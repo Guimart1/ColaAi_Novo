@@ -13,6 +13,10 @@ html, body{
 h1, h2, h3{
     font-family: Negrito;
 }
+p {
+    font-family: OpenSans;
+}
+
 .header{
     background-color: #FFF7D1;
     width: 100vw;

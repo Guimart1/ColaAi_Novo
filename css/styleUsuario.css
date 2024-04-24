@@ -1,0 +1,50 @@
+
+@font-face {
+    font-family: OpenSans;
+    src: url(../Fonts/static/OpenSans-Regular.ttf);
+}
+@font-face {
+    font-family: Negrito;
+    src: url(../Fonts/static/OpenSans-Bold.ttf);
+    font-weight: bold;
+  }
+html, body{
+    overflow-x: hidden;
+    background-color: #FFFBE7;
+}
+h1, h2, h3{
+    font-family: Negrito;
+}
+p {
+    font-family: OpenSans;
+}
+
+
+.inputBox{
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 16px 17px 5px 0px rgba(235,229,229,1);
+}
+input {
+    border: 0px;
+    border-bottom: 2px solid #b6bbbd;
+    border-radius: 0;
+    outline: transparent;
+    background-color: transparent;
+    color: #a6a6a6;
+    font-size: 16pt;
+    font-weight: 600;
+}
+
+input::placeholder{
+    color: #A6A6A6;
+    font-size: 1.2rem;
+    text-align: left;
+}
+.button button{
+    background-color: #FABDC1;
+    height: 120%;
+    width: 120px;
+    color: #6D9EAF;
+    font-size: 16pt;
+}

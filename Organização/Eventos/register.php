@@ -141,7 +141,7 @@ if (!empty($_POST)) {
                             <input type="text" class="form-control inputGeral" placeholder=""  name="bairroEvento" maxlength="100" id="" value="<?=$bairro_Evento?>">
                         </div>
                         <div class="col-md-6 needs-validation">
-                            <label for="complemento" class="col-form-label">Complemento do Evento*</label>
+                            <label for="complemento" class="col-form-label">Complemento do Evento</label>
                             <input type="text" class="form-control inputGeral" placeholder=""  name="complementoEvento" maxlength="100" id="" value="<?=$complemento_Evento?>">
                         </div>
                     </div>

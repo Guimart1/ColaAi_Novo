@@ -1,4 +1,21 @@
-
+@font-face {
+    font-family: OpenSans;
+    src: url(../Fonts/static/OpenSans-Regular.ttf);
+}
+@font-face {
+    font-family: Negrito;
+    src: url(../Fonts/static/OpenSans-Bold.ttf);
+    font-weight: bold;
+  }
+html, body{
+    overflow-x: hidden;
+}
+h1, h2, h3{
+    font-family: Negrito;
+}
+p { 
+    font-family: OpenSans;
+}
 /* Começo header, menu */
 
 .header {
