@@ -1,0 +1,123 @@
+<?php
+    require_once('../../dao/OrganizacaoDao.php');
+    require_once '../../model/Mensagem.php';
+    $organizacao = OrganizacaoDao::selectAll(); 
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Completa</title>
+    <link rel="stylesheet" href="../../css/styleAdm.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
+</head>
+<body>
+    <?php
+    session_start();
+
+    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
+    if (!isset($_SESSION['AutenticaoAdm']) || $_SESSION['AutenticaoAdm'] != 'SIM') {
+      // Redirecionar para o login com um erro2 se não estiver autenticado
+      header('Location: login.php?login=erro2');
+      exit();
+    }
+  
+    //o usuário está autenticado
+    $authUser = $_SESSION['userAdm'];
+  
+    $nomeAdm = $authUser['nomeAdmin'];
+    include('../Componentes/header.php');
+    ?>
+    <div class="container-fluid vw-100">
+    <div class="hamburger-wrapper">
+            <div class="hamburger" onclick="toggleSidebar(), toggleHamburger()">
+                <input class="checkbox" type="checkbox" />
+                <svg fill="none" viewBox="0 0 50 50" height="50" width="50">
+                    <path
+                        class="lineTop line"
+                        stroke-linecap="round"
+                        stroke-width="4"
+                        stroke="black"
+                        d="M6 11L44 11"
+                    ></path>
+                    <path
+                        stroke-linecap="round"
+                        stroke-width="4"
+                        stroke="black"
+                        d="M6 24H43"
+                        class="lineMid line"
+                    ></path>
+                    <path
+                        stroke-linecap="round"
+                        stroke-width="4"
+                        stroke="black"
+                        d="M6 37H43"
+                        class="lineBottom line"
+                    ></path>
+                </svg>
+            </div>
+        </div>
+        <div class="row vw-100">
+            <?php
+                include('../Componentes/menu.php')
+            ?>
+            <div class="info-box col-md-9 pt-4" style="color: #a6a6a6;" id="data-box">
+                <h1 class="text-center">Análise de registro - Concluídos</h1>
+                <div class="w-100 d-flex flex-column mt-5 pe-5">
+                    <div class="dropdown ms-auto">
+                    <h1 class="fs-5 ms-auto me-0 ">Categoria</h1>
+                    <a class="btn btn-body-primary border-1 border dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Selecione
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Aceito</a></li>
+                        <li><a class="dropdown-item" href="#">Negado</a></li>
+                        <li><a class="dropdown-item" href="#">Pendente</a></li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="row ms-4 me-5 mt-2">
+                    <table class="">
+                        <thead>
+                        <tr id="data-table">
+                            <th class="col-md-1 fs-5">ID</th>
+                            <th class="col-md-2 fs-5">Nome</th>
+                            <th class="col-md-3 fs-5">E-mail</th>
+                            <th class="col-md-3 fs-5">CNPJ</th>
+                            <th class="col-md-5 text-end fs-5 pe-3">Situação</th>
+                        </tr>
+                        <tr>
+                            <td class="pt-3 col-md-1">01</td>
+                            <td class="pt-3 col-md-2">Organização</td>
+                            <td class="pt-3 col-md-2">Organização@teste.com</td>
+                            <td class="pt-3 col-md-3">XX. XXX. XXX/0001-XX.</td>
+                            <td class="pt-3 col-md-2 text-end pe-4">
+                                <p class="fs-5 text-success fw-semibold">Aceito</p>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('show');
+        }
+    </script>
+    <script>
+        function toggleHamburger() {
+                var hamburger = document.querySelector('.hamburger'); // Selecionando o ícone do hambúrguer corretamente
+                hamburger.classList.toggle('showHamburger');
+            }
+    </script>
+</body>
+</html>
