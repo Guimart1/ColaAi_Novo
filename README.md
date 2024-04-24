@@ -1,4 +1,5 @@
-
+<h1>-- Repositório Atualizado --</h1>
+Novo repositório para modificações agora em web do ColaAi
 
 <h3>-- Importante --</h3>
 Não Criem do zero os arquivos do app, pois pode dar conflito na hora de dar merge(Mesclar), deem "git clone https://github.com/Bruno2yah/ColaAi.git" para baixarem o arquivo da Main, que é a branch principal. Façam isso dentro da pasta expo<br>
