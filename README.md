@@ -9,7 +9,7 @@ Sigam o Passo a passo:<br>
 3. cd expo<br>
 4. git clone https://github.com/Bruno2yah/ColaAi.git<br>
 
-Ao baixar o app, a primeira coisa que devem fazer, é dar "npm install", que irá baixar os módulos da expo, depois disso, instalem manualmente as dependencias vistas acima.<hr>
+<hr>
 
 <h3>-- Importante --</h3>
 Não alterem diretamente a branch main, criem uma branch para o que vão modificar, a branch main tem que ficar apenas o concluido, não o que está em andamento. Quando terminarem, por exemplo, de fazer uma tela, aí faremos um merge para mesclar.<hr>
