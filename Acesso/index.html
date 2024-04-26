@@ -8,45 +8,46 @@
     <link rel="stylesheet" href="../css/styleCadastroUsuario.css">
 </head>
 
-<?php
-    include('../Organização/Componentes/header.php');
-?>
+<body style="background-color: #FFFBE7">
 
-<body class="container d-flex flex-row justify-content-space-center align-items-center" style="background-color: #FFFBE7">
+    <div class="row vh-100 w-100 d-flex justify-content-center align-items-center g-4" style="height:90vh">
+        <div class="col-md-7 d-flex justify-content-center align-items-center">
+            <img src="../img/Usuario/criança_arrumado.png" class="img-fluid" style="width: 85%;">
+        </div>
+        <div class="col-md-5 d-flex justify-content-centerr">
+            <div class="formulario rounded-4 ms-5 p-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded mt-auto mb-auto "style="width: 80%">
+                <!--Titulo-->
+                <h2 class="text-center mb-4"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h2>
+                <form>
+                    <!--Nome e sobrenome-->
+                    <div class="mb-3 col-12 d-flex flex-row justify-content-evenly">
+                        <input required type="text" placeholder="Nome" id="nome" class="form-control"> 
+                        <input required type="text" placeholder="Sobrenome" id="sobrenome" class="form-control">
+                    </div>
 
+                    <!--Email-->
+                    <input required type="email" placeholder="Email" id="email" class="form-control mb-3">
 
-    <div class="col-6 vh-100">
-        <img src="../img/Usuario/criança_arrumado.png" class="img-fluid">
-    </div>
+                    <!--Celular-->
+                    <input required type="tel" placeholder="Telefone" id="telefone" class="form-control mb-3">
 
-    <div class="formulario rounded-4 col-6 ms-5 p-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-        <!--Titulo-->
-        <h2 class="text-center mb-4"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h2>
-        <form>
-            <!--Nome e sobrenome-->
-            <div class="col-12 d-flex flex-row justify-content-evenly">
-                <input required type="text" placeholder="Nome" id="nome" class="form-control"> 
-                <input required type="text" placeholder="Sobrenome" id="sobrenome" class="form-control">
+                    <!--Senha-->
+                    <input required type="password" placeholder="Senha" id="senha" class="form-control mb-3">
+
+                    <!--Confirmar senha-->
+                    <input required type="password" placeholder="Confirmar senha" class="form-control mb-3">
+
+                    <!--Confirmar-->
+                    <div class="col-12 d-flex" >
+                        <button type="button" class="botao btn ms-auto">Cadastre-se</button>
+                    </div>
+                </form>
             </div>
-
-            <!--Email-->
-            <input required type="email" placeholder="Email" id="email" class="form-control">
-
-            <!--Celular-->
-            <input required type="tel" placeholder="Telefone" id="telefone" class="form-control">
-
-            <!--Senha-->
-            <input required type="password" placeholder="Senha" id="senha" class="form-control">
-
-            <!--Confirmar senha-->
-            <input required type="password" placeholder="Confirmar senha" class="form-control">
-
-            <!--Confirmar-->
-            <div class="col-12 align-items-end">
-                <button type="button" class="botao btn">Cadastre-se</button>
-            </div>
-        </form>
+            
+        </div>
     </div>
+    
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
