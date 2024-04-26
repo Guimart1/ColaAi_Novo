@@ -9,3 +9,26 @@
     height: 6vh;
     width:  20vh;
 }
+
+.botao:hover {
+    background-color: rgb(81, 81, 96);
+}
+
+input {
+    all: unset;
+    border-bottom: 4px solid #A6A6A6;
+    color: #A6A6A6;
+}
+
+.orgSenha i{
+    font-size: 16pt;
+    position: absolute;
+    right: 2%;
+    cursor: pointer;
+    color: #a6a6a6;
+    transform: translateY(-5px);
+}
+
+.orgSenha{
+    position: relative;
+}
