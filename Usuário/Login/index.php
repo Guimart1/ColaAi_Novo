@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuario.css">
+    <link rel="stylesheet" href="../../css/styleUsuarioCadastro.css">
 </head>
 <body>
     <div class="container mt-2 ms-2" style="height: 8vh;">
@@ -23,20 +24,24 @@
                     <h1 class="text-center mt-2 mb-4 fs-2"><span style="color: #E6AEB2">Lo</span><span style="color: #6D9EAF">gin</span></h1>
                     <form action="">
                         <input type="text" class="input-group mt-4" name="" id="" placeholder="Digite o seu e-mail ou telefone">
-                        <input type="password" class="input-group mt-4" name="" id="" placeholder="Senha">
+                        <div class="orgSenha d-flex mt-4">
+                            <input required type="password" placeholder="Senha" id="password" class="input-group mb-4">
+                            <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
+                        </div>
                         <div class="f-password w-100 text-end mt-4">
                             <a href="" style="color: #6D9EAF;">Esqueci a senha</a>
                         </div>
                         <div class="button w-100 d-flex pe-0 mt-5">
-                            <button type="submit" class="border-0 rounded-3 fs-4 ms-auto mb-4" style="width: 8vw;">Entrar</button>
+                            <button type="submit" class="border-0 rounded-3 ms-auto mb-4">Entrar</button>
                         </div>
                     </form>
                 </div>
                 <div class="inputBox mb-auto text-center p-2 rounded rounded-5">
-                    <p class="m-0 p-0">Não tem uma conta? <a href="../Cadastro/fotoPerfil.php" style="color: #6D9EAF; text-decoration:none">Cadastre-se</a></p>
+                    <p class="m-0 p-0">Não tem uma conta? <a href="../Cadastro/" style="color: #6D9EAF; text-decoration:none">Cadastre-se</a></p>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../../js/script.js"></script>
 </body>
 </html>

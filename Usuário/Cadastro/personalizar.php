@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Cola Aí</title>
+    <title>Confirmação</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuarioCadastro.css">
+    <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 
 <body style="background-color: #FFFBE7">
@@ -20,40 +21,18 @@
             <img src="../../img/Usuario/criança_arrumado.png" class="img-fluid" style="width: 85%;" alt="Crianças pulando">
         </div>
         <div class="col-md-5 d-flex justify-content-center">
-            <div class="formulario rounded-5  p-3 rounded d-flex flex-column sombra">
+            <div class="formulario rounded-5  p-4 rounded d-flex flex-column sombra pt-5 pb-5">
                 <!--Titulo-->
-                <h1 class="text-center mb-5"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h1>
-                <form method="post" action="personalizar.php">
-
-                    <!--Nome e sobrenome-->
-                    <div class="col-12 d-flex flex-row mb-4">
-                        <input required type="text" placeholder="Nome" id="nome" class="input-group me-4"> 
-                        <input required type="text" placeholder="Sobrenome" id="sobrenome" class="input-group">
-                    </div>
-
-                    <!--Email-->
-                    <input required type="email" placeholder="Email" id="email" class="input-group mb-4">
-
-                    <!--Celular-->
-                    <input required type="tel" placeholder="Telefone" id="telefone" class="input-group mb-4" data-mask="(00)00000-0000">
-
-                    <!--Senha-->
-                    <div class="orgSenha d-flex">
-                        <input required type="password" placeholder="Senha" id="senha" class="input-group mb-4">
-                        <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
-                    </div>
-
-                    <!--Confirmar senha-->
-                    <div class="orgSenha d-flex">
-                        <input required type="password" id="senha1" placeholder="Confirmar senha" class="input-group mb-4">
-                        <i class="bi bi-eye col1" id="btnSenha1" onclick="MostrarSenha2()"></i>
-                    </div>
-
-                    <!--Confirmar-->
-                    <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="botao btn fs-5">Cadastre-se</button>
-                    </div>
-                </form>
+                <h1 class="fs-4">Vamos personalizar o seu perfil?</h1>  
+                <p class="fs-5">Agora vamos atualizar o seu perfil, para deixar o Cola Aí com a sua melhor identidade.</p> 
+                <p style="font-size: 0.8em;">
+                    Ao clicar em Continuar, você aceita o <a href=""  style="color: #6D9EAF;">Contrato do Usuário</a>, a <a href=""  style="color: #6D9EAF;">Política de Privacidade</a>
+                    e a <a href="" style="color: #6D9EAF;">Política de Cookies</a> do Cola Aí.
+                </p>
+                <div class="col-12 d-flex justify-content-end"><a href="fotoPerfil.php">
+                    <button type="submit" class="botao btn fs-5">Continuar</button>
+                    </a>
+                </div>
             </div>
             
         </div>

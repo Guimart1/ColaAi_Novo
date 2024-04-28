@@ -24,8 +24,9 @@
                     <a href="" style="color: #6D9EAF;" class="me-auto ms-auto">Adicionar mais tarde</a>
                 </div>
                 <div class="col-md-4 col-6">
-                    <div class="button">
+                    <div class="button"><a href="perfilDemo.php">
                         <button class="border-0 rounded-3">Continuar</button>
+                        </a>
                     </div>
                 </div>
             </div>
