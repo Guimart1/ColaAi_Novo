@@ -1,5 +1,10 @@
+<?php
+require_once '../../dao/EventoDao.php';
+$eventos = EventoDao::selectAll();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +17,22 @@
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
+
 <body>
+    <?php
+    // Iniciar a sessão
+    session_start();
+
+    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
+    if (!isset($_SESSION['AutenticaoUser']) || $_SESSION['AutenticaoUser'] != 'SIM') {
+        // Redirecionar para o login com um erro2 se não estiver autenticado
+        header('Location: login.php?login=erro2');
+        exit();
+    }
+
+    //o usuário está autenticado
+    $authUser = $_SESSION['user'];
+    ?>
     <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
         <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
         <div class="searchBox col-6 d-flex justify-content-center ms-4">
@@ -41,7 +61,7 @@
         <nav>
             <ul>
                 <li><a href="">Página Inicial</a></li>
-                <li><a href="">Teatros</a></li>
+                <li><a href="#carrossel-teatros">Teatros</a></li>
                 <li><a href="">Parques</a></li>
                 <li><a href="">Museus</a></li>
                 <li><a href="">Centros Culturais</a></li>
@@ -61,17 +81,7 @@
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                    <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
                             </div>
                         </div>
                     </li>
@@ -81,7 +91,7 @@
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
                             </div>
                         </div>
                     </li>
@@ -91,7 +101,7 @@
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
                             </div>
                         </div>
                     </li>
@@ -101,7 +111,17 @@
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="glide__slide">
+                        <div class="imageBox position-relative">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                            <div class="descCard p-2 ps-4">
+                                <h3 class="fs-4">Nome do Evento</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
                             </div>
                         </div>
                     </li>
@@ -211,32 +231,51 @@
                 <button class="glide__bullet" data-glide-dir="=4"></button>
             </div>
         </div>
-        <h2 class="fs-3">Teatros</h2>
+        <h2 id="carrossel-teatros" class="fs-3">Teatros</h2>
         <div class="glide mb-5" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel"
-        }' id="carrossel">
+                "loop": true,
+                "perView": 4,
+                "perMove": 4,
+                "perSwipe": 4,
+                "perTouch": 4,
+                "gap":20,
+                "type": "carousel"
+            }' id="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
+                    <?php
+                    // Array para armazenar os IDs dos eventos já adicionados
+                    $eventos_adicionados = [];
+
+                    foreach ($eventos as $evento) :
+                        if ($evento['espacoEvento'] === '3') :
+                            // Verifica se o ID do evento já foi adicionado ao carrossel
+                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                    ?>
+                                <li class="glide__slide">
+                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                            <p><?= $evento['descEvento']; ?></p>
+                                        </div>
+                                    </div>
+                                </li>
+                    <?php
+                                // Adiciona o ID do evento ao array de eventos adicionados
+                                $eventos_adicionados[] = $evento['idEvento'];
+                            endif;
+                        endif;
+                    endforeach;
+                    ?>
+
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="&lt;"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir="&gt;"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
             </div>
+
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
@@ -259,14 +298,31 @@
         }' id="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
+                <?php
+                    // Array para armazenar os IDs dos eventos já adicionados
+                    $eventos_adicionados = [];
+
+                    foreach ($eventos as $evento) :
+                        if ($evento['espacoEvento'] === '1') :
+                            // Verifica se o ID do evento já foi adicionado ao carrossel
+                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                    ?>
+                                <li class="glide__slide">
+                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                            <p><?= $evento['descEvento']; ?></p>
+                                        </div>
+                                    </div>
+                                </li>
+                    <?php
+                                // Adiciona o ID do evento ao array de eventos adicionados
+                                $eventos_adicionados[] = $evento['idEvento'];
+                            endif;
+                        endif;
+                    endforeach;
+                    ?>
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
@@ -294,14 +350,31 @@
         }' id="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
+                <?php
+                    // Array para armazenar os IDs dos eventos já adicionados
+                    $eventos_adicionados = [];
+
+                    foreach ($eventos as $evento) :
+                        if ($evento['espacoEvento'] === '2') :
+                            // Verifica se o ID do evento já foi adicionado ao carrossel
+                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                    ?>
+                                <li class="glide__slide">
+                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                            <p><?= $evento['descEvento']; ?></p>
+                                        </div>
+                                    </div>
+                                </li>
+                    <?php
+                                // Adiciona o ID do evento ao array de eventos adicionados
+                                $eventos_adicionados[] = $evento['idEvento'];
+                            endif;
+                        endif;
+                    endforeach;
+                    ?>
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
@@ -330,14 +403,31 @@
         }' id="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
-                    <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
+                <?php
+                    // Array para armazenar os IDs dos eventos já adicionados
+                    $eventos_adicionados = [];
+
+                    foreach ($eventos as $evento) :
+                        if ($evento['espacoEvento'] === '4') :
+                            // Verifica se o ID do evento já foi adicionado ao carrossel
+                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                    ?>
+                                <li class="glide__slide">
+                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                            <p><?= $evento['descEvento']; ?></p>
+                                        </div>
+                                    </div>
+                                </li>
+                    <?php
+                                // Adiciona o ID do evento ao array de eventos adicionados
+                                $eventos_adicionados[] = $evento['idEvento'];
+                            endif;
+                        endif;
+                    endforeach;
+                    ?>
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
@@ -357,12 +447,12 @@
 
     <footer class="w-100 h-auto d-flex justify-content-center">
         <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
-            <div class="col-md-4">   
+            <div class="col-md-4">
                 <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%;" class="mb-2">
-                <p style="font-size:1em; font-weight:bold">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as 
-                melhores experiências para suas crianças.</p>
+                <p style="font-size:1em; font-weight:bold">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as
+                    melhores experiências para suas crianças.</p>
             </div>
-            <div class="col-md-2">   
+            <div class="col-md-2">
                 <h4 style="color: #6D9EAF;">Infos</h4>
                 <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
                     <li>Sobre</li>
@@ -370,11 +460,11 @@
                     <li>Contato</li>
                 </ul>
             </div>
-            <div class="col-md-3">   
+            <div class="col-md-3">
                 <h4 style="color: #6D9EAF;">Desenvolvedora</h4>
                 <img src="../../img/Usuario/magma-logo.png" alt="" style="width: 70%;">
             </div>
-            <div class="col-md-3">   
+            <div class="col-md-3">
                 <h4 style="color: #6D9EAF;">Acesso rápido</h4>
                 <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
                     <li>Início</li>
@@ -390,27 +480,26 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script>
+        const COMPONENT_NAME = "data-glide";
+        const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
 
-const COMPONENT_NAME = "data-glide";
-const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
+        const components = document.querySelectorAll(COMPONENT_SELECTOR);
 
-const components = document.querySelectorAll(COMPONENT_SELECTOR);
+        for (let i = 0; i < components.length; i++) {
+            const options = JSON.parse(
+                components[i].getAttribute(COMPONENT_NAME) || "{}"
+            );
 
-for (let i = 0; i < components.length; i++) {
-  const options = JSON.parse(
-    components[i].getAttribute(COMPONENT_NAME) || "{}"
-  );
-
-  let glide = new Glide(
-    components[i],
-    options
-  );
-  console.log(glide)
-  glide.mount();
-}
-    
-</script>
+            let glide = new Glide(
+                components[i],
+                options
+            );
+            console.log(glide)
+            glide.mount();
+        }
+    </script>
 </body>
+
 </html>

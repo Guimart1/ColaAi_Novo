@@ -13,8 +13,9 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $uf = $evento->getUf();
             $data = $evento->getData();
             $faixaEtaria = $evento->getFaixaEtaria();
-            $valor = $evento->getValor();
             $periodo = $evento->getPeriodoEvento();
+            $valor = $evento->getValor();
+            $espaco = $evento->getEspaco();
             $desc = $evento->getDesc();
             $idOrganizacaoEvento = $evento->getIdOrganizacaoEvento(); 
             $imagem = $evento->getImagemEvento();
@@ -22,7 +23,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
             $stmt = $conn->prepare("INSERT INTO tbevento (nomeEvento, cepEvento, enderecoEvento, numeroEvento, complementoEvento, bairroEvento, cidadeEvento, ufEvento,
-            dataEvento, faixaEtariaEvento, periodoEvento, valorEvento, descEvento, idOrganizacaoEvento, imagemEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:faixa, :valor, :periodo, :desc, :idOrgEvento, :imagem)");
+            dataEvento, faixaEtariaEvento, periodoEvento, valorEvento, espacoEvento, descEvento, idOrganizacaoEvento, imagemEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:faixa, :periodo, :valor,:espaco, :desc, :idOrgEvento, :imagem)");
         
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':cep', $cep);
@@ -34,8 +35,9 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':uf', $uf);
             $stmt->bindParam(':data', $data);
             $stmt->bindParam(':faixa', $faixaEtaria);
-            $stmt->bindParam(':valor', $valor);
             $stmt->bindParam(':periodo', $periodo);
+            $stmt->bindParam(':valor', $valor);
+            $stmt->bindParam(':espaco', $espaco);
             $stmt->bindParam(':desc', $desc);
             $stmt->bindParam(':idOrgEvento', $idOrganizacaoEvento);
             $stmt->bindParam(':imagem', $imagem);
@@ -94,6 +96,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
                faixaEtariaEvento = :faixa,
                periodoEvento = :periodo,
                valorEvento = :valor,
+               espacoEvento = :espaco,
                descEvento = :desc, 
                idOrganizacaoEvento = :idOrgEvento,
                imagemEvento = :imagem
@@ -112,8 +115,9 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $uf = $evento->getUf();
             $data = $evento->getData();
             $faixaEtaria = $evento->getFaixaEtaria();
-            $valor = $evento->getValor();
             $periodo = $evento->getPeriodoEvento();
+            $valor = $evento->getValor();
+            $espaco = $evento->getEspaco();
             $desc = $evento->getDesc();
             $idOrganizacaoEvento = $evento->getIdOrganizacaoEvento();
             $imagem = $evento->getImagemEvento();
@@ -128,8 +132,9 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':uf', $uf);
             $stmt->bindParam(':data', $data);
             $stmt->bindParam(':faixa', $faixaEtaria);
-            $stmt->bindParam(':valor', $valor);
             $stmt->bindParam(':periodo', $periodo);
+            $stmt->bindParam(':valor', $valor);
+            $stmt->bindParam(':espaco', $espaco);
             $stmt->bindParam(':desc', $desc);
             $stmt->bindParam(':idOrgEvento', $idOrganizacaoEvento);
             $stmt->bindParam(':imagem', $imagem);
