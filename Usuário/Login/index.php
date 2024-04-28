@@ -22,10 +22,32 @@
             <div class="col-lg-4 formBox d-flex flex-column align-items-center">
                 <div class="inputBox h-auto rounded rounded-5 mb-5 mt-4 p-4">
                     <h1 class="text-center mt-2 mb-4 fs-2"><span style="color: #E6AEB2">Lo</span><span style="color: #6D9EAF">gin</span></h1>
-                    <form action="">
-                        <input type="text" class="input-group mt-4" name="" id="" placeholder="Digite o seu e-mail ou telefone">
+                    <?php
+                    if (isset($_GET['login']) && $_GET['login'] == "erro") {
+                    ?>
+                        <div class="text-danger" style="text-align: center;">
+                            Usuário ou senha Inválido(s)
+                        </div>
+
+                    <?php
+                    }
+
+                    ?>
+                    <?php
+                    if (isset($_GET['login']) && $_GET['login'] == "erro2") {
+                    ?>
+                        <div class="text-danger" style="text-align: center;">
+                            Usuário não fez o login!
+                        </div>
+
+                    <?php
+                    }
+
+                    ?>
+                    <form action="../valida_login.php" method="post">
+                        <input type="text" class="input-group mt-4" name="email" id="" placeholder="Digite o seu e-mail ou telefone">
                         <div class="orgSenha d-flex mt-4">
-                            <input required type="password" placeholder="Senha" id="password" class="input-group mb-4">
+                            <input required type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4">
                             <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
                         </div>
                         <div class="f-password w-100 text-end mt-4">

@@ -11,10 +11,10 @@
     border: none;
 }
 .carrossel .glide__arrow--left{
-  left: -10em;
+  left: -4em;
 }
 .carrossel .glide__arrow--right{
-  right: -10em;
+  right: -4em;
 }
 .glide__arrow--left {
   left: 2em;
