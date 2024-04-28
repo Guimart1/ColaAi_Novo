@@ -22,7 +22,7 @@
         <div class="col-md-5 d-flex justify-content-center">
             <div class="formulario rounded-5  p-3 rounded d-flex flex-column sombra">
                 <!--Titulo-->
-                <h1 class="text-center"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h1>
+                <h1 class="text-center mb-5"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h1>
                 <form method="post">
 
                     <!--Nome e sobrenome-->
