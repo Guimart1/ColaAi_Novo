@@ -1,3 +1,3 @@
 <?php
-  header("Location: Acesso/index.html");
+  header("Location: Usuário/Cadastro/index.php");
 ?>
