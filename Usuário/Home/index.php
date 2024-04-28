@@ -62,9 +62,9 @@ $eventos = EventoDao::selectAll();
             <ul>
                 <li><a href="">Página Inicial</a></li>
                 <li><a href="#carrossel-teatros">Teatros</a></li>
-                <li><a href="">Parques</a></li>
-                <li><a href="">Museus</a></li>
-                <li><a href="">Centros Culturais</a></li>
+                <li><a href="#carrossel-parques">Parques</a></li>
+                <li><a href="#carrossel-museus">Museus</a></li>
+                <li><a href="#carrossel-centroCulturais">Centros Culturais</a></li>
                 <li><a href="">CEU</a></li>
                 <li><a href="">Perfil</a></li>
             </ul>
@@ -286,7 +286,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
 
-        <h2 class="fs-3">Parques</h2>
+        <h2 id="carrossel-parques" class="fs-3">Parques</h2>
         <div class="glide mb-5" data-glide='{
         "loop": true,
         "perView": 4,
@@ -338,7 +338,7 @@ $eventos = EventoDao::selectAll();
                 <button class="glide__bullet" data-glide-dir="=4"></button>
             </div>
         </div>
-        <h2 class="fs-3">Museus</h2>
+        <h2 id="carrossel-museus" class="fs-3">Museus</h2>
         <div class="glide mb-5" data-glide='{
         "loop": true,
         "perView": 4,
@@ -391,7 +391,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
 
-        <h2 class="fs-3">Centro Culturais</h2>
+        <h2 id="carrossel-centroCulturais" class="fs-3">Centro Culturais</h2>
         <div class="glide mb-5" data-glide='{
         "loop": true,
         "perView": 4,
