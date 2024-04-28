@@ -39,6 +39,7 @@
 		document.getElementById($elemento).value = $id;
 		//window.location.href = "./registro.php";
 		}
+
   $(document).ready(function() {
     $('#modalPadrao').modal('show');
   });

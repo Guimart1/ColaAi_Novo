@@ -122,7 +122,7 @@
         </div>
 
         <h2 class="fs-3">Próximos de você</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
@@ -130,7 +130,7 @@
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
@@ -220,7 +220,7 @@
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }' class="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
@@ -256,7 +256,7 @@
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }' class="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
@@ -291,7 +291,7 @@
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }' class="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
@@ -327,7 +327,7 @@
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }' class="carrossel">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide"><img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;"></li>
@@ -364,8 +364,8 @@
             </div>
             <div class="col-md-2">   
                 <h4 style="color: #6D9EAF;">Infos</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
-                    <li>Sobre</li>
+                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                    <a class="dropdown-item fw-bold" onclick="modalSobre(0,0)"><li>Sobre</li></a>
                     <li>Feedback</li>
                     <li>Contato</li>
                 </ul>
@@ -387,10 +387,28 @@
             </div>
         </div>
     </footer>
+    <div class="modal fade" id="modalSobre" role="dialog">
+                        <div class=" modal-dialog modal-dialog-centered">
+                            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                                <div class="modal-header border-0 pt-4">
+                                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Sobre</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div> 
+                                <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
+                                    <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
+                                    <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                                        O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
+                                        de Sistemas da ETEC de Guaianazes.</p>
+                                </div>
+                            </div>
+                    </div>
+            </div>
 
-
-
+<script type="text/javascript" src="../../js/personalizar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+</script>
 <script>
 
 const COMPONENT_NAME = "data-glide";
@@ -407,10 +425,19 @@ for (let i = 0; i < components.length; i++) {
     components[i],
     options
   );
-  console.log(glide)
   glide.mount();
 }
-    
+function modalSobre(){
+    const myModal = new bootstrap.Modal('#modalSobre');
+    myModal.show();
+    //window.location.href = "./registro.php";
+}
+function modalFeedback($id, $elemento){
+		const myModal = new bootstrap.Modal('#modalFeedback');
+		myModal.show();
+        document.getElementById($elemento).value = $id;
+		//window.location.href = "./registro.php";
+	}
 </script>
 </body>
 </html>

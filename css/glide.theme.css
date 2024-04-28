@@ -10,11 +10,11 @@
     transform: translateY(-50%);
     border: none;
 }
-#carrossel .glide__arrow--left{
-  left: -4em;
+.carrossel .glide__arrow--left{
+  left: -10em;
 }
-#carrossel .glide__arrow--right{
-  right: -4em;
+.carrossel .glide__arrow--right{
+  right: -10em;
 }
 .glide__arrow--left {
   left: 2em;
