@@ -1,7 +1,7 @@
 .formulario {
-    background-color: white;
-    width: 80%;
-    height: 70vh;
+    background-color: rgb(255, 255, 255);
+    width: 57vh;
+    height: auto;
 }
 
 .botao {
@@ -12,7 +12,7 @@
 }
 
 .botao:hover {
-    background-color: rgb(126, 121, 121);
+    background-color: #ebddde;
     color: #6DA2B1;
 }
 
@@ -36,5 +36,5 @@ input {
 }
 
 .sombra {
-    box-shadow: 20px 20px 0px #EBE5E5;
+    box-shadow: 20px 15px 0px #EBE5E5;
 }
