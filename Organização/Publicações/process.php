@@ -21,6 +21,7 @@ switch ($_POST["acao"]) {
         $publicacao->setDescricao($_POST['descPublicacao']);
         $publicacao->setLink($_POST['linkOrganizacaoEvento']);
         $publicacao->setImagem($publicacao->salvarImagem(($_POST['imagemPublicacao'])));  
+        $publicacao->setIdOrganizacaoEvento($_POST['idOrganizacaoEvento']);
         try {
             $publicacaoDao = PublicacaoDao::insert($publicacao);
 
@@ -43,6 +44,7 @@ switch ($_POST["acao"]) {
           $publicacao->setDescricao($_POST['descPublicacao']);
           $publicacao->setLink($_POST['linkOrganizacaoEvento']);
           $publicacao->setImagem($publicacao->salvarImagem(($_POST['imagemPublicacao'])));
+          $publicacao->setIdOrganizacaoEvento($_POST['idOrganizacaoEvento']);
               try {
                 $publicacaoDao = PublicacaoDao::update($_POST["idPublicacao"], $publicacao);
                 $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");

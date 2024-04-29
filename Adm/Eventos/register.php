@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-6 needs-validation">
                             <label for="cep" class="col-form-label">CEP da organização*</label>
-                            <input type="text" class="form-control inputGeral" name="" id="" value="" required>
+                            <input type="text" class="form-control inputGeral" name="" id="" value="" required onchange="buscarEnderecoPorCEP()">
                         </div>
                     </div>
                     <div class="row">
@@ -116,6 +116,42 @@
       </div>
     </div>
   </div>
+  <script>
+        function buscarEnderecoPorCEP() {
+            var cep = document.getElementById('cepEvento').value;
+            cep = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+            // Verifica se o CEP possui 8 dígitos
+            if (cep.length !== 8) {
+                return;
+            }
+
+            // URL de consulta ao ViaCEP
+            var url = 'https://viacep.com.br/ws/' + cep + '/json/';
+
+            // Envia a solicitação AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var endereco = JSON.parse(xhr.responseText);
+                        preencherCamposEndereco(endereco);
+                    } else {
+                        console.error('Erro ao buscar endereço por CEP');
+                    }
+                }
+            };
+            xhr.open('GET', url, true);
+            xhr.send();
+        }
+
+        function preencherCamposEndereco(endereco) {
+            document.getElementById('enderecoEvento').value = endereco.logradouro;
+            document.getElementById('bairroEvento').value = endereco.bairro;
+            document.getElementById('cidadeEvento').value = endereco.localidade;
+            document.getElementById('ufEvento').value = endereco.uf;
+        }
+    </script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
   </script>
