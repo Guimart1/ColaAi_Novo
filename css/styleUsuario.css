@@ -16,7 +16,18 @@ html, body{
     overflow-x: hidden;
     background-color: #FFFBE7;
     color: #a6a6a6;
+    height: 100vh;
 }
+
+.fundo-bolinha {
+    background-image: url("../img/Usuario/fundo-bolinha.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    color: #a6a6a6;
+    overflow-y: hidden;
+}
+
 h1, h2, h3{
     font-family: Negrito;
 

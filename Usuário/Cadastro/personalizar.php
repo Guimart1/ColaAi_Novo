@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 
-<body style="background-color: #FFFBE7">
+<body>
 
     <div class="col-md-12 ps-3 mt-2" style="height: 10vh;">
         <img src="../../img/Login/Cola AI logo.png" style="height: 70%;" alt="Logo Cola Aí">

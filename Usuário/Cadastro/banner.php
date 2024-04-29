@@ -9,11 +9,11 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
-<body>
-    <div class="container mt-2 ms-2" style="height: 8vh;">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
+<body class="fundo-bolinha">
+    <div class="container mt-2 ms-2">
+        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
-    <div class="container-fluid text-center" style="height:88vh">
+    <div class="container-fluid text-center" style="height:80vh">
         <form action="perfilDemo.php" method="post" enctype="multipart/form-data"> <!-- Adicionado enctype para upload de arquivos -->  
             <h1 class="fs-3 mt-3">Adicione um banner ao perfil</h1>
             <p>O seu banner ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>

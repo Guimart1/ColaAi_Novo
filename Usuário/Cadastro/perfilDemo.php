@@ -9,14 +9,14 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
-<body>
-    <div class="container mt-2 ms-2" style="height: 8vh;">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
+<body class="fundo-bolinha">
+    <div class="container mt-2 ms-2">
+        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
-    <div class="container-fluid text-center" style="height:88vh">
-            <h1 class="fs-3 mt-3">Este é o seu perfil</h1>
+    <div class="container-fluid text-center" style="height:80vh">
+            <h1 class="fs-3 mt-2">Este é o seu perfil</h1>
             <p>É assim como ele ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
-            <div class="perfilBox me-auto ms-auto mt-4 rounded rounded-4">
+            <div class="perfilBox me-auto ms-auto mt-4 rounded rounded-4" style="width: 42vh;">
                 <div class="position-relative">
                     <img src="../../img/Usuario/icon-user.png" alt="" class="position-absolute perfilIcon" style="width: 25%;">
                     <img src="../../img/Usuario/banner-padrao.png" alt="" style="width: 100%;" class="rounded rounded-4">
