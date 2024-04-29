@@ -12,6 +12,7 @@ html, body{
     overflow-x: hidden;
     background-color: #FFFBE7;
     color: #a6a6a6;
+    height: 100vh;
 }
 
 .fundo-bolinha {
@@ -20,6 +21,7 @@ html, body{
     background-size: cover;
     overflow-x: hidden;
     color: #a6a6a6;
+    overflow-y: hidden;
 }
 
 h1, h2, h3{

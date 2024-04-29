@@ -11,9 +11,9 @@
 </head>
 <body class="fundo-bolinha">
     <div class="container mt-2 ms-2">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 5.4vh;">
+        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
-    <div class="container-fluid text-center" style="height:92vh">
+    <div class="container-fluid text-center" style="height:80vh">
         <form action="perfilDemo.php" method="post" enctype="multipart/form-data"> <!-- Adicionado enctype para upload de arquivos -->  
             <h1 class="fs-3 mt-3">Adicione um banner ao perfil</h1>
             <p>O seu banner ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
