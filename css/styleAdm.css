@@ -191,13 +191,22 @@ p {
 }
 
 @media only screen and (min-width: 758px) {
-    .modal-content{
+    #modalInfo .modal-content{
+        box-shadow: -9px 10px 0px 0px rgba(166,166,166,1);
+    }
+    #modalExcluir .modal-content{
+        box-shadow: -9px 10px 0px 0px rgba(166,166,166,1);
+    }
+    #modalAceitar .modal-content{
+        box-shadow: -9px 10px 0px 0px rgba(166,166,166,1);
+    }
+    #modalRestaurar .modal-content{
         box-shadow: -9px 10px 0px 0px rgba(166,166,166,1);
     }
   }
 
 #modalInfo{
-    background-color: rgba(0, 0, 0, 0.2); /* Cor de fundo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.2); 
 }
 #modalExcluir{
     background-color: rgba(0, 0, 0, 0.2); /* Cor de fundo semi-transparente */
@@ -208,6 +217,7 @@ p {
 #modalRestaurar{
     background-color: rgba(0, 0, 0, 0.2); /* Cor de fundo semi-transparente */
 }
+
 .hamburger {
     height: 50px;
     width: 50px;

@@ -142,7 +142,7 @@ $eventos = EventoDao::selectAll();
         </div>
 
         <h2 class="fs-3">Próximos de você</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
@@ -150,7 +150,7 @@ $eventos = EventoDao::selectAll();
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
@@ -232,7 +232,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
         <h2 id="carrossel-teatros" class="fs-3">Teatros</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
                 "loop": true,
                 "perView": 4,
                 "perMove": 4,
@@ -240,7 +240,7 @@ $eventos = EventoDao::selectAll();
                 "perTouch": 4,
                 "gap":20,
                 "type": "carousel"
-            }' id="carrossel">
+            }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -253,9 +253,9 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
                                             <p><?= $evento['descEvento']; ?></p>
                                         </div>
@@ -272,8 +272,8 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="&lt;"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="&gt;"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
             </div>
 
 
@@ -287,7 +287,7 @@ $eventos = EventoDao::selectAll();
         </div>
 
         <h2 id="carrossel-parques" class="fs-3">Parques</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
@@ -295,7 +295,7 @@ $eventos = EventoDao::selectAll();
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                 <?php
@@ -308,9 +308,9 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
                                             <p><?= $evento['descEvento']; ?></p>
                                         </div>
@@ -338,7 +338,7 @@ $eventos = EventoDao::selectAll();
                 <button class="glide__bullet" data-glide-dir="=4"></button>
             </div>
         </div>
-        <h2 id="carrossel-museus" class="fs-3">Museus</h2>
+        <h2 class="fs-3">Museus</h2>
         <div class="glide mb-5" data-glide='{
         "loop": true,
         "perView": 4,
@@ -347,7 +347,7 @@ $eventos = EventoDao::selectAll();
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                 <?php
@@ -360,9 +360,9 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
                                             <p><?= $evento['descEvento']; ?></p>
                                         </div>
@@ -391,7 +391,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
 
-        <h2 id="carrossel-centroCulturais" class="fs-3">Centro Culturais</h2>
+        <h2 class="fs-3">Centro Culturais</h2>
         <div class="glide mb-5" data-glide='{
         "loop": true,
         "perView": 4,
@@ -400,7 +400,7 @@ $eventos = EventoDao::selectAll();
         "perTouch": 4,
         "gap":20,
         "type": "carousel"
-        }' id="carrossel">
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                 <?php
@@ -413,9 +413,9 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 255px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descCard p-2 ps-4" style="width: 255px;"> <!-- Defina a largura igual à da imagem -->
+                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
                                             <p><?= $evento['descEvento']; ?></p>
                                         </div>
@@ -454,10 +454,10 @@ $eventos = EventoDao::selectAll();
             </div>
             <div class="col-md-2">
                 <h4 style="color: #6D9EAF;">Infos</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
-                    <li>Sobre</li>
-                    <li>Feedback</li>
-                    <li>Contato</li>
+                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                    <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
+                    <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
+                    <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -477,29 +477,133 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
     </footer>
+    <div class="modal fade" id="modalSobre" role="dialog">
+            <div class=" modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                    <div class="modal-header border-0 pt-4">
+                        <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Sobre</h1>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
+                        <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
+                        <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                            O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
+                            de Sistemas da ETEC de Guaianazes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalFeedback" role="dialog">
+            <div class=" modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                    <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                        <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Feedback</h1>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                        <p>Nos ajude a melhorar a sua experiência como usuário, nos envie sugestões 
+                            e nos conte das suas melhores vivencias com o Cola Aí.</p>
+                        <h2 class="fs-5 mt-3">Título</h2>
+                        <div class="inputContato">
+                            <input type="text" class="input-group mt-1" name="titulo" id="" placeholder="Título do feedback">
+                        </div>
+                        <h2 class="fs-5 mt-3">Comentário</h2>
+                        <div class="inputContato">
+                            <textarea class="form-control rounded rounded-4" name="" id="" cols="30" rows="10" style="max-height: 300px;" placeholder="Escreva sua experiência  com o site, podendo ser sugestões, criticas e melhorias"></textarea>
+                        </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button class="border border-0 ms-auto rounded rounded-5">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalContato" role="dialog">
+            <div class=" modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                    <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                        <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Contato</h1>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                        <p>Entre em contato com a nossa equipe de colaboradores e seja atendido por profissionais 
+                        capacitados e interessados para oferecer a melhor vivencia no Cola Aí.</p>
+                        <h2 class="fs-5 mt-3">Título</h2>
+                        <div class="inputContato">
+                            <input type="text" class="input-group mt-1" name="titulo" id="" placeholder="Título do contato">
+                        </div>
+                        <h2 class="fs-5 mt-3">Comentário</h2>
+                        <select class="selectModal rounded rounded-4" name="" value="" aria-label="Default select example">
+                            <option value="1">Suporte Técnico</option>
+                            <option value="2">Denúncia</option>
+                            <option value="3">Outros</option>
+                        </select>
+                        <h2 class="fs-5 mt-3">Categoria da denúncia</h2>
+                        <select class="selectModal rounded rounded-4" name="" value="" aria-label="Default select example">
+                            <option value="1">Organização</option>
+                            <option value="2">Publicação</option>
+                            <option value="3">Eventos</option>
+                            <option value="4">Outros</option>
+                        </select>
+                        <h2 class="fs-5 mt-3">Descrição</h2>
+                        <div class="inputContato" >
+                            <textarea class="form-control rounded rounded-4" name="" id="" cols="30" rows="10" style="max-height: 300px;" placeholder="Descreva o motivo do seu contato."></textarea>
+                        </div>
+                        <h2 class="fs-5 mt-3">Inserir imagem</h2>
+                        <div class="position-relative">
+                            <img src="../../img/Usuario/add-image.png" alt="" style="width: 25px; position:absolute; left: 90%; top:23%">
+                            <label for="file-upload" class="fileInput rounded rounded-4">
+                                Carregar imagem
+                            </label>
+                            <input id="file-upload" type="file" />
+                        </div>
+                        <p style="color: #6D9EAF; font-size:0.9em" class="mt-3">As imagens serão reservadas e sem fins lucrativas, serão apenas para auxilio na resolução dos problemas</p>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button class="border border-0 ms-auto rounded rounded-5">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    <script>
-        const COMPONENT_NAME = "data-glide";
-        const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
-
-        const components = document.querySelectorAll(COMPONENT_SELECTOR);
-
-        for (let i = 0; i < components.length; i++) {
-            const options = JSON.parse(
-                components[i].getAttribute(COMPONENT_NAME) || "{}"
-            );
-
-            let glide = new Glide(
-                components[i],
-                options
-            );
-            console.log(glide)
-            glide.mount();
-        }
-    </script>
+<script type="text/javascript" src="../../js/personalizar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+</script>
+<script>
+const COMPONENT_NAME = "data-glide";
+const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
+const components = document.querySelectorAll(COMPONENT_SELECTOR);
+for (let i = 0; i < components.length; i++) {
+  const options = JSON.parse(
+    components[i].getAttribute(COMPONENT_NAME) || "{}"
+  );
+  let glide = new Glide(
+    components[i],
+    options
+  );
+  console.log(glide)
+  glide.mount();
+}
+function modalSobre(){
+    const myModal = new bootstrap.Modal('#modalSobre');
+    myModal.show();
+    //window.location.href = "./registro.php";
+}
+function modalFeedback($id, $elemento){
+    const myModal = new bootstrap.Modal('#modalFeedback');
+    myModal.show();
+    document.getElementById($elemento).value = $id;
+    //window.location.href = "./registro.php";
+}
+function modalContato($id, $elemento){
+    const myModal = new bootstrap.Modal('#modalContato');
+    myModal.show();
+    document.getElementById($elemento).value = $id;
+    //window.location.href = "./registro.php";
+}
+</script>
 </body>
 
 </html>
