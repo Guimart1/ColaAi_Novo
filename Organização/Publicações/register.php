@@ -9,11 +9,13 @@ if (!empty($_POST)) {
     $desc_Publicacao =  $publicacaoDao['descPublicacao'];
     $link_Publicacao = $publicacaoDao['linkOrganizacaoEvento'];
     $imagem_Publicacao = $publicacaoDao['imagemPublicacao'];
+    $idOrg_Evento = $publicacaoDao['idOrganizacaoEvento'];
 } else {
     $titulo_Publicacao = '';
     $desc_Publicacao = '';
     $link_Publicacao = '';
     $imagem_Publicacao = '';
+    $idOrg_Evento = '';
     $id_Publicacao = '';
 }
 ?>
@@ -70,6 +72,7 @@ if (!empty($_POST)) {
                         <input type="hidden" name="idPublicacao" id="idPublicacao" placeholder="id" value="<?=$id_Publicacao?>">
                         <input type="hidden" name="imagemPublicacao" id="imagemPublicacao" placeholder="nome foto" value="<?= $imagem_Publicacao ?>">
                         <input type="hidden" value="<?= $id_Publicacao ? 'ATUALIZAR' : 'SALVAR' ?>" name="acao">
+                        <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id da organização" value="<?= isset($authUserOrg['idOrganizacaoEvento']) ? $authUserOrg['idOrganizacaoEvento'] : '' ?>" readonly>
                         <a href="" style="color: #6F9BAB; text-decoration:none"><i class="bi bi-geo-alt fs-4 me-1"></i>Adicionar localização da publicação</a><br>
                         <a href="" style="color: #6F9BAB; text-decoration:none"><i class="bi bi-person-add fs-4 me-1"></i>Marcar pessoas</a>
                         <div class="row g-2" id="publiGrid">

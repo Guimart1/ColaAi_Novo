@@ -1,7 +1,7 @@
 <?php
 
 class Publicacao {
-    public $id, $titulo, $descricao,$link, $imagem, $idEvento;
+    public $id, $titulo, $descricao,$link, $imagem, $idOrganizacaoEvento;
 
     // Getters e Setters
     public function getId() {
@@ -36,12 +36,12 @@ class Publicacao {
         $this->link = $link;
     }
 
-    public function getIdEvento() {
-        return $this->idEvento;
+    public function getIdOrganizacaoEvento() {
+        return $this->idOrganizacaoEvento;
     }
 
-    public function setIdEvento($idEvento) {
-        $this->idEvento = $idEvento;
+    public function setIdOrganizacaoEvento($idOrganizacaoEvento) {
+        $this->idOrganizacaoEvento = $idOrganizacaoEvento;
     }
     public function getImagem(){
         return $this->imagem;

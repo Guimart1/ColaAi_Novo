@@ -142,7 +142,15 @@ require_once (__DIR__ . '../../model/Conexao.php');
         
             return $stmt->execute();
         }
-
+        public static function selectByOrganizacaoId($idOrganizacao){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbevento WHERE idOrganizacaoEvento = :idOrganizacao";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        
         
     }
 

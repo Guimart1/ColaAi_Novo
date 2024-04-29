@@ -56,6 +56,12 @@
             <span>Dados do perfil</span>
           </a>
         </li>
+        <li class="menuItems w-100 p-1 ps-4">
+          <a class="" href="../Eventos/" style="text-decoration: none; color: #a6a6a6;">
+          <img src="../../img/Admin/icon-eventos.png" alt="" id="menu-icon">
+            <span>Eventos Cadastrados</span>
+          </a>
+        </li>
         
       </div>
       <p class="d-inline-flex menuItems w-100 p-1 ps-2" style="margin-bottom: 0">
