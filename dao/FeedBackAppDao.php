@@ -27,11 +27,14 @@ class FeedbackAppDao {
     
     public static function selectAll() {
         $conexao = Conexao::conectar();
-        $query = "SELECT * FROM tbfeedbackapp";
+        $query = "SELECT fb.idFeedBackApp, fb.tituloFeedBackApp, fb.descFeedbackApp, fb.idUsuario, u.nomeUsuario, u.emailUsuario 
+                  FROM tbfeedbackapp fb
+                  INNER JOIN tbusuario u ON fb.idUsuario = u.idUsuario";
         $stmt = $conexao->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    
 
     public static function selectById($id) {
         $conexao = Conexao::conectar();

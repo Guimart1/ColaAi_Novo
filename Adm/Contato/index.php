@@ -64,7 +64,7 @@
             include('../Componentes/menu.php')
             ?>
             <div class="info-box col-md-9 " style="color: #a6a6a6;" id="data-box">
-                <h1 class="text-center mt-4">Suporte Técnico - Contato</h1>
+                <h1 class="text-center mt-4">Contato</h1>
                 <div class="container d-flex w-100 pe-5 mt-5" style="height: 50px">
                 </div>
                 <div class="row ms-4 me-5 mt-4">
