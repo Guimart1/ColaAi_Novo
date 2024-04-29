@@ -72,12 +72,13 @@ $eventos = EventoDao::selectAll();
     </div>
     <div class="container mt-4" style="width: 80%;">
         <div class="glide mb-5" data-glide='{
+            
             }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                        <div class="imageBox position-relative w-100" style="height: 300px;">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -86,8 +87,8 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -96,8 +97,8 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -106,8 +107,8 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -116,8 +117,8 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%;">
+                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -128,8 +129,8 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
@@ -149,7 +150,12 @@ $eventos = EventoDao::selectAll();
         "perSwipe": 4,
         "perTouch": 4,
         "gap":20,
-        "type": "carousel"
+        "type": "carousel",
+        "breakpoints": {
+                    "600": {"perView": 1},
+                    "800": {"perView": 2},
+                    "1370": {"perView": 3}
+                }
         }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
@@ -219,16 +225,14 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=2" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=3" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
         <h2 id="carrossel-teatros" class="fs-3">Teatros</h2>
@@ -239,8 +243,13 @@ $eventos = EventoDao::selectAll();
                 "perSwipe": 4,
                 "perTouch": 4,
                 "gap":20,
-                "type": "carousel"
-            }'>
+                "type": "carousel",
+                "breakpoints": {
+                    "600": {"perView": 1},
+                    "800": {"perView": 2},
+                    "1370": {"perView": 3}
+                }
+                }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -253,7 +262,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
@@ -272,17 +281,15 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=2" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=3" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
 
@@ -294,7 +301,12 @@ $eventos = EventoDao::selectAll();
         "perSwipe": 4,
         "perTouch": 4,
         "gap":20,
-        "type": "carousel"
+        "type": "carousel",
+        "breakpoints": {
+                    "600": {"perView": 1},
+                    "800": {"perView": 2},
+                    "1370": {"perView": 3}
+                }
         }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
@@ -308,7 +320,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
@@ -326,27 +338,30 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt="" ></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=2" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=3" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
         <h2 class="fs-3">Museus</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
         "perSwipe": 4,
         "perTouch": 4,
         "gap":20,
-        "type": "carousel"
+        "type": "carousel",
+        "breakpoints": {
+                    "600": {"perView": 1},
+                    "800": {"perView": 2},
+                    "1370": {"perView": 3}
+                }
         }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
@@ -360,7 +375,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
@@ -378,28 +393,31 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=2" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=3" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
 
         <h2 class="fs-3">Centro Culturais</h2>
-        <div class="glide mb-5" data-glide='{
+        <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
         "perSwipe": 4,
         "perTouch": 4,
         "gap":20,
-        "type": "carousel"
+        "type": "carousel",     
+        "breakpoints": {
+                    "600": {"perView": 1},
+                    "800": {"perView": 2},
+                    "1370": {"perView": 3}
+                }
         }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
@@ -413,7 +431,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 280px; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
@@ -431,16 +449,14 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="=0"><img src="../../img/Usuario/arrow-previus.png" alt="" style="width: 40px;"></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir="=4"><img src="../../img/Usuario/arrow-next.png" alt="" style="width: 40px;"></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt="" ></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt="" ></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
                 <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=2" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=3" style="display: none;"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
     </div>
