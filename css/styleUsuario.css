@@ -13,6 +13,15 @@ html, body{
     background-color: #FFFBE7;
     color: #a6a6a6;
 }
+
+.fundo-bolinha {
+    background-image: url("../img/Usuario/fundo-bolinha.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    color: #a6a6a6;
+}
+
 h1, h2, h3{
     font-family: Negrito;
 
@@ -21,7 +30,6 @@ p {
     font-family: OpenSans;
     font-size: 12pt;
 }
-
 
 .inputBox{
     width: 80%;

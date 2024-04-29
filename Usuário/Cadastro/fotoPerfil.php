@@ -27,11 +27,11 @@ if (!empty($_POST['idUsuario'])) {
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 
-<body>
-    <div class="container mt-2 ms-2" style="height: 8vh;">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
+<body class="fundo-bolinha">
+    <div class="container mt-2 ms-2">
+        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 5.4vh;">
     </div>
-    <div class="container-fluid text-center" style="height:88vh">
+    <div class="container-fluid text-center" style="height:92vh">
         <form action="banner.php" method="post" enctype="multipart/form-data"> <!-- Adicionado enctype para upload de arquivos -->  
             <h1 class="fs-3 mt-3">Adicione uma foto ao perfil</h1>
             <p>A sua foto de perfil ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
