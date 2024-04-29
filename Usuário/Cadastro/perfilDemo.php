@@ -11,9 +11,9 @@
 </head>
 <body class="fundo-bolinha">
     <div class="container mt-2 ms-2">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 5.4vh;">
+        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
-    <div class="container-fluid text-center" style="height:100vh">
+    <div class="container-fluid text-center" style="height:80vh">
             <h1 class="fs-3 mt-2">Este é o seu perfil</h1>
             <p>É assim como ele ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
             <div class="perfilBox me-auto ms-auto mt-4 rounded rounded-4" style="width: 42vh;">
