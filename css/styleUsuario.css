@@ -131,19 +131,27 @@ p {
 .navigation ul li a:hover{
     color: #FFD932;
 }
-.glide img{
-    width: 100%;
-    border-radius: 15px;
+@media only screen and (min-width: 758px) {
+    .glide img {
+        width: 40px;
+        border-radius: 15px;
+    }
+}
+@media only screen and (max-width: 758px) {
+    .glide img {
+        width: 25px;
+        border-radius: 15px;
+    }
 }
 
 .descCard {
     position: absolute;
     color: #fff;
-    height: 150px;
+    height: 119px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.167);
     display: block;
-    top: 81%;
+    top: 84%;
     z-index: 2;
     opacity: 1;
     transform: translateY(-50%);
@@ -151,7 +159,6 @@ p {
     border-radius: 40px 40px 0px 0px;
     font-size: 0.4em;
 }
-
 .descMini {
     position: absolute;
     color: #fff;
