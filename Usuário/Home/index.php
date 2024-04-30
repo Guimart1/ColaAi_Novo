@@ -52,7 +52,7 @@ $eventos = EventoDao::selectAll();
                 <img src="../../img/Usuario/icon-select.png" alt="" id="arrow" class="ms-2" style="cursor: pointer;">
             </div>
         </div>
-        <div class="buttonSearch col-2 d-flex justify-content-center mt-auto mb-1">
+        <div class="buttonProcurar col-2 d-flex justify-content-center mt-auto mb-1">
             <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
         </div>
         <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
@@ -466,13 +466,7 @@ $eventos = EventoDao::selectAll();
                 <button class="glide__bullet" data-glide-dir="=1"></button>
                 <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
-        </div>
-
-        <div class="glide__bullets" data-glide-el="controls[nav]">
-            <button class="glide__bullet" data-glide-dir="=0"></button>
-            <button class="glide__bullet" data-glide-dir="=1"></button>
-            <button class="glide__bullet" data-glide-dir="=2"></button>
-        </div>
+        </div>  
     </div>
     </div>
 <!--inicio footer-->
@@ -507,7 +501,12 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
         </div>
+        <div class="d-flex justify-content-between mt-2" style="width: 90%;">
+            <p style="color: #6D9EAF;">©2024 Todos os direitos reservados</p>
+            <p style="color: #6D9EAF;">Política de Privacidade</p>
+        </div>
     </footer>
+
     <div class="modal fade" id="modalSobre" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
@@ -599,7 +598,8 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
     </div>
-
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">

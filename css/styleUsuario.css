@@ -25,7 +25,6 @@ html, body{
     background-size: cover;
     overflow-x: hidden;
     color: #a6a6a6;
-    overflow-y: hidden;
 }
 
 h1, h2, h3{
@@ -41,7 +40,7 @@ p {
 }
 
 .inputBox{
-    width: 80%;
+    width: 70%;
     background-color: #fff;
     box-shadow: 12px 12px 0px 0px rgba(235,229,229,1);
     color: #a6a6a6;
@@ -116,7 +115,7 @@ p {
     width: 20px;
     pointer-events:visible;
 }
-.buttonSearch button{
+.buttonProcurar button{
     background-color: #FABDC1;
     width: 100%;
     max-height: 30px;
@@ -299,4 +298,26 @@ input[type="file"] {
     .centerInfo{
         justify-content: center;
     }
+}
+
+.social-container{
+    width:100%;
+    justify-content:space-evenly
+}
+.social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border: 3px solid #6D9EAF;
+    border-radius: 50%
+}
+.social ion-icon{
+    width: 35px;
+    height: 35px;
+    color: #6D9EAF;
+}
+.row-footer{
+    border-bottom: 2px solid #6D9EAF;
 }

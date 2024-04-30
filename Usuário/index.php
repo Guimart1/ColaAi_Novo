@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../css/styleUsuarioCadastro.css">
+    <link rel="stylesheet" href="../css/styleUsuario.css">
 </head>
 
 <body style="background-color: #FFFBE7; width: 100%">
@@ -95,38 +96,47 @@
         </div>
     </div>
 
-    <footer class="w-100 h-auto d-flex justify-content-center">
-        <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
-            <div class="col-md-4">
-                <img src="../img/Login/Cola AI logo.png" alt="" style="width: 40%;" class="mb-2">
-                <p style="font-size:1em; font-weight:bold; color: #A6A6A6;">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as
-                    melhores experiências para suas crianças.</p>
-            </div>
-            <div class="col-md-2">
-                <h4 style="color: #6D9EAF;">Infos</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                    <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
-                    <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                    <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h4 style="color: #6D9EAF;">Desenvolvedora</h4>
-                <img src="../img/Usuario/magma-logo.png" alt="" style="width: 70%;">
-            </div>
-            <div class="col-md-3">
-                <h4 style="color: #6D9EAF;">Acesso rápido</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
-                    <li>Início</li>
-                    <li>Teatros</li>
-                    <li>Parques</li>
-                    <li>Museus</li>
-                    <li>Centro Culturais</li>
-                    <li>CEU</li>
-                </ul>
+    <footer class="w-100 h-auto d-flex align-items-center flex-column">
+        <div class="d-flex justify-content-center">
+            <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
+                <div class="col-md-3">
+                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 80%; transform:translateY(-30px)" class="mb-2 me-auto">
+                    <p style="font-size:1.1em; font-weight:bold; text-align:justify;transform:translateY(-30px)" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
+                    encontrar as melhores experiências para suas crianças.</p>
+                </div>
+                <div class="col-2"></div>   
+                <div class="col-md-2 me-3">
+                    <h4 style="color: #6D9EAF;" class="mb-4">Desenvolvedor</h4>
+                    <p style="font-size:1em; font-weight:bold; text-align:justify">
+                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
+                    </p>
+                </div>
+                <div class="col-md-1 infoCol">
+                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold">Info</h4>
+                    <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                        <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
+                        <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
+                        <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 pb-5">
+                    <h4 style="color: #6D9EAF;" class="text-center">Siga-nos</h4>
+                    <div class="social-container d-flex mt-4">
+                        <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
+                        <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
+                        <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                    </div>
+                </div>
+
             </div>
         </div>
+        <div class="d-flex justify-content-between mt-2" style="width: 90%;">
+            <p style="color: #6D9EAF;">©2024 Todos os direitos reservados</p>
+            <p style="color: #6D9EAF;">Política de Privacidade</p>
+        </div>
     </footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
     </script>
