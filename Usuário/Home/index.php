@@ -237,19 +237,19 @@ $eventos = EventoDao::selectAll();
         </div>
         <h2 id="carrossel-teatros" class="fs-3">Teatros</h2>
         <div class="glide mb-5 carrossel" data-glide='{
-                "loop": true,
-                "perView": 4,
-                "perMove": 4,
-                "perSwipe": 4,
-                "perTouch": 4,
-                "gap":20,
-                "type": "carousel",
-                "breakpoints": {
-                    "600": {"perView": 1},
-                    "800": {"perView": 2},
-                    "1370": {"perView": 3}
-                }
-                }'>
+        "loop": true,
+        "perView": 4,
+        "perMove": 4,
+        "perSwipe": 4,
+        "perTouch": 4,
+        "gap":20,
+        "type": "carousel",
+        "breakpoints": {
+            "600": {"perView": 1},
+            "800": {"perView": 2},
+            "1370": {"perView": 3}
+        }
+        }'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -262,7 +262,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                             <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
@@ -279,7 +279,6 @@ $eventos = EventoDao::selectAll();
                         endif;
                     endforeach;
                     ?>
-
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
@@ -297,19 +296,19 @@ $eventos = EventoDao::selectAll();
 
         <h2 id="carrossel-parques" class="fs-3">Parques</h2>
         <div class="glide mb-5 carrossel" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel",
-        "breakpoints": {
-                    "600": {"perView": 1},
-                    "800": {"perView": 2},
-                    "1370": {"perView": 3}
-                }
-        }'>
+    "loop": true,
+    "perView": 4,
+    "perMove": 4,
+    "perSwipe": 4,
+    "perTouch": 4,
+    "gap":20,
+    "type": "carousel",
+    "breakpoints": {
+        "600": {"perView": 1},
+        "800": {"perView": 2},
+        "1370": {"perView": 3}
+    }
+}'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -322,14 +321,15 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                            <p><?= $evento['descEvento']; ?></p>
+                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <p><?= $evento['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                     <?php
                                 // Adiciona o ID do evento ao array de eventos adicionados
@@ -351,21 +351,22 @@ $eventos = EventoDao::selectAll();
                 <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
+
         <h2 class="fs-3">Museus</h2>
         <div class="glide mb-5 carrossel" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel",
-        "breakpoints": {
-                    "600": {"perView": 1},
-                    "800": {"perView": 2},
-                    "1370": {"perView": 3}
-                }
-        }'>
+    "loop": true,
+    "perView": 4,
+    "perMove": 4,
+    "perSwipe": 4,
+    "perTouch": 4,
+    "gap":20,
+    "type": "carousel",
+    "breakpoints": {
+        "600": {"perView": 1},
+        "800": {"perView": 2},
+        "1370": {"perView": 3}
+    }
+}'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -378,14 +379,15 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                            <p><?= $evento['descEvento']; ?></p>
+                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <p><?= $evento['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                     <?php
                                 // Adiciona o ID do evento ao array de eventos adicionados
@@ -410,19 +412,19 @@ $eventos = EventoDao::selectAll();
 
         <h2 class="fs-3">Centro Culturais</h2>
         <div class="glide mb-5 carrossel" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel",     
-        "breakpoints": {
-                    "600": {"perView": 1},
-                    "800": {"perView": 2},
-                    "1370": {"perView": 3}
-                }
-        }'>
+    "loop": true,
+    "perView": 4,
+    "perMove": 4,
+    "perSwipe": 4,
+    "perTouch": 4,
+    "gap":20,
+    "type": "carousel",     
+    "breakpoints": {
+        "600": {"perView": 1},
+        "800": {"perView": 2},
+        "1370": {"perView": 3}
+    }
+}'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <?php
@@ -435,14 +437,15 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                            <p><?= $evento['descEvento']; ?></p>
+                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <p><?= $evento['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                     <?php
                                 // Adiciona o ID do evento ao array de eventos adicionados
@@ -464,6 +467,13 @@ $eventos = EventoDao::selectAll();
                 <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
+
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            <button class="glide__bullet" data-glide-dir="=0"></button>
+            <button class="glide__bullet" data-glide-dir="=1"></button>
+            <button class="glide__bullet" data-glide-dir="=2"></button>
+        </div>
+    </div>
     </div>
 
     <footer class="w-100 h-auto d-flex justify-content-center">
