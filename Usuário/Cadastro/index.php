@@ -46,10 +46,22 @@
 
                     <!--Confirmar senha-->
                     <div class="orgSenha d-flex">
-                        <input required type="password" id="senha1" placeholder="Confirmar senha" class="input-group mb-4">
+                        <input required type="password" id="senha1" placeholder="Confirmar senha" name="senhaUsuario" class="input-group mb-4">
                         <i class="bi bi-eye col1" id="btnSenha1" onclick="MostrarSenha2()"></i>
                     </div>
-
+                    <script>
+                        function myFunction() {
+                            var x = document.getElementById("senha");
+                            var y = document.getElementById("senha1")
+                            if (x.type === "password") {
+                                x.type = "text";
+                                y.type = "text";
+                            } else {
+                                x.type = "password";
+                                y.type = "password";
+                            }
+                        }
+                    </script>
                     <!--Confirmar-->
                     <div class="col-12 d-flex justify-content-end">
                         <button type="submit" class="botao btn fs-5" name="acao" value="SALVAR">Cadastre-se</button>
@@ -84,19 +96,6 @@
             } else {
                 inputPass.setAttribute('type', 'password')
                 btnShowPass.classList.replace('bi-eye-slash', 'bi-eye')
-            }
-        }
-    </script>
-    <script>
-        function myFunction() {
-            var x = document.getElementById("senha");
-            var y = document.getElementById("senha1")
-            if (x.type === "password") {
-                x.type = "text";
-                y.type = "text";
-            } else {
-                x.type = "password";
-                y.type = "password";
             }
         }
     </script>

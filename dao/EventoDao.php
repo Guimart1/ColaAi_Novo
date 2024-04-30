@@ -151,6 +151,23 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetchAll();
         }
         
+        public static function countEventsLast30Days(){
+            // Data atual
+            $dataAtual = date('Y-m-d');
+        
+            // Data de 30 dias atrás
+            $data30DiasAtras = date('Y-m-d', strtotime('-30 days'));
+        
+            $conexao = Conexao::conectar();
+            $query = "SELECT COUNT(*) AS totalEventos FROM tbevento WHERE dataEvento BETWEEN :data30DiasAtras AND :dataAtual";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':data30DiasAtras', $data30DiasAtras);
+            $stmt->bindParam(':dataAtual', $dataAtual);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            return $resultado['totalEventos'];
+        }
         
     }
 

@@ -1,11 +1,14 @@
-
+<?php
+require_once '../../dao/ContatoOrgEventoDao.php';
+$contatoOrg = ContatoOrgEventoDao::selectAll();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback de Usuários</title>
+    <title>Contato Organizações</title>
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
@@ -64,7 +67,7 @@
             include('../Componentes/menu.php')
             ?>
             <div class="info-box col-md-9 " style="color: #a6a6a6;" id="data-box">
-                <h1 class="text-center mt-4">Contato</h1>
+                <h1 class="text-center mt-4">Contato - Organizações</h1>
                 <div class="container d-flex w-100 pe-5 mt-5" style="height: 50px">
                 </div>
                 <div class="row ms-4 me-5 mt-4">
@@ -78,10 +81,12 @@
                                 <th class="col-md-3 fs-4 text-center">Status</th>
                                 <th class="col-md-2 fs-4 text-center">Devolutiva</th>
                             </tr>
+                            <?php foreach ($contatoOrg as $contatoOrgs) : ?>
                                 <tr class="mt-1">
-                                    <td class="fs-5 p-1"></td>
-                                    <td class="fs-5 p-1"></td>
-                                    <td class="fs-5 p-1"></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrg['idContatoOrganizacaoEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrg['tituloContatoOrganizacaoEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrg['nomeUsuario']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrg['emailUsuario']; ?></td>
                                     <td class="text-center">
                                         <a class="dropdown-item" onclick="modalInfo(1,1)">
                                                 <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
@@ -94,6 +99,7 @@
                                         <img src="../../img/Admin/contato-icon.png" alt="" style="width: 40px;" >
                                     </td>
                                 </tr>
+                            <?php endforeach; ?>
                         </thead>
                     </table>
                 </div>

@@ -66,9 +66,9 @@ $eventos = EventoDao::selectAll();
             <div class="info-box col-md-9 pt-4" style="color: #a6a6a6;" id="data-box">
                 <h1 class="text-center mt-4">Veja aqui todos os eventos registrados na plataforma!</h1>
                 <div class="container d-flex w-100 h-auto mt-5 me-5">
-                    <a href="register.php" class="ms-auto me-0" style="width: 45px;">
+                    <!-- <a href="register.php" class="ms-auto me-0" style="width: 45px;">
                         <img src="../../img/Admin/add-icon.png" alt="" class="ms-auto" style="width: 45px;">
-                    </a>
+                    </a> -->
                 </div>  
                 <div class="row ms-4 me-5 mt-4">
                     <table class="">

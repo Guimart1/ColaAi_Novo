@@ -10,7 +10,7 @@ class ContatoOrgEventoDao {
     
         $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
-        $stmt = $conn->prepare("INSERT INTO tbcontatoorgevento (tituloContatoOrgEvento, descContatoOrgEvento, idOrganizacaoEvento) 
+        $stmt = $conn->prepare("INSERT INTO tbcontatoorganizacaoevento (tituloContatoOrgEvento, descContatoOrgEvento, idOrganizacaoEvento) 
                         VALUES (:titulo, :descricao, :idOrganizacaoEvento)");
     
         $stmt->bindParam(':titulo', $titulo);        
@@ -28,15 +28,18 @@ class ContatoOrgEventoDao {
     
     public static function selectAll(){
         $conexao = Conexao::conectar();
-        $query = "SELECT * FROM tbcontatoorgevento";
+        $query = "SELECT c.*, o.nomeOrganizacaoEvento, o.emailOrganizacaoEvento 
+                  FROM tbcontatoorganizacaoevento c
+                  INNER JOIN tborganizacaoevento o ON c.idOrganizacaoEvento = o.idOrganizacaoEvento";
         $stmt = $conexao->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
     }
     
+    
     public static function selectById($id){
         $conexao = Conexao::conectar();
-        $query = "SELECT * FROM tbcontatoorgevento WHERE idContatoOrgEvento = :id";
+        $query = "SELECT * FROM tbcontatoorganizacaoevento WHERE idContatoOrgEvento = :id";
         $stmt = $conexao->prepare($query);
         $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
         $stmt->execute();
@@ -45,7 +48,7 @@ class ContatoOrgEventoDao {
     
     public static function delete($id){
         $conexao = Conexao::conectar();
-        $query = "DELETE FROM tbcontatoorgevento WHERE idContatoOrgEvento = :id";
+        $query = "DELETE FROM tbcontatoorganizacaoevento WHERE idContatoOrgEvento = :id";
         $stmt = $conexao->prepare($query);
         $stmt->bindParam(':id', $id);
         return  $stmt->execute();
@@ -54,7 +57,7 @@ class ContatoOrgEventoDao {
     public static function update($id, $contato){
         $conexao = Conexao::conectar();
     
-        $query = "UPDATE tbcontatoorgevento SET 
+        $query = "UPDATE tbcontatoorganizacaoevento SET 
             tituloContatoOrgEvento = :titulo,
             descContatoOrgEvento = :descricao,
             idOrganizacaoEvento = :idOrganizacaoEvento
