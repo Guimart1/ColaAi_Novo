@@ -112,34 +112,41 @@
         <div class="d-flex justify-content-center">
             <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
                 <div class="col-md-3">
-                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 80%; transform:translateY(-30px)" class="mb-2 me-auto">
-                    <p style="font-size:1.1em; font-weight:bold; text-align:justify;transform:translateY(-30px)" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
+                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
+                    <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
                     encontrar as melhores experiências para suas crianças.</p>
                 </div>
-                <div class="col-2"></div>   
-                <div class="col-md-2 me-3">
-                    <h4 style="color: #6D9EAF;" class="mb-4">Desenvolvedor</h4>
-                    <p style="font-size:1em; font-weight:bold; text-align:justify">
+                <div class="col-md-2">
+                <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Acesso rápido</h4>
+                    <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Organização/">Organizador</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/">Administrador</a></li>
+                    </ul>
+                </div>   
+                <div class="col-md-2">
+                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-2">Desenvolvedor</h4>
+                    <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
                     A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">
-                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold">Info</h4>
+                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Info</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                        <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
-                        <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                        <li><a class="dropdown-item fw-bold">Licença</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5">Licença</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 pb-5">
-                    <h4 style="color: #6D9EAF;" class="text-center">Siga-nos</h4>
-                    <div class="social-container d-flex mt-4">
-                        <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
-                        <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
-                        <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                <div class="col-md-2 pb-5">
+                    <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-2">Siga-nos</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="social-container d-flex mt-4">
+                            <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>   
+                            <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
+                            <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="d-flex justify-content-between mt-2" style="width: 90%;">
@@ -156,11 +163,11 @@
                 </div>
                 <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
                     <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
-                    <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                    <p class="fw-bold " style="text-align: justify; width:70%;">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
                         O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
-                        de Sistemas da ETEC de Guaianazes.</p>
+                        de Sistemas da ETEC de Guaianazes.</p>      
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
     <div class="modal fade" id="modalFeedback" role="dialog"><!--Modal de FeedBack-->

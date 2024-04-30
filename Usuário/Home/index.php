@@ -33,15 +33,17 @@ $eventos = EventoDao::selectAll();
     //o usuário está autenticado
     $authUsuario = $_SESSION['user'];
     ?>
-    <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
-        <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
-        <div class="searchBox col-6 d-flex justify-content-center ms-4">
+    <div class="container-fluid mt-2 ms-2 d-flex justify-content-evenly vw-100 align-items-end mb-4" style="height: 8vh;">
+        <div class="col-2">
+                <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
+        </div>
+        <div class="searchBox col-4 d-flex justify-content-center">
             <div class="searchInput w-100 position-relative">
                 <img src="../../img/Usuario/icon-search.png" alt="">
                 <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
             </div>
         </div>
-        <div class="selectValor col-1 ms-4 me-5">
+        <div class="selectValor ps-5 col-1">
             <div class="selectIn position-relative">
                 <img src="../../img/Usuario/icon-valor.png" alt="">
                 <select class="rounded rounded-5 d-flex align-items-center w-100 ps-5" aria-label="Default select example" style="width: 15%;">
@@ -52,10 +54,13 @@ $eventos = EventoDao::selectAll();
                 <img src="../../img/Usuario/icon-select.png" alt="" id="arrow" class="ms-2" style="cursor: pointer;">
             </div>
         </div>
-        <div class="buttonProcurar col-2 d-flex justify-content-center mt-auto mb-1">
+        <div class="buttonProcurar col-1 d-flex justify-content-center mt-auto mb-1">
             <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
         </div>
-        <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
+        <div class="col-1">
+            <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
+        </div>
+
     </div>
     <div class="navigation">
         <nav>
@@ -470,35 +475,40 @@ $eventos = EventoDao::selectAll();
     </div>
     </div>
 <!--inicio footer-->
-    <footer class="w-100 h-auto d-flex justify-content-center">
-        <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
-            <div class="col-md-4">
-                <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%;" class="mb-2">
-                <p style="font-size:1em; font-weight:bold">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as
-                    melhores experiências para suas crianças.</p>
-            </div>
-            <div class="col-md-2">
-                <h4 style="color: #6D9EAF;">Infos</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                    <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
-                    <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                    <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h4 style="color: #6D9EAF;">Desenvolvedora</h4>
-                <img src="../../img/Usuario/magma-logo.png" alt="" style="width: 70%;">
-            </div>
-            <div class="col-md-3">
-                <h4 style="color: #6D9EAF;">Acesso rápido</h4>
-                <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
-                    <li>Início</li>
-                    <li>Teatros</li>
-                    <li>Parques</li>
-                    <li>Museus</li>
-                    <li>Centro Culturais</li>
-                    <li>CEU</li>
-                </ul>
+<footer class="w-100 h-auto d-flex align-items-center flex-column">
+        <div class="d-flex justify-content-center">
+            <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
+                <div class="col-md-3">
+                    <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
+                    <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
+                    encontrar as melhores experiências para suas crianças.</p>
+                </div>
+                <div class="col-md-2">
+                </div>   
+                <div class="col-md-2">
+                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-2">Desenvolvedor</h4>
+                    <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
+                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
+                    </p>
+                </div>
+                <div class="col-md-1 infoCol">
+                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Info</h4>
+                    <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5"onclick="modalContato(0,0)">Contato</a>></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 pb-5">
+                    <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-2">Siga-nos</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="social-container d-flex mt-4">
+                            <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>   
+                            <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
+                            <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="d-flex justify-content-between mt-2" style="width: 90%;">
@@ -506,7 +516,6 @@ $eventos = EventoDao::selectAll();
             <p style="color: #6D9EAF;">Política de Privacidade</p>
         </div>
     </footer>
-
     <div class="modal fade" id="modalSobre" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
