@@ -170,3 +170,13 @@
 </body>
 
 </html>
+<?php
+        } else {
+            // Se o evento não foi encontrado, exibe uma mensagem de erro
+            echo "<p>Evento não encontrado.</p>";
+        }
+    } else {
+        // Se o parâmetro idEvento não estiver definido na URL, exibe uma mensagem de erro
+        echo "<p>Parâmetro idEvento não especificado na URL.</p>";
+    }
+    ?>
