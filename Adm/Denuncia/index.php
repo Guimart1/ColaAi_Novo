@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback de Usuários</title>
+    <title>Denuncia</title>
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
@@ -64,7 +64,7 @@
             include('../Componentes/menu.php')
             ?>
             <div class=" col-md-9 " style="color: #a6a6a6;" id="data-box">
-                <h1 class="text-center mt-4">Suporte Técnico - Denúncia</h1>
+                <h1 class="text-center mt-4">Reportes de Denúncia</h1>
                 <div class="container d-flex w-100 pe-5 mt-5" style="height: 50px">
                 </div>
                 <div class="row ms-4 me-5 mt-4">

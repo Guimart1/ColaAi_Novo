@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . '../../../dao/EventoDao.php';
+require_once '../../dao/OrganizacaoDao.php';
 // Chamar a função para contar eventos nos últimos 30 dias
 $totalEventos = EventoDao::countEventsLast30Days();
+$totalOrganizacoes = OrganizacaoDao::countAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -65,9 +67,10 @@ $totalEventos = EventoDao::countEventsLast30Days();
                 <h2 class="fs-5 p-3 pb-0">Eventos Cadastrados</h2>
                 <p class="fs-5 p-0">+ <?php echo $totalEventos; ?> eventos</p>
             </div>
+            <!-- caixa de informações para organizações cadastradas -->
             <div class="col-md-3 rounded-5" id="info-box">
-                <h2 class="fs-5 p-3 pb-0">Organizações</h2>
-                <p class="fs-5 p-0">+ 10 organizações</p>
+                <h2 class="fs-5 p-3 pb-0">Organizações Cadastradas</h2>
+                <p class="fs-5 p-0">+ <?php echo $totalOrganizacoes; ?> organizações</p>
             </div>
         </div>
         <div class="row justify-content-evenly">

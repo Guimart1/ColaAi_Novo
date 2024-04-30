@@ -217,8 +217,14 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetchAll();
         }
         
-        
+        public static function countAll(){
+            $conexao = Conexao::conectar();
+            $query = "SELECT COUNT(*) FROM tborganizacaoevento";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchColumn(); // Retorna o número de organizações cadastradas
+        }
     }
-
+        
 
 ?>

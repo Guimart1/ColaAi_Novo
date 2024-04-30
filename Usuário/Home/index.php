@@ -32,7 +32,7 @@ $eventos = EventoDao::selectAll();
     }
 
     //o usuário está autenticado
-    $authUser = $_SESSION['user'];
+    $authUsuario = $_SESSION['user'];
     ?>
     <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
         <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">

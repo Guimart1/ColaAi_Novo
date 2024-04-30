@@ -1,6 +1,6 @@
 <?php
-require_once '../../dao/OrganizacaoDao.php';
-$organizacaoDao = new OrganizacaoDao();
+require_once '../../dao/UserAdmDao.php';
+$userAdmDao = new UserAdmDao();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,7 +8,7 @@ $organizacaoDao = new OrganizacaoDao();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Perfil Adiministrador</title>
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
@@ -21,17 +21,20 @@ $organizacaoDao = new OrganizacaoDao();
     session_start();
 
     // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
-    if (!isset($_SESSION['AutenticaoOrg']) || $_SESSION['AutenticaoOrg'] != 'SIM') {
+    if (!isset($_SESSION['AutenticaoAdm']) || $_SESSION['AutenticaoAdm'] != 'SIM') {
         // Redirecionar para o login com um erro2 se não estiver autenticado
-        header('Location: loginEmail.php?login=erro2');
+        header('Location: login.php?login=erro2');
         exit();
     }
 
     //o usuário está autenticado
-    $authUserOrg = $_SESSION['userOrg'];
-    // Buscar dados da organização pelo ID (você precisa passar o ID da organização)
-    $idOrganizacao = $_SESSION['userOrg']['idOrganizacaoEvento']; // Supondo que o ID da organização esteja na sessão
-    $organizacao = $organizacaoDao->selectById($idOrganizacao);
+    $authUser = $_SESSION['userAdm'];
+
+    $nomeAdm = $authUser['nomeAdmin'];
+
+    // Buscar dados do usuário administrador pelo ID (você precisa passar o ID do usuário)
+    $idUsuarioAdm = $_SESSION['userAdm']['idAdmin']; // Supondo que o ID do usuário esteja na sessão
+    $userAdm = $userAdmDao->selectById($idUsuarioAdm);
     ?>
 
     <?php
@@ -73,20 +76,20 @@ $organizacaoDao = new OrganizacaoDao();
         <!-- Hamburger -->
     </div>
     <div class="first-div">
-        <img src="../../img/Organizacao/<?=$authUserOrg['imagemOrganizacaoEvento']? $authUserOrg['imagemOrganizacaoEvento']: 'userPadrao.png';?>"style="width:100% ;heigh:100%"> 
+        <img src="../../img/Admin/<?= $authUser['fotoPerfilAdmin'] ? $authUser['fotoPerfilAdmin'] : 'userPadrao.png'; ?>" style="width:100% ;heigh:100%"> 
     </div>
     <div class="second-div">
         <div class="third-div">
-        <img src="../../img/Organizacao/<?=$authUserOrg['imagemOrganizacaoEvento']? $authUserOrg['imagemOrganizacaoEvento']: 'userPadrao.png';?>"style="width:100% ;heigh:100%"> 
+        <img src="../../img/Admin/<?= $authUser['fotoPerfilAdmin'] ? $authUser['fotoPerfilAdmin'] : 'userPadrao.png'; ?>" style="width:100% ;heigh:100%"> 
 
         </div>
         <div class="four-div">
             <div class="five-div">
-                <?php if ($organizacao !== false): ?>
-                    <h4 class="organization-name"><?php echo $organizacao['nomeOrganizacaoEvento']; ?></h4>
-                    <h2 class="organization-description"><?php echo $organizacao['descOrganizacaoEvento']; ?></h2>
+                <?php if ($userAdm !== false): ?>
+                    <h4 class="organization-name"><?php echo $userAdm['nomeAdmin']; ?></h4>
+                    <!-- <h2 class="organization-description"></h2> -->
                     <?php else: ?>
-                        <p>Não foi possível carregar os dados da organização.</p>
+                        <p>Não foi possível carregar os dados do usuário administrador.</p>
                     <?php endif; ?>
             </div>
         </div>
