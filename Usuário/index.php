@@ -116,7 +116,7 @@
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
                         <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
                         <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                        <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
+                        <li><a class="dropdown-item fw-bold">Licença</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 pb-5">
@@ -135,11 +135,56 @@
             <p style="color: #6D9EAF;">Política de Privacidade</p>
         </div>
     </footer>
+    <div class="modal fade" id="modalSobre" role="dialog">
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Sobre</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
+                    <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
+                    <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                        O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
+                        de Sistemas da ETEC de Guaianazes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalFeedback" role="dialog"><!--Modal de FeedBack-->
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Feedback</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                    <p>Nos ajude a melhorar a sua experiência como usuário, nos envie sugestões
+                        e nos conte das suas melhores vivencias com o Cola Aí.</p>
+                    <form method="post" action="./processFeedBack.php">
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <h2 class="fs-5 mt-3">Título</h2>
+                        <div class="inputContato">
+                            <input type="text" class="input-group mt-1" name="tituloFeedBackApp" placeholder="Título do feedback">
+                        </div>
+                        <h2 class="fs-5 mt-3">Comentário</h2>
+                        <div class="inputContato">
+                            <textarea class="form-control rounded rounded-4" name="descFeedbackApp" cols="30" rows="10" style="max-height: 300px;" placeholder="Escreva sua experiência  com o site, podendo ser sugestões, criticas e melhorias"></textarea>
+                        </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
     </script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
 </body>
 
 </html>

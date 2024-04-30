@@ -605,6 +605,7 @@ $eventos = EventoDao::selectAll();
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script>
@@ -623,25 +624,7 @@ $eventos = EventoDao::selectAll();
             glide.mount();
         }
 
-        function modalSobre() {
-            const myModal = new bootstrap.Modal('#modalSobre');
-            myModal.show();
-            //window.location.href = "./registro.php";
-        }
 
-        function modalFeedback($id, $elemento) {
-            const myModal = new bootstrap.Modal('#modalFeedback');
-            myModal.show();
-            document.getElementById($elemento).value = $id;
-            //window.location.href = "./registro.php";
-        }
-
-        function modalContato($id, $elemento) {
-            const myModal = new bootstrap.Modal('#modalContato');
-            myModal.show();
-            document.getElementById($elemento).value = $id;
-            //window.location.href = "./registro.php";
-        }
     </script>
 </body>
 
