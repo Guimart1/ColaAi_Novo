@@ -39,7 +39,25 @@
 		document.getElementById($elemento).value = $id;
 		//window.location.href = "./registro.php";
 		}
+        function modalSobre() {
+            const myModal = new bootstrap.Modal('#modalSobre');
+            myModal.show();
+            //window.location.href = "./registro.php";
+        }
 
+        function modalFeedback($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalFeedback');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
+
+        function modalContato($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalContato');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
   $(document).ready(function() {
     $('#modalPadrao').modal('show');
   });
