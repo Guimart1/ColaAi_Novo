@@ -39,3 +39,23 @@ input {
 .sombra {
     box-shadow: 20px 15px 0px #EBE5E5;
 }
+
+.buttonSearch button{
+    background-color: #DCF4CA;
+    width: 100%;
+    max-height: 75px;
+    min-height: 75px;
+    min-width: 300px;
+    color: #6D9EAF;
+    font-size: 14pt;
+    border-radius: 65px;
+}
+
+footer{
+    background-color: #F6EFCD;
+}
+
+li{
+    margin: 8px 0px 8px 0px;
+    color: #A6A6A6;
+}
