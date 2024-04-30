@@ -475,7 +475,7 @@ $eventos = EventoDao::selectAll();
         </div>
     </div>
     </div>
-
+<!--inicio footer-->
     <footer class="w-100 h-auto d-flex justify-content-center">
         <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
             <div class="col-md-4">

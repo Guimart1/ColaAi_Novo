@@ -168,6 +168,18 @@ require_once (__DIR__ . '../../model/Conexao.php');
         
             return $resultado['totalEventos'];
         }
+
+        public static function selecionarEventoComOrganizacaoPorId($id){
+            $conexao = Conexao::conectar();
+            $query = "SELECT e.*, o.nomeOrganizacao, o.imagemOrganizacao FROM tbevento e
+                      INNER JOIN tborganizacaoevento o ON e.idOutraChaveEstrangeira = o.idOrganizacao
+                      WHERE e.idEvento = :id";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        
         
     }
 
