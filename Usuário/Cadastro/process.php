@@ -5,6 +5,7 @@ require_once '../../model/Mensagem.php';
 
 $user = new User();
 $msg = new Mensagem();
+$conexao = new mysqli("localhost", "root", "", "bdcolaai");
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
@@ -22,16 +23,33 @@ switch ($_POST["acao"]) {
     $user->setEmail($_POST['emailUsuario']);
     $user->setSenha($_POST['senhaUsuario']);
     $user->setTel($_POST['telUsuario']);
-    $user->setImagemPerfil($user->salvarImagem($_POST['imagemPerfilUsuario']));
-    $user->setImagemBanner($user->salvarImagem($_POST['imagemBannerUsuario']));
 
     try {
       $userDao = UserDao::insert($user);
-
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
-      header("Location: personalizar.php");
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Obtém o e-mail enviado pelo formulário
+        $email = $_POST['emailUsuario'];
+    
+        // Consulta SQL para verificar se o e-mail já existe no banco de dados
+        $sql = "SELECT * FROM tbusuario WHERE emailUsuario = '$email'";
+        $resultado = $conexao->query($sql);
+            // Verifica se houve algum erro na execução da consulta
+    if ($resultado === false) {
+      echo "Erro ao executar a consulta: ";
+      
+     } else {
+        // Verifica se houve algum resultado retornado pela consulta
+        if ($resultado->num_rows > 0) {
+            // E-mail já existe no banco de dados, exibe mensagem de erro
+            echo "Erro: Este e-mail já está cadastrado.";
+        } else {
+            // E-mail não existe no banco de dados, pode prosseguir com o cadastro
+            $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
+            header("Location: personalizar.php");
+        }
+    } 
+    
+    } 
     } catch (Exception $e) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
 
@@ -41,6 +59,7 @@ switch ($_POST["acao"]) {
       header("Location: index.php");
     }
     break;
+
   case 'ATUALIZAR':
     //pode validar as informações
     $user->setNome($_POST['nomeUsuario']);
