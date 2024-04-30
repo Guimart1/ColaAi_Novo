@@ -1,4 +1,3 @@
-
 <?php
 require_once '../../dao/EventoDao.php';
 $eventos = EventoDao::selectAll();
@@ -88,7 +87,7 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                        <div class="imageBox position-relative w-100" style="height: 300px;">
                             <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
@@ -98,7 +97,7 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                        <div class="imageBox position-relative w-100" style="height: 300px;">
                             <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
@@ -108,7 +107,7 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                        <div class="imageBox position-relative w-100" style="height: 300px;">
                             <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
@@ -118,7 +117,7 @@ $eventos = EventoDao::selectAll();
                         </div>
                     </li>
                     <li class="glide__slide">
-                        <div class="imageBox position-relative w-100"  style="height: 300px;">
+                        <div class="imageBox position-relative w-100" style="height: 300px;">
                             <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4">Nome do Evento</h3>
@@ -263,13 +262,15 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                            <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                            <p><?= $evento['descEvento']; ?></p>
+                                    <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <p><?= $evento['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </li>
                     <?php
                                 // Adiciona o ID do evento ao array de eventos adicionados
@@ -321,6 +322,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
+                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                     <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
@@ -339,7 +341,7 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt="" ></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
                 <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
@@ -376,6 +378,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
+                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                     <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
@@ -432,6 +435,7 @@ $eventos = EventoDao::selectAll();
                             if (!in_array($evento['idEvento'], $eventos_adicionados)) :
                     ?>
                                 <li class="glide__slide">
+                                <a href="../Evento/evento.php?id=<?=$evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                     <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
@@ -450,8 +454,8 @@ $eventos = EventoDao::selectAll();
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt="" ></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt="" ></button>
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
             </div>
 
             <div class="glide__bullets" data-glide-el="controls[nav]">
@@ -521,7 +525,7 @@ $eventos = EventoDao::selectAll();
                     <p>Nos ajude a melhorar a sua experiência como usuário, nos envie sugestões
                         e nos conte das suas melhores vivencias com o Cola Aí.</p>
                     <form method="post" action="./processFeedBack.php">
-                    <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <h2 class="fs-5 mt-3">Título</h2>
                         <div class="inputContato">
                             <input type="text" class="input-group mt-1" name="tituloFeedBackApp" placeholder="Título do feedback">
