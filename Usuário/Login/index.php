@@ -19,9 +19,9 @@
             <div class="col-lg-7 imageBox d-flex justify-content-center  align-items-center">
                 <img src="../../img/Usuario/login-img.png" alt="" style="width: 90%;">
             </div>
-            <div class="col-lg-4 formBox d-flex flex-column align-items-center">
-                <div class="inputBox h-auto rounded rounded-5 mb-5 mt-4 p-4">
-                    <h1 class="text-center mt-2 mb-4 fs-2"><span style="color: #E6AEB2">Lo</span><span style="color: #6D9EAF">gin</span></h1>
+            <div class="col-lg-4 formBox d-flex row align-items-center justify-content-center">
+                <div class="inputBox h-auto rounded rounded-5 mb-5 mt-4 p-5">
+                    <h1 class="text-center mt-2 mb-5 fs-2"><span style="color: #E6AEB2; font-size: 50px">Lo</span><span style="color: #6D9EAF; font-size: 50px">gin</span></h1>
                     <?php
                     if (isset($_GET['login']) && $_GET['login'] == "erro") {
                     ?>
@@ -46,11 +46,11 @@
                     ?>
                     <form action="../valida_login.php" method="post">
                         <input type="text" class="input-group mt-4" name="email" id="" placeholder="Digite o seu e-mail ou telefone">
-                        <div class="orgSenha d-flex mt-4">
+                        <div class="orgSenha d-flex mt-5">
                             <input required type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4">
                             <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
                         </div>
-                        <div class="f-password w-100 text-end mt-4">
+                        <div class="f-password w-100 text-end">
                             <a href="" style="color: #6D9EAF;">Esqueci a senha</a>
                         </div>
                         <div class="button w-100 d-flex pe-0 mt-5">

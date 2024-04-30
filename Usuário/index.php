@@ -11,31 +11,43 @@
     <link rel="stylesheet" href="../css/styleUsuario.css">
 </head>
 
-<body style="background-color: #FFFBE7; width: 100%">
+<body style="background-color: #FFFBE7;">
 
-    <!-- Bolinhas conflitam com os botões
-    <div class="d-flex" style="height: 100vh; width: 100%; position:absolute;">
-        <div class="d-flex justify-content-center align-items-end">
-            <img src="../img/Usuario/Bolinhas_index/Inferior_Esquerdo.png" style="height:9vw; position:fixed; margin-left:10px"></img>
-        </div>
+    
+    <div class="d-flex" style="width: 100%; position:relative;">
         <div class="d-flex justify-content-start align-items-start" >
-            <img src="../img/Usuario/Bolinhas_index/Superior_esquerdo.png" style="height:6vw"></img>
+            <img src="../img/Usuario/Bolinhas_index/Superior_esquerdo.png" style="height:6vw; position:absolute"></img>
         </div>
+
+        <div class="d-flex justify-content-start align-items-start">
+            <img src="../img/Usuario/Bolinhas_index/Centro_Esquerdo_2.png" style="height:10vw; margin-top:40%; position:absolute"></img>
+        </div>
+        <div class="d-flex justify-content-start align-items-start">
+            <img src="../img/Usuario/Bolinhas_index/Centro_Esquerdo.png" style="height:10vw; margin-top:75%; position:absolute"></img>
+        </div>
+        <div class="d-flex justify-content-start align-items-start">
+            <img src="../img/Usuario/Bolinhas_index/Centro_Esquerdo_2.png" style="height:10vw; margin-top:110%; position:absolute"></img>
+        </div>
+
         <div class="d-flex w-100 justify-content-center align-items-end">
-            <img src="../img/Usuario/Bolinhas_index/Inferior_Centro.png" style="height:5vw; margin-left:25%; position:fixed;"></img>
+            <img src="../img/Usuario/Bolinhas_index/Inferior_Centro.png" style="height:5vw; margin-left:25%; position:absolute;"></img>
         </div>
+
         <div class="d-flex w-100 justify-content-center align-items-start">
-            <img src="../img/Usuario/Bolinhas_index/Superior_Centro.png" style="height:6vw; margin-right:50%"></img>
+            <img src="../img/Usuario/Bolinhas_index/Superior_Centro.png" style="height:6vw; margin-right:50%; position:absolute"></img>
         </div>
         <div class="d-flex justify-content-end align-items-start">
             <img src="../img/Usuario/Bolinhas_index/Centro_Direito.png" style="height:10vw; margin-top:10%; position:absolute"></img>
         </div>
-        <div class="d-flex justify-content-end align-items-end">
-            <img src="../img/Usuario/Bolinhas_index/Centro_Direito_2.png" style="height:10vw; margin-bottom:10%; position:fixed"></img>
+        <div class="d-flex justify-content-end align-items-start">
+            <img src="../img/Usuario/Bolinhas_index/Centro_Direito_2.png" style="height:10vw; margin-top:50%; position:absolute"></img>
+        </div>
+        <div class="d-flex justify-content-end align-items-start">
+            <img src="../img/Usuario/Bolinhas_index/Centro_Direito.png" style="height:10vw; margin-top:95%; position:absolute"></img>
         </div>
         
     </div>
-    -->
+    
 
     <div class="col-md-12 d-flex justify-content-end" style="height: 100px; position:fixed; bottom:10px; padding:5%;">
         <li style="list-style: none;">
@@ -70,7 +82,7 @@
     <div class="row w-100 d-flex justify-content-center align-items-center " style="height: 80vh;">
         <div class="col-md-5 d-flex justify-content-center">
             <div class="col-9 d-flex justify-content-center">
-                <h4 class="text-center"><p style="color: #A6A6A6; text-align:justify" class="lh-lg">
+                <h4 class="text-center"><p style="color: #A6A6A6; text-align:justify; font-weight:bold; font-size:20px" class="lh-lg">
                     A cultura é extremamente importante para o crescimento da sua criança, e nós te ajudamos nisso!
                     <img src="../img/Usuario/logoColaai.png" style="height: 45px; margin-bottom: 20px" alt="Cola Aí">
                     é um site que te mostra os eventos culturais mais próximos de você, agora é só entrar e aproveitar.
@@ -87,7 +99,7 @@
         </div>
         <div class="col-md-5 d-flex justify-content-center">
             <div class="col-9 d-flex justify-content-center">
-                <h4 class="text-center "><p style="color: #A6A6A6; text-align:justify" class="lh-lg">
+                <h4 class="text-center "><p style="color: #A6A6A6; text-align:justify; font-weight:bold; font-size:20px" class="lh-lg">
                     Acesse pelo seu celular, computador, tablet ou notebook. nós do
                     <img src="../img/Usuario/logoColaai.png" style="height: 45px; margin-bottom: 20px" alt="Cola Aí">
                     estamos te esperando para participar da nossa comunidade de responsaveis que querem dar o melhor da cultura para os seus pequenos!
