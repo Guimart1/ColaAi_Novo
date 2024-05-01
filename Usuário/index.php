@@ -100,9 +100,9 @@
         <div class="col-md-5 d-flex justify-content-center">
             <div class="col-9 d-flex justify-content-center">
                 <h4 class="text-center "><p style="color: #A6A6A6; text-align:justify; font-weight:bold; font-size:20px" class="lh-lg">
-                    Acesse pelo seu celular, computador, tablet ou notebook. nós do
+                    Acesse pelo seu celular, computador ou tablet. Nós do
                     <img src="../img/Usuario/logoColaai.png" style="height: 45px; margin-bottom: 20px" alt="Cola Aí">
-                    estamos te esperando para participar da nossa comunidade de responsaveis que querem dar o melhor da cultura para os seus pequenos!
+                    estamos te esperando para participar da nossa comunidade de responsáveis que querem dar o melhor da cultura para os seus pequenos!
                 </p></h4>
             </div>
         </div>
@@ -120,7 +120,7 @@
                 <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Acesso rápido</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
                         <li><a class="dropdown-item fw-bold fs-5" href="../Organização/">Organizador</a></li>
-                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/">Administrador</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/Login/index.php">Administrador</a></li>
                     </ul>
                 </div>   
                 <div class="col-md-2">
@@ -133,7 +133,7 @@
                     <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Info</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
                         <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
-                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
+                        <!-- <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li> -->
                         <li><a class="dropdown-item fw-bold fs-5">Licença</a></li>
                     </ul>
                 </div>
