@@ -24,9 +24,7 @@ switch ($_POST["acao"]) {
     $user->setSenha($_POST['senhaUsuario']);
     $user->setTel($_POST['telUsuario']);
 
-    try {
-      $userDao = UserDao::insert($user);
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try { 
         // Obtém o e-mail enviado pelo formulário
         $email = $_POST['emailUsuario'];
     
@@ -35,21 +33,21 @@ switch ($_POST["acao"]) {
         $resultado = $conexao->query($sql);
             // Verifica se houve algum erro na execução da consulta
     if ($resultado === false) {
-      echo "Erro ao executar a consulta: ";
-      
+      $msg->setMensagem("Erro ao executar a consulta.", "bg-danger");
      } else {
         // Verifica se houve algum resultado retornado pela consulta
         if ($resultado->num_rows > 0) {
             // E-mail já existe no banco de dados, exibe mensagem de erro
-            echo "Erro: Este e-mail já está cadastrado.";
+            $msg->setMensagem("Erro, o e-mail informado já está em uso.", "bg-danger");
+            header("Location: index.php");
         } else {
             // E-mail não existe no banco de dados, pode prosseguir com o cadastro
+            $userDao = UserDao::insert($user);
             $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
             header("Location: personalizar.php");
         }
     } 
-    
-    } 
+
     } catch (Exception $e) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
 
