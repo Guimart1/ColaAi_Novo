@@ -99,28 +99,10 @@
             }
         }
     </script>
-    <script>
-        //Impede o formulário de ser processado caso as senhas sejam diferentes
-        document.getElementById("formulario").addEventListener("submit", function(event) {
-        if (!verificarSenhas()) {
-            event.preventDefault(); // Impede o envio do formulário se as senhas forem diferentes
-        }
-        });
 
-        //Função que verifica se a senha e confirmar senha são iguais
-        function verificarSenhas() {
-        // Obtém os valores dos campos de senha e confirmar senha
-        var senha = document.getElementById("senha").value;
-        var confirmarSenha = document.getElementById("senha1").value;
-        // Verifica se os valores são diferentes
-        if (senha !== confirmarSenha) {
-            //Caso sejam diferentes, exibe um alerta para o usuário
-            alert("As senhas não coincidem. Por favor, verifique e tente novamente.");
-            return false;
-        } 
-        return true;
-    }
-    </script>
+    <!--Verificar senha-->
+    <script src="../../js/verificarSenha.js"></script>
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
     </script>
