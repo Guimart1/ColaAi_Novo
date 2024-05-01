@@ -14,7 +14,7 @@ switch ($_POST["acao"]) {
       $userDao = UserDao::delete($_POST['id']);
       header("Location: index.php");
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
     break;
   case 'SALVAR':
@@ -34,6 +34,7 @@ switch ($_POST["acao"]) {
             // Verifica se houve algum erro na execução da consulta
     if ($resultado === false) {
       $msg->setMensagem("Erro ao executar a consulta.", "bg-danger");
+      header("Location: index.php");
      } else {
         // Verifica se houve algum resultado retornado pela consulta
         if ($resultado->num_rows > 0) {
@@ -52,7 +53,7 @@ switch ($_POST["acao"]) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
 
       // Adiciona uma mensagem para debug
-      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
+      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMensagem(), "bg-danger");
 
       header("Location: index.php");
     }
@@ -72,7 +73,7 @@ switch ($_POST["acao"]) {
       $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
       header("Location: index.php");
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
     break;
 
@@ -105,7 +106,7 @@ switch ($_POST["acao"]) {
       // Configura as opções do contexto da solicitação
       include('register.php');
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
 
 
