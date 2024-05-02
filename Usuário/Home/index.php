@@ -33,48 +33,44 @@ $eventos = EventoDao::selectAll();
     //o usuário está autenticado
     $authUsuario = $_SESSION['user'];
     ?>
-    <div class="container-fluid mt-2 ms-2 d-flex justify-content-evenly vw-100 align-items-end mb-4" style="height: 8vh;">
-        <div class="col-2">
+    <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
                 <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
-        </div>
-        <div class="searchBox col-4 d-flex justify-content-center">
-            <div class="searchInput w-100 position-relative">
-                <img src="../../img/Usuario/icon-search.png" alt="">
-                <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
+                <div class="searchBox col-6 d-flex justify-content-center ms-4">
+                    <div class="searchInput w-100 position-relative">
+                        <img src="../../img/Usuario/icon-search.png" alt="">
+                        <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
+                    </div>
+                </div>
+                <div class="selectValor col-1 ms-4 me-5">
+                    <div class="selectIn position-relative">
+                        <img src="../../img/Usuario/icon-valor.png" alt="">
+                        <select class="rounded rounded-5 d-flex align-items-center w-100 ps-5" aria-label="Default select example" style="width: 15%;">
+                            <option selected>Valor</option>
+                            <option value="1">Grátis</option>
+                            <option value="2">Pago</option>
+                        </select>
+                        <img src="../../img/Usuario/icon-select.png" alt="" id="arrow" class="ms-2" style="cursor: pointer;">
+                    </div>
+                </div>
+                <div class="buttonProcurar col-2 d-flex justify-content-center mt-auto mb-1">
+                    <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
+                </div>
+                <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
             </div>
-        </div>
-        <div class="selectValor ps-5 col-1">
-            <div class="selectIn position-relative">
-                <img src="../../img/Usuario/icon-valor.png" alt="">
-                <select class="rounded rounded-5 d-flex align-items-center w-100 ps-5" aria-label="Default select example" style="width: 15%;">
-                    <option selected>Valor</option>
-                    <option value="1">Grátis</option>
-                    <option value="2">Pago</option>
-                </select>
-                <img src="../../img/Usuario/icon-select.png" alt="" id="arrow" class="ms-2" style="cursor: pointer;">
+            <div class="navigation">
+                <nav>
+                    <ul>
+                        <li><a href="../Home/index.php">Página Inicial</a></li>
+                        <li><a href="#carrossel-teatros">Teatros</a></li>
+                        <li><a href="#carrossel-parques">Parques</a></li>
+                        <li><a href="#carrossel-museus">Museus</a></li>
+                        <li><a href="#carrossel-centroCulturais">Centros Culturais</a></li>
+                        <li><a href="">CEU</a></li>
+                        <li><a href="">Perfil</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-        <div class="buttonProcurar col-1 d-flex justify-content-center mt-auto mb-1">
-            <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
-        </div>
-        <div class="col-1">
-            <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
-        </div>
 
-    </div>
-    <div class="navigation">
-        <nav>
-            <ul>
-                <li><a href="">Página Inicial</a></li>
-                <li><a href="#carrossel-teatros">Teatros</a></li>
-                <li><a href="#carrossel-parques">Parques</a></li>
-                <li><a href="#carrossel-museus">Museus</a></li>
-                <li><a href="#carrossel-centroCulturais">Centros Culturais</a></li>
-                <li><a href="">CEU</a></li>
-                <li><a href="">Perfil</a></li>
-            </ul>
-        </nav>
-    </div>
     <div class="container mt-4" style="width: 80%;">
         <div class="glide mb-5" data-glide='{
             
@@ -486,21 +482,21 @@ $eventos = EventoDao::selectAll();
                 <div class="col-md-2">
                 </div>   
                 <div class="col-md-2">
-                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-2">Desenvolvedor</h4>
+                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
                     <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
                     A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">
-                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-2">Info</h4>
+                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-3">Info</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
                         <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
                         <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
-                        <li><a class="dropdown-item fw-bold fs-5"onclick="modalContato(0,0)">Contato</a>></li>
+                        <li><a class="dropdown-item fw-bold fs-5"onclick="modalContato(0,0)">Contato</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 pb-5">
-                    <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-2">Siga-nos</h4>
+                    <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-3">Siga-nos</h4>
                     <div class="d-flex justify-content-center">
                         <div class="social-container d-flex mt-4">
                             <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>   
