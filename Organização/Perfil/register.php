@@ -141,9 +141,9 @@ if (!empty($_POST)) {
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 needs-validation">
+                            <div class="col-md-12">
                                 <label for="complemento" class="col-form-label">Complemento da organização</label>
-                                <input type="text" class="form-control inputGeral" placeholder="" name="complementoOrganizacaoEvento" maxlength="100" id="complementoOrganizacaoEvento" value="<?= $complemento_Org ?>" required>
+                                <input type="text" class="form-control inputGeral" placeholder="" name="complementoOrganizacaoEvento" maxlength="100" id="complementoOrganizacaoEvento" value="<?= $complemento_Org ?>">
                             </div>
                         </div>
                         <div class="row">
@@ -182,7 +182,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="row">
                             <div class="col-md-12 needs-validation ">
-                                <label for="descricao" class="col-form-label">Descrição do Evento*</label>
+                                <label for="descricao" class="col-form-label">Descrição da Organização*</label>
                                 <textarea class="form-control inputGeral" name="descOrganizacaoEvento" id="descOrganizacaoEvento" cols="30" rows="10" style="max-height: 400px;"><?= $desc_Org ?></textarea>
                             </div>
                         </div>

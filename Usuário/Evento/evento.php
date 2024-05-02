@@ -123,7 +123,7 @@
                                 </spa>
                             </div>
                             <div class="col-md-5 d-flex centerInfo">
-                                <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 30px">
+                                <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px">
                                 <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
                                 <span class="ms-1" style="font-size: 1.2em;">
                                     <?php

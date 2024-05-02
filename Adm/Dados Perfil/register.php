@@ -171,7 +171,7 @@ if (!empty($_POST)) {
                         </div>
                         <div class="row">
                             <div class="col-md-12 needs-validation ">
-                                <label for="descricao" class="col-form-label">Descrição do Evento*</label>
+                                <label for="descricao" class="col-form-label">Descrição da Organização*</label>
                                 <textarea class="form-control inputGeral" name="descOrganizacaoEvento" id="descOrganizacaoEvento" cols="30" rows="10" style="max-height: 400px;"><?= $desc_Org ?></textarea>
                             </div>
                         </div>
