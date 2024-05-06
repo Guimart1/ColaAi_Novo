@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
 
-<body>
+<body class="fundo-bolinha">
     <?php
     // Iniciar a sessão
     session_start();
@@ -129,38 +129,35 @@
                         <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
                     </div>
                 </div>
-                <footer class="container-fluid w-100 h-auto d-flex justify-content-center">
-                    <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
-                        <div class="col-md-4">
-                            <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%;" class="mb-2">
-                            <p style="font-size:1em; font-weight:bold">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as
-                                melhores experiências para suas crianças.</p>
-                        </div>
-                        <div class="col-md-2">
-                            <h4 style="color: #6D9EAF;">Infos</h4>
-                            <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                                <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
-                                <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                                <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3">
-                            <h4 style="color: #6D9EAF;">Desenvolvedora</h4>
-                            <img src="../../img/Usuario/magma-logo.png" alt="" style="width: 70%;">
-                        </div>
-                        <div class="col-md-3">
-                            <h4 style="color: #6D9EAF;">Acesso rápido</h4>
-                            <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
-                                <li>Início</li>
-                                <li>Teatros</li>
-                                <li>Parques</li>
-                                <li>Museus</li>
-                                <li>Centro Culturais</li>
-                                <li>CEU</li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
+                <footer class="w-100 h-auto d-flex justify-content-center">
+        <div class="row d-flex align-items-start pt-4 g-4 text-start" style="width: 80%;">
+            <div class="col-md-4">
+                <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%;" class="mb-2">
+                <p style="font-size:1em; font-weight:bold">Seja bem-vindo(a) a Cola ai, nós pretendemos lhe ajudar a encontrar as
+                    melhores experiências para suas crianças.</p>
+            </div>
+            <div class="col-md-2">
+                <h4 style="color: #6D9EAF;">Infos</h4>
+                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                    <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
+                    <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
+                    <li><a class="dropdown-item fw-bold" onclick="modalContato(0,0)">Contato</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 style="color: #6D9EAF;">Desenvolvedora</h4>
+                <img src="../../img/Usuario/magma-logo.png" alt="" style="width: 70%;">
+            </div>
+            <div class="col-md-3">
+                <h4 style="color: #6D9EAF;">Acesso rápido</h4>
+                <ul class="m-0 p-0" style="list-style: none; font-weight: bold">
+                    <li>Início</li>
+                    <li>Teatros</li>
+                    <li>Parques</li>
+                    <li>Museus</li>
+                    <li>Centro Culturais</li>
+                    <li>CEU</li>
+                </ul>
             </div>
         </div>
         <div class="d-flex justify-content-between mt-2" style="width: 90%;">
