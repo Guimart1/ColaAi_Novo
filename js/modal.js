@@ -27,10 +27,10 @@
 		//window.location.href = "./registro.php";
 		}
 
-	function modalAceitar($id, $elemento){
+	function modalAceitar(id, elemento){
 		const myModal = new bootstrap.Modal('#modalAceitar');
 		myModal.show();
-		document.getElementById($elemento).value = $id;
+		document.getElementById(elemento).value = id;
 		//window.location.href = "./registro.php";
 		}
 	function modalRestaurar($id, $elemento){

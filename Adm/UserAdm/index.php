@@ -120,7 +120,7 @@ $users = UserAdmDao::selectAll();
                             <div class="modal-content ">
                                 <div class="modal-body" style="color: #a6a6a6;">
                                     <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                        <input type="text" class="form-control" id="idDeletar" name="id" type="text">
                                         <h1 class="text-center fs-2 fw-bold">Excluir Usuário?</h1>
                                         <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">excluir</span> a
                                          ação não poderá ser desfeita, deixando o usuário impossibilitado de se registrar no site.</p>

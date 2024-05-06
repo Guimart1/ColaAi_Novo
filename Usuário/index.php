@@ -49,7 +49,7 @@
     </div>
     
 
-    <div class="col-md-12 d-flex justify-content-end" style="height: 100px; position:fixed; bottom:10px; padding:5%;">
+    <div class="col-md-12 d-flex justify-content-end" style="height: 50px; position:fixed; bottom:10px; padding-right:100px; margin-bottom:50px">
         <li style="list-style: none;">
             <a href="#topo"><img src="../img/Usuario/scroll.png" style="width: 75px; height: 75px" alt="Crianças pulando"></a></img>
         </li>
@@ -100,9 +100,9 @@
         <div class="col-md-5 d-flex justify-content-center">
             <div class="col-9 d-flex justify-content-center">
                 <h4 class="text-center "><p style="color: #A6A6A6; text-align:justify; font-weight:bold; font-size:20px" class="lh-lg">
-                    Acesse pelo seu celular, computador, tablet ou notebook. nós do
+                    Acesse pelo seu celular, computador ou tablet. Nós do
                     <img src="../img/Usuario/logoColaai.png" style="height: 45px; margin-bottom: 20px" alt="Cola Aí">
-                    estamos te esperando para participar da nossa comunidade de responsaveis que querem dar o melhor da cultura para os seus pequenos!
+                    estamos te esperando para participar da nossa comunidade de responsáveis que querem dar o melhor da cultura para os seus pequenos!
                 </p></h4>
             </div>
         </div>
@@ -112,34 +112,41 @@
         <div class="d-flex justify-content-center">
             <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
                 <div class="col-md-3">
-                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 80%; transform:translateY(-30px)" class="mb-2 me-auto">
-                    <p style="font-size:1.1em; font-weight:bold; text-align:justify;transform:translateY(-30px)" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
+                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
+                    <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
                     encontrar as melhores experiências para suas crianças.</p>
                 </div>
-                <div class="col-2"></div>   
-                <div class="col-md-2 me-3">
-                    <h4 style="color: #6D9EAF;" class="mb-4">Desenvolvedor</h4>
-                    <p style="font-size:1em; font-weight:bold; text-align:justify">
+                <div class="col-md-2">
+                <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-3">Acesso rápido</h4>
+                    <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Organização/">Organizador</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/Login/index.php">Administrador</a></li>
+                    </ul>
+                </div>   
+                <div class="col-md-2">
+                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
+                    <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
                     A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">
-                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold">Info</h4>
+                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-3">Info</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                        <li><a class="dropdown-item fw-bold" onclick="modalSobre(0,0)">Sobre</a></li>
-                        <li><a class="dropdown-item fw-bold" onclick="modalFeedback(0,0)">Feedback</a></li>
-                        <li><a class="dropdown-item fw-bold">Licença</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
+                        <!-- <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li> -->
+                        <li><a class="dropdown-item fw-bold fs-5">Licença</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 pb-5">
-                    <h4 style="color: #6D9EAF;" class="text-center">Siga-nos</h4>
-                    <div class="social-container d-flex mt-4">
-                        <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
-                        <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
-                        <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                <div class="col-md-2 pb-5">
+                    <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-3">Siga-nos</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="social-container d-flex mt-4">
+                            <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>   
+                            <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
+                            <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="d-flex justify-content-between mt-2" style="width: 90%;">
@@ -155,40 +162,12 @@
                     <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
-                    <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
-                    <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                    <img src="../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
+                    <p class="fw-bold " style="text-align: justify; width:70%;">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
                         O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
-                        de Sistemas da ETEC de Guaianazes.</p>
+                        de Sistemas da ETEC de Guaianazes.</p>      
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalFeedback" role="dialog"><!--Modal de FeedBack-->
-        <div class=" modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
-                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
-                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Feedback</h1>
-                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
-                    <p>Nos ajude a melhorar a sua experiência como usuário, nos envie sugestões
-                        e nos conte das suas melhores vivencias com o Cola Aí.</p>
-                    <form method="post" action="./processFeedBack.php">
-                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
-                        <h2 class="fs-5 mt-3">Título</h2>
-                        <div class="inputContato">
-                            <input type="text" class="input-group mt-1" name="tituloFeedBackApp" placeholder="Título do feedback">
-                        </div>
-                        <h2 class="fs-5 mt-3">Comentário</h2>
-                        <div class="inputContato">
-                            <textarea class="form-control rounded rounded-4" name="descFeedbackApp" cols="30" rows="10" style="max-height: 300px;" placeholder="Escreva sua experiência  com o site, podendo ser sugestões, criticas e melhorias"></textarea>
-                        </div>
-                        <div class="btnModal w-100 mt-4 d-flex">
-                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Enviar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </div>  
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -196,7 +175,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
     </script>
-    <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="../js/modal.js"></script>
 </body>
 
 </html>

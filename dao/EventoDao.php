@@ -171,14 +171,16 @@ require_once (__DIR__ . '../../model/Conexao.php');
 
         public static function selecionarEventoComOrganizacaoPorId($id){
             $conexao = Conexao::conectar();
-            $query = "SELECT e.*, o.nomeOrganizacao, o.imagemOrganizacao FROM tbevento e
-                      INNER JOIN tborganizacaoevento o ON e.idOutraChaveEstrangeira = o.idOrganizacao
+            $query = "SELECT e.*, o.nomeOrganizacaoEvento, o.imagemOrganizacaoEvento 
+                      FROM tbevento e
+                      INNER JOIN tborganizacaoevento o ON e.idOrganizacaoEvento = o.idOrganizacaoEvento
                       WHERE e.idEvento = :id";
             $stmt = $conexao->prepare($query);
             $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        
         
         
     }

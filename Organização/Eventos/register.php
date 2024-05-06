@@ -148,10 +148,11 @@ if (!empty($_POST)) {
                                         <label for="faixaetaria" class="col-form-label">Faixa etária do Evento*</label>
                                         <select class="form-select inputGeral" name="faixaEtariaEvento" value="<?= $faixa_Evento ?>" aria-label="Default select example">
                                             <option selected>Selecione a faixa etária</option>
-                                            <option value="1">+0</option>
-                                            <option value="2">+1</option>
-                                            <option value="3">+2</option>
-                                            <option value="4">Livre para todos os públicos</option>
+                                            <option value="1">0-12 meses</option>
+                                            <option value="2">1-3 anos</option>
+                                            <option value="3">3-5 anos</option>
+                                            <option value="4">5-12 anos</option>
+                                            <option value="5">Livre para todos os públicos</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 needs-validation">
@@ -170,8 +171,8 @@ if (!empty($_POST)) {
                                         <select class="form-select inputGeral" name="valorEvento" value="<?= $valor_Evento ?>" aria-label="Default select example">
                                             <option selected>Selecione o valor</option>
                                             <option value="1">Grátis</option>
-                                            <option value="1">Pago</option>
-                                            <option value="1">Outros</option>
+                                            <option value="2">Pago</option>
+                                            <option value="3">Outros</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 needs-validation mb-4">
