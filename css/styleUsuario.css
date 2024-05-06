@@ -17,6 +17,7 @@ html, body{
     background-color: #FFFBE7;
     color: #a6a6a6;
     height: 100vh;
+    scroll-behavior: smooth;
 }
 
 .fundo-bolinha {

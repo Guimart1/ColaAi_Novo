@@ -49,7 +49,7 @@
     </div>
     
 
-    <div class="col-md-12 d-flex justify-content-end" style="height: 100px; position:fixed; bottom:10px; padding:5%;">
+    <div class="col-md-12 d-flex justify-content-end" style="height: 50px; position:fixed; bottom:10px; padding-right:100px; margin-bottom:50px">
         <li style="list-style: none;">
             <a href="#topo"><img src="../img/Usuario/scroll.png" style="width: 75px; height: 75px" alt="Crianças pulando"></a></img>
         </li>

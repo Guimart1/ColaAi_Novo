@@ -353,7 +353,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
 
-        <h2 class="fs-3">Museus</h2>
+        <h2 id="carrossel-museus" class="fs-3">Museus</h2>
         <div class="glide mb-5 carrossel" data-glide='{
     "loop": true,
     "perView": 4,
@@ -411,7 +411,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>
 
-        <h2 class="fs-3">Centro Culturais</h2>
+        <h2 id="carrossel-centroCulturais" class="fs-3">Centro Culturais</h2>
         <div class="glide mb-5 carrossel" data-glide='{
     "loop": true,
     "perView": 4,
