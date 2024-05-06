@@ -238,7 +238,98 @@
                                 </footer>
 
             </div>
-
+            <div class="modal fade" id="modalSobre" role="dialog">
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Sobre</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center flex-column align-items-center p-0" style="color: #a6a6a6; text-align:justify">
+                    <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 40%; transform:translateY(-20px)">
+                    <p class="fw-bold " style="text-align: justify; width:70%">A premissa do site foi iniciada após a união de um grupo para desenvolver um projeto de conclusão de curso. <br><br>
+                        O projeto Cola aí foi fundado pela empresa Magma, sendo todos parceiros e alunos do curso de Desenvolvimento
+                        de Sistemas da ETEC de Guaianazes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalFeedback" role="dialog"><!--Modal de FeedBack-->
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Feedback</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                    <p>Nos ajude a melhorar a sua experiência como usuário, nos envie sugestões
+                        e nos conte das suas melhores vivencias com o Cola Aí.</p>
+                    <form method="post" action="./processFeedBack.php">
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <h2 class="fs-5 mt-3">Título</h2>
+                        <div class="inputContato">
+                            <input type="text" class="input-group mt-1" name="tituloFeedBackApp" placeholder="Título do feedback">
+                        </div>
+                        <h2 class="fs-5 mt-3">Comentário</h2>
+                        <div class="inputContato">
+                            <textarea class="form-control rounded rounded-4" name="descFeedbackApp" cols="30" rows="10" style="max-height: 300px;" placeholder="Escreva sua experiência  com o site, podendo ser sugestões, criticas e melhorias"></textarea>
+                        </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalContato" role="dialog">
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Contato</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                    <p>Entre em contato com a nossa equipe de colaboradores e seja atendido por profissionais
+                        capacitados e interessados para oferecer a melhor vivencia no Cola Aí.</p>
+                    <h2 class="fs-5 mt-3">Título</h2>
+                    <div class="inputContato">
+                        <input type="text" class="input-group mt-1" name="titulo" id="" placeholder="Título do contato">
+                    </div>
+                    <h2 class="fs-5 mt-3">Comentário</h2>
+                    <select class="selectModal rounded rounded-4" name="" value="" aria-label="Default select example">
+                        <option value="1">Suporte Técnico</option>
+                        <option value="2">Denúncia</option>
+                        <option value="3">Outros</option>
+                    </select>
+                    <h2 class="fs-5 mt-3">Categoria da denúncia</h2>
+                    <select class="selectModal rounded rounded-4" name="" value="" aria-label="Default select example">
+                        <option value="1">Organização</option>
+                        <option value="2">Publicação</option>
+                        <option value="3">Eventos</option>
+                        <option value="4">Outros</option>
+                    </select>
+                    <h2 class="fs-5 mt-3">Descrição</h2>
+                    <div class="inputContato">
+                        <textarea class="form-control rounded rounded-4" name="" id="" cols="30" rows="10" style="max-height: 300px;" placeholder="Descreva o motivo do seu contato."></textarea>
+                    </div>
+                    <h2 class="fs-5 mt-3">Inserir imagem</h2>
+                    <div class="position-relative">
+                        <img src="../../img/Usuario/add-image.png" alt="" style="width: 25px; position:absolute; left: 90%; top:23%">
+                        <label for="file-upload" class="fileInput rounded rounded-4">
+                            Carregar imagem
+                        </label>
+                        <input id="file-upload" type="file" />
+                    </div>
+                    <p style="color: #6D9EAF; font-size:0.9em" class="mt-3">As imagens serão reservadas e sem fins lucrativas, serão apenas para auxilio na resolução dos problemas</p>
+                    <div class="btnModal w-100 mt-4 d-flex">
+                        <button class="border border-0 ms-auto rounded rounded-5">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
             <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
