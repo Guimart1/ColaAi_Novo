@@ -1,3 +1,10 @@
+<?php 
+  require_once "../../dao/UserDao.php";
+
+  $users = UserDao::selectById($id);
+  //var_dump($user);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +17,7 @@
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 <body class="fundo-bolinha">
+    <?php foreach ($users as $user) { ?>
     <div class="container mt-2 ms-2">
         <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
@@ -23,7 +31,7 @@
                 </div>
                 <div class="d-flex">
                     <div class="fill" style="width: 220px"></div>
-                    <h2 class="text-start">Usuário</h2>
+                    <h2 class="text-start"><?=$user[1]?></h2>
                 </div>
 
             </div>
@@ -40,5 +48,6 @@
             </div>
 
     </div>
+    <?php } ?>
 </body>
 </html>
