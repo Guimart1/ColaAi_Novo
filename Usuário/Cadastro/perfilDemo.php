@@ -30,10 +30,7 @@
             <div class="" style="height: 9%;"></div>
             <div class="row mb-auto mt-5">
                 <div class="col-md-4"></div>
-                <div class="col-md-4 col-6 text-center">
-                    <a href="" style="color: #6D9EAF;" class="me-auto ms-auto">Adicionar mais tarde</a>
-                </div>
-                <div class="col-md-4 col-6">
+                <div class="col-md-4 col-12">
                     <div class="button">
                         <a href="../Home/">
                             <button class="border-0 rounded-3">Continuar</button>
