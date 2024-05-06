@@ -69,6 +69,7 @@
                 <div class="container mt-5" style="height: 40px;">
                     
                 </div>
+                
                 <div class="row ms-4 me-5 mt-4">
                     <table class="">
                         <thead>
@@ -82,7 +83,9 @@
                             <th class="text-center col-md-1 fs-4">Negar</th>
 
                         </tr>
-                        <?php foreach ($organizacao as $organizacao) : ?>
+                        <?php foreach ($organizacao as $organizacao) : 
+                            if($organizacao['idSituacaoOrganizacaoEvento'] == 1){
+                            ?>
                                 <tr class="mt-1">
                                     <td class="fs-5 pt-3"><?= $organizacao['idOrganizacaoEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $organizacao['nomeOrganizacaoEvento']; ?></td>
@@ -94,17 +97,19 @@
                                         </a>
                                     </td>
                                     <td class="text-center pt-3">
-                                    <a class="dropdown-item" onclick="modalAceitar(1,1)">
+                                    <a class="dropdown-item" onclick="modalAceitar(<?=$organizacao['idOrganizacaoEvento']?>, 'idAceitar')">
                                         <img src="../../img/Admin/aceitar-icon.png" alt="" style="width: 30px;">
                                         </a>
                                     </td>
                                     <td class="text-center pt-3">
-                                    <a class="dropdown-item" onclick="modalRemover(<?= $organizacao['idOrganizacaoEvento']?>,'idDeletar')">
+                                    <a class="dropdown-item" onclick="modalRemover(<?=$organizacao['idOrganizacaoEvento']?>,'idDeletar')">
                                         <img src="../../img/Admin/excluir-icon.png" alt="" style="width: 30px;">
                                         </a>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php 
+                            }
+                                endforeach; ?>
                         </thead>
                     </table>
                 </div>
@@ -118,7 +123,7 @@
                                 </div>
                                 <div class="modal-body" style="color: #a6a6a6;">
                                     <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                        <input type="hidden" class="form-control" id="idInfo" name="id" type="text">
                                         <div class="d-flex m-0" style="height: 30px;">
                                             <p class="m-0 fw-bold fs-5">Nome da Organização: </p> <p class="ms-2 fs-5" >aa</p>
                                         </div>
@@ -163,13 +168,13 @@
                             <div class="modal-content ">
                                 <div class="modal-body" style="color: #a6a6a6;">
                                     <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                        <input type="text" class="form-control" id="idAceitar" name="id" type="text">
                                         <h1 class="text-center fs-2 fw-bold">Aceitar o cadastro<br> da organização?</h1>
                                         <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#93CC4C">aceitar</span> 
                                         a organização receberá um e-mail de acesso para concluír o seu cadastro.</p>
                                         <div class="d-flex justify-content-between mt-5"> 
                                             <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
-                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="?" name="acao">Aceitar</button>
+                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="ACEITAR" name="acao">Aceitar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -181,13 +186,13 @@
                             <div class="modal-content ">
                                 <div class="modal-body" style="color: #a6a6a6;">
                                     <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                        <input type="text" class="form-control" id="idDeletar" name="id" type="text">
                                         <h1 class="text-center fs-2 fw-bold">Negar cadastro<br> da organização?</h1>
                                         <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">negar</span> a
                                          ação não poderá ser desfeita, deixando a organização impossibilitada de  se registrar no site.</p>
                                             <div class="d-flex justify-content-between mt-5"> 
                                             <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
-                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="DELETE" name="acao">Excluir</button>
+                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="NEGAR" name="acao">Excluir</button>
                                         </div>
                                     </form>
                                 </div>

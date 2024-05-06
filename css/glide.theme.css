@@ -18,11 +18,11 @@
     right: -4em;
   }
   .glide__arrow--left {
-    left: 1em;
+    left: -5em;
     width: 35px;
   }
   .glide__arrow--right {
-    right: 3em;
+    right: -4em;
     width: 35px;
   }
 }
@@ -34,11 +34,11 @@
     right: -2em;
   }
   .glide__arrow--left {
-    left: 0em;
+    left: -5em;
     width: 35px;
   }
   .glide__arrow--right {
-    right: 1em;
+    right: -4em;
     width: 35px;
   }
 }

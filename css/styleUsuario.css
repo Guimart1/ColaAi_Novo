@@ -17,6 +17,7 @@ html, body{
     background-color: #FFFBE7;
     color: #a6a6a6;
     height: 100vh;
+    scroll-behavior: smooth;
 }
 
 .fundo-bolinha {
@@ -111,7 +112,7 @@ p {
     height: auto;
 }
 .selectIn #arrow{
-    left: 100%;
+    left: 110%;
     width: 20px;
     pointer-events:visible;
 }
@@ -147,6 +148,8 @@ p {
 .navigation ul li a:hover{
     color: #FFD932;
 }
+
+
 @media only screen and (min-width: 758px) {
     .glide img {
         width: 40px;
@@ -297,6 +300,9 @@ input[type="file"] {
     }
     .centerInfo{
         justify-content: center;
+    }
+    .infoCol{
+        margin-left: 40px;
     }
 }
 

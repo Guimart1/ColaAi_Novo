@@ -64,12 +64,13 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $link = $org->getLink();          
             $imagem = $org->getImagem();
             $desc = $org->getDesc(); 
+            $situacao = 1;
             
             $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
             $stmt = $conn->prepare("INSERT INTO tborganizacaoevento (nomeOrganizacaoEvento, cnpjOrganizacaoEvento, cepOrganizacaoEvento, enderecoOrganizacaoEvento, numeroOrganizacaoEvento, complementoOrganizacaoEvento, bairroOrganizacaoEvento, cidadeOrganizacaoEvento, ufOrganizacaoEvento,telOrganizacaoEvento, 
-            emailOrganizacaoEvento, senhaOrganizacaoEvento, linkSiteOrganizacaoEvento, imagemOrganizacaoEvento, descOrganizacaoEvento) 
-                            VALUES (:nome, :cnpj, :cep, :log, :num, :complemento, :bairro, :cidade, :uf, :tel, :email, :senha, :link, :imagem, :desc)");
+            emailOrganizacaoEvento, senhaOrganizacaoEvento, linkSiteOrganizacaoEvento, imagemOrganizacaoEvento, descOrganizacaoEvento, idSituacaoOrganizacaoEvento) 
+                            VALUES (:nome, :cnpj, :cep, :log, :num, :complemento, :bairro, :cidade, :uf, :tel, :email, :senha, :link, :imagem, :desc, :idSituacao)");
         
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':cnpj', $cnpj);
@@ -86,6 +87,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':link', $link);
             $stmt->bindParam(':imagem', $imagem);
             $stmt->bindParam(':desc', $desc);
+            $stmt->bindParam(':idSituacao', $situacao);
         
             $result = $stmt->execute();
         
@@ -180,6 +182,24 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':link', $link);
             $stmt->bindParam(':imagem', $imagem);
             $stmt->bindParam(':desc', $desc);
+            $stmt->bindParam(':id', $id);
+        
+            return $stmt->execute();
+        }
+
+        public static function updateSituacao($id, $org){
+            $conexao = Conexao::conectar();
+        
+            $query = "UPDATE tborganizacaoevento SET 
+                idSituacaoOrganizacaoEvento = :situacao
+                WHERE idOrganizacaoEvento = :id";
+            
+            $stmt = $conexao->prepare($query);
+        
+            // Atribuir os valores a variáveis antes de chamar bindParam
+            $situacao = $org->getSituacao();
+
+            $stmt->bindParam(':situacao', $situacao);
             $stmt->bindParam(':id', $id);
         
             return $stmt->execute();
