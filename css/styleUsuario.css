@@ -190,6 +190,7 @@ p {
     transform: translateY(-50%);
     border: none;
     border-radius: 40px 40px 13px 13px;
+    transition: 1s;
 }
 .descMini p {
     font-size: 0.7em;
@@ -325,4 +326,10 @@ input[type="file"] {
 }
 .row-footer{
     border-bottom: 2px solid #6D9EAF;
+}
+.tituloEvento {
+    max-width: 40ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

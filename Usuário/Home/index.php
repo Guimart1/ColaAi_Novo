@@ -33,7 +33,7 @@ $eventos = EventoDao::selectAll();
     //o usuário está autenticado
     $authUsuario = $_SESSION['user'];
     ?>
-    <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
+    <di v class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
                 <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
                 <div class="searchBox col-6 d-flex justify-content-center ms-4">
                     <div class="searchInput w-100 position-relative">
@@ -56,7 +56,7 @@ $eventos = EventoDao::selectAll();
                     <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
                 </div>
                 <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
-            </div>
+            </di>
             <div class="navigation">
                 <nav>
                     <ul>
@@ -267,7 +267,7 @@ $eventos = EventoDao::selectAll();
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                             <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
                                                 <p><?= $evento['descEvento']; ?></p>
                                             </div>
                                         </div>
@@ -326,7 +326,7 @@ $eventos = EventoDao::selectAll();
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                             <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
                                                 <p><?= $evento['descEvento']; ?></p>
                                             </div>
                                         </div>
@@ -384,7 +384,7 @@ $eventos = EventoDao::selectAll();
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                             <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
                                                 <p><?= $evento['descEvento']; ?></p>
                                             </div>
                                         </div>
@@ -442,8 +442,8 @@ $eventos = EventoDao::selectAll();
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
                                             <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                                <p><?= $evento['descEvento']; ?></p>
+                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
+                                                <p ><?= $evento['descEvento']; ?></p>
                                             </div>
                                         </div>
                                     </a>
@@ -469,7 +469,7 @@ $eventos = EventoDao::selectAll();
             </div>
         </div>  
     </div>
-    </div>
+
 <!--inicio footer-->
 <footer class="w-100 h-auto d-flex align-items-center flex-column">
         <div class="d-flex justify-content-center">
