@@ -18,7 +18,7 @@ $eventos = EventoDao::selectAll();
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
 
-<body>
+<body class="fundo-bolinha">
     <?php
     // Iniciar a sessão
     session_start();
