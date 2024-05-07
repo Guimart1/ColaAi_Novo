@@ -19,11 +19,12 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $desc = $evento->getDesc();
             $idOrganizacaoEvento = $evento->getIdOrganizacaoEvento(); 
             $imagem = $evento->getImagemEvento();
+            $situacaoEvento = 1;
             
             $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
             $stmt = $conn->prepare("INSERT INTO tbevento (nomeEvento, cepEvento, enderecoEvento, numeroEvento, complementoEvento, bairroEvento, cidadeEvento, ufEvento,
-            dataEvento, faixaEtariaEvento, periodoEvento, valorEvento, espacoEvento, descEvento, idOrganizacaoEvento, imagemEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:faixa, :periodo, :valor,:espaco, :desc, :idOrgEvento, :imagem)");
+            dataEvento, faixaEtariaEvento, periodoEvento, valorEvento, espacoEvento, descEvento, idOrganizacaoEvento, imagemEvento, idSituacaoEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:faixa, :periodo, :valor,:espaco, :desc, :idOrgEvento, :imagem, :situacao)");
         
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':cep', $cep);
@@ -41,6 +42,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':desc', $desc);
             $stmt->bindParam(':idOrgEvento', $idOrganizacaoEvento);
             $stmt->bindParam(':imagem', $imagem);
+            $stmt->bindParam(':situacao', $situacaoEvento);
         
             $result = $stmt->execute();
         
@@ -58,7 +60,21 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt = $conexao->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
+        }
 
+        public static function selectAllActive(){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbevento WHERE idSituacaoEvento = 1";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        public static function selectAllFiled(){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbevento WHERE idSituacaoEvento = 2";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
         }
 
         public static function selectById($id){
@@ -142,9 +158,17 @@ require_once (__DIR__ . '../../model/Conexao.php');
         
             return $stmt->execute();
         }
-        public static function selectByOrganizacaoId($idOrganizacao){
+        public static function selectByOrganizacaoIdActive($idOrganizacao){
             $conexao = Conexao::conectar();
-            $query = "SELECT * FROM tbevento WHERE idOrganizacaoEvento = :idOrganizacao";
+            $query = "SELECT * FROM tbevento WHERE idOrganizacaoEvento = :idOrganizacao AND idSituacaoEvento = 1";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        public static function selectByOrganizacaoIdFiled($idOrganizacao){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbevento WHERE idOrganizacaoEvento = :idOrganizacao AND idSituacaoEvento = 2";
             $stmt = $conexao->prepare($query);
             $stmt->bindParam(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
             $stmt->execute();
@@ -181,6 +205,23 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
+        public static function updateSituacao($id, $evento){
+            $conexao = Conexao::conectar();
+        
+            $query = "UPDATE tbevento SET 
+                idSituacaoEvento = :situacao
+                WHERE idEvento = :id";
+            
+            $stmt = $conexao->prepare($query);
+        
+            // Atribuir os valores a variáveis antes de chamar bindParam
+            $situacao = $evento->getSituacaoEvento();
+
+            $stmt->bindParam(':situacao', $situacao);
+            $stmt->bindParam(':id', $id);
+        
+            return $stmt->execute();
+        }
         
         
     }

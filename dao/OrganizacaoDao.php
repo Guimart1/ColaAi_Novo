@@ -206,7 +206,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
         }
         public static function checkCredentials($email, $senha){
             $conexao = Conexao::conectar();
-            $query = "SELECT * FROM tborganizacaoevento WHERE emailOrganizacaoEvento = :email and senhaOrganizacaoEvento = :senha";
+            $query = "SELECT * FROM tborganizacaoevento WHERE emailOrganizacaoEvento = :email and senhaOrganizacaoEvento = :senha and idSituacaoOrganizacaoEvento = 2";
             $stmt = $conexao->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':senha', $senha);

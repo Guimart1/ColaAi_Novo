@@ -1,6 +1,6 @@
 <?php
 require_once '../../dao/EventoDao.php';
-$eventos = EventoDao::selectAll();
+$eventos = EventoDao::selectAllActive();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,7 +32,7 @@ $eventos = EventoDao::selectAll();
     $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
 
     // Buscar apenas os eventos associados a essa organização
-    $eventos = EventoDao::selectByOrganizacaoId($idOrganizacaoLogada);
+    $eventos = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
 
     include('../Componentes/header.php');
     ?>
@@ -70,17 +70,17 @@ $eventos = EventoDao::selectAll();
                                 <th class="text-center col-md-1 fs-4">Excluir</th>
 
                             </tr>
-                            <?php foreach ($eventos as $Eventos) : ?>
+                            <?php foreach ($eventos as $eventos) : ?>
                                 <tr class="mt-1">
-                                    <td class="fs-5 pt-3"><?= $Eventos['idEvento']; ?></td>
-                                    <td class="fs-5 pt-3"><?= $Eventos['nomeEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalInfo(<?= $Eventos['idEvento'] ?>,'modalInfo')">
+                                        <a class="dropdown-item" onclick="modalInfo(<?= $eventos['idEvento'] ?>,'modalInfo')">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
                                     <td class="text-center fs-5 pt-3">
-                                        <a class="dropdown-item" onclick="">
+                                        <a class="dropdown-item" onclick="modalArquivar(<?= $eventos['idEvento'] ?>,'idArquivar')">
                                             <img src="../../img/Organizacao/arquivar-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -183,6 +183,25 @@ $eventos = EventoDao::selectAll();
                                     <div class="d-flex justify-content-between mt-5">
                                         <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
                                         <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="DELETE" name="acao">Excluir</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?= require '../Componentes/modal.php' ?>
+                </div>
+                <div class="modal fade" id="modalArquivar" role="dialog" data-bs-backdrop="false">
+                    <div class=" modal-dialog modal-dialog-centered">
+                        <div class="modal-content ">
+                            <div class="modal-body" style="color: #a6a6a6;">
+                                <form action="process.php" method="post">
+                                    <input type="hidden" class="form-control" id="idArquivar" name="id" type="text">
+                                    <h1 class="text-center fs-2 fw-bold">Arquivar evento<br> da organização?</h1>
+                                    <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">arquivar</span>
+                                        a ação não poderá ser desfeita, na qual fará o evento deixar de existir.</p>
+                                    <div class="d-flex justify-content-between mt-5">
+                                        <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
+                                        <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="ARQUIVAR" name="acao">Arquivar</button>
                                     </div>
                                 </form>
                             </div>

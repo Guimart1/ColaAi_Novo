@@ -1,6 +1,6 @@
 <?php
 class Evento {
-    public $id, $nome, $cep, $endereco, $numero, $complemento, $bairro, $cidade, $uf, $data, $faixaEtaria,$periodoEvento,$valor,$espaco, $desc, $idOrganizacaoEvento, $imagemEvento;
+    public $id, $nome, $cep, $endereco, $numero, $complemento, $bairro, $cidade, $uf, $data, $faixaEtaria,$periodoEvento,$valor,$espaco, $desc, $idOrganizacaoEvento, $imagemEvento, $situacaoEvento;
 
     // Getters e Setters
     public function getId() {
@@ -132,6 +132,13 @@ class Evento {
 
     public function setImagemEvento($imagemEvento) {
         $this->imagemEvento = $imagemEvento;
+    }
+    public function getSituacaoEvento() {
+        return $this->situacaoEvento;
+    }
+
+    public function setSituacaoEvento($situacaoEvento) {
+        $this->situacaoEvento = $situacaoEvento;
     }
 
     public function salvarImagem($novo_nome){

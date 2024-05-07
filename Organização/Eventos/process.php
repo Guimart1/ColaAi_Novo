@@ -86,8 +86,16 @@ switch ($_POST["acao"]) {
           } catch (Exception $e) {
               echo 'Exceção capturada: ',  $e->getMessage(), "\n";
           } 
-      
         
+        case 'ARQUIVAR':
+          $evento->setSituacaoEvento(2);
+          try {
+            $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
+            $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+            header("Location: index.php");
+          } catch (Exception $e) {
+           echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+          } 
           break;
         }
 ?>

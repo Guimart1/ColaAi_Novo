@@ -33,6 +33,12 @@
 		document.getElementById(elemento).value = id;
 		//window.location.href = "./registro.php";
 		}
+	function modalArquivar(id, elemento){
+		const myModal = new bootstrap.Modal('#modalArquivar');
+		myModal.show();
+		document.getElementById(elemento).value = id;
+		//window.location.href = "./registro.php";
+		}
 	function modalRestaurar($id, $elemento){
 		const myModal = new bootstrap.Modal('#modalRestaurar');
 		myModal.show();

@@ -1,6 +1,6 @@
 <?php
 require_once '../../dao/EventoDao.php';
-$eventos = EventoDao::selectAll();
+$eventos = EventoDao::selectAllActive();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

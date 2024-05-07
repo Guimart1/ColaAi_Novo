@@ -16,7 +16,6 @@ switch ($_POST["acao"]) {
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-      
               } 
           break;
         case 'NEGAR':
