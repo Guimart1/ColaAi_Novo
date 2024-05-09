@@ -1,13 +1,14 @@
 <?php
 //echo "Teste"; die;
 session_start();
-require_once (__DIR__ . '/../dao/UserDao.php'); 
+require_once (__DIR__ . '../../dao/UserDao.php'); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
+
+    $emailOuTelefone = $_POST["emailOuTelefone"];
     $senha = $_POST["senha"];
 
-    $user = UserDao::checkCredentials($email, $senha);
+    $user = UserDao::checkCredentials($emailOuTelefone, $senha);
 
     if ($user) {
         // Login bem-sucedido

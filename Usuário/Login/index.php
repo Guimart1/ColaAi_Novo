@@ -45,9 +45,9 @@
 
                     ?>
                     <form action="../valida_login.php" method="post">
-                        <input type="text" class="input-group mt-4" name="email" id="" placeholder="Digite o seu e-mail ou telefone">
+                        <input type="text" class="input-group mt-4" name="emailOuTelefone" id="emailOuTelefone" placeholder="Digite o seu e-mail ou telefone">
                         <div class="orgSenha d-flex mt-5">
-                            <input required type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4">
+                            <input required type="password" placeholder="Senha" name="senha" id="senha" class="input-group mb-4">
                             <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
                         </div>
                         <div class="f-password w-100 text-end">
