@@ -1,15 +1,3 @@
-<?php
-session_start();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senhaOrganizacaoEvento'])) {
-    $_SESSION['senhaOrganizacaoEvento'] = trim($_POST['senhaOrganizacaoEvento']);
-
-    header("Location:analise.php");
-    exit;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senhaOrganizacaoEvento
     <div class="box-center container-fluid w-100">
         <div class="row h-100 justify-content-center vw-100 align-items-center">
             <div class="form-box col-11 col-sm-9 col-md-5 rounded-4">
-                <form action="process.php" method="post">
+                <form action="process.php" method="post" onsubmit="return validateForm()">
                     <input type="hidden" value="CADASTRAR" name="acao">
                     <div class="title-box p-4 pb-0 pt-5 text-start">
                         <h1 class="fw-bold fs-3" id="title-cadastro">Crie uma senha para a Organização</h1>
@@ -50,16 +38,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senhaOrganizacaoEvento
                             <i class="bi bi-eye col1" id="btnSenha1" onclick="MostrarSenha2()"></i>
                         </div>
                         <script>
-                            function myFunction() {
+                            function MostrarSenha() {
                                 var x = document.getElementById("password");
-                                var y = document.getElementById("password1")
                                 if (x.type === "password") {
                                     x.type = "text";
-                                    y.type = "text";
                                 } else {
                                     x.type = "password";
+                                }
+                            }
+
+                            function MostrarSenha2() {
+                                var y = document.getElementById("password1")
+                                if (y.type === "password") {
+                                    y.type = "text";
+                                } else {
                                     y.type = "password";
                                 }
+                            }
+
+                            function validateForm() {
+                                var password = document.getElementById("password").value;
+                                var password1 = document.getElementById("password1").value;
+
+                                // Verifica se a senha tem pelo menos 8 caracteres
+                                if (password.length >= 8) {
+                                    alert("A senha deve ter pelo menos 8 caracteres.");
+                                    return false;
+                                }
+
+                                // Verifica se a senha contém pelo menos um dos caracteres especiais
+                                var specialCharacters = /[@#$%&*!]/;
+                                if (!specialCharacters.test(password)) {
+                                    alert("A senha deve conter pelo menos um dos seguintes caracteres especiais: @#$%&*!");
+                                    return false;
+                                }
+
+                                // Verifica se as senhas coincidem
+                                if (password !== password1) {
+                                    alert("As senhas digitadas não coincidem.");
+                                    return false;
+                                }
+
+                                return true;
                             }
                         </script>
                     </div>
@@ -73,8 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['senhaOrganizacaoEvento
         </div>
     </div>
     <script src="../../js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 
 </html>
