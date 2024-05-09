@@ -33,7 +33,7 @@
                 <div class="col-md-4 col-12">
                     <div class="button">
                         <a href="../Home/">
-                            <button class="border-0 rounded-3">Continuar</button>
+                        <a href="../Login/index.php"><button class="border-0 rounded-3">Continuar</button></a>
                         </a>
                     </div>
                 </div>

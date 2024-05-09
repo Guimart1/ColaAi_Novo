@@ -119,14 +119,14 @@
                 <div class="col-md-2">
                 <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-3">Acesso rápido</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                        <li><a class="dropdown-item fw-bold fs-5" href="../Organização/">Organizador</a></li>
-                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/Login/index.php">Administrador</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Organização/" target="_blank">Organizador</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" href="../Adm/Login/index.php" target="_blank">Administrador</a></li>
                     </ul>
                 </div>   
                 <div class="col-md-2">
                     <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
                     <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
-                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
+                    A Magma é uma empresa voltada ao setor de tecnologia da informação. 
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">

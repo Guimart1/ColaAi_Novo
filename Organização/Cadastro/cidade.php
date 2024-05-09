@@ -7,6 +7,34 @@
         header("Location:email.php");
         exit;
     }
+    // Função para buscar o endereço com base no CEP
+function buscarEnderecoPorCEP($cep) {
+    $url = "https://viacep.com.br/ws/{$cep}/json/";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+// Verifica se foi enviado um CEP
+if (isset($_SESSION['cepOrganizacaoEvento'])) {
+    $cep = $_SESSION['cepOrganizacaoEvento'];
+    $enderecoDetalhes = buscarEnderecoPorCEP($cep);
+
+     // Se o endereço foi encontrado, preenche os campos de cidade e UF
+     if (!empty($enderecoDetalhes['localidade']) && !empty($enderecoDetalhes['uf'])) {
+        $cidade = $enderecoDetalhes['localidade'];
+        $uf = $enderecoDetalhes['uf'];
+    } else {
+        $cidade = '';
+        $uf = '';
+    }
+} else {
+    // Se não foi enviado um CEP, define os campos de cidade e UF como vazios
+    $cidade = '';
+    $uf = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +63,10 @@
                     </div>
                     <div class="row mb-5 ps-4 pe-4 g-5">
                         <div class="input-box col-md-8">
-                            <input type="text" class="input-group fs-4" name="cidadeOrganizacaoEvento" placeholder="Digite a cidade">
+                            <input type="text" class="input-group fs-4" name="cidadeOrganizacaoEvento" placeholder="Digite a cidade" value="<?php echo $cidade; ?>">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="input-group fs-4" name="ufOrganizacaoEvento" placeholder="UF">
+                            <input type="text" class="input-group fs-4" name="ufOrganizacaoEvento" placeholder="UF" value="<?php echo $uf; ?>">
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4"> 

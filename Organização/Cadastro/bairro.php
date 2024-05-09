@@ -1,15 +1,43 @@
 <?php
-     session_start();
+session_start();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bairroOrganizacaoEvento'])) {
-        $_SESSION['bairroOrganizacaoEvento'] = trim($_POST['bairroOrganizacaoEvento']);
-        header("Location:cidade.php");
-        exit;
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bairroOrganizacaoEvento'])) {
+    $_SESSION['bairroOrganizacaoEvento'] = trim($_POST['bairroOrganizacaoEvento']);
+    header("Location:cidade.php");
+    exit;
+}
+// Função para buscar o endereço com base no CEP
+function buscarEnderecoPorCEP($cep)
+{
+    $url = "https://viacep.com.br/ws/{$cep}/json/";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+// Verifica se foi enviado um CEP
+if (isset($_SESSION['cepOrganizacaoEvento'])) {
+    $cep = $_SESSION['cepOrganizacaoEvento'];
+    $enderecoDetalhes = buscarEnderecoPorCEP($cep);
+
+    // Se o endereço foi encontrado, preenche o campo de endereço
+    if (!empty($enderecoDetalhes['bairro'])) {
+        $bairro = $enderecoDetalhes['bairro'];
+    } else {
+        $bairro = '';
     }
+} else {
+    // Se não foi enviado um CEP, define o campo de endereço como vazio
+    $bairro = '';
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +46,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
 </head>
+
 <body class="w-100">
     <div class="header d-flex justify-content-center align-items-center">
         <img src="../../img/Login/Cola AI logo.png" alt="">
@@ -33,20 +62,20 @@
                         <p class="fs-4 ps-4 pe-4">Recomendamos que envie dados atualizados.</p>
                     </div>
                     <div class="input-box mt-5 mb-5 ps-4 pe-4">
-                        <input type="text" class="input-group" name="bairroOrganizacaoEvento" placeholder="Digite o bairro">
+                        <input type="text" class="input-group" name="bairroOrganizacaoEvento" placeholder="Digite o bairro" value="<?php echo $bairro; ?>" required>
                     </div>
-                    <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4"> 
-                    <a href="complemento.php" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Voltar</a>
-                    <div class="w-100  justify-content-end align-items-end d-flex" id="btn-box">
-                        <a href="cidade.php"><button type="submit" class="border-0 rounded-3 fs-4">Prosseguir</button></a>
-                    </div>
+                    <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4">
+                        <a href="complemento.php" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Voltar</a>
+                        <div class="w-100  justify-content-end align-items-end d-flex" id="btn-box">
+                            <a href="cidade.php"><button type="submit" class="border-0 rounded-3 fs-4">Prosseguir</button></a>
+                        </div>
                 </form>
             </div>
         </div>
     </div>
     <script src="../js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
 </body>
+
 </html>
