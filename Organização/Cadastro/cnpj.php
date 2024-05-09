@@ -1,11 +1,53 @@
 <?php
-     session_start();
+session_start();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cnpjOrganizacaoEvento'])) {
-        $_SESSION['cnpjOrganizacaoEvento'] = trim($_POST['cnpjOrganizacaoEvento']);
-        header("Location:nomeOrg.php");
-        exit;
+// Função para verificar se o CNPJ é válido
+function verificarCNPJ($cnpj) {
+    // Remover caracteres especiais do CNPJ
+    $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+
+    // Valida tamanho do CNPJ
+    if (strlen($cnpj) != 14) {
+        return false;
     }
+
+    // Verificar se todos os dígitos são iguais
+    if (preg_match('/(\d)\1{13}/', $cnpj)) {
+        return false;
+    }
+
+    // Valida o primeiro dígito verificador
+    for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++) {
+        $soma += $cnpj[$i] * $j;
+        $j = ($j == 2) ? 9 : $j - 1;
+    }
+    $resto = $soma % 11;
+    if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto)) {
+        return false;
+    }
+
+    // Valida o segundo dígito verificador
+    for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++) {
+        $soma += $cnpj[$i] * $j;
+        $j = ($j == 2) ? 9 : $j - 1;
+    }
+    $resto = $soma % 11;
+    return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cnpjOrganizacaoEvento'])) {
+    $cnpj = trim($_POST['cnpjOrganizacaoEvento']);
+
+    // Verifica se o CNPJ é válido
+    if (verificarCNPJ($cnpj)) {
+        $_SESSION['cnpjOrganizacaoEvento'] = $cnpj;
+        header("Location: nomeOrg.php");
+        exit;
+    } else {
+        // Se o CNPJ não for válido, redireciona de volta para a mesma página com uma mensagem de erro
+        echo "<script>alert('CNPJ inválido');</script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
