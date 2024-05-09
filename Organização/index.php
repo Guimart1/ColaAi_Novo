@@ -11,13 +11,16 @@
     <div class="container-fluid vw-100 vh-100" id="content-screen">
         <div class="row vw-100 h-100">
             <div class="col-md-4 d-flex flex-column justify-content-center z-1" id="painel">
-                <div class="text-box ps-md-3 p-2">
+                <div class="mb-auto mt-4">
+                    <a href="../Acesso/index.html"><img src="../img/Usuario/arrow-previus.png" alt="" style="width: 30px; cursor:pointer"></a>
+                </div>
+                <div class="text-box ps-md-3 p-2 mb-auto">
                     <h1 class="fw-bold" id="title-acessar">
                         <span id="c-bem">Bem </span><span id="c-vin">vin</span><span id="c-do">do</span><span id="c-a">(a)</span>
                     </h1>
                     <p class="text-acessar fs-4 lh-sm">Faça login com a sua conta e desfrute  de todos os benefícios do Cola Aí.</p>
                 </div>
-                <div class="btn-box w-100 justify-content-center d-flex flex-column mt-5">
+                <div class="btn-box w-100 justify-content-center d-flex flex-column mb-auto">
                     <div class="btn-org row w-100 justify-content-center mb-3">
                         <a href="./Login/loginEmail.php" class="d-flex justify-content-center">
                         <button class="border border-0 rounded-4 fs-3 d-flex align-items-center justify-content-evenly col-9">
@@ -27,7 +30,7 @@
                         </button>
                         </a>
                     </div>
-                    <div class="btn-adm row w-100 justify-content-center mt-4 mb-md-0 mb-5">
+                    <div class="btn-adm row w-100 justify-content-center mt-4 mb-md-0 mb-auto">
                         <a href="./Login/loginTel.php" class="d-flex justify-content-center">
                         <button class="border border-0 rounded-4 fs-3 d-flex align-items-center justify-content-evenly col-9">
                             <img src="../img/Organizacao/icon-tel.png" alt="" class="icon-telefone">
