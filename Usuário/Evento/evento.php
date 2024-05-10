@@ -44,43 +44,24 @@
 
     
     ?>
-            <div class="container mt-2 ms-2 d-flex align-items-end mb-4" style="height: 8vh;">
-                <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 8vh;">
-                <div class="searchBox col-6 d-flex justify-content-center ms-4">
-                    <div class="searchInput w-100 position-relative">
-                        <img src="../../img/Usuario/icon-search.png" alt="">
-                        <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
+            <nav>
+                <div class="navigation">
+                    <div class="imgHeader">
+                        <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
                     </div>
-                </div>
-                <div class="selectValor col-1 ms-4 me-5">
-                    <div class="selectIn position-relative">
-                        <img src="../../img/Usuario/icon-valor.png" alt="">
-                        <select class="rounded rounded-5 d-flex align-items-center w-100 ps-5" aria-label="Default select example" style="width: 15%;">
-                            <option selected>Valor</option>
-                            <option value="1">Grátis</option>
-                            <option value="2">Pago</option>
-                        </select>
-                        <img src="../../img/Usuario/icon-select.png" alt="" id="arrow" class="ms-2" style="cursor: pointer;">
+                    <a href="../Home/index.php">Página Inicial</a>
+                    <a href="#carrossel-teatros">Teatros</a>
+                    <a href="#carrossel-parques">Parques</a>
+                    <a href="#carrossel-museus">Museus</a>
+                    <a href="#carrossel-centroCulturais">Centros Culturais</a>
+                    <div class="iconBox">
+                        <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
+                        <img src="../../img/Usuario/icon-notificacao.png" alt="">
+                        <img src="../../img/Usuario/icon-perfil.png" alt="">
                     </div>
+
                 </div>
-                <div class="buttonProcurar col-2 d-flex justify-content-center mt-auto mb-1">
-                    <button type="submit" class="border-0 rounded-3" style="width: 5vw;">Buscar</button>
-                </div>
-                <img src="../../img/Usuario/icon-notificacao.png" alt="" style="width: 30px;">
-            </div>
-            <div class="navigation">
-                <nav>
-                    <ul>
-                        <li><a href="../Home/index.php">Página Inicial</a></li>
-                        <li><a href="#carrossel-teatros">Teatros</a></li>
-                        <li><a href="#carrossel-parques">Parques</a></li>
-                        <li><a href="#carrossel-museus">Museus</a></li>
-                        <li><a href="#carrossel-centroCulturais">Centros Culturais</a></li>
-                        <li><a href="">CEU</a></li>
-                        <li><a href="">Perfil</a></li>
-                    </ul>
-                </nav>
-            </div>
+            </nav>
             <!--inicio do conteudo-->
             <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">
                 <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 83vh">
