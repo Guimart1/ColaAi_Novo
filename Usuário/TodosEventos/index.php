@@ -28,7 +28,6 @@
             <img src="../../img/Usuario/icon-notificacao.png" alt="">
             <img src="../../img/Usuario/icon-perfil.png" alt="">
         </div>
-
     </div>
 </nav>
 <div class="container-fluid">
