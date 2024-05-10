@@ -465,7 +465,7 @@ $eventos = EventoDao::selectAllActive();
                 <div class="col-md-2">
                     <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
                     <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
-                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
+                    A Magma é uma empresa voltada ao setor de tecnologia da informação.
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">

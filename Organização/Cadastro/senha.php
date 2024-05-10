@@ -61,7 +61,7 @@
                                 var password1 = document.getElementById("password1").value;
 
                                 // Verifica se a senha tem pelo menos 8 caracteres
-                                if (password.length >= 8) {
+                                if (password.length <= 8) {
                                     alert("A senha deve ter pelo menos 8 caracteres.");
                                     return false;
                                 }

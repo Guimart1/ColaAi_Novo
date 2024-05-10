@@ -1,6 +1,6 @@
 <?php
 require_once '../../dao/EventoDao.php';
-$eventos = EventoDao::selectAllActive();
+$evento = EventoDao::selectAllActive();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,7 +32,7 @@ $eventos = EventoDao::selectAllActive();
     $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
 
     // Buscar apenas os eventos associados a essa organização
-    $eventos = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
+    $evento = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
 
     include('../Componentes/header.php');
     ?>
@@ -70,7 +70,7 @@ $eventos = EventoDao::selectAllActive();
                                 <th class="text-center col-md-1 fs-4">Excluir</th>
 
                             </tr>
-                            <?php foreach ($eventos as $eventos) : ?>
+                            <?php foreach ($evento as $eventos) : ?>
                                 <tr class="mt-1">
                                     <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
@@ -87,13 +87,13 @@ $eventos = EventoDao::selectAllActive();
                                     <td class="text-center pt-3">
                                         <form action="process.php" method="POST">
                                             <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
-                                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $Eventos['idEvento'] ?>">
+                                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $eventos['idEvento'] ?>">
                                             <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" style="width: 35px;">
                                             </button>
                                         </form>
                                     </td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalRemover(<?= $Eventos['idEvento'] ?>,'idDeletar')">
+                                        <a class="dropdown-item" onclick="modalRemover(<?= $eventos['idEvento'] ?>,'idDeletar')">
                                             <img src="../../img/Admin/excluir-icon.png" alt="" style="width: 30px;">
                                         </a>
                                     </td>

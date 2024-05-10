@@ -75,11 +75,11 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
         </div>
         <div class="row justify-content-evenly">
             <div class="col-md-3">
-                <h2 class="fs-4 p-3 pb-0">Interações com Eventos</h2>
+                <h2 class="fs-4 p-3 pb-0">Registro de Interesse nos Eventos</h2>
                 <canvas id="graficoBarras" width="400" height="400"></canvas> <!-- Gráfico de barras será renderizado aqui -->
             </div>
             <div class="col-md-3">
-                <h2 class="fs-4 p-3 pb-0">Usuários</h2>
+                <h2 class="fs-4 p-3 pb-0">Usuários Cadastrados</h2>
                 <canvas id="graficoRosca" width="400" height="400"></canvas> <!-- Gráfico de rosca será renderizado aqui -->
             </div>
         </div>
@@ -99,7 +99,7 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Dados para o gráfico de barras (Interações com Eventos)
+        // Dados para o gráfico de barras (Registro de Interesse nos Eventos)
         var dadosBarras = {
             labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
             datasets: [{

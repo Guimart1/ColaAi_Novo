@@ -78,7 +78,6 @@ switch ($_POST["acao"]) {
           break;
       
         case 'SELECTID':
-      
           try {
               $eventoDao = EventoDao::selectById($_POST['id']);
               // Configura as opções do contexto da solicitação
@@ -86,12 +85,13 @@ switch ($_POST["acao"]) {
           } catch (Exception $e) {
               echo 'Exceção capturada: ',  $e->getMessage(), "\n";
           } 
-        
+        break;
+
         case 'ARQUIVAR':
           $evento->setSituacaoEvento(2);
           try {
-            $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
-            $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+            $eventoDao = eventoDao::updateSituacao($_POST["idEvento"], $evento);
+            $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
             header("Location: index.php");
           } catch (Exception $e) {
            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
