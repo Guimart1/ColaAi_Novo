@@ -537,7 +537,7 @@ $eventos = EventoDao::selectAllActive();
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalContato" role="dialog">
+    <div class="modal fade" id="modalContato" role="dialog"><!--Modal de contato-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">

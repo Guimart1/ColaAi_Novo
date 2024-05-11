@@ -30,5 +30,16 @@ class Mensagem {
         $_SESSION["mensagem"] = "";
         $_SESSION["tipo"] = "";
     }
+
+    public function exibirMensagemJS($mensagem) {
+        // Script JavaScript para exibir a mensagem
+        $script = "<script>";
+        $script .= "exibirMensagem('" . $mensagem . "');";
+        $script .= "</script>";
+
+        // Retorna o script JavaScript
+        return $script;
+    }
 }
+
 ?>

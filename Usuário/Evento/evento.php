@@ -1,6 +1,6 @@
-<?php 
-  require_once '../../dao/EventoDao.php';
-
+<?php
+require_once '../../dao/EventoDao.php';
+require_once '../../dao/InteresseEventoDao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuario.css">
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"> -->
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
@@ -29,6 +29,8 @@
         header('Location: login.php?login=erro2');
         exit();
     }
+    //o usuário está autenticado
+    $authUsuario = $_SESSION['user'];
 
     // Verifique se o parâmetro id está definido na URL
     if (isset($_GET['id'])) {
@@ -41,185 +43,204 @@
 
         // Verifica se o evento foi encontrado
         if ($evento && $organizacao) {
-
-    
+            // Verificar se o usuário já registrou interesse neste evento
+            $idUsuario = $_SESSION['user']['idUsuario'];
     ?>
-            <nav>
-                <div class="navigation">
-                    <div class="imgHeader">
-                        <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
-                    </div>
-                    <a href="../Home/index.php">Página Inicial</a>
-                    <a href="#carrossel-teatros">Teatros</a>
-                    <a href="#carrossel-parques">Parques</a>
-                    <a href="#carrossel-museus">Museus</a>
-                    <a href="#carrossel-centroCulturais">Centros Culturais</a>
-                    <div class="iconBox">
-                        <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
-                        <img src="../../img/Usuario/icon-notificacao.png" alt="">
-                        <img src="../../img/Usuario/icon-perfil.png" alt="">
-                    </div>
+    <?php
+        } else {
+            // Se o evento não foi encontrado, exibe uma mensagem de erro
+            echo "<p>Evento não encontrado.</p>";
+        }
+    } else {
+        // Se o parâmetro idEvento não estiver definido na URL, exibe uma mensagem de erro
+        echo "<p>Parâmetro idEvento não especificado na URL.</p>";
+    }
+    ?>
+    <nav>
+        <div class="navigation">
+            <div class="imgHeader">
+                <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
+            </div>
+            <a href="../Home/index.php">Página Inicial</a>
+            <a href="#carrossel-teatros">Teatros</a>
+            <a href="#carrossel-parques">Parques</a>
+            <a href="#carrossel-museus">Museus</a>
+            <a href="#carrossel-centroCulturais">Centros Culturais</a>
+            <div class="iconBox">
+                <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
+                <img src="../../img/Usuario/icon-notificacao.png" alt="">
+                <img src="../../img/Usuario/icon-perfil.png" alt="">
+            </div>
 
+        </div>
+    </nav>
+    <!--inicio do conteudo-->
+    <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">
+        <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 83vh">
+            <div class="eventImage col-md-4">
+                <h1 class="fw-bold fs-2 mt-4"><span style="color: #E6AEB2">E</span><span style="color: #6D9EAF">VEN</span><span style="color: #FFD417">TO</span></h1>
+                <div class="d-flex align-items-center">
+                    <img src="<?php echo !empty($organizacao['imagemOrganizacaoEvento']) ? "../../img/Organizacao/" . $organizacao['imagemOrganizacaoEvento'] : "../../img/Organizacao/userPadrao.png"; ?>" alt="foto perfil" style="width: 40px; border-radius: 50%;">
+
+                    <p class="ms-2 mt-auto mb-auto" style="color: #6D9EAF;"><?= $organizacao['nomeOrganizacaoEvento']; ?></p>
                 </div>
-            </nav>
-            <!--inicio do conteudo-->
-            <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">
-                <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 83vh">
-                    <div class="eventImage col-md-4">
-                        <h1 class="fw-bold fs-2 mt-4"><span style="color: #E6AEB2">E</span><span style="color: #6D9EAF">VEN</span><span style="color: #FFD417">TO</span></h1>
-                        <div class="d-flex align-items-center">
-                            <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento']; ?>" alt="foto perfil" style="width: 40px">
-                            <p class="ms-2 mt-auto mb-auto" style="color: #6D9EAF;"><?= $organizacao['nomeOrganizacaoEvento']; ?></p>
+                <div class="imagemEvento">
+                    <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
+                    <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="<?= $evento['nomeEvento']; ?>" style="width: 100%; height: 100%;" class="mt-2 img-fluid">
+                </div>
+                <div class="eventTag w-100 row mt-2 g-4">
+                    <div class="col-md-7 d-flex centerInfo">
+                        <div class="livreBox d-flex justify-content-center align-items-center fw-bold">
+                            L
                         </div>
-                        <div class="imagemEvento">
-                            <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
-                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="<?= $evento['nomeEvento']; ?>" style="width: 100%; height: 100%;" class="mt-2 img-fluid">
-                        </div>
-                        <div class="eventTag w-100 row mt-2 g-4">
-                            <div class="col-md-7 d-flex centerInfo">
-                                <div class="livreBox d-flex justify-content-center align-items-center fw-bold">
-                                    L
-                                </div>
-                                <span class="fw-bold ms-3" style="font-size: 1.2em;">Faixa etária:</span>
-                                <spa class="ms-2" style="font-size: 1.2em;">
-                                    <?php
-                                    // array associativo para mapear os valores numéricos para os valores correspondentes
-                                    $faixa_etaria = array(
-                                        '1' => '0-12 meses',
-                                        '2' => '1-3 anos',
-                                        '3' => '3-5 anos',
-                                        '4' => '5-12 anos',
-                                        '5' => 'Livre para todos os públicos'
-                                    );
-
-                                    // Verifique se o valor da faixa etária está definido e não é vazio
-                                    if (isset($evento['faixaEtariaEvento']) && !empty($evento['faixaEtariaEvento'])) {
-                                        // Use o valor da faixa etária para acessar o array e exibir o valor correspondente
-                                        echo $faixa_etaria[$evento['faixaEtariaEvento']];
-                                    } else {
-                                        // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                        echo "Faixa etária não especificada";
-                                    }
-                                    ?>
-                                </spa>
-                            </div>
-                            <div class="col-md-5 d-flex centerInfo">
-                                <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px">
-                                <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
-                                <span class="ms-1" style="font-size: 1.2em;">
-                                    <?php
-                                    // array associativo para mapear os valores numéricos para os valores correspondentes
-                                    $valores = array(
-                                        '1' => 'Grátis',
-                                        '2' => 'Pago',
-                                        '3' => 'Outros'
-                                    );
-
-                                    // Verifique se o valor do evento está definido e não é vazio
-                                    if (isset($evento['valorEvento']) && !empty($evento['valorEvento'])) {
-                                        // Use o valor do evento para acessar o array e exibir o valor correspondente
-                                        echo $valores[$evento['valorEvento']];
-                                    } else {
-                                        // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                        echo "Valor não especificado";
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                            <div class="col-md-12 d-flex centerInfo">
-                                <img src="../../img/Usuario/icon-local.png " alt="" style="width: 30px; height:35px">
-                                <span class="fw-bold ms-2" style="font-size: 1.2em;">Local:</span>
-                                <span class="ms-1" style="font-size: 1.2em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
-                            </div>
-                            <div class="col-md-6 d-flex mb-5 centerInfo">
-                                <img src="../../img/Usuario/icon-horario.png" alt="" style="width: 30px">
-                                <span class="fw-bold ms-2" style="font-size: 1.2em;">Turno:</span>
-                                <span class="ms-1" style="font-size: 1.2em;">
-                                    <?php
-                                    // array associativo para mapear os valores numéricos para os valores correspondentes
-                                    $turnos = array(
-                                        '1' => 'Manhã',
-                                        '2' => 'Tarde',
-                                        '3' => 'Noite'
-                                    );
-
-                                    // Verifique se o turno do evento está definido e não é vazio
-                                    if (isset($evento['periodoEvento']) && !empty($evento['periodoEvento'])) {
-                                        // Use o turno do evento para acessar o array e exibir o valor correspondente
-                                        echo $turnos[$evento['periodoEvento']];
-                                    } else {
-                                        // Se o turno não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                        echo "Turno não especificado";
-                                    }
-                                    ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column">
-                        <h1 class="fw-bold fs-2 mb-5">
+                        <span class="fw-bold ms-3" style="font-size: 1.2em;">Faixa etária:</span>
+                        <spa class="ms-2" style="font-size: 1.2em;">
                             <?php
-                            $nomeEvento = $evento['nomeEvento'];
-                            $cores = ['#FFD417', '#6D9EAF', '#E6AEB2']; // Cores correspondentes a cada parte do nome do evento
-                            $comprimento = mb_strlen($nomeEvento, 'UTF-8');
+                            // array associativo para mapear os valores numéricos para os valores correspondentes
+                            $faixa_etaria = array(
+                                '1' => '0-12 meses',
+                                '2' => '1-3 anos',
+                                '3' => '3-5 anos',
+                                '4' => '5-12 anos',
+                                '5' => 'Livre para todos os públicos'
+                            );
 
-                            for ($i = 0; $i < $comprimento; $i++) {
-                                $letra = mb_substr($nomeEvento, $i, 1, 'UTF-8');
-                                echo "<span style='color: " . $cores[$i % count($cores)] . "'>" . $letra . "</span>";
+                            // Verifique se o valor da faixa etária está definido e não é vazio
+                            if (isset($evento['faixaEtariaEvento']) && !empty($evento['faixaEtariaEvento'])) {
+                                // Use o valor da faixa etária para acessar o array e exibir o valor correspondente
+                                echo $faixa_etaria[$evento['faixaEtariaEvento']];
+                            } else {
+                                // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                echo "Faixa etária não especificada";
                             }
                             ?>
-                        </h1>
-                        <p><?= $evento['descEvento']; ?></p>
-                        <div class="button">
-                            <button type="submit" class="border-0 rounded-5 mt-5" style="width: 15vw; height: 50px;min-width:200px">Registre interesse</button>
-                        </div>
-                        <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
+                        </spa>
+                    </div>
+                    <div class="col-md-5 d-flex centerInfo">
+                        <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px">
+                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
+                        <span class="ms-1" style="font-size: 1.2em;">
+                            <?php
+                            // array associativo para mapear os valores numéricos para os valores correspondentes
+                            $valores = array(
+                                '1' => 'Grátis',
+                                '2' => 'Pago',
+                                '3' => 'Outros'
+                            );
+
+                            // Verifique se o valor do evento está definido e não é vazio
+                            if (isset($evento['valorEvento']) && !empty($evento['valorEvento'])) {
+                                // Use o valor do evento para acessar o array e exibir o valor correspondente
+                                echo $valores[$evento['valorEvento']];
+                            } else {
+                                // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                echo "Valor não especificado";
+                            }
+                            ?>
+                        </span>
+                    </div>
+                    <div class="col-md-12 d-flex centerInfo">
+                        <img src="../../img/Usuario/icon-local.png " alt="" style="width: 30px; height:35px">
+                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Local:</span>
+                        <span class="ms-1" style="font-size: 1.2em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
+                    </div>
+                    <div class="col-md-6 d-flex mb-5 centerInfo">
+                        <img src="../../img/Usuario/icon-horario.png" alt="" style="width: 30px">
+                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Turno:</span>
+                        <span class="ms-1" style="font-size: 1.2em;">
+                            <?php
+                            // array associativo para mapear os valores numéricos para os valores correspondentes
+                            $turnos = array(
+                                '1' => 'Manhã',
+                                '2' => 'Tarde',
+                                '3' => 'Noite'
+                            );
+
+                            // Verifique se o turno do evento está definido e não é vazio
+                            if (isset($evento['periodoEvento']) && !empty($evento['periodoEvento'])) {
+                                // Use o turno do evento para acessar o array e exibir o valor correspondente
+                                echo $turnos[$evento['periodoEvento']];
+                            } else {
+                                // Se o turno não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                echo "Turno não especificado";
+                            }
+                            ?>
+                        </span>
                     </div>
                 </div>
-                <footer class="w-100 h-auto d-flex align-items-center flex-column">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
-                                            <div class="col-md-3">
-                                                <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
-                                                <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
-                                                    encontrar as melhores experiências para suas crianças.</p>
-                                            </div>
-                                            <div class="col-md-2">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
-                                                <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
-                                                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a>
-                                                </p>
-                                            </div>
-                                            <div class="col-md-1 infoCol">
-                                                <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Info</h4>
-                                                <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
-                                                    <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
-                                                    <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
-                                                    <li><a class="dropdown-item fw-bold fs-5" onclick="modalContato(0,0)">Contato</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-2 pb-5">
-                                                <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-3">Siga-nos</h4>
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="social-container d-flex mt-4">
-                                                        <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
-                                                        <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
-                                                        <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-2" style="width: 90%;">
-                                        <p style="color: #6D9EAF;">©2024 Todos os direitos reservados</p>
-                                        <p style="color: #6D9EAF;">Política de Privacidade</p>
-                                    </div>
-                                </footer>
-
             </div>
-            <div class="modal fade" id="modalSobre" role="dialog">
+            <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column">
+                <h1 class="fw-bold fs-2 mb-5">
+                    <?php
+                    $nomeEvento = $evento['nomeEvento'];
+                    $cores = ['#FFD417', '#6D9EAF', '#E6AEB2']; // Cores correspondentes a cada parte do nome do evento
+                    $comprimento = mb_strlen($nomeEvento, 'UTF-8');
+
+                    for ($i = 0; $i < $comprimento; $i++) {
+                        $letra = mb_substr($nomeEvento, $i, 1, 'UTF-8');
+                        echo "<span style='color: " . $cores[$i % count($cores)] . "'>" . $letra . "</span>";
+                    }
+                    ?>
+                </h1>
+                <p><?= $evento['descEvento']; ?></p>
+                <div class="button">
+                    <form method="post" action="./processInterresseEvento.php">
+                        <!-- Adicione um campo oculto para armazenar o ID do evento -->
+                        <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
+
+                        <!-- Adicione um campo oculto para armazenar o ID do usuário -->
+                        <input type="hidden" name="idUsuario" value="<?= $authUsuario['idUsuario'] ?>">
+
+                        <button type="submit" class="border-0 rounded-5 mt-5" style="width: 15vw; height: 50px;min-width:200px" value="SALVAR" name="acao">Registre interesse</button>
+                    </form>
+                </div>
+                <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
+            </div>
+        </div>
+        <footer class="w-100 h-auto d-flex align-items-center flex-column"><!--Começo do Footer-->
+            <div class="d-flex justify-content-center">
+                <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
+                    <div class="col-md-3">
+                        <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
+                        <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
+                            encontrar as melhores experiências para suas crianças.</p>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                        <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
+                        <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
+                            A Magma é uma empresa voltada ao setor de tecnologia da informação.
+                        </p>
+                    </div>
+                    <div class="col-md-1 infoCol">
+                        <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Info</h4>
+                        <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
+                            <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
+                            <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
+                            <li><a class="dropdown-item fw-bold fs-5" onclick="modalContato(0,0)">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 pb-5">
+                        <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-3">Siga-nos</h4>
+                        <div class="d-flex justify-content-center">
+                            <div class="social-container d-flex mt-4">
+                                <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
+                                <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
+                                <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2" style="width: 90%;">
+                <p style="color: #6D9EAF;">©2024 Todos os direitos reservados</p>
+                <p style="color: #6D9EAF;">Política de Privacidade</p>
+            </div>
+        </footer>
+
+    </div>
+    <div class="modal fade" id="modalSobre" role="dialog"><!--Modal do Sobre-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4">
@@ -263,7 +284,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalContato" role="dialog">
+    <div class="modal fade" id="modalContato" role="dialog"><!--Modal de Contato-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
@@ -310,23 +331,14 @@
             </div>
         </div>
     </div>
-    
-            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-            </script>
-            <script type="text/javascript" src="../../js/modal.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
 </body>
 
 </html>
-<?php
-        } else {
-            // Se o evento não foi encontrado, exibe uma mensagem de erro
-            echo "<p>Evento não encontrado.</p>";
-        }
-    } else {
-        // Se o parâmetro idEvento não estiver definido na URL, exibe uma mensagem de erro
-        echo "<p>Parâmetro idEvento não especificado na URL.</p>";
-    }
-?>
