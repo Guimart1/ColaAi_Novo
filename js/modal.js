@@ -64,8 +64,34 @@
             document.getElementById($elemento).value = $id;
             //window.location.href = "./registro.php";
         }
-		jQuery(document).ready(function() {
-			jQuery('#modalPadrao').modal('show');
-		});
 
+		function modalFotoPerfil($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalFotoPerfil');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
+
+		function modalBannerPerfil($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalBannerPerfil');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
+
+		function modalDadosPessoais($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalDadosPessoais');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
+		function modalSeguindo($id, $elemento) {
+            const myModal = new bootstrap.Modal('#modalSeguindo');
+            myModal.show();
+            document.getElementById($elemento).value = $id;
+            //window.location.href = "./registro.php";
+        }
+  $(document).ready(function() {
+    $('#modalPadrao').modal('show');
+  });
 
