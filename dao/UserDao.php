@@ -101,42 +101,26 @@ class UserDao
         return $stmt->execute();
     }
 
-    public static function checkCredentials($emailOuTelefone, $senha)
+    public static function checkCredentials($email, $senha)
     {
-        try {
-            // Conectar ao banco de dados usando PDO
-            $conexao = Conexao::conectar();
-    
-            // Consulta SQL com placeholders para prevenir SQL Injection
-            $query = "SELECT * FROM tbusuario WHERE emailUsuario = :emailOuTelefone OR telUsuario = :emailOuTelefone";
-            
-            // Depuração: Imprimir a consulta SQL para verificar se os placeholders estão corretos
-            echo "Consulta SQL: $query <br>";
-    
-            $stmt = $conexao->prepare($query);
-    
-            // Bind dos parâmetros
-            $stmt->bindParam(':emailOuTelefone', $emailOuTelefone);
-            // Você não precisa vincular a senha, pois ela não é usada como parâmetro na consulta
-    
-            // Executar a consulta
-            $stmt->execute();
-    
-            // Recuperar o usuário
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-            // Verificar se o usuário existe e se a senha está correta
-            if ($usuario && password_verify($senha, $usuario['senha'])) {
-                // Senha correta, retornar os dados do usuário
-                return $usuario;
-            } else {
-                // Senha incorreta ou usuário não encontrado
-                return false;
-            }
-        } catch (PDOException $e) {
-            // Em caso de erro, imprimir a mensagem de erro
-            echo "Erro: " . $e->getMessage();
-        }
+        $conexao = Conexao::conectar();
+        $query = "SELECT * FROM tbusuario WHERE emailUsuario = :email and senhaUsuario = :senha";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function checkCredentialsTel($tel, $senha)
+    {
+        $conexao = Conexao::conectar();
+        $query = "SELECT * FROM tbusuario WHERE telUsuario = :telefone and senhaUsuario = :senha";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':telefone', $tel);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
     public static function getTotalClientes()
