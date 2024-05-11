@@ -223,6 +223,14 @@ footer{
 li{
     margin: 8px 0px 8px 0px;
 }
+.inputContato i{
+    font-size: 16pt;
+    position: absolute;
+    right: 10%;
+    cursor: pointer;
+    color: #a6a6a6;
+    transform: translateY(-5px);
+}
 .inputContato input{
     border: 0px;
     border-bottom: 2px solid #b6bbbd;
@@ -232,6 +240,7 @@ li{
     color: #a6a6a6;
     font-size: 12pt;
     font-weight: 600;
+    position: relative;
 }
 .inputContato input::placeholder{
     color: #A6A6A6;
