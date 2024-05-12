@@ -1,6 +1,8 @@
 <?php
 require_once '../../dao/EventoDao.php';
+require_once '../../dao/InteresseEventoDao.php';
 $eventos = EventoDao::selectAllActive();
+$eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,7 +33,7 @@ $eventos = EventoDao::selectAllActive();
     }
 
     //o usuário está autenticado
-    $authUsuario = $_SESSION['user'];
+    $authUser = $_SESSION['user'];
     ?>
     <nav>
     <div class="navigation">
@@ -46,7 +48,7 @@ $eventos = EventoDao::selectAllActive();
         <div class="iconBox">
             <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
             <img src="../../img/Usuario/icon-notificacao.png" alt="">
-            <img src="../../img/Usuario/icon-perfil.png" alt="">
+            <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
         </div>
 
     </div>
@@ -59,55 +61,16 @@ $eventos = EventoDao::selectAllActive();
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
+                    <?php foreach ($eventosMaisInteresse as $evento) : ?>
                         <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
+                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%">
                             <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
+                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                <p><?= $evento['descEvento']; ?></p>
                             </div>
                         </div>
                     </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Usuario/slider-padrao.png" alt="" style="width: 100%; height: 100%">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy textLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply </p>
-                            </div>
-                        </div>
-                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="glide__arrows" data-glide-el="controls">

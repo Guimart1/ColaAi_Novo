@@ -1,3 +1,9 @@
+<?php
+require_once '../../dao/UserDao.php';
+require_once '../../dao/InteresseEventoDao.php';
+
+$user = new UserDao();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,7 +16,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="../../css/styleUsuario.css">
     <link rel="stylesheet" href="../../css/styleUsuarioCadastro.css">
-    <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"> -->
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
@@ -28,21 +34,28 @@
     }
 
     //o usuário está autenticado
-    $authUsuario = $_SESSION['user'];
+    $authUser = $_SESSION['user'];
 
-    // Troca da imagem de perfil do usuário 
-    // NÃO FUNCIONANDO
-    if (!empty($_POST['idUsuario'])) {
-        $id_Usuario = $_POST['idUsuario'];
-        $user = UserDao::selectById($id_Usuario);
-        $ImagemPerfil_Usuario = $user['imagemPerfilUsuario'];
-    } else {
-        $ImagemPerfil_Usuario = '';
-        $id_Usuario = '';
+    $idUsuario = $authUser['idUsuario']; // Supondo que o ID do usuário está armazenado na sessão
+
+    // Busque os eventos em que o usuário registrou interesse
+    $eventosInteresse = InteresseEventoDao::selectByUsuario($idUsuario);
+    //var_dump($eventosInteresse);
+    // Verifique se o usuário já tem uma foto de perfil
+    $imagemPerfil = ''; // Defina a variável como vazia inicialmente
+    $imagemBanner = ''; // Defina a variável como vazia inicialmente
+
+    if ($authUser && isset($authUser['imagemPerfilUsuario'])) {
+        // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
+        $imagemPerfil = $authUser['imagemPerfilUsuario'];
+    }
+    if ($authUser && isset($authUser['imagemBannerUsuario'])) {
+        // Se o usuário tiver uma imagem de banner, atribua à variável $imagemBanner
+        $imagemBanner = $authUser['imagemBannerUsuario'];
     }
     ?>
-    
-    <nav>
+
+    <nav><!------------------------------------------------------------navbar--------------------------------------------------->
         <div class="navigation">
             <div class="imgHeader">
                 <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
@@ -55,36 +68,48 @@
             <div class="iconBox">
                 <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
                 <img src="../../img/Usuario/icon-notificacao.png" alt="">
-                <img src="../../img/Usuario/icon-perfil.png" alt="">
+                <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
             </div>
 
         </div>
     </nav>
-        
+
     <!-- O banner está em background-image -->
     <!-- Os usuários deverão colocar um banner com proporções específicas -->
     <!-- Ao juntar com o banco, tornar background-position como center -->
-    <div class="row d-flex align-items-end justify-content-center" style="height:400px; background-image: url('../../img/Usuario/banner-padrao.png'); background-position:bottom; background-size: cover; margin-bottom:25vh;">
+    <div class="row d-flex align-items-end justify-content-center" style="height:400px; background-image: url('../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>'); background-position:bottom; background-size: cover; margin-bottom:25vh;">
         <div class="w-100 d-flex align-items-end justify-content-center" style="z-index: 1; margin-top: 300px;">
             <div class="w-100 d-flex align-items-center justify-content-start" style="height:auto;">
                 <div class="d-flex align-items-end justify-content-start" style="width: 200px; height: 200px; margin-left: 5vw; position:relative;">
                     <div class="d-flex align-items-end justify-content-end">
-                        <img src="../../img/Usuario/icon-user.png" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: auto; width: 200px;">
+                        <img src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" class="img-fluid" alt="imagem Perfil" style="border-radius: 90px; height: auto; width: 200px;">
                         <div class="d-flex align-items-center justify-content-center" style="width: 30px; height: 30px; position:absolute;  margin-right: 20px; margin-bottom: 20px">
                             <ul class="m-0 p-0" onclick="modalFotoPerfil(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
                                 <li><img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem" style="height: auto; width: auto;"></li>
                             </ul>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 100px">
                     <ul class="m-0 p-0" onclick="modalDadosPessoais(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
-                        <li><h2 style="font-weight: bold; color: #FFD932">Usuário</h2></li>
+                        <li>
+                            <h2 style="font-weight: bold; color: #FFD932">
+                                <?php
+                                // Exibir o nome do usuário se estiver autenticado
+                                if (isset($authUser['nomeUsuario'])) {
+                                    echo $authUser['nomeUsuario'];
+                                } else {
+                                    echo "Nome de Usuário";
+                                }
+                                ?></h2>
+                        </li>
                     </ul>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
-                        <li><h4 style="font-weight: bold; color: #A6A6A6">3 seguindo</h4></li>
+                        <li>
+                            <h4 style="font-weight: bold; color: #A6A6A6">3 seguindo</h4>
+                        </li>
                     </ul>
-                    
+
                 </div>
                 <div class="d-flex align-items-center justify-content-center" style="height:auto; ">
                     <div style="width: 40px; height: 40px; margin-bottom: 100px; margin-right: 25px">
@@ -94,161 +119,96 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        
+
     </div>
 
     <div class="container mt-4" style="width: 80%;">
         <div class="glide mb-5" data-glide='{}'>
-
-        <h2 class="fs-3">Eventos que foram registrado o interesse</h2>
-        <div class="glide mb-5 carrossel" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel",
-        "breakpoints": {
-                    "600": {"perView": 1},
-                    "800": {"perView": 2},
-                    "1370": {"perView": 3}
-                }
+        <?php if (empty($eventosInteresse)) : ?>
+            <div class="alert alert-warning" role="alert">
+                Parece que você ainda não registrou interesse em nenhum evento.
+            </div>
+        <?php else : ?>
+            <h2 class="fs-3">Eventos que foram registrados interesse</h2>
+            <div class="glide mb-5 carrossel" data-glide='{
+            "loop": true,
+            "perView": 4,
+            "perMove": 4,
+            "perSwipe": 4,
+            "perTouch": 4,
+            "gap":20,
+            "type": "carousel",
+            "breakpoints": {
+                "600": {"perView": 1},
+                "800": {"perView": 2},
+                "1370": {"perView": 3}
+            }
         }'>
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="imageBox position-relative">
-                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
-                            </div> 
-                            <img src="../../img/Usuario/carrossel-padrao.png" alt="" style="width: 100%;">
-                            <div class="descMini p-2 ps-4 ">
-                                <h3 class="fs-5">Nome do Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <?php foreach ($eventosInteresse as $interesse) : ?>
+                            <li class="glide__slide">
+                                <div class="imageBox position-relative">
+                                    <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
+                                        <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
+                                    </div>
+                                    <!-- Aqui você pode exibir os detalhes do evento -->
+                                    <img src="../../img/Organizacao/<?= $interesse['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%;">
+                                    <div class="descMini p-2 ps-4">
+                                        <h3 class="fs-5"><?= $interesse['nomeEvento']; ?></h3>
+                                        <p><?= $interesse['descEvento']; ?></p>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                </div>
             </div>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
-            </div>
-
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
-        </div>
+        <?php endif; ?>
         </div>
     </div>
 
-<!--inicio footer-->
+    <!----------------------------------------------------inicio footer--------------------------------------------------------------->
     <footer class="w-100 h-auto d-flex align-items-center flex-column">
         <div class="d-flex justify-content-center">
             <div class="row d-flex align-items-start justify-content-evenly pt-4 g-4 text-start pt-5 row-footer" style="width: 90%;">
                 <div class="col-md-3">
                     <img src="../../img/Login/Cola AI logo.png" alt="" style="width: 60%; transform:translateY(-30px)" class="mb-2 me-auto">
                     <p style="font-size:1.3em; font-weight:bold; text-align:justify;transform:translateY(-30px); width:80%" class="m-0 p-0">Seja bem-vindo(a)! nós da Cola ai, pretendemos lhe ajudar a
-                    encontrar as melhores experiências para suas crianças.</p>
+                        encontrar as melhores experiências para suas crianças.</p>
                 </div>
                 <div class="col-md-2">
-                </div>   
+                </div>
                 <div class="col-md-2">
                     <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Desenvolvedor</h4>
                     <p style="font-size:1em; font-weight:bold; text-align:justify; font-size: 1.2em">
-                    A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a> 
+                        A Magma é uma empresa voltada ao setor de tecnologia da informação. <a href="" style="color: #6D9EAF">Saiba mais></a>
                     </p>
                 </div>
                 <div class="col-md-1 infoCol">
-                    <h4 style="color: #6D9EAF;"  class="mb-4 fw-bold fs-3">Info</h4>
+                    <h4 style="color: #6D9EAF;" class="mb-4 fw-bold fs-3">Info</h4>
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer">
                         <li><a class="dropdown-item fw-bold fs-5" onclick="modalSobre(0,0)">Sobre</a></li>
                         <li><a class="dropdown-item fw-bold fs-5" onclick="modalFeedback(0,0)">Feedback</a></li>
-                        <li><a class="dropdown-item fw-bold fs-5"onclick="modalContato(0,0)">Contato</a></li>
+                        <li><a class="dropdown-item fw-bold fs-5" onclick="modalContato(0,0)">Contato</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 pb-5">
                     <h4 style="color: #6D9EAF;" class="text-center fw-bold fs-3">Siga-nos</h4>
                     <div class="d-flex justify-content-center">
                         <div class="social-container d-flex mt-4">
-                            <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>   
+                            <div class="social"><ion-icon name="logo-facebook"></ion-icon> </div>
                             <div class="social"><ion-icon name="logo-instagram"></ion-icon></div>
                             <div class="social"><ion-icon name="logo-twitter"></ion-icon></div>
                         </div>
@@ -352,7 +312,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalFotoPerfil" role="dialog">
+    <div class="modal fade" id="modalFotoPerfil" role="dialog"><!--modal foto perfil-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
@@ -361,21 +321,25 @@
                 </div>
                 <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
                     <p>A sua foto de perfil ficará visível para os perfis deorganizações e administradores do Cola Aí.</p>
-                    <form method="post" action="./processFeedBack.php">
-                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
-                        <input type="file" id="imagemPerfilUsuario" name="imagemPerfilUsuario" accept="image/*" style="display: none;">
-                            <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                                <img id="preview" src="../../img/Usuario/<?= $ImagemPerfil_Usuario!=""?$ImagemPerfil_Usuario:'add-foto.png';?>" alt="" style="width: 20%; min-width:250px" class="mt-5">
-                            </label>
+                    <form method="post" action="./processFotoPerfil.php" enctype="multipart/form-data">
+                        <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil ?>">
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id do usuario" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
+                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="width: 20%; min-width:250px" class="mt-5">
+                        </label>
+                        <div class="row inputFile text-center">
+                            <label for="foto" class="form-label">Carregar Imagem</label>
+                            <input type="file" id="foto" name="foto" accept="image/*" class="form-control mt-1 mb-4">
+                        </div>
                         <div class="btnModal w-100 mt-4 d-flex">
-                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Salvar</button>
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalBannerPerfil" role="dialog">
+    <div class="modal fade" id="modalBannerPerfil" role="dialog"><!--modal foto BANNER-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
@@ -384,14 +348,18 @@
                 </div>
                 <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
                     <p>O seu banner ficará visível para os perfis de organizações e administradores do Cola Aí.</p>
-                    <form method="post" action="./processFeedBack.php">
-                        <!--<input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>-->
-                        <input type="file" id="imagemBannerUsuario" name="imagemBannerUsuario" accept="image/*" style="display: none;">
-                            <label for="imagemBannerUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                                <img id="preview" src="../../img/Usuario/add-banner.png" alt="" style="width: 30%; min-width:250px" class="mt-5">
-                            </label>
+                    <form method="post" action="./processBannerPerfil.php" enctype="multipart/form-data">
+                        <input type="hidden" name="imagemBannerUsuario" id="imagemBannerUsuario" placeholder="nome foto" value="<?= $imagemBanner ?>">
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <label for="imagemBannerUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
+                            <img id="preview" src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'add-banner.png'; ?>" id="imagemBannerUsuario" name="imagemBannerUsuario" alt="foto de Capa" style="width: 30%; min-width:250px" class="mt-5">
+                        </label>
+                        <div class="row inputFile text-center">
+                            <label for="foto" class="form-label">Carregar Imagem</label>
+                            <input type="file" id="foto" name="foto" accept="image/*" class="form-control mt-1 mb-4">
+                        </div>
                         <div class="btnModal w-100 mt-4 d-flex">
-                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Salvar</button>
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -406,7 +374,7 @@
                     <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
-                    <p>O Cola Aí utiliza esses dados para manter sua segurança e elegibilidade de  perfil único.</p>
+                    <p>O Cola Aí utiliza esses dados para manter sua segurança e elegibilidade de perfil único.</p>
                     <form method="post" action="./processFeedBack.php">
                         <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <h2 class="fs-5 mt-3">Nome</h2>
@@ -423,7 +391,7 @@
                             <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
                         </div>
                         <div class="btnModal w-100 mt-4 d-flex">
-                            <button type="submit" id="btnEnviarFeedback" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Salvar</button>
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -434,7 +402,9 @@
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #F4FFEB;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2 d-flex align-items-center">
-                    <h1 class="modal-title fs-3 ps-5" id="exampleModalLabel" style="color: #E6AEB2; font-weight: bold">SE</h1><h1 class="modal-title fs-3" id="exampleModalLabel" style="color: #6D9EAF; font-weight: bold">GUIN</h1><h1 class="modal-title fs-3" id="exampleModalLabel" style="color: #93CC4C; font-weight: bold">DO</h1>
+                    <h1 class="modal-title fs-3 ps-5" id="exampleModalLabel" style="color: #E6AEB2; font-weight: bold">SE</h1>
+                    <h1 class="modal-title fs-3" id="exampleModalLabel" style="color: #6D9EAF; font-weight: bold">GUIN</h1>
+                    <h1 class="modal-title fs-3" id="exampleModalLabel" style="color: #93CC4C; font-weight: bold">DO</h1>
                     <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  pt-0 pb-1">
@@ -445,7 +415,7 @@
                         <div class="col-md-8">
                             <h2 class="fs-5 ">Magma</h2>
                             <p>A Magma é uma empresa voltada a tecnologia.</p>
-                        </div>  
+                        </div>
                     </div>
                     <div class="row d-flex mt-4 align-items-center">
                         <div class="col-md-4">
@@ -454,7 +424,7 @@
                         <div class="col-md-8">
                             <h2 class="fs-5">CEU Jambeiro</h2>
                             <p>O CEU Jambeiro é uma escola feita pela prefeitura de São Paulo onde se há diversos cursos e eventos para a família.</p>
-                        </div>  
+                        </div>
                     </div>
                     <div class="row d-flex mt-4 align-items-center">
                         <div class="col-md-4">
@@ -463,7 +433,7 @@
                         <div class="col-md-8">
                             <h2 class="fs-5 ">Centro Cultural Cidade Tiradentes</h2>
                             <p>O Centro de Formação Cultural Cidade Tiradentes é o maior equipamento cultural da Prefeitura de São Paulo na Zona Leste da cidade.</p>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -471,8 +441,8 @@
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script type="text/javascript" src="../../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
@@ -492,8 +462,6 @@
             console.log(glide)
             glide.mount();
         }
-
-
     </script>
 </body>
 

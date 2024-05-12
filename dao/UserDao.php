@@ -97,6 +97,7 @@ class UserDao
         $stmt->bindParam(':tel', $tel);
         $stmt->bindParam(':imagemPerfil', $imagemP);
         $stmt->bindParam(':imagemBanner', $imagemB);
+        $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
     }
@@ -120,23 +121,99 @@ class UserDao
 
         return $result['totalUsuários'];
     }
-    public static function updatePerfilImage($user)
-    {
-        $conexao = Conexao::conectar();
+    public static function updatePerfilImage($id, $user){
+    $conexao = Conexao::conectar();
 
-        $query = "UPDATE tbusuario SET 
+    // Verifica se há uma imagem a ser atualizada
+    if (!empty($_FILES['foto']['size'])) {
+        // Diretório onde as imagens são armazenadas
+        $diretorio = "../../img/Usuario/";
+
+        // Verifica se a imagem já foi movida e renomeada
+        if (!$user->getImagemPerfil()) {
+            // Gera um nome aleatório para a imagem
+            $novo_nome = md5(time()) . ".jpg";
+            $nomeCompleto = $diretorio . $novo_nome;
+
+            // Move a imagem para o diretório
+            move_uploaded_file($_FILES['foto']['tmp_name'], $nomeCompleto);
+
+            // Atualiza o nome da imagem no objeto usuário
+            $user->setImagemPerfil($novo_nome);
+        } else {
+            // A imagem já foi movida e renomeada
+            $nomeCompleto = $diretorio . $user->getImagemPerfil();
+        }
+    } else {
+        // Se não houver uma nova imagem, use a imagem existente
+        $nomeCompleto = $diretorio . $user->getImagemPerfil();
+    }
+
+    // Query SQL para atualizar a imagem do perfil do usuário
+    $query = "UPDATE tbusuario SET 
             imagemPerfilUsuario = :imagemPerfil
             WHERE idUsuario = :id";
 
-        $stmt = $conexao->prepare($query);
+    // Prepara a declaração
+    $stmt = $conexao->prepare($query);
 
-        // Atribuir os valores a variáveis antes de chamar bindParam
-        $id = $user->getId();
-        $imagemP = $user->getImagemPerfil();
+    // Obtém o nome da imagem do objeto usuário
+    $imagemP = $user->getImagemPerfil();
 
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':imagemPerfil', $imagemP);
+    // Vincula os parâmetros
+    $stmt->bindParam(':imagemPerfil', $imagemP);
+    $stmt->bindParam(':id', $id);
 
-        return $stmt->execute();
-    }
+    // Executa a consulta SQL
+    return $stmt->execute();
 }
+
+public static function updateBannerImage($id, $user){
+    $conexao = Conexao::conectar();
+
+    // Verifica se há uma imagem a ser atualizada
+    if (!empty($_FILES['foto']['size'])) {
+        // Diretório onde as imagens são armazenadas
+        $diretorio = "../../img/Usuario/";
+
+        // Verifica se a imagem já foi movida e renomeada
+        if (!$user->getImagemBanner()) {
+            // Gera um nome aleatório para a imagem
+            $novo_nome = md5(time()) . ".jpg";
+            $nomeCompleto = $diretorio . $novo_nome;
+
+            // Move a imagem para o diretório
+            move_uploaded_file($_FILES['foto']['tmp_name'], $nomeCompleto);
+
+            // Atualiza o nome da imagem no objeto usuário
+            $user->setImagemBanner($novo_nome);
+        } else {
+            // A imagem já foi movida e renomeada
+            $nomeCompleto = $diretorio . $user->getImagemBanner();
+        }
+    } else {
+        // Se não houver uma nova imagem, use a imagem existente
+        $nomeCompleto = $diretorio . $user->getImagemBanner();
+    }
+
+    // Query SQL para atualizar a imagem do perfil do usuário
+    $query = "UPDATE tbusuario SET 
+            imagemBannerUsuario = :imagemBanner
+            WHERE idUsuario = :id";
+
+    // Prepara a declaração
+    $stmt = $conexao->prepare($query);
+
+    // Obtém o nome da imagem do objeto usuário
+    $imagemB = $user->getImagemBanner();
+
+    // Vincula os parâmetros
+    $stmt->bindParam(':imagemBanner', $imagemB);
+    $stmt->bindParam(':id', $id);
+
+    // Executa a consulta SQL
+    return $stmt->execute();
+}
+
+}
+?>

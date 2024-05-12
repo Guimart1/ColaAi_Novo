@@ -69,7 +69,7 @@ require_once '../../dao/InteresseEventoDao.php';
             <div class="iconBox">
                 <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
                 <img src="../../img/Usuario/icon-notificacao.png" alt="">
-                <img src="../../img/Usuario/icon-perfil.png" alt="">
+                <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
             </div>
 
         </div>
