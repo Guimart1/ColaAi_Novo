@@ -30,9 +30,11 @@
         </div>
     </div>
 </nav>
+
+
 <div class="container-fluid">
 <div class="row">
-        <div class="col-2 filtroBox pt-3 ps-4">
+        <div class="col-md-2 filtroBox pt-3" id="filtro">
             <div class="filtroEtaria mb-2">
                 <label for="" class="fs-5">Faixa Etária</label>
                 <div class="mt-1 mb-1">
@@ -45,7 +47,7 @@
             <div class="distanciaBox">
                 <label for="" class="mb-1 fs-5 mb-4">Distância</label>
                 <div class="d-flex align-items-center">
-                    <div class="teste"></div><input type="range" name="" id=""><div class="teste">
+                    <div class="teste"></div><input type="range" name="" id=""><div class="teste"></div>
                 </div>
             </div>
             <span class="ms-auto">km</span>
@@ -86,24 +88,28 @@
                 </div>
             </div>
             <div class="w-100 d-flex justify-content-center mt-3">
-                <button class="btnFiltro rounded rounded-3">Aplicar filtros</button>
+                <button class="btnFiltro rounded rounded-3" onclick="Fechar()">Aplicar filtros</button>
             </div>
+        </div>
 
-        </div>
-        </div>
-        <div class="col-10 listEventos">
-            <div class="p-5 pb-3 pt-3 d-flex justify-content-between listSearch position-fixed">
-                <div class="searchBox col-md-8 col-sm-5 col-5 d-flex justify-content-center ms-4">
-                    <div class="searchInput w-100 position-relative">
+        <div class="listSearch pt-3 pb-3">
+                <div class="searchBox d-flex justify-content-center">
+                    <div class="searchInput position-relative">
                         <img src="../../img/Usuario/icon-search.png" alt="">
                         <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
                     </div>
                 </div>
-                <div class="buttonProcurar col-2 d-flex justify-content-center mt-auto mb-1">
+                <div class="buttonProcurar d-flex justify-content-center mt-auto mb-1 me-auto">
                     <button type="submit" class="border-0 rounded-3">Buscar</button>
                 </div>
+                <div class="showFiltro mt-auto mb-1">
+                    <div class="buttonFiltros d-flex justify-content-center ">
+                        <button type="submit" class="border-0 rounded-3" onclick="Abrir()">Filtros</button>
+                    </div>
+                </div>
             </div>
-            <div class="" style="height: 70px;"></div>
+        <div class="col-md-10 listEventos">
+
     	    <div class="w-100 d-flex justify-content-center mb-4">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.6584015061503!2d-46.392098635479655!3d-23.580709061748028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6f888cba55e7%3A0xe7a2b982ac60485a!2sCentro%20de%20Forma%C3%A7%C3%A3o%20Cultural%20Cidade%20Tiradentes!5e0!3m2!1spt-BR!2sbr!4v1715321667853!5m2!1spt-BR!2sbr" width="800" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -115,7 +121,7 @@
                 <div class="boxVazio p-3 fw-bold rounded rounded-5">
                     <p>Infelizmente não encontramos eventos próximos a este endereço  cadastrados.</p>
                 </div>
-            </div> -->
+            </div>
 
             
             <!-- Pode copiar essa div e só mudar o titulo pras outras funções de pesquisa -->
@@ -144,6 +150,7 @@
     </div>
 </div>
 
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
@@ -151,6 +158,16 @@
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-
+    <script>
+        let filtro = document.getElementById("filtro")
+        function Abrir() {
+            filtro.classList.add("filtroBox-on");
+            filtro.classList.remove("filtroBox-off");
+        }
+        function Fechar() {
+            filtro.classList.add("filtroBox-off");
+            filtro.classList.remove("filtroBox-on");
+        }
+    </script>
 
 </body></html>
