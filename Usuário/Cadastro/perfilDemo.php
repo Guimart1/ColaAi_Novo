@@ -1,8 +1,7 @@
 <?php 
   require_once "../../dao/UserDao.php";
 
-  $users = UserDao::selectById($id);
-  //var_dump($user);
+  $user = new UserDao();
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +16,38 @@
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 <body class="fundo-bolinha">
-    <?php foreach ($users as $user) { ?>
+<?php
+    // Iniciar a sessão
+    session_start();
+
+    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
+    if (!isset($_SESSION['AutenticacaoUser']) || $_SESSION['AutenticacaoUser'] != 'SIM') {
+        // Redirecionar para o login com um erro2 se não estiver autenticado
+        header('Location: login.php?login=erro2');
+        exit();
+    }
+
+    //o usuário está autenticado
+    $authUser = $_SESSION['user'];
+
+    $idUsuario = $authUser['idUsuario']; // Supondo que o ID do usuário está armazenado na sessão
+
+    // Busque os eventos em que o usuário registrou interesse
+    //var_dump($eventosInteresse);
+    // Verifique se o usuário já tem uma foto de perfil
+    $imagemPerfil = ''; // Defina a variável como vazia inicialmente
+    $imagemBanner = ''; // Defina a variável como vazia inicialmente
+
+    if ($authUser && isset($authUser['imagemPerfilUsuario'])) {
+        // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
+        $imagemPerfil = $authUser['imagemPerfilUsuario'];
+    }
+    if ($authUser && isset($authUser['imagemBannerUsuario'])) {
+        // Se o usuário tiver uma imagem de banner, atribua à variável $imagemBanner
+        $imagemBanner = $authUser['imagemBannerUsuario'];
+    }
+?>
+
     <div class="container mt-2 ms-2">
         <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
@@ -26,12 +56,19 @@
             <p>É assim como ele ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
             <div class="perfilBox me-auto ms-auto mt-4 rounded rounded-4" style="width: 42vh;">
                 <div class="position-relative">
-                    <img src="../../img/Usuario/icon-user.png" alt="" class="position-absolute perfilIcon" style="width: 25%;">
-                    <img src="../../img/Usuario/banner-padrao.png" alt="" style="width: 100%;" class="rounded rounded-4">
+                    <img src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" class="img-fluid" alt="imagem Perfil" style="border-radius: 90px; height: auto; width: 200px;">
+                    <img src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>" class="img-fluid" alt="imagem Perfil" style="border-radius: 90px; height: auto; width: 200px;">
                 </div>
                 <div class="d-flex">
                     <div class="fill" style="width: 220px"></div>
-                    <h2 class="text-start"><?=$user[1]?></h2>
+                    <h2 class="text-start">
+                        <?php
+                            if (isset($authUser['nomeUsuario'])) {
+                                echo $authUser['nomeUsuario'];
+                            } else {
+                                echo "Nome de Usuário";
+                            }
+                        ?></h2>
                 </div>
 
             </div>
@@ -48,6 +85,5 @@
             </div>
 
     </div>
-    <?php } ?>
 </body>
 </html>
