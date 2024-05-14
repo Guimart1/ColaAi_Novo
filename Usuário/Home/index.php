@@ -35,24 +35,10 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
     //o usuário está autenticado
     $authUser = $_SESSION['user'];
     ?>
-    <nav>
-    <div class="navigation">
-        <div class="imgHeader">
-            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
-        </div>
-        <a href="../Home/index.php">Página Inicial</a>
-        <a href="#carrossel-teatros">Teatros</a>
-        <a href="#carrossel-parques">Parques</a>
-        <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
-        <div class="iconBox">
-            <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
-            <img src="../../img/Usuario/icon-notificacao.png" alt="">
-            <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
-        </div>
+    <?php
+        require_once('../Componentes/headerLogado.php')
+    ?>
 
-    </div>
-</nav>
 
     <div class="container mt-4" style="width: 80%;">
         <div class="glide mb-5" data-glide='{
@@ -423,7 +409,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
 ?>
     
     
-    
+    <script type="text/javascript" src="../../js/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
@@ -446,8 +432,22 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             console.log(glide)
             glide.mount();
         }
+    </script>
+    <script>  
 
-
+        let nav = document.getElementById("nav")
+        var i = 0
+        function toggleNav(){
+            if (i == 0) {
+                nav.classList.add("navbarActive-on");
+                nav.classList.remove("navbarActive-off");
+                i = 1
+            }else {
+                nav.classList.add("navbarActive-off");
+                nav.classList.remove("navbarActive-on");
+                i = 0
+            }
+        }
     </script>
 </body>
 

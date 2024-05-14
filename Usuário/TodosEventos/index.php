@@ -13,23 +13,10 @@
 
 <body class="fundo-bolinha">
 
-<nav>
-    <div class="navigation">
-        <div class="imgHeader">
-            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
-        </div>
-        <a href="../Home/index.php">Página Inicial</a>
-        <a href="#carrossel-teatros">Teatros</a>
-        <a href="#carrossel-parques">Parques</a>
-        <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
-        <div class="iconBox">
-            <img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;">
-            <img src="../../img/Usuario/icon-notificacao.png" alt="">
-            <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
-        </div>
-    </div>
-</nav>
+<!--Header-->
+    <?php
+        require_once('../Componentes/headerLogado.php')
+    ?>
 
 
 <div class="container-fluid">
@@ -159,6 +146,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script>
+        
+    </script>
+<script>  
         let filtro = document.getElementById("filtro")
         function Abrir() {
             filtro.classList.add("filtroBox-on");
@@ -168,6 +158,18 @@
             filtro.classList.add("filtroBox-off");
             filtro.classList.remove("filtroBox-on");
         }
+        let nav = document.getElementById("nav")
+        var i = 0
+        function toggleNav(){
+            if (i == 0) {
+                nav.classList.add("navbarActive-on");
+                nav.classList.remove("navbarActive-off");
+                i = 1
+            }else {
+                nav.classList.add("navbarActive-off");
+                nav.classList.remove("navbarActive-on");
+                i = 0
+            }
+        }
     </script>
-
 </body></html>
