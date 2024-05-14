@@ -1,7 +1,33 @@
 <?php
     require_once('../../dao/OrganizacaoDao.php');
     require_once '../../model/Mensagem.php';
-    $organizacao = OrganizacaoDao::selectAll(); 
+    // Verifica se o método de requisição é POST e se o parâmetro filtro foi enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filtro'])) {
+    // Obtém o valor do filtro enviado pelo formulário
+    $filtro = $_POST['filtro'];
+
+    // Obtém os dados filtrados da organização com base no valor do filtro
+    $organizacao_filtrada = OrganizacaoDao::selectAllInnerJoinFiltrado($filtro);
+
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $html_tbody = '';
+    foreach ($organizacao_filtrada as $organizacao) {
+        $html_tbody .= "<tr class='mt-1'>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['idOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['nomeOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['emailOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['cnpjOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['situacaoOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "</tr>";
+    }
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $html_tbody;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
+
+// Caso não seja uma requisição POST ou o filtro não foi enviado, exiba todos os registros da tabela
+$organizacao = OrganizacaoDao::selectAllInnerJoin();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -68,42 +94,50 @@
                 <div class="w-100 d-flex flex-column mt-5 pe-5">
                     <div class="dropdown ms-auto">
                     <h1 class="fs-5 ms-auto me-0 ">Categoria</h1>
-                    <a class="btn btn-body-primary border-1 border dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Selecione
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Aceito</a></li>
-                        <li><a class="dropdown-item" href="#">Negado</a></li>
-                        <li><a class="dropdown-item" href="#">Pendente</a></li>
-                    </ul>
+                    <form id="filtroForm">
+                        <select name="filtro" id="filtro">
+                            <option value="0">Todos</option>
+                            <option value="2">Ativo</option>
+                            <option value="3">Desativado</option>
+                        </select>
+                        </form>
                     </div>
                 </div>
                 <div class="row ms-4 me-5 mt-2">
-                    <table class="">
+                    <table class="" id="tabelaOrganizacoes">
                         <thead>
                         <tr id="data-table">
-                            <th class="col-md-1 fs-5">ID</th>
-                            <th class="col-md-2 fs-5">Nome</th>
-                            <th class="col-md-3 fs-5">E-mail</th>
-                            <th class="col-md-3 fs-5">CNPJ</th>
-                            <th class="col-md-5 text-end fs-5 pe-3">Situação</th>
-                        </tr>
-                        <tr>
-                            <td class="pt-3 col-md-1">01</td>
-                            <td class="pt-3 col-md-2">Organização</td>
-                            <td class="pt-3 col-md-2">Organização@teste.com</td>
-                            <td class="pt-3 col-md-3">XX. XXX. XXX/0001-XX.</td>
-                            <td class="pt-3 col-md-2 text-end pe-4">
-                                <p class="fs-5 text-success fw-semibold">Aceito</p>
-                            </td>
+                            <th class="col-md-1 fs-4">ID</th>
+                            <th class="col-md-2 fs-4">Nome</th>
+                            <th class="col-md-3 fs-4">E-mail</th>
+                            <th class="col-md-3 fs-4">CNPJ</th>
+                            <th class="col-md-3 fs-4">Situação</th>
                         </tr>
                         </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <tbody>
+
+                        <?php
+            // Loop para exibir os dados da tabela
+            foreach ($organizacao as $org) {
+                echo "<tr class='mt-1'>";
+                echo "<td class='fs-5 pt-3'>" . $org['idOrganizacaoEvento'] . "</td>";
+                echo "<td class='fs-5 pt-3'>" . $org['nomeOrganizacaoEvento'] . "</td>";
+                echo "<td class='fs-5 pt-3'>" . $org['emailOrganizacaoEvento'] . "</td>";
+                echo "<td class='fs-5 pt-3'>" . $org['cnpjOrganizacaoEvento'] . "</td>";
+                echo "<td class='fs-5 pt-3'>" . $org['situacaoOrganizacaoEvento'] . "</td>";
+                echo "</tr>";
+            }
+            ?>
+                        </tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
@@ -119,5 +153,31 @@
                 hamburger.classList.toggle('showHamburger');
             }
     </script>
+    <script>
+        $(document).ready(function() {
+    $('#filtroForm').change(function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+
+        $.ajax({
+            url: '', // URL para o PHP que retorna o conteúdo da tabela filtrada
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                console.log(data)
+                $('#tabelaOrganizacoes tbody').html(data); // Insere o conteúdo na tbody da tabela
+            },
+            error: function(error) {
+                console.error('Erro:', error);
+            }
+        });
+    });
+});
+
+    </script>
 </body>
 </html>
+11
