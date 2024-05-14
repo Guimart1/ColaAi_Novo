@@ -40,18 +40,19 @@ $user = new UserDao();
 
     // Busque os eventos em que o usuário registrou interesse
     $eventosInteresse = InteresseEventoDao::selectByUsuario($idUsuario);
+    $dadosUser = UserDao::selectById($idUsuario);
     //var_dump($eventosInteresse);
     // Verifique se o usuário já tem uma foto de perfil
     $imagemPerfil = ''; // Defina a variável como vazia inicialmente
     $imagemBanner = ''; // Defina a variável como vazia inicialmente
 
-    if ($authUser && isset($authUser['imagemPerfilUsuario'])) {
+    if ($dadosUser && isset($dadosUser['imagemPerfilUsuario'])) {
         // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
-        $imagemPerfil = $authUser['imagemPerfilUsuario'];
+        $imagemPerfil = $dadosUser['imagemPerfilUsuario'];
     }
-    if ($authUser && isset($authUser['imagemBannerUsuario'])) {
+    if ($dadosUser && isset($dadosUser['imagemBannerUsuario'])) {
         // Se o usuário tiver uma imagem de banner, atribua à variável $imagemBanner
-        $imagemBanner = $authUser['imagemBannerUsuario'];
+        $imagemBanner = $dadosUser['imagemBannerUsuario'];
     }
     ?>
 
@@ -62,12 +63,14 @@ $user = new UserDao();
     <!-- O banner está em background-image -->
     <!-- Os usuários deverão colocar um banner com proporções específicas -->
     <!-- Ao juntar com o banco, tornar background-position como center -->
-    <div class="row d-flex align-items-end justify-content-center" style="height:400px; background-image: url('../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>'); background-position:bottom; background-size: cover; margin-bottom:25vh;">
-        <div class="w-100 d-flex align-items-end justify-content-center" style="z-index: 1; margin-top: 300px;">
+    <div class="row d-flex align-items-end justify-content-center" style="height:44vh; margin-bottom:225px; position: relative;">
+        <img src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>" class="img-fluid" alt="Alterar imagem" 
+        style="height: 100%; width: 100%; position: absolute; object-fit: cover;">
+        <div class="w-100 d-flex align-items-end justify-content-center" style="z-index: 1; margin-top: 33vh;">
             <div class="w-100 d-flex align-items-center justify-content-start" style="height:auto;">
                 <div class="d-flex align-items-end justify-content-start" style="width: 200px; height: 200px; margin-left: 5vw; position:relative;">
                     <div class="d-flex align-items-end justify-content-end">
-                        <img src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" class="img-fluid" alt="imagem Perfil" style="border-radius: 90px; height: auto; width: 200px;">
+                        <img src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" alt="imagem Perfil" style="border-radius: 100%; height: 200px; width: 200px;">
                         <div class="d-flex align-items-center justify-content-center" style="width: 30px; height: 30px; position:absolute;  margin-right: 20px; margin-bottom: 20px">
                             <ul class="m-0 p-0" onclick="modalFotoPerfil(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
                                 <li><img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem" style="height: auto; width: auto;"></li>
@@ -310,10 +313,10 @@ $user = new UserDao();
                         <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil ?>">
                         <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id do usuario" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="width: 20%; min-width:250px" class="mt-5">
+                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
                         </label>
                         <div class="row inputFile text-center">
-                            <label for="foto" class="form-label">Carregar Imagem</label>
+                            <label for="foto" class="form-label mt-1">Carregar Imagem</label>
                             <input type="file" id="foto" name="foto" accept="image/*" class="form-control mt-1 mb-4">
                         </div>
                         <div class="btnModal w-100 mt-4 d-flex">
@@ -337,11 +340,11 @@ $user = new UserDao();
                         <input type="hidden" name="imagemBannerUsuario" id="imagemBannerUsuario" placeholder="nome foto" value="<?= $imagemBanner ?>">
                         <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <label for="imagemBannerUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                            <img id="preview" src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'add-banner.png'; ?>" id="imagemBannerUsuario" name="imagemBannerUsuario" alt="foto de Capa" style="width: 30%; min-width:250px" class="mt-5">
+                            <img id="previewBanner" src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'add-banner.png'; ?>" id="imagemBannerUsuario" name="imagemBannerUsuario" alt="foto de Capa" style="width: 80%; min-width:250px; height:200px;" class="mt-5">
                         </label>
                         <div class="row inputFile text-center">
-                            <label for="foto" class="form-label">Carregar Imagem</label>
-                            <input type="file" id="foto" name="foto" accept="image/*" class="form-control mt-1 mb-4">
+                            <label for="banner" class="form-label m-1">Carregar Imagem</label>
+                            <input type="file" id="banner" name="banner" accept="image/*" class="form-control mt-1 mb-4">
                         </div>
                         <div class="btnModal w-100 mt-4 d-flex">
                             <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
@@ -431,22 +434,6 @@ $user = new UserDao();
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script type="text/javascript" src="../../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script>
-        const COMPONENT_NAME = "data-glide";
-        const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
-        const components = document.querySelectorAll(COMPONENT_SELECTOR);
-        for (let i = 0; i < components.length; i++) {
-            const options = JSON.parse(
-                components[i].getAttribute(COMPONENT_NAME) || "{}"
-            );
-            let glide = new Glide(
-                components[i],
-                options
-            );
-            console.log(glide)
-            glide.mount();
-        }
     </script>
     <script>  
         let nav = document.getElementById("nav")

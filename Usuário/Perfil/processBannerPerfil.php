@@ -9,7 +9,7 @@ $msg = new Mensagem();
 var_dump($_POST);
 switch ($_POST["acao"]) {
   case 'SALVAR':
-    $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
+    $user->setImagemBanner($user->salvarBanner(($_POST['imagemBannerUsuario'])));
     try {
         $userDao = UserDao::insert($user);
 
@@ -28,7 +28,7 @@ switch ($_POST["acao"]) {
     break;
   case 'ATUALIZAR':
     //pode validar as informações
-    $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
+    $user->setImagemBanner($user->salvarBanner(($_POST['imagemBannerUsuario'])));
     try {
       $userDao = UserDao::updateBannerImage($_POST["idUsuario"], $user);
       $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");

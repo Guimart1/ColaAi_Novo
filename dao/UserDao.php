@@ -128,7 +128,7 @@ class UserDao
     if (!empty($_FILES['foto']['size'])) {
         // Diretório onde as imagens são armazenadas
         $diretorio = "../../img/Usuario/";
-
+        $nomeCompleto = $diretorio . $user->getImagemPerfil();
         // Verifica se a imagem já foi movida e renomeada
         if (!$user->getImagemPerfil()) {
             // Gera um nome aleatório para a imagem
@@ -146,7 +146,7 @@ class UserDao
         }
     } else {
         // Se não houver uma nova imagem, use a imagem existente
-        $nomeCompleto = $diretorio . $user->getImagemPerfil();
+        
     }
 
     // Query SQL para atualizar a imagem do perfil do usuário
@@ -175,7 +175,7 @@ public static function updateBannerImage($id, $user){
     if (!empty($_FILES['foto']['size'])) {
         // Diretório onde as imagens são armazenadas
         $diretorio = "../../img/Usuario/";
-
+        $nomeCompleto = $diretorio . $user->getImagemBanner();
         // Verifica se a imagem já foi movida e renomeada
         if (!$user->getImagemBanner()) {
             // Gera um nome aleatório para a imagem
@@ -193,7 +193,7 @@ public static function updateBannerImage($id, $user){
         }
     } else {
         // Se não houver uma nova imagem, use a imagem existente
-        $nomeCompleto = $diretorio . $user->getImagemBanner();
+        
     }
 
     // Query SQL para atualizar a imagem do perfil do usuário
