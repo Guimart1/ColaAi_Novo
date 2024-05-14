@@ -90,7 +90,7 @@ switch ($_POST["acao"]) {
         case 'ARQUIVAR':
           $evento->setSituacaoEvento(2);
           try {
-            $eventoDao = eventoDao::updateSituacao($_POST["idEvento"], $evento);
+            $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
             $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
             header("Location: index.php");
           } catch (Exception $e) {

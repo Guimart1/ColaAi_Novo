@@ -44,7 +44,7 @@
                     ?>
                     </div>
                     <div class="input-box mt-1 mb-5 ps-md-5 pe-md-5">
-                        <input type="telefone" class="input-group fs-5" name="telefone" placeholder="Digite o seu telefone">
+                        <input type="text" class="input-group fs-5" name="telefone" placeholder="Digite o seu telefone" data-mask = "(00)00000-0000">
                     </div>
                     <div class="input-box mt-4 mb-3 ps-md-5 pe-md-5">
                         <div class="orgSenha d-flex">
@@ -63,8 +63,11 @@
         </div>
     </div>
     <script src="../../js/script.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="../../js/personalizar.js"> </script>
 </body>
 </html>
