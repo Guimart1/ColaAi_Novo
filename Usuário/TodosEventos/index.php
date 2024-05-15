@@ -1,4 +1,43 @@
+<!--     <?php 
+    require_once '../../dao/EventoDao.php';
+    
+    $eventos = EventoDao::selectAll();
+
+    $eventos_js = [];
+
+    $evento_coords = [];
+
+
+    foreach ($eventos as $evento) {
+        // Formate os dados do evento como desejado
+        $evento_js = [
+            'idEvento' => $evento['idEvento'],
+            'latitude' => $evento['latitude'], // Substitua por sua coluna de latitude
+            'longitude' => $evento['longitude'], // Substitua por sua coluna de longitude
+            // Adicione outros campos conforme necessário
+        ];
+
+        // Adicione o evento ao array de eventos JavaScript
+        $eventos_js[] = $evento_js;
+    }
+
+
+    // Converta cada evento em um formato JavaScript
+    foreach ($eventos as $evento) {
+        // Formate os dados do evento como desejado
+        $evento_js = [
+            'nome' => $evento['nomeEvento'],
+            'latitude' => $evento['latitude'], // Substitua por sua coluna de latitude
+            'longitude' => $evento['longitude'], // Substitua por sua coluna de longitude
+            // Adicione outros campos conforme necessário
+        ];
+
+        // Adicione o evento ao array de eventos JavaScript
+        $eventos_js[] = $evento_js;
+    }
+    ?> -->
 <html lang="pt-br" class="hydrated"><head>
+
     <meta charset="UTF-8"><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Cola Aí</title>
@@ -9,6 +48,18 @@
     <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEx8FgHwmJjDQPZq_JQBPxi_1on_zcpQI&callback=initMap" defer></script>
+    <!-- Fim da API do Google Maps -->
+    <!-- Adicione a biblioteca ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Adicione seu script personalizado -->
+    <script type="text/javascript" src="../../js/personalizar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 </head>
 
 <body class="fundo-bolinha">
@@ -110,9 +161,7 @@
             </div>
         <div class="col-md-10 listEventos">
 
-    	    <div class="w-100 d-flex justify-content-center mb-4">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.6584015061503!2d-46.392098635479655!3d-23.580709061748028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6f888cba55e7%3A0xe7a2b982ac60485a!2sCentro%20de%20Forma%C3%A7%C3%A3o%20Cultural%20Cidade%20Tiradentes!5e0!3m2!1spt-BR!2sbr!4v1715321667853!5m2!1spt-BR!2sbr" width="800" height="550" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            <div id="map"></div>
 
 
             <!-- Card se não encontrar evento -->
@@ -149,8 +198,11 @@
         </div>
     </div>
 </div>
-
-
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEx8FgHwmJjDQPZq_JQBPxi_1on_zcpQI&callback=initMap&v=weekly&solution_channel=GMP_CCS_geolocation_v1"
+      defer
+    ></script>
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
@@ -169,5 +221,89 @@
             filtro.classList.remove("filtroBox-on");
         }
     </script>
+
+    <script>
+
+        const getPosition = position => {
+            const dados = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+
+            }
+
+
+        }
+
+        const geoError = error => {
+            console.log ("Erro: " + error.message)
+        }
+        navigator.geolocation.getCurrentPosition(getPosition, geoError)
+
+
+        // Função para inicializar o mapa
+        let map, infoWindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 12,
+            });
+            infoWindow = new google.maps.InfoWindow();
+
+            // Adicione um marcador para a sua localização atual
+            const addMarker = (location) => {
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: "Sua Localização",
+                });
+                map.setCenter(location);
+            };
+
+            // Função para obter a posição do usuário
+            const getPosition = (position) => {
+                const dados = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                };
+                const userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                console.log(dados);
+                addMarker(userLocation);
+            };
+
+            // Função de erro de geolocalização
+            const geoError = (error) => {
+                console.log("Erro: " + error.message);
+            };
+
+            // Solicita a localização do usuário
+            navigator.geolocation.getCurrentPosition(getPosition, geoError);
+        }
+
+    </script>
+
+    
+
+    <!-- <script>
+        // Adicione os eventos ao mapa usando JavaScript
+        var map = L.map('map').setView([-22.9035, -43.2096], 13); // Configuração inicial do mapa
+
+        // Adicione um tile layer (layer de azulejos) para exibir o mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Adicione os eventos ao mapa
+        var eventos = <?php echo json_encode($eventos_js); ?>;
+        eventos.forEach(function(evento) {
+            var marker = L.marker([evento.latitude, evento.longitude]).addTo(map);
+            marker.bindPopup(evento.nome);
+        });
+    </script> -->
+
+    
 
 </body></html>
