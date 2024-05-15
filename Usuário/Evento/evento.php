@@ -1,6 +1,7 @@
 <?php
 require_once '../../dao/EventoDao.php';
 require_once '../../dao/InteresseEventoDao.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,7 +37,7 @@ require_once '../../dao/InteresseEventoDao.php';
     if (isset($_GET['id'])) {
         // Obtém o id do evento da URL
         $idEvento = $_GET['id'];
-
+        
         // Busca os detalhes do evento com base no id do evento
         $evento = EventoDao::selectById($idEvento);
         $organizacao = EventoDao::selecionarEventoComOrganizacaoPorId($idEvento);
@@ -175,6 +176,7 @@ require_once '../../dao/InteresseEventoDao.php';
                     $nomeEvento = $evento['nomeEvento'];
                     $cores = ['#FFD417', '#6D9EAF', '#E6AEB2']; // Cores correspondentes a cada parte do nome do evento
                     $comprimento = mb_strlen($nomeEvento, 'UTF-8');
+                    $jaRegistrado = InteresseEventoDao::selectByUsuarioEvento($idUsuario, $idEvento);
 
                     for ($i = 0; $i < $comprimento; $i++) {
                         $letra = mb_substr($nomeEvento, $i, 1, 'UTF-8');
@@ -184,34 +186,64 @@ require_once '../../dao/InteresseEventoDao.php';
                 </h1>
                 <p><?= $evento['descEvento']; ?></p>
                 <div class="button">
-                    <form method="post" action="./processInterresseEvento.php">
+                    <form id="interestForm" method="post" action="./processInterresseEvento.php">
                         <!-- Adicione um campo oculto para armazenar o ID do evento -->
                         <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
 
                         <!-- Adicione um campo oculto para armazenar o ID do usuário -->
                         <input type="hidden" name="idUsuario" value="<?= $authUsuario['idUsuario'] ?>">
 
-                        <button type="submit" class="border-0 rounded-5 mt-5" style="width: 15vw; height: 50px;min-width:200px" value="SALVAR" name="acao">Registre interesse</button>
+                        <!-- Adicione um campo oculto para a ação -->
+                        <input type="hidden" name="acao" value="<?php echo $jaRegistrado ? 'DELETE' : 'SALVAR'; ?>">
+
+                        <button id="interestButton" type="submit" class="border-0 rounded-5 mt-5" style="width: 15vw; height: 50px;min-width:200px" value="SALVAR" name="acao">
+                            <?php
+                            // Verificar se o usuário já registrou interesse
+                            // Suponha que $jaRegistrado seja uma variável que indica se o usuário já registrou interesse no evento
+                            if ($jaRegistrado) {
+                                echo "Retirar Interesse";
+                            } else {
+                                echo "Registrar Interesse";
+                            }
+                            ?>
+                        </button>
                     </form>
                 </div>
                 <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
             </div>
-        </div>
-        
-<?php
-    require_once('../Componentes/footerLogado.php');
-    require_once('../Componentes/modalFeedback.php');
-    require_once('../Componentes/modalContato.php');
-    require_once('../Componentes/modalSobre.php');
-?>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" src="../../js/modal.js"></script>
+            <script>
+                // Adicione um evento de clique ao botão
+                document.getElementById('interestButton').addEventListener('click', function(event) {
+                    event.preventDefault(); // Evitar o envio do formulário
+
+                    // Verificar se o texto do botão é "Registrar Interesse"
+                    if (this.textContent.trim() === "Registrar Interesse") {
+                        this.textContent = "Retirar Interesse"; // Alterar o texto do botão
+                    } else {
+                        this.textContent = "Registrar Interesse"; // Alterar o texto do botão
+                    }
+
+                    // Submeter o formulário
+                    document.getElementById('interestForm').submit();
+                });
+            </script>
+
+
+            <?php
+            require_once('../Componentes/footerLogado.php');
+            require_once('../Componentes/modalFeedback.php');
+            require_once('../Componentes/modalContato.php');
+            require_once('../Componentes/modalSobre.php');
+            ?>
+
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+            </script>
+            <script type="text/javascript" src="../../js/modal.js"></script>
 </body>
 
 </html>

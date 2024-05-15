@@ -10,9 +10,23 @@ $msg = new Mensagem();
 switch ($_POST["acao"]) {
   case 'DELETE':
     try {
-      $interesseDao = InteresseEventoDao::delete($_POST['id']);
-      header("Location: index.php");
+      // Instancie a classe InteresseEventoDao
+      $interesseDao = new InteresseEventoDao();
+      
+      // Chame o método deleteInterest passando o ID do evento e do usuário
+      $resultado = $interesseDao->deleteInterest($_POST['idEvento'], $_POST['idUsuario']);
+      
+      // Verifique se a exclusão foi bem-sucedida
+      if ($resultado) {
+          // Se sim, redirecione para a página de eventos
+          header("Location: evento.php?id=" . $_POST['idEvento']);
+          exit();
+      } else {
+          // Se não, exiba uma mensagem de erro ou tome outra ação adequada
+          echo "Erro ao excluir interesse do evento.";
+      }
     } catch (Exception $e) {
+      // Em caso de exceção, exiba a mensagem de erro
       echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
     break;
