@@ -56,27 +56,12 @@ require_once '../../dao/InteresseEventoDao.php';
         echo "<p>Parâmetro idEvento não especificado na URL.</p>";
     }
     ?>
-    <nav>
-        <div class="navigation">
-            <div class="imgHeader">
-                <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
-            </div>
-            <a href="../Home/index.php">Página Inicial</a>
-            <a href="#carrossel-teatros">Teatros</a>
-            <a href="#carrossel-parques">Parques</a>
-            <a href="#carrossel-museus">Museus</a>
-            <a href="#carrossel-centroCulturais">Centros Culturais</a>
-            <div class="iconBox">
-                <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
-                <img src="../../img/Usuario/icon-notificacao.png" alt="">
-                <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
-            </div>
-
-        </div>
-    </nav>
+    <?php
+        require_once('../Componentes/headerLogado.php')
+    ?>
     <!--inicio do conteudo-->
     <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">
-        <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 83vh">
+        <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 92vh">
             <div class="eventImage col-md-4">
                 <h1 class="fw-bold fs-2 mt-4"><span style="color: #E6AEB2">E</span><span style="color: #6D9EAF">VEN</span><span style="color: #FFD417">TO</span></h1>
                 <div class="d-flex align-items-center">
@@ -88,85 +73,114 @@ require_once '../../dao/InteresseEventoDao.php';
                     <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
                     <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="<?= $evento['nomeEvento']; ?>" style="width: 100%; height: 100%;" class="mt-2 img-fluid">
                 </div>
-                <div class="eventTag w-100 row mt-2 g-4">
-                    <div class="col-md-7 d-flex centerInfo">
-                        <div class="livreBox d-flex justify-content-center align-items-center fw-bold">
-                            L
+                <div class="eventTag row mt-2">
+                    <div class="row mt-2 g-2">
+                        <div class="col-md-8 d-flex centerInfo">
+                            <div class="" style="height: 35px; width:35px">
+                                <div class="livreBox d-flex justify-content-center align-items-center rounded rounded-2">
+                                    <span>L</span>
+                                </div>
+                            </div>
+                            <span class="fw-bold ms-3" style="font-size: 1.2em;">Faixa etária:</span>
+                            <spa class="" style="font-size: 1.2em;">
+                                <?php
+                                // array associativo para mapear os valores numéricos para os valores correspondentes
+                                $faixa_etaria = array(
+                                    '1' => '0-12 meses',
+                                    '2' => '1-3 anos',
+                                    '3' => '3-5 anos',
+                                    '4' => '5-12 anos',
+                                    '5' => 'Livre para todos os públicos'
+                                );
+
+                                // Verifique se o valor da faixa etária está definido e não é vazio
+                                if (isset($evento['faixaEtariaEvento']) && !empty($evento['faixaEtariaEvento'])) {
+                                    // Use o valor da faixa etária para acessar o array e exibir o valor correspondente
+                                    echo $faixa_etaria[$evento['faixaEtariaEvento']];
+                                } else {
+                                    // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                    echo "Faixa etária não especificada";
+                                }
+                                ?>
+                            </spa>
                         </div>
-                        <span class="fw-bold ms-3" style="font-size: 1.2em;">Faixa etária:</span>
-                        <spa class="ms-2" style="font-size: 1.2em;">
-                            <?php
-                            // array associativo para mapear os valores numéricos para os valores correspondentes
-                            $faixa_etaria = array(
-                                '1' => '0-12 meses',
-                                '2' => '1-3 anos',
-                                '3' => '3-5 anos',
-                                '4' => '5-12 anos',
-                                '5' => 'Livre para todos os públicos'
-                            );
+                        <div class="col-md-2 d-flex centerInfo">
+                            <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px; height:35px">
+                            <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
+                            <span class="ms-1" style="font-size: 1.2em;">
+                                <?php
+                                // array associativo para mapear os valores numéricos para os valores correspondentes
+                                $valores = array(
+                                    '1' => 'Grátis',
+                                    '2' => 'Pago',
+                                    '3' => 'Outros'
+                                );
 
-                            // Verifique se o valor da faixa etária está definido e não é vazio
-                            if (isset($evento['faixaEtariaEvento']) && !empty($evento['faixaEtariaEvento'])) {
-                                // Use o valor da faixa etária para acessar o array e exibir o valor correspondente
-                                echo $faixa_etaria[$evento['faixaEtariaEvento']];
-                            } else {
-                                // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                echo "Faixa etária não especificada";
-                            }
-                            ?>
-                        </spa>
+                                // Verifique se o valor do evento está definido e não é vazio
+                                if (isset($evento['valorEvento']) && !empty($evento['valorEvento'])) {
+                                    // Use o valor do evento para acessar o array e exibir o valor correspondente
+                                    echo $valores[$evento['valorEvento']];
+                                } else {
+                                    // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                    echo "Valor não especificado";
+                                }
+                                ?>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-md-5 d-flex centerInfo">
-                        <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px">
-                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
-                        <span class="ms-1" style="font-size: 1.2em;">
-                            <?php
-                            // array associativo para mapear os valores numéricos para os valores correspondentes
-                            $valores = array(
-                                '1' => 'Grátis',
-                                '2' => 'Pago',
-                                '3' => 'Outros'
-                            );
+                    
+                    <div class="row mt-2 g-2">
+                        <div class="col-md-12 d-flex centerInfo">
+                            <img src="../../img/Usuario/icon-local.png " alt="" style="width: 30px; height:35px">
+                            <span class="fw-bold ms-2" style="font-size: 1.2em;">Local:</span>
+                            <span class="ms-1" style="font-size: 1.2em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
+                        </div>
+                    </div>
+                    <div class="row mt-2 g-3" >
+                        <div class="col-md-5 d-flex" style="height: 40px;">
+                            <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
+                            <div class="d-flex flex-column ms-1">
+                                <span class="fw-bold mb-auto" style="font-size: 1.2em;">Data começo:</span>
+                                <span class="text-center">???</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex" style="height: 40px;">
+                            <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
+                            <div class="d-flex flex-column ms-1">
+                                <span class="fw-bold mb-auto" style="font-size: 1.2em;">Data Fim:</span>
+                                <span class="text-center">???</span>
+                            </div>
+                        </div>
+                            <div class="col-md-3 d-flex mb-5 centerInfo">
+                                    <img src="../../img/Usuario/icon-horario.png" alt="" style="width: 35px; height:35px">
+                                    <div class="d-flex flex-column ms-1">
+                                        <span class="fw-bold mb-auto" style="font-size: 1.2em;">Turnos:</span>
+                                        <span class="text-center">
+                                    
+                                        <?php
+                                        // array associativo para mapear os valores numéricos para os valores correspondentes
+                                        $turnos = array(
+                                            '1' => 'Manhã',
+                                            '2' => 'Tarde',
+                                            '3' => 'Noite'
+                                        );
 
-                            // Verifique se o valor do evento está definido e não é vazio
-                            if (isset($evento['valorEvento']) && !empty($evento['valorEvento'])) {
-                                // Use o valor do evento para acessar o array e exibir o valor correspondente
-                                echo $valores[$evento['valorEvento']];
-                            } else {
-                                // Se o valor não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                echo "Valor não especificado";
-                            }
-                            ?>
-                        </span>
+                                        // Verifique se o turno do evento está definido e não é vazio
+                                        if (isset($evento['periodoEvento']) && !empty($evento['periodoEvento'])) {
+                                            // Use o turno do evento para acessar o array e exibir o valor correspondente
+                                            echo $turnos[$evento['periodoEvento']];
+                                        } else {
+                                            // Se o turno não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
+                                            echo "Turno não especificado";
+                                        }
+                                        ?>
+                                    </span>
+                                    </div>
+                                </div>
                     </div>
-                    <div class="col-md-12 d-flex centerInfo">
-                        <img src="../../img/Usuario/icon-local.png " alt="" style="width: 30px; height:35px">
-                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Local:</span>
-                        <span class="ms-1" style="font-size: 1.2em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
-                    </div>
-                    <div class="col-md-6 d-flex mb-5 centerInfo">
-                        <img src="../../img/Usuario/icon-horario.png" alt="" style="width: 30px">
-                        <span class="fw-bold ms-2" style="font-size: 1.2em;">Turno:</span>
-                        <span class="ms-1" style="font-size: 1.2em;">
-                            <?php
-                            // array associativo para mapear os valores numéricos para os valores correspondentes
-                            $turnos = array(
-                                '1' => 'Manhã',
-                                '2' => 'Tarde',
-                                '3' => 'Noite'
-                            );
-
-                            // Verifique se o turno do evento está definido e não é vazio
-                            if (isset($evento['periodoEvento']) && !empty($evento['periodoEvento'])) {
-                                // Use o turno do evento para acessar o array e exibir o valor correspondente
-                                echo $turnos[$evento['periodoEvento']];
-                            } else {
-                                // Se o turno não estiver definido ou for vazio, exiba uma mensagem de erro ou padrão
-                                echo "Turno não especificado";
-                            }
-                            ?>
-                        </span>
-                    </div>
+                        
+                    
+                    
                 </div>
             </div>
             <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column">

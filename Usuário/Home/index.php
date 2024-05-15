@@ -48,8 +48,8 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 <ul class="glide__slides">
                     <li class="glide__slide">
                     <?php foreach ($eventosMaisInteresse as $evento) : ?>
-                        <div class="imageBox position-relative w-100" style="height: 300px;">
-                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%">
+                        <div class="imageBox position-relative" style="height: 300px;">
+                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%; object-fit:cover">
                             <div class="descCard p-2 ps-4">
                                 <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
                                 <p><?= $evento['descEvento']; ?></p>
@@ -400,13 +400,13 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
         </div>  
     </div>
 
-<!--inicio footer-->
-<?php
-    require_once('../Componentes/footerLogado.php');
-    require_once('../Componentes/modalFeedback.php');
-    require_once('../Componentes/modalContato.php');
-    require_once('../Componentes/modalSobre.php');
-?>
+    <!--inicio footer-->
+    <?php
+        require_once('../Componentes/footerLogado.php');
+        require_once('../Componentes/modalFeedback.php');
+        require_once('../Componentes/modalContato.php');
+        require_once('../Componentes/modalSobre.php');
+    ?>
     
     
     <script type="text/javascript" src="../../js/script.js"></script>

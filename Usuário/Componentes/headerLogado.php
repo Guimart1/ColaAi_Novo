@@ -2,7 +2,7 @@
 <nav>
     <div class="navigation">
         <div class="imgHeader">
-            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
+            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2 logoHeader">
         </div>
         <a href="../Home/index.php">Página Inicial</a>
         <a href="#carrossel-teatros">Teatros</a>
