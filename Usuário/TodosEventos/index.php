@@ -1,41 +1,19 @@
-<!--     <?php 
-    require_once '../../dao/EventoDao.php';
-    
-    $eventos = EventoDao::selectAll();
+<?php 
+require_once '../../dao/EventoDao.php';
 
-    $eventos_js = [];
+$eventos = EventoDao::selectAll();
+$enderecosEventos = [];
 
-    $evento_coords = [];
+// Populando $enderecosEventos
+foreach ($eventos as $evento) {
+    $enderecoEvento = $evento['enderecoEvento'] . "," . $evento['numeroEvento'] . "," .  $evento['complementoEvento']. "," .  $evento['bairroEvento'] . "," . $evento['cepEvento'] . "," . $evento['cidadeEvento']. "," .  $evento['ufEvento'];
+    $enderecosEventos[] = $enderecoEvento;
+}
 
+// Transformando em JSON para usar no JavaScript
+$enderecosEventosJSON = json_encode($enderecosEventos);
 
-    foreach ($eventos as $evento) {
-        // Formate os dados do evento como desejado
-        $evento_js = [
-            'idEvento' => $evento['idEvento'],
-            'latitude' => $evento['latitude'], // Substitua por sua coluna de latitude
-            'longitude' => $evento['longitude'], // Substitua por sua coluna de longitude
-            // Adicione outros campos conforme necessário
-        ];
-
-        // Adicione o evento ao array de eventos JavaScript
-        $eventos_js[] = $evento_js;
-    }
-
-
-    // Converta cada evento em um formato JavaScript
-    foreach ($eventos as $evento) {
-        // Formate os dados do evento como desejado
-        $evento_js = [
-            'nome' => $evento['nomeEvento'],
-            'latitude' => $evento['latitude'], // Substitua por sua coluna de latitude
-            'longitude' => $evento['longitude'], // Substitua por sua coluna de longitude
-            // Adicione outros campos conforme necessário
-        ];
-
-        // Adicione o evento ao array de eventos JavaScript
-        $eventos_js[] = $evento_js;
-    }
-    ?> -->
+?>
 <html lang="pt-br" class="hydrated"><head>
 
     <meta charset="UTF-8"><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
@@ -49,7 +27,10 @@
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEx8FgHwmJjDQPZq_JQBPxi_1on_zcpQI&callback=initMap" defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
     <!-- Fim da API do Google Maps -->
     <!-- Adicione a biblioteca ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -59,6 +40,40 @@
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script>
+        // Função para geocodificar endereço
+        function geocodeAddress(address) {
+            return new Promise((resolve, reject) => {
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: address, region: 'BR' }, (results, status) => {
+                    if (status === 'OK') {
+                        const position = results[0].geometry.location;
+                        resolve(position);
+                    } else {
+                        reject(status);
+                    }
+                });
+            });
+        }
+
+        // Função para geocodificar todos os endereços e exibir no console
+        async function geocodeAddresses(addresses) {
+            for (const address of addresses) {
+                try {
+                    console.log(`Tentando geocodificar ${address}`);
+                    const position = await geocodeAddress(address);
+                    console.log(`Resultado do geocodificador para ${address}:`, position);
+                    console.log(`Coordenadas de ${address}: ${position.lat()}, ${position.lng()}`);
+                } catch (error) {
+                    console.error(`Falha ao geocodificar ${address}: ${error}`);
+                }
+            }
+        }
+
+        // Chamada da função com os endereços
+        const enderecosEventos = <?php echo $enderecosEventosJSON; ?>;
+        geocodeAddresses(enderecosEventos);
+    </script>
 
 </head>
 
