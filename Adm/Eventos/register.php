@@ -144,11 +144,11 @@ if (!empty($_POST)) {
                         <div class="row">
                             <div class="col-md-6 needs-validation">
                                 <label for="date" class="col-form-label">Data do Evento*</label>
-                                <input type="date" class="form-control inputGeral" placeholder="" name="dataEvento" maxlength="100" id="" value="<?= $data_Evento ?>" required>
+                                <input type="date" class="form-control inputGeral" placeholder="" name="dataEvento" maxlength="100" id="dataEvento" value="<?= $data_Evento ?>" required>
                             </div>
                             <div class="col-md-6 needs-validation">
                                 <label for="date" class="col-form-label">Data do Evento*</label>
-                                <input type="date" class="form-control inputGeral" placeholder="" name="dataFimEvento" maxlength="100" id="" value="<?= $dataFim_Evento ?>" required>
+                                <input type="date" class="form-control inputGeral" placeholder="" name="dataFimEvento" maxlength="100" id="dataFimEvento" value="<?= $dataFim_Evento ?>" required>
                             </div>
 
                                 <div class="row">
