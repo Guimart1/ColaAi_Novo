@@ -386,7 +386,9 @@ input[type="file"] {
     border: 3.2px solid #a6a6a6;
     font-weight: bolder;
 }
-
+.centerInfo{
+    align-items: center;
+}
 
 @media only screen and (max-width: 758px) {
     .eventImage{
@@ -394,9 +396,7 @@ input[type="file"] {
         flex-direction: column;
         align-items: center;
     }
-    .centerInfo{
-        align-items: center;
-    }
+
     .imagemEvento {
         width: 350px;
         height: 210px;

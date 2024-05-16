@@ -62,7 +62,7 @@ require_once '../../dao/InteresseEventoDao.php';
     ?>
     <!--inicio do conteudo-->
     <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">
-        <div class="row d-flex justify-content-evenly gap-4" style="width: 100%; min-height: 92vh">
+        <div class="row d-flex justify-content-evenly gap-4 mb-5" style="width: 100%; min-height: 92vh">
             <div class="eventImage col-md-4">
                 <h1 class="fw-bold fs-2 mt-4"><span style="color: #E6AEB2">E</span><span style="color: #6D9EAF">VEN</span><span style="color: #FFD417">TO</span></h1>
                 <div class="d-flex align-items-center">
@@ -74,16 +74,16 @@ require_once '../../dao/InteresseEventoDao.php';
                     <input type="hidden" name="idEvento" value="<?= $idEvento ?>">
                     <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="<?= $evento['nomeEvento']; ?>" style="width: 100%; height: 100%;" class="mt-2 img-fluid">
                 </div>
-                <div class="eventTag row mt-2">
-                    <div class="row mt-2 g-2">
-                        <div class="col-md-8 d-flex centerInfo">
-                            <div class="" style="height: 35px; width:35px">
+                <div class="eventTag mt-4">
+                    <div class="row d-flex justify-content-between mt-3 g-3">
+                        <div class="col-md-auto d-flex centerInfo">
+                            <div class="" style="height: 33px; width:33px">
                                 <div class="livreBox d-flex justify-content-center align-items-center rounded rounded-2">
                                     <span>L</span>
                                 </div>
                             </div>
-                            <span class="fw-bold ms-3" style="font-size: 1.2em;">Faixa etária:</span>
-                            <spa class="" style="font-size: 1.2em;">
+                            <span class="fw-bold ms-1" style="font-size: 1.1em;">Faixa etária:</span>
+                            <span class="ms-2 mt-1" style="font-size: 0.9em;">
                                 <?php
                                 // array associativo para mapear os valores numéricos para os valores correspondentes
                                 $faixa_etaria = array(
@@ -103,12 +103,12 @@ require_once '../../dao/InteresseEventoDao.php';
                                     echo "Faixa etária não especificada";
                                 }
                                 ?>
-                            </spa>
+                            </span>
                         </div>
-                        <div class="col-md-2 d-flex centerInfo">
-                            <img src="../../img/Usuario/icon-valor.png" alt="" style="width: 35px; height:35px">
-                            <span class="fw-bold ms-2" style="font-size: 1.2em;">Valor:</span>
-                            <span class="ms-1" style="font-size: 1.2em;">
+                        <div class="col-md-auto d-flex centerInfo">
+                            <img src="../../img/Usuario/icon-valor.png" alt="" style="min-width: 33px; max-height:33px">
+                            <span class="fw-bold ms-1" style="font-size: 1.1em;">Valor:</span>
+                            <span class="ms-1" style="font-size: 1em;">
                                 <?php
                                 // array associativo para mapear os valores numéricos para os valores correspondentes
                                 $valores = array(
@@ -130,32 +130,31 @@ require_once '../../dao/InteresseEventoDao.php';
                         </div>
                     </div>
                     
-                    <div class="row mt-2 g-2">
-                        <div class="col-md-12 d-flex centerInfo">
-                            <img src="../../img/Usuario/icon-local.png " alt="" style="width: 30px; height:35px">
-                            <span class="fw-bold ms-2" style="font-size: 1.2em;">Local:</span>
-                            <span class="ms-1" style="font-size: 1.2em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
+                        <div class="col-md-auto mt-3 d-flex centerInfo">
+                            <img src="../../img/Usuario/icon-local.png " alt="" style="min-width: 34px; height:32px">
+                            <span class="fw-bold ms-1" style="font-size: 1.1em;">Local:</span>
+                            <span class="ms-3 mb-auto" style="font-size: 1em;"><?= $evento['enderecoEvento']; ?>, <?= $evento['numeroEvento']; ?>, <?= $evento['complementoEvento']; ?> <?= $evento['bairroEvento']; ?> <?= $evento['cepEvento']; ?> <?= $evento['cidadeEvento']; ?> <?= $evento['ufEvento']; ?></span>
                         </div>
-                    </div>
-                    <div class="row mt-2 g-3" >
-                        <div class="col-md-5 d-flex" style="height: 40px;">
+
+                    <div class="row d-flex justify-content-between mt-1 g-3" >
+                        <div class="col-md-auto col-6  d-flex centerInfo" >
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
-                                <span class="fw-bold mb-auto" style="font-size: 1.2em;">Data começo:</span>
+                                <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data começo:</span>
                                 <span class="text-center">???</span>
                             </div>
                         </div>
-                        <div class="col-md-4 d-flex" style="height: 40px;">
+                        <div class="col-md-auto col-6 d-flex centerInfo" >
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
-                                <span class="fw-bold mb-auto" style="font-size: 1.2em;">Data Fim:</span>
+                                <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data Fim:</span>
                                 <span class="text-center">???</span>
                             </div>
                         </div>
-                            <div class="col-md-3 d-flex mb-5 centerInfo">
+                            <div class="col-md-auto d-flex centerInfo">
                                     <img src="../../img/Usuario/icon-horario.png" alt="" style="width: 35px; height:35px">
-                                    <div class="d-flex flex-column ms-1">
-                                        <span class="fw-bold mb-auto" style="font-size: 1.2em;">Turnos:</span>
+                                    <div class="d-flex flex-column ms-2">
+                                        <span class="fw-bold mb-auto" style="font-size: 1.1em;">Turnos:</span>
                                         <span class="text-center">
                                     
                                         <?php
@@ -175,13 +174,11 @@ require_once '../../dao/InteresseEventoDao.php';
                                             echo "Turno não especificado";
                                         }
                                         ?>
-                                    </span>
+                                        </span>
                                     </div>
                                 </div>
                     </div>
                         
-                    
-                    
                 </div>
             </div>
             <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column">
@@ -225,7 +222,8 @@ require_once '../../dao/InteresseEventoDao.php';
                 </div>
                 <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
             </div>
-
+        </div>
+    </div>
             <script>
                 // Adicione um evento de clique ao botão
                 document.getElementById('interestButton').addEventListener('click', function(event) {
@@ -258,6 +256,22 @@ require_once '../../dao/InteresseEventoDao.php';
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
             </script>
             <script type="text/javascript" src="../../js/modal.js"></script>
+            <script>  
+
+let nav = document.getElementById("nav")
+var i = 0
+function toggleNav(){
+    if (i == 0) {
+        nav.classList.add("navbarActive-on");
+        nav.classList.remove("navbarActive-off");
+        i = 1
+    }else {
+        nav.classList.add("navbarActive-off");
+        nav.classList.remove("navbarActive-on");
+        i = 0
+    }
+}
+</script>
 </body>
 
 </html>
