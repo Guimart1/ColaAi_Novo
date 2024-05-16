@@ -203,6 +203,21 @@
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+        <script>  
+        let nav = document.getElementById("nav")
+        var i = 0
+        function toggleNav(){
+            if (i == 0) {
+                nav.classList.add("navbarActive-on");
+                nav.classList.remove("navbarActive-off");
+                i = 1
+            }else {
+                nav.classList.add("navbarActive-off");
+                nav.classList.remove("navbarActive-on");
+                i = 0
+            }
+        }
+        </script>
     <script>
         let filtro = document.getElementById("filtro")
         function Abrir() {

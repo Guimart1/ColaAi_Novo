@@ -98,14 +98,6 @@ $user = new UserDao();
                     </ul>
 
                 </div>
-                <div class="d-flex align-items-center justify-content-center" style="height:auto; ">
-                    <div style="width: 40px; height: 40px; margin-bottom: 100px; margin-right: 25px">
-                        <ul class="m-0 p-0" onclick="modalBannerPerfil(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
-                            <li><img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
@@ -137,14 +129,14 @@ $user = new UserDao();
                         <ul class="glide__slides">
                             <?php foreach ($eventosInteresse as $interesse) : ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative">
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;">
                                         <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
                                             <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
                                         </div>
                                         <!-- Aqui você pode exibir os detalhes do evento -->
-                                        <img src="../../img/Organizacao/<?= $interesse['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%;">
+                                        <img src="../../img/Organizacao/<?= $interesse['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height:100%; object-fit:cover">
                                         <div class="descMini p-2 ps-4">
-                                            <h3 class="fs-5"><?= $interesse['nomeEvento']; ?></h3>
+                                            <h3 class="fs-5 tituloEvento"><?= $interesse['nomeEvento']; ?></h3>
                                             <p><?= $interesse['descEvento']; ?></p>
                                         </div>
                                     </div>
