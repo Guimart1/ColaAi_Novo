@@ -141,14 +141,14 @@ require_once '../../dao/InteresseEventoDao.php';
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
                                 <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data começo:</span>
-                                <span class="text-center">???</span>
+                                <span class="text-center"><?= $evento['dataEvento']; ?></span>
                             </div>
                         </div>
                         <div class="col-md-auto col-6 d-flex centerInfo" >
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
                                 <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data Fim:</span>
-                                <span class="text-center">???</span>
+                                <span class="text-center"><?= $evento['dataFimEvento']; ?></span>
                             </div>
                         </div>
                             <div class="col-md-auto d-flex centerInfo">
@@ -162,7 +162,8 @@ require_once '../../dao/InteresseEventoDao.php';
                                         $turnos = array(
                                             '1' => 'Manhã',
                                             '2' => 'Tarde',
-                                            '3' => 'Noite'
+                                            '3' => 'Noite',
+                                            '4' => 'Dia Todo'
                                         );
 
                                         // Verifique se o turno do evento está definido e não é vazio
