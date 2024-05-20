@@ -26,6 +26,7 @@ switch ($_POST["acao"]) {
         $evento->setCidade($_POST['cidadeEvento']);
         $evento->setUf($_POST['ufEvento']);
         $evento->setData($_POST['dataEvento']);
+        $evento->setDataFim($_POST['dataFimEvento']);
         $evento->setFaixaEtaria($_POST['faixaEtariaEvento']);
         $evento->setPeriodoEvento($_POST['periodoEvento']);
         $evento->setValor($_POST['valorEvento']);
@@ -60,6 +61,7 @@ switch ($_POST["acao"]) {
           $evento->setCidade($_POST['cidadeEvento']);
           $evento->setUf($_POST['ufEvento']);
           $evento->setData($_POST['dataEvento']);
+          $evento->setDataFim($_POST['dataFimEvento']);
           $evento->setFaixaEtaria($_POST['faixaEtariaEvento']);
           $evento->setPeriodoEvento($_POST['periodoEvento']);
           $evento->setValor($_POST['valorEvento']);
