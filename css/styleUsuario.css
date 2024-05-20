@@ -376,6 +376,25 @@ input[type="file"] {
     border-radius: 20px;      
     border: 3px solid #FABDC1; 
 }
+
+#modalBannerPerfil .modal-body{
+    overflow-y: scroll;
+    height: 500px;
+}
+#modalBannerPerfil .modal-body::-webkit-scrollbar {
+    width: 6px;         
+    height: 20px;    
+    transform: translateX(40px);
+}
+#modalBannerPerfil .modal-body::-webkit-scrollbar-track {
+    background-color:#FFFBE7;     
+}
+#modalBannerPerfil .modal-body::-webkit-scrollbar-thumb {
+    background-color:#FABDC1; 
+    border-radius: 20px;      
+    border: 3px solid #FABDC1; 
+}
+
 .imagemEvento {
     width: 500px;
     height: 300px;

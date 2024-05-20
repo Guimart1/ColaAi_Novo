@@ -10,7 +10,7 @@ $user = new UserDao();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Cola Aí</title>
+    <title>Perfil de Usuário - Cola Aí</title>
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
@@ -63,9 +63,9 @@ $user = new UserDao();
     <!-- O banner está em background-image -->
     <!-- Os usuários deverão colocar um banner com proporções específicas -->
     <!-- Ao juntar com o banco, tornar background-position como center -->
-    <div class="row d-flex align-items-end justify-content-center" style="height:44vh; margin-bottom:225px; position: relative;">
+    <div class="row d-flex align-items-center justify-content-center" style="height:44vh; margin-bottom:225px; position: relative;">
         <img src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>" class="img-fluid" alt="Alterar imagem" style="height: 100%; width: 100%; position: absolute; object-fit: cover;">
-        <div class="w-100 d-flex align-items-end justify-content-center" style="z-index: 1; margin-top: 33vh;">
+        <div class="w-100 d-flex align-items-center justify-content-end" style="z-index: 1; margin-top: 33vh;">
             <div class="w-100 d-flex align-items-center justify-content-start" style="height:auto;">
                 <div class="d-flex align-items-end justify-content-start" style="width: 200px; height: 200px; margin-left: 5vw; position:relative;">
                     <div class="d-flex align-items-end justify-content-end">
@@ -78,7 +78,7 @@ $user = new UserDao();
                     </div>
                 </div>
                 <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 100px">
-                    <ul class="m-0 p-0" onclick="modalDadosPessoais(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
+                    <ul class="m-0 p-0" style="list-style: none; font-weight: bold;">
                         <li>
                             <h2 style="font-weight: bold; color: #FFD932">
                                 <?php
@@ -88,7 +88,8 @@ $user = new UserDao();
                                 } else {
                                     echo "Nome de Usuário";
                                 }
-                                ?></h2>
+                                ?>
+                            </h2>
                         </li>
                     </ul>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
@@ -98,9 +99,13 @@ $user = new UserDao();
                     </ul>
 
                 </div>
-
+            </div>
+            <div class="d-flex align-items-center justify-content-center" style="width: 30px; height: 30px; position:absolute;  margin-right: 20px; margin-bottom: 100px;">
+                <ul class="m-0 p-0" onclick="modalBannerPerfil(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
+                    <li><img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem" style="height: auto; width: auto;"></li>
+                </ul>
+            </div>
         </div>
-
     </div>
 
     <div class="container mt-4" style="width: 80%;">
@@ -194,7 +199,7 @@ $user = new UserDao();
     </div>
     <div class="modal fade" id="modalBannerPerfil" role="dialog"><!--modal foto BANNER-->
         <div class=" modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+            <div class="modal-content rounded rounded-5 pb-4 overflow-auto" style="background-color: #FFFBE7; height: 550px">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
                     <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Adicione um banner ao perfil</h1>
                     <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -211,15 +216,37 @@ $user = new UserDao();
                             <label for="banner" class="form-label m-1">Carregar Imagem</label>
                             <input type="file" id="banner" name="banner" accept="image/*" class="form-control mt-1 mb-4">
                         </div>
-                        <div class="btnModal w-100 mt-4 d-flex">
-                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
-                        </div>
+                        <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                        <h1 class="modal-title fs-4 ps-1" id="exampleModalLabel">Dados Pessoais</h1>
+                    </div>
+                    <div class="p-1 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                        <p>O Cola Aí utiliza esses dados para manter sua segurança e elegibilidade de perfil único.</p>
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                            <h2 class="fs-5 mt-3">Nome</h2>
+                            <div class="inputContato">
+                                <input type="text" class="input-group mt-1" name="nomeUsuario" placeholder="Nome do usuário">
+                            </div>
+                            <h2 class="fs-5 mt-3">E-mail</h2>
+                            <div class="inputContato">
+                                <input type="text" class="input-group mt-1" name="emailUsuario" placeholder="E-mail do usuário">
+                            </div>
+                            <h2 class="fs-5 mt-3">Senha</h2>
+                            <div class="inputContato d-flex">
+                                <input type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4" style="font-weight: 600; color: #a6a6a6">
+                                <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
+                            </div>
+                            <div class="btnModal w-100 mt-4 d-flex">
+                                <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
+                            </div>
                     </form>
+                    </div>
                 </div>
+
+                
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalDadosPessoais" role="dialog">
+    <!--<div class="modal fade" id="modalDadosPessoais" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
@@ -250,7 +277,7 @@ $user = new UserDao();
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="modal fade" id="modalSeguindo" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #F4FFEB;">

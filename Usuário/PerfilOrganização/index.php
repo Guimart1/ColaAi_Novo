@@ -1,8 +1,8 @@
 <?php
-require_once '../../dao/UserDao.php';
+require_once '../../dao/OrganizacaoDao.php';
+require_once '../../dao/EventoDao.php';
 
-
-$user = new UserDao();
+$organizacao = new OrganizacaoDao();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,9 +36,45 @@ $user = new UserDao();
     //o usuário está autenticado
     $authUser = $_SESSION['user'];
 
-    $idUsuario = $authUser['idUsuario']; // Supondo que o ID do usuário está armazenado na sessão
+    // Verifique se o parâmetro id está definido na URL
+    if (isset($_GET['id'])) {
+        // Obtém o id do evento da URL
+        $idOrganizacao = $_GET['id'];
+        
+        // Busca os detalhes do evento com base no id do evento
+        $organizacao = OrganizacaoDao::selectById($idOrganizacao);
+        $eventos = EventoDao::selectByOrganizacaoIdActive($idOrganizacao);
 
+        // Verifique se o usuário já tem uma foto de perfil
+        $imagemPerfil = ''; // Defina a variável como vazia inicialmente
+        //$imagemBanner = ''; // Defina a variável como vazia inicialmente
+        $nomeOrg = '';
+        
 
+        if ($organizacao && isset($organizacao['imagemOrganizacaoEvento'])) {
+            // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
+            $imagemPerfil = $organizacao['imagemOrganizacaoEvento'];
+        }
+
+        /*if ($dadosUser && isset($dadosUser['imagemBannerUsuario'])) {
+            // Se o usuário tiver uma imagem de banner, atribua à variável $imagemBanner
+            $imagemBanner = $dadosUser['imagemBannerUsuario'];
+        }*/
+
+        // Verifica se o evento foi encontrado
+        if ($organizacao) {
+
+            //var_dump($eventos)
+    ?>
+    <?php
+        } else {
+            // Se o evento não foi encontrado, exibe uma mensagem de erro
+            echo "<p>Organização não encontradq.</p>";
+        }
+    } else {
+        // Se o parâmetro idOrganizacaoEvento não estiver definido na URL, exibe uma mensagem de erro
+        echo "<p>Parâmetro idOrganizacaoEvento não especificado na URL.</p>";
+    }
     ?>
 
     <?php
@@ -54,13 +90,22 @@ $user = new UserDao();
             <div class="w-100 d-flex align-items-center justify-content-start" style="height:auto;">
                 <div class="d-flex align-items-end justify-content-start" style="width: 200px; height: 200px; margin-left: 5vw; position:relative;">
                     <div class="d-flex align-items-end justify-content-end">
-                        <img src="../../img/Usuario/icon-user.png" alt="imagem Perfil" style="border-radius: 100%; height: 200px; width: 200px;">
+                        <img src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" alt="imagem Perfil" style="border-radius: 100%; height: 200px; width: 200px;">
                     </div>
                 </div>
                 <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 100px">
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer;">
                         <li>
-                            <h2 style="font-weight: bold; color: #FFD932">Organização Eventos</h2>
+                            <h2 style="font-weight: bold; color: #FFD932">
+                            <?php
+                                // Exibir o nome do usuário se estiver autenticado
+                                if (isset($organizacao['nomeOrganizacaoEvento'])) {
+                                    echo $organizacao['nomeOrganizacaoEvento'];
+                                } else {
+                                    echo "Organização Eventos";
+                                }
+                                ?>
+                            </h2>
                             <a href="" style="font-weight: bold; color: #6F9BAB">Site organização</a>
                         </li>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
@@ -98,19 +143,33 @@ $user = new UserDao();
         }'>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
+                        <?php
+                // Array para armazenar os IDs dos eventos já adicionados
+                            $eventos_adicionados = [];
+                            
+
+                            foreach ($eventos as $evento) :
+                                // Verifica se o ID do evento já foi adicionado ao carrossel
+                                if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                                        
+                            ?>
                                 <li class="glide__slide">
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;">
-                                        <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                            <img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">
+                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
+                                                <p><?= $evento['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                        <!-- Aqui você pode exibir os detalhes do evento -->
-                                        <img src="../../img/Organizacao/eventoPadrao.png" alt="Imagem do Evento" style="width: 100%; height:100%; object-fit:cover">
-                                        <div class="descMini p-2 ps-4">
-                                            <h3 class="fs-5 tituloEvento">Nome do evento</h3>
-                                            <p>Descrição do evento.</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
+                            <?php
+                                    // Adiciona o ID do evento ao array de eventos adicionados
+                                    $eventos_adicionados[] = $evento['idEvento'];
+                                endif;
+                            endforeach;
+                            ?>
                         </ul>
                     </div>
                     <div class="glide__arrows" data-glide-el="controls">
