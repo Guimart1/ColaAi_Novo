@@ -1,6 +1,22 @@
 <?php
 require_once '../../dao/EventoDao.php';
 $evento = EventoDao::selectAllActive();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
+    // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+    $idEvento = $_POST['idEvento'];
+
+    // Obtém os dados filtrados da organização com base no valor do filtro
+    $eventoSolo = EventoDao::selectById($idEvento);
+
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $html_tbody = '';
+    $html_tbody .= $eventoSolo['nomeEvento'];
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $html_tbody;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -75,7 +91,7 @@ $evento = EventoDao::selectAllActive();
                                     <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalInfo(<?= $eventos['idEvento'] ?>,'modalInfo')">
+                                        <a class="dropdown-item" onclick="mm(<?=$eventos['idEvento']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -111,10 +127,10 @@ $evento = EventoDao::selectAllActive();
                             </div>
                             <div class="modal-body" style="color: #a6a6a6;">
                                 <form action="process.php" method="post">
-                                    <input type="hidden" class="form-control" id="" name="id" type="text">
+                                    <input type="text" class="form-control" id="idInfo" name="id" type="text">
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">Nome do Evento: </p>
-                                        <p class="ms-2 fs-5">aa</p>
+                                        <p class="ms-2 fs-5" id = "nome">aa</p>
                                     </div>
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">CEP: </p>
@@ -176,7 +192,7 @@ $evento = EventoDao::selectAllActive();
                         <div class="modal-content ">
                             <div class="modal-body" style="color: #a6a6a6;">
                                 <form action="process.php" method="post">
-                                    <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                    <input type="text" class="form-control" id="idDeletar" name="id" type="text">
                                     <h1 class="text-center fs-2 fw-bold">Excluir evento<br> da organização?</h1>
                                     <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">excluir</span>
                                         a ação não poderá ser desfeita, na qual fará o evento deixar de existir.</p>
@@ -210,6 +226,7 @@ $evento = EventoDao::selectAllActive();
                     <?= require '../Componentes/modal.php' ?>
                 </div>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
             </script>
             <script>
@@ -226,6 +243,30 @@ $evento = EventoDao::selectAllActive();
             </script>
             <script type="text/javascript" src="../../js/personalizar.js"></script>
             <script type="text/javascript" src="../../js/modal.js"></script>
+            <script>
+
+                  function enviarIdEvento(idEvento) {
+                    // Faz a requisição AJAX
+                    $.ajax({
+                        url: '', // URL do seu script PHP
+                        method: 'POST',
+                        data: { idEvento: idEvento }, // Envia o ID do evento para o PHP
+                        success: function(data) {
+                            // Manipule a resposta do servidor, se necessário
+                            console.log(data);
+                            $('#nome').html(data); // Insere o conteúdo na tbody da tabela
+                        },
+                        error: function(error) {
+                            console.error('Erro:', error);
+                        }
+                    });
+                }
+
+                function mm(idEvento){
+                    enviarIdEvento(idEvento);
+                    modalInfo(idEvento, 'idInfo');
+                }
+            </script>
 </body>
 
 </html>
