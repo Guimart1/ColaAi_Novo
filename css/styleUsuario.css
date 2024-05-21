@@ -70,6 +70,10 @@ p {
     color: #6D9EAF;
     font-size: 14pt;
 }
+.button button:hover {
+    background-color: #ebddde;
+    color: #6DA2B1;
+}
 .perfilBox{
     height: 350px;
     width: 800px;
