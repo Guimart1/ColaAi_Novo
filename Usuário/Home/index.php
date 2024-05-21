@@ -36,26 +36,25 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
     $authUser = $_SESSION['user'];
     ?>
     <?php
-        require_once('../Componentes/headerLogado.php')
+    require_once('../Componentes/headerLogado.php')
     ?>
 
-
     <div class="container mt-4" style="width: 80%;">
-        <div class="glide mb-5" data-glide='{
-            
-            }'>
+        <div class="glide mb-5" data-glide='{}'>
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide">
                     <?php foreach ($eventosMaisInteresse as $evento) : ?>
-                        <div class="imageBox position-relative" style="height: 300px;">
-                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%; object-fit:cover">
-                            <div class="descCard p-2 ps-4">
-                                <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
-                                <p><?= $evento['descEvento']; ?></p>
-                            </div>
-                        </div>
-                    </li>
+                        <li class="glide__slide">
+                            <a href="../Evento/evento.php?id=<?php echo $evento['idEvento']; ?>" style="text-decoration: none; color: inherit;">
+                                <div class="imageBox position-relative" style="height: 300px;">
+                                    <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="descCard p-2 ps-4">
+                                        <h3 class="fs-4"><?= $evento['nomeEvento']; ?></h3>
+                                        <p><?= $evento['descEvento']; ?></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -72,6 +71,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 <button class="glide__bullet" data-glide-dir="=4"></button>
             </div>
         </div>
+
 
         <h2 class="fs-3">Próximos de você</h2>
         <div class="glide mb-5 carrossel" data-glide='{
@@ -166,8 +166,27 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
         </div>
-        <h2 id="carrossel-teatros" class="fs-3">Teatros</h2>
-        <div class="glide mb-5 carrossel" data-glide='{
+        <div class="container">
+            <?php
+            // Defina as categorias e seus IDs correspondentes
+            $categorias = [
+                'Teatros' => '3',
+                'Parques' => '1',
+                'Museus' => '2',
+                'Centro Culturais' => '4'
+            ];
+
+            foreach ($categorias as $nomeCategoria => $espacoEvento) :
+                // Filtra os eventos pela categoria atual
+                $eventos_filtrados = array_filter($eventos, function ($evento) use ($espacoEvento) {
+                    return $evento['espacoEvento'] === $espacoEvento;
+                });
+
+                // Verifica se há eventos disponíveis para essa categoria
+                if (!empty($eventos_filtrados)) :
+            ?>
+                    <h2 id="carrossel-<?= strtolower(str_replace(' ', '', $nomeCategoria)); ?>" class="fs-3"><?= $nomeCategoria; ?></h2>
+                    <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
         "perMove": 4,
@@ -181,234 +200,62 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             "1370": {"perView": 3}
         }
         }'>
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <?php
-                    // Array para armazenar os IDs dos eventos já adicionados
-                    $eventos_adicionados = [];
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                <?php
+                                // Array para armazenar os IDs dos eventos já adicionados
+                                $eventos_adicionados = [];
 
-                    foreach ($eventos as $evento) :
-                        if ($evento['espacoEvento'] === '3') :
-                            // Verifica se o ID do evento já foi adicionado ao carrossel
-                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
-                    ?>
-                                <li class="glide__slide">
-                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
-                                                <p><?= $evento['descEvento']; ?></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                    <?php
-                                // Adiciona o ID do evento ao array de eventos adicionados
-                                $eventos_adicionados[] = $evento['idEvento'];
-                            endif;
-                        endif;
-                    endforeach;
-                    ?>
-                </ul>
-            </div>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
-            </div>
+                                foreach ($eventos_filtrados as $evento) :
+                                    // Verifica se o ID do evento já foi adicionado ao carrossel
+                                    if (!in_array($evento['idEvento'], $eventos_adicionados)) :
+                                ?>
+                                        <li class="glide__slide">
+                                            <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                                <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                                    <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                                    <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                                        <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
+                                                        <p><?= $evento['descEvento']; ?></p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                <?php
+                                        // Adiciona o ID do evento ao array de eventos adicionados
+                                        $eventos_adicionados[] = $evento['idEvento'];
+                                    endif;
+                                endforeach;
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="glide__arrows" data-glide-el="controls">
+                            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
+                            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
+                        </div>
 
-
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <button class="glide__bullet" data-glide-dir="=0"></button>
+                            <button class="glide__bullet" data-glide-dir="=1"></button>
+                            <button class="glide__bullet" data-glide-dir="=2"></button>
+                        </div>
+                    </div>
+            <?php
+                endif;
+            endforeach;
+            ?>
         </div>
-
-        <h2 id="carrossel-parques" class="fs-3">Parques</h2>
-        <div class="glide mb-5 carrossel" data-glide='{
-    "loop": true,
-    "perView": 4,
-    "perMove": 4,
-    "perSwipe": 4,
-    "perTouch": 4,
-    "gap":20,
-    "type": "carousel",
-    "breakpoints": {
-        "600": {"perView": 1},
-        "800": {"perView": 2},
-        "1370": {"perView": 3}
-    }
-}'>
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <?php
-                    // Array para armazenar os IDs dos eventos já adicionados
-                    $eventos_adicionados = [];
-
-                    foreach ($eventos as $evento) :
-                        if ($evento['espacoEvento'] === '1') :
-                            // Verifica se o ID do evento já foi adicionado ao carrossel
-                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
-                    ?>
-                                <li class="glide__slide">
-                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
-                                                <p><?= $evento['descEvento']; ?></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                    <?php
-                                // Adiciona o ID do evento ao array de eventos adicionados
-                                $eventos_adicionados[] = $evento['idEvento'];
-                            endif;
-                        endif;
-                    endforeach;
-                    ?>
-                </ul>
-            </div>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
-            </div>
-
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
-        </div>
-
-        <h2 id="carrossel-museus" class="fs-3">Museus</h2>
-        <div class="glide mb-5 carrossel" data-glide='{
-    "loop": true,
-    "perView": 4,
-    "perMove": 4,
-    "perSwipe": 4,
-    "perTouch": 4,
-    "gap":20,
-    "type": "carousel",
-    "breakpoints": {
-        "600": {"perView": 1},
-        "800": {"perView": 2},
-        "1370": {"perView": 3}
-    }
-}'>
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <?php
-                    // Array para armazenar os IDs dos eventos já adicionados
-                    $eventos_adicionados = [];
-
-                    foreach ($eventos as $evento) :
-                        if ($evento['espacoEvento'] === '2') :
-                            // Verifica se o ID do evento já foi adicionado ao carrossel
-                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
-                    ?>
-                                <li class="glide__slide">
-                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
-                                                <p><?= $evento['descEvento']; ?></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                    <?php
-                                // Adiciona o ID do evento ao array de eventos adicionados
-                                $eventos_adicionados[] = $evento['idEvento'];
-                            endif;
-                        endif;
-                    endforeach;
-                    ?>
-                </ul>
-            </div>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
-            </div>
-
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
-        </div>
-
-        <h2 id="carrossel-centroCulturais" class="fs-3">Centro Culturais</h2>
-        <div class="glide mb-5 carrossel" data-glide='{
-    "loop": true,
-    "perView": 4,
-    "perMove": 4,
-    "perSwipe": 4,
-    "perTouch": 4,
-    "gap":20,
-    "type": "carousel",     
-    "breakpoints": {
-        "600": {"perView": 1},
-        "800": {"perView": 2},
-        "1370": {"perView": 3}
-    }
-}'>
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    <?php
-                    // Array para armazenar os IDs dos eventos já adicionados
-                    $eventos_adicionados = [];
-
-                    foreach ($eventos as $evento) :
-                        if ($evento['espacoEvento'] === '4') :
-                            // Verifica se o ID do evento já foi adicionado ao carrossel
-                            if (!in_array($evento['idEvento'], $eventos_adicionados)) :
-                    ?>
-                                <li class="glide__slide">
-                                    <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                            <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
-                                                <p ><?= $evento['descEvento']; ?></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                    <?php
-                                // Adiciona o ID do evento ao array de eventos adicionados
-                                $eventos_adicionados[] = $evento['idEvento'];
-                            endif;
-                        endif;
-                    endforeach;
-                    ?>
-                </ul>
-            </div>
-            <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
-            </div>
-
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-            </div>
-        </div>  
     </div>
 
     <!--inicio footer-->
     <?php
-        require_once('../Componentes/footerLogado.php');
-        require_once('../Componentes/modalFeedback.php');
-        require_once('../Componentes/modalContato.php');
-        require_once('../Componentes/modalSobre.php');
+    require_once('../Componentes/footerLogado.php');
+    require_once('../Componentes/modalFeedback.php');
+    require_once('../Componentes/modalContato.php');
+    require_once('../Componentes/modalSobre.php');
     ?>
-    
-    
+
+
     <script type="text/javascript" src="../../js/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -433,16 +280,16 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             glide.mount();
         }
     </script>
-    <script>  
-
+    <script>
         let nav = document.getElementById("nav")
         var i = 0
-        function toggleNav(){
+
+        function toggleNav() {
             if (i == 0) {
                 nav.classList.add("navbarActive-on");
                 nav.classList.remove("navbarActive-off");
                 i = 1
-            }else {
+            } else {
                 nav.classList.add("navbarActive-off");
                 nav.classList.remove("navbarActive-on");
                 i = 0
