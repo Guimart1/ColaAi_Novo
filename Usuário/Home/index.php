@@ -173,7 +173,8 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 'Teatros' => '3',
                 'Parques' => '1',
                 'Museus' => '2',
-                'Centro Culturais' => '4'
+                'Centro Culturais' => '4',
+                'Outros' => '5'
             ];
 
             foreach ($categorias as $nomeCategoria => $espacoEvento) :

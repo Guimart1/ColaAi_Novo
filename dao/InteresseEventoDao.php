@@ -187,6 +187,27 @@ class InteresseEventoDao {
         }
     }
    
+    public static function countAll() {
+        $conn = Conexao::conectar();
+        $query = "SELECT COUNT(*) AS total FROM tbinteresseevento";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public static function countByOrganization($idOrganizacao) {
+        $conn = Conexao::conectar();
+        $query = "SELECT COUNT(*) AS total 
+                  FROM tbinteresseevento ie
+                  JOIN tbevento e ON ie.idEvento = e.idEvento
+                  WHERE e.idOrganizacaoEvento = :idOrganizacaoEvento";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacao, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    
     
 }
 ?>
