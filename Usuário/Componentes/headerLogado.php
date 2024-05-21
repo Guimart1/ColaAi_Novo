@@ -1,16 +1,12 @@
 
 <nav>
     <div class="navigation">
-        <div class="imgHeader">
+        <div class="imgHeader ms-5">
             <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2 logoHeader">
         </div>
-        <a href="../Home/index.php">Página Inicial</a>
-        <a href="#carrossel-teatros">Teatros</a>
-        <a href="#carrossel-parques">Parques</a>
-        <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
-        <div class="iconBox">
-            <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
+        <a href="../Home/index.php" class=" me-auto ms-5 fs-5">Página Inicial</a>
+        <div class="iconBox me-5" style="width: 15%;">
+            <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 35px; height:35px;"></a>
             <img src="../../img/Usuario/icon-notificacao.png" alt="">
             <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
         </div>
@@ -27,10 +23,6 @@
 <div class="navbarActive" id="nav">
     <div class="linkActive p-3">
         <a href="../Home/index.php">Página Inicial</a>
-        <a href="#carrossel-teatros">Teatros</a>
-        <a href="#carrossel-parques">Parques</a>
-        <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
     </div>
     <div class="iconBoxActive">
         <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
