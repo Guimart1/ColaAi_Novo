@@ -21,7 +21,7 @@ $user = new UserDao();
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
 
-<body>
+<body class="fundo-bolinha2">
     <?php
     // Iniciar a sessão
     session_start();

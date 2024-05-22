@@ -21,7 +21,7 @@ $organizacao = new OrganizacaoDao();
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
 
-<body>
+<body class="fundo-bolinha2">
     <?php
     // Iniciar a sessão
     session_start();
@@ -93,19 +93,39 @@ $organizacao = new OrganizacaoDao();
                         <img src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" alt="imagem Perfil" style="border-radius: 100%; height: 200px; width: 200px;">
                     </div>
                 </div>
-                <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 100px">
+                <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 125px;">
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer;">
                         <li>
-                            <h2 style="font-weight: bold; color: #FFD932">
-                            <?php
-                                // Exibir o nome do usuário se estiver autenticado
-                                if (isset($organizacao['nomeOrganizacaoEvento'])) {
-                                    echo $organizacao['nomeOrganizacaoEvento'];
-                                } else {
-                                    echo "Organização Eventos";
-                                }
-                                ?>
-                            </h2>
+                            <div class="d-flex flex-table">
+                                <h2 style="font-weight: bold; color: #FFD932">
+                                <?php
+                                    // Exibir o nome do usuário se estiver autenticado
+                                    if (isset($organizacao['nomeOrganizacaoEvento'])) {
+                                        echo $organizacao['nomeOrganizacaoEvento'];
+                                    } else {
+                                        echo "Organização Eventos";
+                                    }
+                                    ?>
+                                </h2>
+                                <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px;">
+                                    <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
+                                        Seguir
+                                    </h4>
+                                </div>
+                                <!--<//?php if () : ?>
+                                    <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px;">
+                                        <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
+                                            Seguir
+                                        </h4>
+                                    </div>
+                                <//?php else : ?>
+                                    <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#6D9EAF; margin-left: 25px; border-radius: 25px;">
+                                        <h4 class="text-center" style="font-weight:normal; color:#FFD932">
+                                            Seguindo
+                                        </h4>
+                                    </div>
+                                <//?php endif; ?>-->
+                            </div>
                             <a href="" style="font-weight: bold; color: #6F9BAB">Site organização</a>
                         </li>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
