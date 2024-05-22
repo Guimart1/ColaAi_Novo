@@ -10,11 +10,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
     $eventoSolo = EventoDao::selectById($idEvento);
 
     // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
-    $html_tbody = '';
-    $html_tbody .= $eventoSolo['nomeEvento'];
+    $html_info = '';
+    $html_info .= "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Evento: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['nomeEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>CEP: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['cepEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+    $html_info .= "<div class='d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Endereço: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['enderecoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='me-auto ms-auto d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Nº: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['numeroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Complemento: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['complementoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['bairroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+    $html_info .= "<div class='d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Cidade: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['cidadeEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='me-auto ms-auto d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>UF: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['ufEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Faixa etária: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['faixaEtariaEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Turno: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['periodoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['bairroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+    $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
+    $html_info .= "<p>" . $eventoSolo['descEvento'] . "</p>";
+    $html_info .= "</div>";
 
     // Retorna o HTML do <tbody> com os dados filtrados
-    echo $html_tbody;
+    echo $html_info;
     exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
 }
 ?>
@@ -91,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                                     <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="mm(<?=$eventos['idEvento']?>)">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$eventos['idEvento']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -126,11 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="color: #a6a6a6;">
-                                <form action="process.php" method="post">
+                                <form action="process.php" method="post" id = "informacoes">
                                     <input type="text" class="form-control" id="idInfo" name="id" type="text">
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">Nome do Evento: </p>
-                                        <p class="ms-2 fs-5" id = "nome">aa</p>
+                                        <p class="ms-2 fs-5">aa</p>
                                     </div>
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">CEP: </p>
@@ -243,26 +295,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
             </script>
             <script type="text/javascript" src="../../js/personalizar.js"></script>
             <script type="text/javascript" src="../../js/modal.js"></script>
+            <script type="text/javascript" src="../../js/ajax.js"></script>
             <script>
-
-                  function enviarIdEvento(idEvento) {
-                    // Faz a requisição AJAX
-                    $.ajax({
-                        url: '', // URL do seu script PHP
-                        method: 'POST',
-                        data: { idEvento: idEvento }, // Envia o ID do evento para o PHP
-                        success: function(data) {
-                            // Manipule a resposta do servidor, se necessário
-                            console.log(data);
-                            $('#nome').html(data); // Insere o conteúdo na tbody da tabela
-                        },
-                        error: function(error) {
-                            console.error('Erro:', error);
-                        }
-                    });
-                }
-
-                function mm(idEvento){
+                function mostrarInfo(idEvento){
                     enviarIdEvento(idEvento);
                     modalInfo(idEvento, 'idInfo');
                 }
