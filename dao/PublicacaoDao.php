@@ -1,8 +1,7 @@
 <?php
 require_once(__DIR__ . '../../model/Conexao.php');
 
-class PublicacaoDao
-{
+class PublicacaoDao {
     public static function insert($publicacao)
     {
         $titulo = $publicacao->getTitulo();
@@ -13,8 +12,7 @@ class PublicacaoDao
 
         $conn = Conexao::conectar();
 
-        $stmt = $conn->prepare("INSERT INTO tbpublicacao (tituloPublicacao, descPublicacao, linkOrganizacaoEvento, idOrganizacaoEvento, idSituacaoPublicacao)  
-                                VALUES (:titulo, :descricao, :link, :idOrganizacaoEvento, :idSituacao)");
+        $stmt = $conn->prepare("INSERT INTO tbpublicacao (tituloPublicacao, descPublicacao, linkOrganizacaoEvento, idOrganizacaoEvento, idSituacaoPublicacao) VALUES (:titulo, :descricao, :link, :idOrganizacaoEvento, :idSituacao)");
 
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':descricao', $descricao);
@@ -130,3 +128,5 @@ class PublicacaoDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+    
+?>

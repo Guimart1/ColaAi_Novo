@@ -12,19 +12,19 @@
                     <div class="inputContato">
                         <input type="text" class="input-group mt-1 form-control" name="tituloContatoUsuario" placeholder="Título do contato" required>
                     </div>
-                    <h2 class="fs-5 mt-3">Comentário</h2>
+                    <h2 class="fs-5 mt-3">Motivo de Contato</h2>
                     <select class="selectModal rounded rounded-4 form-select" name="comentario" aria-label="Default select example" required>
                         <option value="1">Suporte Técnico</option>
                         <option value="2">Denúncia</option>
                         <option value="3">Outros</option>
                     </select>
-                    <h2 class="fs-5 mt-3">Categoria da denúncia</h2>
+                    <!-- <h2 class="fs-5 mt-3">Categoria da denúncia</h2>
                     <select class="selectModal rounded rounded-4 form-select" name="categoriaContatoUsuario" aria-label="Default select example" required>
                         <option value="1">Organização</option>
                         <option value="2">Publicação</option>
                         <option value="3">Eventos</option>
                         <option value="4">Outros</option>
-                    </select>
+                    </select> -->
                     <h2 class="fs-5 mt-3">Descrição</h2>
                     <div class="inputContato">
                         <textarea class="form-control rounded rounded-4" name="descContatoUsuario" cols="30" rows="10" style="max-height: 300px;" placeholder="Descreva o motivo do seu contato." required></textarea>
