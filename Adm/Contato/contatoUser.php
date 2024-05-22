@@ -1,6 +1,6 @@
 <?php
 require_once '../../dao/ContatoUsuarioDao.php';
-$contatoUser = ContatoUsuarioDao::selectAll();
+$contatoUser = ContatoUsuarioDao::selectAllInner();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

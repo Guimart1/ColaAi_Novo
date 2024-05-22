@@ -35,6 +35,15 @@ class ContatoUsuarioDao{
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public static function selectAllInner(){
+        $conexao = Conexao::conectar();
+        $query = "SELECT c.*, o.nomeUsuario, o.emailUsuario 
+                  FROM tbcontatousuario c
+                  INNER JOIN tbusuario o ON c.idUsuario = o.idUsuario";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     
     public static function selectById($id){
         $conexao = Conexao::conectar();

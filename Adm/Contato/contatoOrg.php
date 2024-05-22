@@ -83,9 +83,9 @@ $contatoOrg = ContatoOrgEventoDao::selectAll();
                             </tr>
                             <?php foreach ($contatoOrg as $contatoOrgs) : ?>
                                 <tr class="mt-1">
-                                    <td class="fs-5 pt-3"><?= $contatoOrg['idContatoOrganizacaoEvento']; ?></td>
-                                    <td class="fs-5 pt-3"><?= $contatoOrg['nomeOrganizacaoEvento']; ?></td>
-                                    <td class="fs-5 pt-3"><?= $contatoOrg['emailOrganizacaoEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrgs['idContatoOrganizacaoEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrgs['nomeOrganizacaoEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $contatoOrgs['emailOrganizacaoEvento']; ?></td>
                                     <td class="text-center">
                                         <a class="dropdown-item" onclick="modalInfo(1,1)">
                                                 <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">

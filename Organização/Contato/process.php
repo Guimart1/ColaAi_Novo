@@ -6,7 +6,7 @@ require_once '../../model/Mensagem.php';
 $contato = new ContatoOrgEvento();
 $msg = new Mensagem();
 
-var_dump($_POST);
+//var_dump($_POST);
 switch ($_POST["acao"]) {
   case 'DELETE':
     try {
@@ -20,7 +20,7 @@ switch ($_POST["acao"]) {
     $contato->setTitulo($_POST["tituloContatoOrganizacaoEvento"]);
     $contato->setDesc($_POST["descContatoOrganizacaoEvento"]);
     $contato->setIdOrganizacaoEvento($_POST["idOrganizacaoEvento"]);
-    $contato->setIdCategoriaContatoOrganizacaoEvento($_POST["idCategoriaContatoOrganizacaoEvento "]);
+    $contato->setIdCategoriaContatoOrganizacaoEvento($_POST["idCategoriaContatoOrganizacaoEvento"]);
 
     try {
     $contatoDao = ContatoOrgEventoDao::insert($contato);
@@ -35,7 +35,8 @@ switch ($_POST["acao"]) {
       // Adiciona uma mensagem para debug
       $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
 
-      header("Location: index.php");
+      // header("Location: index.php");
+      echo "falhou";
     }
     break;
   case 'ATUALIZAR':

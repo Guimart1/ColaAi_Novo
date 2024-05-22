@@ -11,7 +11,7 @@ class ContatoOrgEventoDao {
     
         $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
-        $stmt = $conn->prepare("INSERT INTO tbcontatoorganizacaoevento (tituloContatoOrgEvento, descContatoOrgEvento, idOrganizacaoEvento, idCategoriaContatoOrganizacaoEvento) 
+        $stmt = $conn->prepare("INSERT INTO tbcontatoorganizacaoevento (tituloContatoOrganizacaoEvento, descContatoOrganizacaoEvento, idOrganizacaoEvento, idCategoriaContatoOrganizacaoEvento) 
                         VALUES (:titulo, :descricao, :idOrganizacaoEvento, :idCategoriaContatoOrganizacaoEvento)");
     
         $stmt->bindParam(':titulo', $titulo);        
@@ -60,8 +60,8 @@ class ContatoOrgEventoDao {
         $conexao = Conexao::conectar();
     
         $query = "UPDATE tbcontatoorganizacaoevento SET 
-            tituloContatoOrgEvento = :titulo,
-            descContatoOrgEvento = :descricao,
+            tituloContatoOrganizacaoEvento = :titulo,
+            descContatoOrganizacaoEvento = :descricao,
             idOrganizacaoEvento = :idOrganizacaoEvento,
             idCategoriaContatoOrganizacaoEvento = :idCategoriaContatoOrganizacaoEvento
             WHERE idContatoOrgEvento = :id";
