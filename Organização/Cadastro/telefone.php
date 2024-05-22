@@ -1,41 +1,12 @@
 <?php
-session_start();
+    session_start();
 
-// Conectar ao banco de dados
-$servername = "localhost"; 
-$username = "root";
-$password = ""; 
-$dbname = "bdcolaai"; 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['telefoneOrganizacaoEvento'])) {
+    $_SESSION['telefoneOrganizacaoEvento'] = trim($_POST['telefoneOrganizacaoEvento']);
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['telefoneOrganizacaoEvento'])) {
-    $telefone = trim($_POST['telefoneOrganizacaoEvento']);
-
-    // Verifica se o telefone já está cadastrado no banco de dados
-    $stmt = $conn->prepare("SELECT * FROM tborganizacaoevento WHERE telOrganizacaoEvento = ?");
-    $stmt->bind_param("s", $telefone);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        echo "<script>alert('Telefone já registrado');</script>";
-    } else {
-        // Se o telefone não estiver registrado, salva na sessão e redireciona
-        $_SESSION['telefoneOrganizacaoEvento'] = $telefone;
-        header("Location: senha.php");
-        exit;
+    header("Location:senha.php");
+    exit;
     }
-
-    $stmt->close();
-}
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -62,11 +33,11 @@ $conn->close();
                         <p class="fs-5 ps-4 pe-4">Recomendamos que disponha um telefone usual.</p>
                     </div>
                     <div class="input-box mt-5 mb-5 ps-md-4 pe-md-4">
-                        <input type="text" class="input-group " placeholder="(00)00000-0000" name="telefoneOrganizacaoEvento" data-mask="(00)00000-0000">
+                        <input type="text" class="input-group " placeholder="(00)00000-0000" name = "telefoneOrganizacaoEvento" data-mask = "(00)00000-0000">
                     </div>
                     <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4"> 
                     <a href="codigoAcesso.php" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Voltar</a>
-                    <div class="w-100 justify-content-end align-items-end d-flex" id="btn-box">
+                    <div class="w-100  justify-content-end align-items-end d-flex" id="btn-box">
                         <a href="senha.php"><button type="submit" class="border-0 rounded-3 fs-4">Prosseguir</button></a>
                     </div>
                 </form>

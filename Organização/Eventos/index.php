@@ -46,8 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
 
     // Obter o ID da organização logada
     $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
-    //o usuário está autenticado
-    $authUserOrg = $_SESSION['userOrg'];
+
     // Buscar apenas os eventos associados a essa organização
     $evento = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
 
@@ -92,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                                     <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="mm(<?= $eventos['idEvento'] ?>)">
+                                        <a class="dropdown-item" onclick="mm(<?=$eventos['idEvento']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -131,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                                     <input type="text" class="form-control" id="idInfo" name="id" type="text">
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">Nome do Evento: </p>
-                                        <p class="ms-2 fs-5" id="nome">aa</p>
+                                        <p class="ms-2 fs-5" id = "nome">aa</p>
                                     </div>
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">CEP: </p>
@@ -245,14 +244,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
             <script type="text/javascript" src="../../js/personalizar.js"></script>
             <script type="text/javascript" src="../../js/modal.js"></script>
             <script>
-                function enviarIdEvento(idEvento) {
+
+                  function enviarIdEvento(idEvento) {
                     // Faz a requisição AJAX
                     $.ajax({
                         url: '', // URL do seu script PHP
                         method: 'POST',
-                        data: {
-                            idEvento: idEvento
-                        }, // Envia o ID do evento para o PHP
+                        data: { idEvento: idEvento }, // Envia o ID do evento para o PHP
                         success: function(data) {
                             // Manipule a resposta do servidor, se necessário
                             console.log(data);
@@ -264,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                     });
                 }
 
-                function mm(idEvento) {
+                function mm(idEvento){
                     enviarIdEvento(idEvento);
                     modalInfo(idEvento, 'idInfo');
                 }

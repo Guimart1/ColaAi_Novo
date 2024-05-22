@@ -1,6 +1,7 @@
 <?php
 require_once '../../dao/OrganizacaoDao.php';
 require_once '../../dao/EventoDao.php';
+require_once '../../dao/SeguirOrganizacaoDao.php';
 
 $organizacao = new OrganizacaoDao();
 ?>
@@ -24,7 +25,7 @@ $organizacao = new OrganizacaoDao();
 <body class="fundo-bolinha2">
     <?php
     // Iniciar a sessão
-    session_start();
+    session_start(); 
 
     // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
     if (!isset($_SESSION['AutenticaoUser']) || $_SESSION['AutenticaoUser'] != 'SIM') {
@@ -44,6 +45,9 @@ $organizacao = new OrganizacaoDao();
         // Busca os detalhes do evento com base no id do evento
         $organizacao = OrganizacaoDao::selectById($idOrganizacao);
         $eventos = EventoDao::selectByOrganizacaoIdActive($idOrganizacao);
+
+        $idUsuario = $_SESSION['user']['idUsuario'];
+        $jaSegue = SeguirOrganizacaoDao::selectByUsuarioOrganizacao($idUsuario, $idOrganizacao);
 
         // Verifique se o usuário já tem uma foto de perfil
         $imagemPerfil = ''; // Defina a variável como vazia inicialmente
@@ -107,11 +111,43 @@ $organizacao = new OrganizacaoDao();
                                     }
                                     ?>
                                 </h2>
-                                <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px;">
-                                    <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
-                                        Seguir
-                                    </h4>
-                                </div>
+                                <?php
+                                    // Verificar se o usuário já registrou interesse
+                                    // Suponha que $jaRegistrado seja uma variável que indica se o usuário já registrou interesse no evento
+                                    if ($jaSegue) {
+                                        ?>
+                                        <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;">
+                                            <form method="post" action="./processSeguir.php">
+                                                <input type="hidden" name="idOrganizacaoEvento" value="<?= $idOrganizacao ?>">
+                                                <input type="hidden" name="idUsuario" value="<?= $idUsuario ?>">
+                                                <input type="hidden" name="acao" value="<?php echo $jaSegue ? 'DELETE' : 'SALVAR'; ?>">
+
+                                                <button type="submit" value="DELETE" name="acao" style="width: 150px; height: 40px; background-color:#6D9EAF; margin-left: 25px; border-radius: 25px; border-width:0px; padding:4px">
+                                                    <h4 class="text-center" style="font-weight:normal; color:#FFD932">
+                                                        Seguindo
+                                                    </h4>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;">
+                                            <form method="post" action="./processSeguir.php">
+                                                <input type="hidden" name="idOrganizacaoEvento" value="<?= $idOrganizacao ?>">
+                                                <input type="hidden" name="idUsuario" value="<?= $idUsuario ?>">
+                                                <input type="hidden" name="acao" value="SALVAR">
+
+                                                <button type="submit" value="<?php echo $jaSegue ? 'DELETE' : 'SALVAR'; ?>" name="acao" class="text-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px; border-width:0px; padding:4px">
+                                                    <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
+                                                        Seguir
+                                                    </h4>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    <?php }
+                                ?>
+                                
                                 <!--<//?php if () : ?>
                                     <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px;">
                                         <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">

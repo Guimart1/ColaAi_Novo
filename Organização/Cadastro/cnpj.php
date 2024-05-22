@@ -1,19 +1,6 @@
 <?php
 session_start();
 
-// Conectar ao banco de dados
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "bdcolaai"; 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexão
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Função para verificar se o CNPJ é válido
 function verificarCNPJ($cnpj) {
     // Remover caracteres especiais do CNPJ
@@ -53,29 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cnpjOrganizacaoEvento'
 
     // Verifica se o CNPJ é válido
     if (verificarCNPJ($cnpj)) {
-        // Verifica se o CNPJ já está cadastrado no banco de dados
-        $stmt = $conn->prepare("SELECT * FROM tborganizacaoevento WHERE cnpjOrganizacaoEvento = ?");
-        $stmt->bind_param("s", $cnpj);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            echo "<script>alert('CNPJ já registrado');</script>";
-        } else {
-            // Se o CNPJ não estiver registrado, salva na sessão e redireciona
-            $_SESSION['cnpjOrganizacaoEvento'] = $cnpj;
-            header("Location: nomeOrg.php");
-            exit;
-        }
-        
-        $stmt->close();
+        $_SESSION['cnpjOrganizacaoEvento'] = $cnpj;
+        header("Location: nomeOrg.php");
+        exit;
     } else {
         // Se o CNPJ não for válido, redireciona de volta para a mesma página com uma mensagem de erro
         echo "<script>alert('CNPJ inválido');</script>";
     }
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -116,4 +88,12 @@ $conn->close();
         </div>
     </div>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"  crossorigin="anonymous" defer>
+    </script>
+     <!-- Para usar Mascara  -->
+  <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
+  <script type="text/javascript" src="../../js/personalizar.js"> </script>
+  
+ 
+</body>
+</html>
