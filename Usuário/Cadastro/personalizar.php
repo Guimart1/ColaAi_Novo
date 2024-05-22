@@ -29,10 +29,13 @@
                     Ao clicar em Continuar, você aceita o <a href=""  style="color: #6D9EAF;">Contrato do Usuário</a>, a <a href=""  style="color: #6D9EAF;">Política de Privacidade</a>
                     e a <a href="" style="color: #6D9EAF;">Política de Cookies</a> do Cola Aí.
                 </p>
-                <div class="col-12 d-flex justify-content-end"><a href="fotoPerfil.php">
-                    <button type="submit" class="botao btn fs-5">Continuar</button>
-                    </a>
-                </div>
+                <form action="processFotoPerfil.php" method="post">
+                    <input type="hidden">
+                    <div class="col-12 d-flex justify-content-end"><a href="fotoPerfil.php">
+                        <button id="botao" type="submit" name="acao" class="botao btn fs-5" value="SELECTID">Continuar</button>
+                        </a>
+                    </div>
+                </form>                
             </div>
             
         </div>
