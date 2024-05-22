@@ -65,8 +65,8 @@ require_once '../../dao/ContatoOrgEventoDao.php';
                 <div class="d-flex w-75 flex-column border border-1 rounded rounded-4 mt-5 "
                     style="background-color: #FFFFFF;" id="formBox">
                     <h1 class="text-center mt-5 fs-1" style="color: #a6a6a6;">Contato</h1>
-                    <form method="post" action="process.php" enctype="multipart/form-data"
-                        class="needs-validation w-100 h-100 p-4" novalidate>
+                    <form method="post" action="process.php" enctype="multipart/form-data" class="needs-validation w-100 h-100 p-4" novalidate>
+                        <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id da organização" value="<?= isset($authUserOrg['idOrganizacaoEvento']) ? $authUserOrg['idOrganizacaoEvento'] : '' ?>" readonly> 
                         <input type="hidden" name="acao" value="SALVAR">
                         <div class="col-md-12 needs-validation mb-4">
                             <label for="categoriaContato" class="col-form-label">Motivo do contato*</label>
