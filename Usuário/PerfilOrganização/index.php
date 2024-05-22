@@ -1,6 +1,7 @@
 <?php
 require_once '../../dao/OrganizacaoDao.php';
 require_once '../../dao/EventoDao.php';
+require_once '../../dao/SeguirOrganizacaoDao.php';
 
 $organizacao = new OrganizacaoDao();
 ?>
@@ -21,10 +22,10 @@ $organizacao = new OrganizacaoDao();
     <link rel="stylesheet" href="../../css/glide.theme.css">
 </head>
 
-<body>
+<body class="fundo-bolinha2">
     <?php
     // Iniciar a sessão
-    session_start();
+    session_start(); 
 
     // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
     if (!isset($_SESSION['AutenticaoUser']) || $_SESSION['AutenticaoUser'] != 'SIM') {
@@ -44,6 +45,11 @@ $organizacao = new OrganizacaoDao();
         // Busca os detalhes do evento com base no id do evento
         $organizacao = OrganizacaoDao::selectById($idOrganizacao);
         $eventos = EventoDao::selectByOrganizacaoIdActive($idOrganizacao);
+
+        $idUsuario = $_SESSION['user']['idUsuario'];
+        $jaSegue = SeguirOrganizacaoDao::selectByUsuarioOrganizacao($idUsuario, $idOrganizacao);
+
+        //var_dump(SeguirOrganizacaoDao::selectByUsuario($idUsuario));
 
         // Verifique se o usuário já tem uma foto de perfil
         $imagemPerfil = ''; // Defina a variável como vazia inicialmente
@@ -93,19 +99,71 @@ $organizacao = new OrganizacaoDao();
                         <img src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" alt="imagem Perfil" style="border-radius: 100%; height: 200px; width: 200px;">
                     </div>
                 </div>
-                <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 100px">
+                <div class="d-flex align-items-start justify-content-center flex-column" style="width: 75%; height: 100px; position:relative; margin-top: 125px;">
                     <ul class="m-0 p-0" style="list-style: none; font-weight: bold; cursor:pointer;">
                         <li>
-                            <h2 style="font-weight: bold; color: #FFD932">
-                            <?php
-                                // Exibir o nome do usuário se estiver autenticado
-                                if (isset($organizacao['nomeOrganizacaoEvento'])) {
-                                    echo $organizacao['nomeOrganizacaoEvento'];
-                                } else {
-                                    echo "Organização Eventos";
-                                }
+                            <div class="d-flex flex-table">
+                                <h2 style="font-weight: bold; color: #FFD932">
+                                <?php
+                                    // Exibir o nome do usuário se estiver autenticado
+                                    if (isset($organizacao['nomeOrganizacaoEvento'])) {
+                                        echo $organizacao['nomeOrganizacaoEvento'];
+                                    } else {
+                                        echo "Organização Eventos";
+                                    }
+                                    ?>
+                                </h2>
+                                <?php
+                                    // Verificar se o usuário já registrou interesse
+                                    // Suponha que $jaRegistrado seja uma variável que indica se o usuário já registrou interesse no evento
+                                    if ($jaSegue) {
+                                        ?>
+                                        <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;">
+                                            <form method="post" action="./processSeguir.php">
+                                                <input type="hidden" name="idOrganizacaoEvento" value="<?= $idOrganizacao ?>">
+                                                <input type="hidden" name="idUsuario" value="<?= $idUsuario ?>">
+                                                <input type="hidden" name="acao" value="<?php echo $jaSegue ? 'DELETE' : 'SALVAR'; ?>">
+
+                                                <button type="submit" value="DELETE" name="acao" style="width: 150px; height: 40px; background-color:#6D9EAF; margin-left: 25px; border-radius: 25px; border-width:0px; padding:4px">
+                                                    <h4 class="text-center" style="font-weight:normal; color:#FFD932">
+                                                        Seguindo
+                                                    </h4>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;">
+                                            <form method="post" action="./processSeguir.php">
+                                                <input type="hidden" name="idOrganizacaoEvento" value="<?= $idOrganizacao ?>">
+                                                <input type="hidden" name="idUsuario" value="<?= $idUsuario ?>">
+                                                <input type="hidden" name="acao" value="SALVAR">
+
+                                                <button type="submit" value="<?php echo $jaSegue ? 'DELETE' : 'SALVAR'; ?>" name="acao" class="text-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px; border-width:0px; padding:4px">
+                                                    <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
+                                                        Seguir
+                                                    </h4>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    <?php }
                                 ?>
-                            </h2>
+                                
+                                <!--<//?php if () : ?>
+                                    <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#E6AEB2; margin-left: 25px; border-radius: 25px;">
+                                        <h4 class="text-center" style="font-weight:normal; color:#6D9EAF">
+                                            Seguir
+                                        </h4>
+                                    </div>
+                                <//?php else : ?>
+                                    <div class="d-flex justify-content-center align-items-center" style="width: 150px; height: 40px; background-color:#6D9EAF; margin-left: 25px; border-radius: 25px;">
+                                        <h4 class="text-center" style="font-weight:normal; color:#FFD932">
+                                            Seguindo
+                                        </h4>
+                                    </div>
+                                <//?php endif; ?>-->
+                            </div>
                             <a href="" style="font-weight: bold; color: #6F9BAB">Site organização</a>
                         </li>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
@@ -156,7 +214,7 @@ $organizacao = new OrganizacaoDao();
                                 <li class="glide__slide">
                                     <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%; object-fit:cover"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                                 <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
                                                 <p><?= $evento['descEvento']; ?></p>

@@ -28,6 +28,15 @@ html, body{
     color: #a6a6a6;
 }
 
+.fundo-bolinha2 {
+    background-image: url("../img/Usuario/Bolinhas_index/fundo-bolinha.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    color: #a6a6a6;
+    position: relative;
+}
+
 h1, h2, h3{
     font-family: Negrito;
 
@@ -701,4 +710,20 @@ input[type="checkbox"] {
 }
 .selectPerfil-off {
     display: none;
+}
+.notiBox-on{
+    display: block;
+}
+.notiBox-off{
+    display: none;
+}
+.notificacaoBox{
+    position:absolute;
+    height: fit-content;
+    width: 400px;
+    background-color: #F4FFEB;
+    z-index: 10;
+    right:10%;
+    top: 10%;
+
 }
