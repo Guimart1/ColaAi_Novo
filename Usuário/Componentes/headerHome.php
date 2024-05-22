@@ -46,12 +46,12 @@
     </div>
     <div class="d-flex p-2 ps-5 align-items-center optionPerfil">
         <img src="../../img/Usuario/icon-editar.png" alt=""  style="width: 32px; height:32px" class="me-1">
-        <a class="fw-bold">Editar Perfil</a>
+        <a class="fw-bold" >Editar Perfil</a> <!--Chamar o modal de editar dados do perfil-->
     </div>
 
     <div class="d-flex p-2 ps-5 align-items-center optionPerfil" style="border: none;">
         <img src="../../img/Usuario/icon-sair.png" alt=""  style="width: 32px; height:32px" class="me-1">
-        <a class="fw-bold">Sair</a>
+        <a class="fw-bold" href="../logoff.php">Sair</a>
     </div>
 </div>
 </div>
