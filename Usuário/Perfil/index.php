@@ -1,6 +1,7 @@
 <?php
 require_once '../../dao/UserDao.php';
 require_once '../../dao/InteresseEventoDao.php';
+require_once '../../dao/SeguirOrganizacaoDao.php';
 
 $user = new UserDao();
 ?>
@@ -41,6 +42,10 @@ $user = new UserDao();
     // Busque os eventos em que o usuário registrou interesse
     $eventosInteresse = InteresseEventoDao::selectByUsuario($idUsuario);
     $dadosUser = UserDao::selectById($idUsuario);
+
+    //Para Ver quem o usuário está seguindo
+    var_dump(SeguirOrganizacaoDao::selectByUsuario($idUsuario));
+
     //var_dump($eventosInteresse);
     // Verifique se o usuário já tem uma foto de perfil
     $imagemPerfil = ''; // Defina a variável como vazia inicialmente

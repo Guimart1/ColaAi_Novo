@@ -49,6 +49,8 @@ $organizacao = new OrganizacaoDao();
         $idUsuario = $_SESSION['user']['idUsuario'];
         $jaSegue = SeguirOrganizacaoDao::selectByUsuarioOrganizacao($idUsuario, $idOrganizacao);
 
+        //var_dump(SeguirOrganizacaoDao::selectByUsuario($idUsuario));
+
         // Verifique se o usuário já tem uma foto de perfil
         $imagemPerfil = ''; // Defina a variável como vazia inicialmente
         //$imagemBanner = ''; // Defina a variável como vazia inicialmente
