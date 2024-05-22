@@ -99,9 +99,9 @@ class SeguirOrganizacaoDao {
         $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
     
         try {
-            $stmt = $conn->prepare("SELECT tborganizacaoevento.imagemOrganizacaoEvento, tborganizacaoevento.nomeOrganizacaoEvento, tborganizacaoevento.descOrganizacaoEvento
+            $stmt = $conn->prepare("SELECT tborganizacaoevento.imagemOrganizacaoEvento, tborganizacaoevento.nomeOrganizacaoEvento, tborganizacaoevento.descOrganizacaoEvento, tborganizacaoevento.idOrganizacaoEvento
                                     FROM tbusuarioseguindo
-                                    INNER JOIN tborganizacaoevento ON tbusuarioseguindo.idOrgaizacaoEvento = tborganizacaoevento.idOrganizacaoEvento
+                                    INNER JOIN tborganizacaoevento ON tbusuarioseguindo.idOrganizacaoEvento = tborganizacaoevento.idOrganizacaoEvento
                                     WHERE tbusuarioseguindo.idUsuario = :idUsuario");
             $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
             $stmt->execute();
@@ -110,7 +110,7 @@ class SeguirOrganizacaoDao {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             // Em caso de erro, lança uma exceção
-            throw new Exception("Erro ao selecionar eventos de interesse do usuário: " . $e->getMessage());
+            throw new Exception("Erro ao selecionar organizacoes seguidas: " . $e->getMessage());
         }
     }
     public static function deleteSeguir($idOrganizacaoEvento, $idUsuario)
