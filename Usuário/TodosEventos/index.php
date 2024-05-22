@@ -188,7 +188,7 @@ foreach ($eventos as $evento) {
                                         <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4 tituloEvento"><?php echo $evento['nomeEvento']; ?></h3>
-                                            <p><?php echo $evento['descEvento']; ?></p>
+                                            <p class="tituloEvento"><?php echo $evento['descEvento']; ?></p>
                                         </div>
                                     </div>
                                 </a>

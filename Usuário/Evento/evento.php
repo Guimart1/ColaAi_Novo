@@ -182,7 +182,7 @@ require_once '../../dao/InteresseEventoDao.php';
                         
                 </div>
             </div>
-            <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column">
+            <div class="eventDesc col-md-4 d-flex align-items-center justify-content-center flex-column mt-4">
                 <h1 class="fw-bold fs-2 mb-5">
                     <?php
                     $nomeEvento = $evento['nomeEvento'];
@@ -196,7 +196,7 @@ require_once '../../dao/InteresseEventoDao.php';
                     }
                     ?>
                 </h1>
-                <p><?= $evento['descEvento']; ?></p>
+                <p style="text-align: justify;"><?= $evento['descEvento']; ?></p>
                 <div class="button">
                     <form id="interestForm" method="post" action="./processInterresseEvento.php">
                         <!-- Adicione um campo oculto para armazenar o ID do evento -->
@@ -208,7 +208,7 @@ require_once '../../dao/InteresseEventoDao.php';
                         <!-- Adicione um campo oculto para a ação -->
                         <input type="hidden" name="acao" value="<?php echo $jaRegistrado ? 'DELETE' : 'SALVAR'; ?>">
 
-                        <button id="interestButton" type="submit" class="border-0 rounded-5 mt-5" style="width: 15vw; height: 50px;min-width:200px" value="SALVAR" name="acao">
+                        <button id="interestButton" type="submit" class="border-0 rounded-5 mt-3" style="width: 15vw; height: 50px;min-width:200px" value="SALVAR" name="acao">
                             <?php
                             // Verificar se o usuário já registrou interesse
                             // Suponha que $jaRegistrado seja uma variável que indica se o usuário já registrou interesse no evento

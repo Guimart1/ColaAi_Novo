@@ -711,3 +711,19 @@ input[type="checkbox"] {
 .selectPerfil-off {
     display: none;
 }
+.notiBox-on{
+    display: block;
+}
+.notiBox-off{
+    display: none;
+}
+.notificacaoBox{
+    position:absolute;
+    height: fit-content;
+    width: 400px;
+    background-color: #F4FFEB;
+    z-index: 10;
+    right:10%;
+    top: 10%;
+
+}

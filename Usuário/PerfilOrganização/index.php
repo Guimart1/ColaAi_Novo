@@ -212,7 +212,7 @@ $organizacao = new OrganizacaoDao();
                                 <li class="glide__slide">
                                     <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                         <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                            <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%; object-fit:cover"> <!-- Defina a largura e altura desejadas -->
                                             <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                                 <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
                                                 <p><?= $evento['descEvento']; ?></p>
