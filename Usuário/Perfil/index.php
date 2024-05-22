@@ -44,7 +44,7 @@ $user = new UserDao();
     $dadosUser = UserDao::selectById($idUsuario);
 
     //Para Ver quem o usuário está seguindo
-    var_dump(SeguirOrganizacaoDao::selectByUsuario($idUsuario));
+    //var_dump(SeguirOrganizacaoDao::selectByUsuario($idUsuario));
 
     //var_dump($eventosInteresse);
     // Verifique se o usuário já tem uma foto de perfil

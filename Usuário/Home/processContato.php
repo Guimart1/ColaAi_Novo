@@ -1,5 +1,5 @@
 <?php
-require_once '../../model/CategoriaContatoUsuario.php';
+require_once '../../model/ContatoUsuario.php';
 require_once '../../dao/ContatoUsuarioDao.php';
 require_once '../../model/Mensagem.php';
 
@@ -10,19 +10,20 @@ $msg = new Mensagem();
 switch ($_POST["acao"]) {
   case 'DELETE':
     try {
-      $feedbackDao = FeedbackAppDao::delete($_POST['id']);
+      $contatoDao = ContatoUsuarioDao::delete($_POST['id']);
       header("Location: index.php");
     } catch (Exception $e) {
       echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
     break;
   case 'SALVAR':
-    $feedback->setTitulo($_POST["tituloFeedBackApp"]);
-    $feedback->setDescricao($_POST["descFeedbackApp"]);
-    $feedback->setIdUsuario($_POST["idUsuario"]);
+    $contato->setTitulo($_POST["tituloContatoUsuario"]);
+    $contato->setDesc($_POST["descContatoUsuario"]);
+    $contato->setIdUsuario($_POST["idUsuario"]);
+    $contato->setidCategoriaContatoUsuario($_POST["idCategoriaContatoUsuario "]);
 
     try {
-    $feedbackDao = FeedbackAppDao::insert($feedback);
+    $contatoDao = ContatoUsuarioDao::insert($contato);
 
       // Adiciona uma mensagem para debug
       $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
@@ -32,18 +33,19 @@ switch ($_POST["acao"]) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
 
       // Adiciona uma mensagem para debug
-      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
+      echo "Erro ao inserir contato no banco de dados: " . $e->getMessage();
 
       header("Location: index.php");
     }
     break;
   case 'ATUALIZAR':
     //pode validar as informações
-    $feedback->setTitulo($_POST["tituloFeedBackApp"]);
-    $feedback->setDescricao($_POST["descFeedbackApp"]);
-    $feedback->setIdUsuario($_POST["idUsuario"]);
+    $contato->setTitulo($_POST["tituloContatoUsuario"]);
+    $contato->setDesc($_POST["descContatoUsuario"]);
+    $contato->setIdUsuario($_POST["idUsuario"]);
+    $contato->setidCategoriaContatoUsuario($_POST["idCategoriaContatoUsuario "]);
     try {
-    $feedbackDao = FeedbackAppDao::update($_POST["idFeedBackApp"], $feedback);
+    $contatoDao = ContatoUsuarioDao::update($_POST["idContatoUsuario "], $contato);
       $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
       header("Location: index.php");
     } catch (Exception $e) {
@@ -54,7 +56,7 @@ switch ($_POST["acao"]) {
   case 'SELECTID':
 
     try {
-    $feedbackDao = FeedbackAppDao::selectById($_POST['id']);
+    $contatoDao = ContatoUsuarioDao::selectById($_POST['id']);
       // Configura as opções do contexto da solicitação
       include('register.php');
     } catch (Exception $e) {
