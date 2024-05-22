@@ -1,6 +1,29 @@
 <?php
 require_once '../../dao/EventoDao.php';
 $eventos = EventoDao::selectAllActive();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filtro'])) {
+    // Obtém o valor do filtro enviado pelo formulário
+    $filtro = $_POST['filtro'];
+
+    // Obtém os dados filtrados da organização com base no valor do filtro
+
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $html_tbody = '';
+        $html_tbody .= "<tr class='mt-1'>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['idOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['nomeOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['emailOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['cnpjOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "<td class='fs-5 pt-3'>" . $organizacao['situacaoOrganizacaoEvento'] . "</td>";
+        $html_tbody .= "</tr>";
+
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $html_tbody;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -79,6 +79,10 @@ p {
     color: #6D9EAF;
     font-size: 14pt;
 }
+.button button:hover {
+    background-color: #ebddde;
+    color: #6DA2B1;
+}
 .perfilBox{
     height: 350px;
     width: 800px;
@@ -685,3 +689,25 @@ input[type="checkbox"] {
     background-color: #DCF4CA;
 }
 
+.selectPerfil{
+    background-color: #F4FFEB;
+    position: absolute;
+    height: auto;
+    width: 300px;
+    right: 5%;
+    z-index: 10;
+    display: none;
+}
+.selectPerfil a {
+    color: #A6A6A6;
+    text-decoration: none;
+}
+.optionPerfil{
+    border-bottom: 2px solid #a6a6a6;
+}
+.selectPerfil-on{
+    display: block;
+}
+.selectPerfil-off {
+    display: none;
+}

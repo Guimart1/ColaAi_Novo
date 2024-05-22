@@ -36,7 +36,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
     $authUser = $_SESSION['user'];
     ?>
     <?php
-    require_once('../Componentes/headerLogado.php')
+    require_once('../Componentes/headerHome.php')
     ?>
 
     <div class="container mt-4" style="width: 80%;">
@@ -281,22 +281,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             glide.mount();
         }
     </script>
-    <script>
-        let nav = document.getElementById("nav")
-        var i = 0
 
-        function toggleNav() {
-            if (i == 0) {
-                nav.classList.add("navbarActive-on");
-                nav.classList.remove("navbarActive-off");
-                i = 1
-            } else {
-                nav.classList.add("navbarActive-off");
-                nav.classList.remove("navbarActive-on");
-                i = 0
-            }
-        }
-    </script>
 </body>
 
 </html>
