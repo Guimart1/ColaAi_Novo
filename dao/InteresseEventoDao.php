@@ -207,7 +207,20 @@ class InteresseEventoDao {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'];
     }
-    
-    
+    public static function countInterestRegistrationsLast30Days() {
+        $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
+        
+        try {
+            $stmt = $conn->prepare("SELECT COUNT(*) AS total 
+                                    FROM tbinteresseevento 
+                                    WHERE DATE(dataRegistro) >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+            
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw new Exception("Erro ao contar registros de interesse nos últimos 30 dias: " . $e->getMessage());
+        }
+    }   
 }
 ?>

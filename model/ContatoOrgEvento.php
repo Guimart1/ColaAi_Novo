@@ -1,7 +1,7 @@
 <?php
 
 class ContatoOrgEvento {
-    public $id, $titulo, $desc, $idOrganizacaoEvento;
+    public $id, $titulo, $desc, $idOrganizacaoEvento, $idCategoriaContatoOrganizacaoEvento ;
 
    // Getters e Setters
    public function getId() {
@@ -34,6 +34,13 @@ public function getIdOrganizacaoEvento() {
 
 public function setIdOrganizacaoEvento($idOrganizacaoEvento) {
     $this->idOrganizacaoEvento = $idOrganizacaoEvento;
+}
+public function getIdCategoriaContatoOrganizacaoEvento() {
+    return $this->idCategoriaContatoOrganizacaoEvento;
+}
+
+public function setIdCategoriaContatoOrganizacaoEvento($idCategoriaContatoOrganizacaoEvento) {
+    $this->idCategoriaContatoOrganizacaoEvento = $idCategoriaContatoOrganizacaoEvento;
 }
 }
 
