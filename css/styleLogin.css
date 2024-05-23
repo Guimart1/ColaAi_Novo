@@ -54,6 +54,12 @@ input::placeholder{
     width: 120px;
     color: #6D9EAF;
 }
+#btn-box button:hover{
+    background-color: #ebddde;
+    color: #6DA2B1;
+        height: 7vh;
+    width: 120px;
+}
 .orgSenha{
     position: relative;
 }

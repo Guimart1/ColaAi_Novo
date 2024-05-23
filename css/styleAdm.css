@@ -124,6 +124,11 @@ p {
     width: 120px;
     color: #6D9EAF;
     font-size: 16pt;
+    border: 0;
+}
+.btn:hover{
+    background-color: #ebddde;
+    color: #6D9EAF;
 }
 .inputFile input{
     display: none;
