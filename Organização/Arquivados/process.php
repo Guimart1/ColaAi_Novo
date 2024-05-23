@@ -93,8 +93,19 @@ switch ($_POST["acao"]) {
           $evento->setSituacaoEvento(2);
           try {
             $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
-            // $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
+            $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
             header("Location: index.php");
+          } catch (Exception $e) {
+           echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+          } 
+          break;
+
+        case 'RESTAURAR':
+          $evento->setSituacaoEvento(1);
+          try {
+            $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
+            // $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
+            header("Location: eventos.php");
           } catch (Exception $e) {
            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
           } 
