@@ -1,61 +1,22 @@
-<?php
+<?php 
 require_once '../../dao/EventoDao.php';
 
-$eventos = EventoDao::selectAllActive();
-
+$eventos = EventoDao::selectAll();
 $enderecosEventos = [];
 
-$eventos_js = [];
-
-$evento_coords = [];
-
-
-$i = 0;
-
+// Populando $enderecosEventos
 foreach ($eventos as $evento) {
-    // Formate os dados do evento como desejado
-    $enderecoEvento = $evento['enderecoEvento'] . "," . $evento['numeroEvento'] . "," .  $evento['complementoEvento'] . "," .  $evento['bairroEvento'] . "," . $evento['cepEvento'] . "," . $evento['cidadeEvento'] . "," .  $evento['ufEvento'];
-
-    $enderecosEventos[$i] = $enderecoEvento;
-    $i++;
+    $enderecoEvento = $evento['enderecoEvento'] . "," . $evento['numeroEvento'] . "," .  $evento['complementoEvento']. "," .  $evento['bairroEvento'] . "," . $evento['cepEvento'] . "," . $evento['cidadeEvento']. "," .  $evento['ufEvento'];
+    $enderecosEventos[] = $enderecoEvento;
 }
 
-//var_dump($enderecosEventos);
-
-// foreach ($enderecosEventos as $eventoss) {
-//     echo $eventoss;
-// }
-
-
-
-// Converta cada evento em um formato JavaScript
-// foreach ($eventos as $evento) {
-//     // Formate os dados do evento como desejado
-//     $evento_js = [
-//         'nome' => $evento['nomeEvento'],
-//         'latitude' => $evento['latitude'], // Substitua por sua coluna de latitude
-//         'longitude' => $evento['longitude'], // Substitua por sua coluna de longitude
-//         // Adicione outros campos conforme necessário
-//     ];
-
-//     // Adicione o evento ao array de eventos JavaScript
-//     $eventos_js[] = $evento_js;
-// }
+// Transformando em JSON para usar no JavaScript
+$enderecosEventosJSON = json_encode($enderecosEventos);
 ?>
-<html lang="pt-br" class="hydrated">
-
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-
     <meta charset="UTF-8">
-    <style data-styles="">
-        ion-icon {
-            visibility: hidden
-        }
-
-        .hydrated {
-            visibility: inherit
-        }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Cola Aí</title>
     <link rel="stylesheet" href="../../css/styleAdm.css">
@@ -66,19 +27,121 @@ foreach ($eventos as $evento) {
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEx8FgHwmJjDQPZq_JQBPxi_1on_zcpQI&callback=initMap" defer></script>
-    <!-- Fim da API do Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZxEPesp8pDRjhFBsLKBA7EMkA6jdfWzI&callback=initMap&v=weekly" defer></script>
     <!-- Adicione a biblioteca ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- Adicione seu script personalizado -->
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <style>
+        #map {
+            width: 800px;
+            height: 550px;
+            border: 0;
+            margin-top:20px;
+        }
 
+        #address-search {
+        display: none;
+    }
+    </style>
+    <script>
+        let map, infoWindow, userMarker;
+        const enderecosEventos = <?php echo $enderecosEventosJSON; ?>;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 13.5,
+            });
+            infoWindow = new google.maps.InfoWindow();
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        map.setCenter(userLocation);    
+                        userMarker = new google.maps.Marker({
+                            position: userLocation,
+                            map: map,
+                            title: "Sua Localização",
+                           
+                        });
+                        // Função para adicionar marcadores dos eventos
+                        addEventMarkers();
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(
+                browserHasGeolocation
+                    ? "Erro: O serviço de geolocalização falhou."
+                    : "Erro: Seu navegador não suporta geolocalização."
+            );
+            infoWindow.open(map);
+        }
+
+        function addEventMarkers() {
+            const geocoder = new google.maps.Geocoder();
+            const eventIcon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
+            enderecosEventos.forEach((endereco) => {
+                geocoder.geocode({ address: endereco }, (results, status) => {
+                    if (status === 'OK') {
+                        new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            title: endereco,
+                            icon: eventIcon
+                        });
+                    } else {
+                        console.error('Geocode falhou: ' + status);
+                    }
+                });
+            });
+        }
+
+        function searchAddress() {
+            const addressInput = document.getElementById('address-input').value;
+            const geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode({ address: addressInput }, (results, status) => {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    map.setZoom(17);
+                    createMarker(results[0].geometry.location);
+                } else {
+                    alert('Geocode não foi bem sucedido pela seguinte razão: ' + status);
+                }
+            });
+        }
+
+        function createMarker(latlng) {
+            if (userMarker) {
+                userMarker.setMap(null);
+            }
+            userMarker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+            });
+        }
+    </script>
 </head>
-
 <body class="fundo-bolinha">
 
     <?php
@@ -154,19 +217,22 @@ foreach ($eventos as $evento) {
                         <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
                     </div>
                 </div>
-                <div class="buttonProcurar d-flex justify-content-center mt-auto mb-1 me-auto">
-                    <button type="submit" class="border-0 rounded-3">Buscar</button>
-                </div>
-                <div class="showFiltro mt-auto mb-1">
-                    <div class="buttonFiltros d-flex justify-content-center ">
-                        <button type="submit" class="border-0 rounded-3" onclick="Abrir()">Filtros</button>
+                <div class="distanciaBox">
+                    <label for="" class="mb-1 fs-5 mb-4">Distância</label>
+                    <div class="d-flex align-items-center">
+                        <div class="teste"></div><input type="range" name="" id=""><div class="teste"></div>
                     </div>
                 </div>
             </div> -->
             <div class="col-md-10 listEventos">
 
-                <div id="map"></div>
-
+                <div id="address-search">
+                <input type="text" id="address-input">
+                <button onclick="searchAddress();">Pesquisar</button>
+            </div>  
+                <div class="w-100 d-flex justify-content-center mb-4">
+                    <div id="map"></div>
+                </div>
 
                 <!-- Card se não encontrar evento -->
 
@@ -199,130 +265,11 @@ foreach ($eventos as $evento) {
             </div>
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEx8FgHwmJjDQPZq_JQBPxi_1on_zcpQI&callback=initMap&v=weekly&solution_channel=GMP_CCS_geolocation_v1" defer></script>
-
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script type="text/javascript" src="../../js/personalizar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    <script type="text/javascript" src="../../js/modal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <script>
-        let nav = document.getElementById("nav")
-        var i = 0
-
-        function toggleNav() {
-            if (i == 0) {
-                nav.classList.add("navbarActive-on");
-                nav.classList.remove("navbarActive-off");
-                i = 1
-            } else {
-                nav.classList.add("navbarActive-off");
-                nav.classList.remove("navbarActive-on");
-                i = 0
-            }
-        }
-    </script>
-    <script>
-        let filtro = document.getElementById("filtro")
-
-        function Abrir() {
-            filtro.classList.add("filtroBox-on");
-            filtro.classList.remove("filtroBox-off");
-        }
-
-        function Fechar() {
-            filtro.classList.add("filtroBox-off");
-            filtro.classList.remove("filtroBox-on");
-        }
-    </script>
-
-    <script>
-        const getPosition = position => {
-            const dados = {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-
-            }
-
-
-        }
-
-        const geoError = error => {
-            console.log("Erro: " + error.message)
-        }
-        navigator.geolocation.getCurrentPosition(getPosition, geoError)
-
-
-        // Função para inicializar o mapa
-        let map, infoWindow;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: {
-                    lat: -34.397,
-                    lng: 150.644
-                },
-                zoom: 12,
-            });
-            infoWindow = new google.maps.InfoWindow();
-
-            // Adicione um marcador para a sua localização atual
-            const addMarker = (location) => {
-                const marker = new google.maps.Marker({
-                    position: location,
-                    map: map,
-                    title: "Sua Localização",
-                });
-                map.setCenter(location);
-            };
-
-            // Função para obter a posição do usuário
-            const getPosition = (position) => {
-                const dados = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                };
-                const userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                };
-                console.log(dados);
-                addMarker(userLocation);
-            };
-
-            // Função de erro de geolocalização
-            const geoError = (error) => {
-                console.log("Erro: " + error.message);
-            };
-
-            // Solicita a localização do usuário
-            navigator.geolocation.getCurrentPosition(getPosition, geoError);
-        }
-    </script>
-
-
-
-    <!-- <script>
-        // Adicione os eventos ao mapa usando JavaScript
-        var map = L.map('map').setView([-22.9035, -43.2096], 13); // Configuração inicial do mapa
-
-        // Adicione um tile layer (layer de azulejos) para exibir o mapa
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Adicione os eventos ao mapa
-        var eventos = <?php echo json_encode($eventos_js); ?>;
-        eventos.forEach(function(evento) {
-            var marker = L.marker([evento.latitude, evento.longitude]).addTo(map);
-            marker.bindPopup(evento.nome);
-        });
-    </script> -->
-
-
-
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
