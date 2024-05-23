@@ -143,6 +143,84 @@ class InteresseEventoDao {
             throw new Exception("Erro ao selecionar os eventos com mais interesse: " . $e->getMessage());
         }
     }
-    
+    public static function verificarInteresseUsuarioEvento($idUsuario, $idEvento) {
+        $conn = Conexao::conectar(); 
+        
+        try {
+            $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM tbinteresseevento WHERE idUsuario = :idUsuario AND idEvento = :idEvento");
+            $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+            $stmt->bindParam(':idEvento', $idEvento, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            return $resultado['total'] > 0; // Retorna true se o usuário já registrou interesse neste evento, caso contrário, retorna false
+        } catch (PDOException $e) {
+            // Em caso de erro, lança uma exceção
+            throw new Exception("Erro ao verificar interesse do usuário neste evento: " . $e->getMessage());
+        }
+    }
+    public static function deleteInterest($idEvento, $idUsuario)
+    {
+        $conn = Conexao::conectar(); 
+
+        try {
+            //instrução SQL para excluir o interesse do evento
+            $stmt = $conn->prepare("DELETE FROM tbinteresseevento WHERE idEvento = :idEvento AND idUsuario = :idUsuario");
+
+            // Vincule os parâmetros
+            $stmt->bindParam(':idEvento', $idEvento, PDO::PARAM_INT);
+            $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+
+            // Execute a consulta
+            $stmt->execute();
+
+            // Verifique se a exclusão foi bem-sucedida
+            if ($stmt->rowCount() > 0) {
+                return true; // Retorna true se a exclusão for bem-sucedida
+            } else {
+                return false; // Retorna false se nenhum registro for excluído (possivelmente o interesse não existia)
+            }
+        } catch (PDOException $e) {
+            echo "Erro ao excluir interesse do evento: " . $e->getMessage();
+            return false; // Retorna false em caso de erro
+        }
+    }
+   
+    public static function countAll() {
+        $conn = Conexao::conectar();
+        $query = "SELECT COUNT(*) AS total FROM tbinteresseevento";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public static function countByOrganization($idOrganizacao) {
+        $conn = Conexao::conectar();
+        $query = "SELECT COUNT(*) AS total 
+                  FROM tbinteresseevento ie
+                  JOIN tbevento e ON ie.idEvento = e.idEvento
+                  WHERE e.idOrganizacaoEvento = :idOrganizacaoEvento";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacao, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
+    public static function countInterestRegistrationsLast30Days() {
+        $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
+        
+        try {
+            $stmt = $conn->prepare("SELECT COUNT(*) AS total 
+                                    FROM tbinteresseevento 
+                                    WHERE DATE(dataRegistro) >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+            
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw new Exception("Erro ao contar registros de interesse nos últimos 30 dias: " . $e->getMessage());
+        }
+    }   
 }
 ?>

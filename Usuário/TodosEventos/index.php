@@ -143,23 +143,12 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
     </script>
 </head>
 <body class="fundo-bolinha">
-    <nav>
-        <div class="navigation">
-            <div class="imgHeader">
-                <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2">
-            </div>
-            <a href="../Home/index.php">Página Inicial</a>
-            <a href="#carrossel-teatros">Teatros</a>
-            <a href="#carrossel-parques">Parques</a>
-            <a href="#carrossel-museus">Museus</a>
-            <a href="#carrossel-centroCulturais">Centros Culturais</a>
-            <div class="iconBox">
-                <img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;">
-                <img src="../../img/Usuario/icon-notificacao.png" alt="">
-                <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
-            </div>
-        </div>
-    </nav>
+
+    <?php
+    require_once('../Componentes/headerLogado.php')
+    ?>
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 filtroBox pt-3" id="filtro">
@@ -175,7 +164,8 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                 <div class="distanciaBox">
                     <label for="" class="mb-1 fs-5 mb-4">Distância</label>
                     <div class="d-flex align-items-center">
-                        <div class="teste"></div><input type="range" name="" id=""><div class="teste"></div>
+                        <div class="teste"></div><input type="range" name="" id="">
+                        <div class="teste"></div>
                     </div>
                 </div>
                 <span class="ms-auto">km</span>
@@ -194,6 +184,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                         <input type="checkbox" name="" id=""><span class="ms-2">Noturno</span>
                     </div>
                 </div>
+
                 <div class="turnoBox mt-1">
                     <label for="" class="fs-5 ">Valor</label>
                     <div class="inputFiltros">
@@ -203,7 +194,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                         <input type="checkbox" name="" data-bs-toggle="collapse" href="#collapsePreco" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="ms-2">Pago</span>
                     </div>
                     <div class="collapse" id="collapsePreco">
-                        <li class="w-100" style="list-style: none;">
+                        <li class=" w-100" style="list-style: none;">
                             <div class="d-flex flex-column">
                                 <label for="" class="mb-1 fs-5">Preço</label>
                                 <div class="d-flex">
@@ -211,48 +202,67 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                                     <span class="ms-2" style="color:#E6AEB2">max</span><input type="number" class="faixaEtariaInput ms-2" min="1" max="15">
                                 </div>
                             </div>
-                        </li> 
+                        </li>
                     </div>
                 </div>
                 <div class="w-100 d-flex justify-content-center mt-3">
                     <button class="btnFiltro rounded rounded-3" onclick="Fechar()">Aplicar filtros</button>
                 </div>
             </div>
+
+            <!-- <div class="listSearch pt-3 pb-3">
+                <div class="searchBox d-flex justify-content-center">
+                    <div class="searchInput position-relative">
+                        <img src="../../img/Usuario/icon-search.png" alt="">
+                        <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
+                    </div>
+                </div>
+                <div class="distanciaBox">
+                    <label for="" class="mb-1 fs-5 mb-4">Distância</label>
+                    <div class="d-flex align-items-center">
+                        <div class="teste"></div><input type="range" name="" id=""><div class="teste"></div>
+                    </div>
+                </div>
+            </div> -->
             <div class="col-md-10 listEventos">
-            <div id="address-search">
+
+                <div id="address-search">
                 <input type="text" id="address-input">
                 <button onclick="searchAddress();">Pesquisar</button>
             </div>  
                 <div class="w-100 d-flex justify-content-center mb-4">
                     <div id="map"></div>
                 </div>
+
                 <!-- Card se não encontrar evento -->
+
                 <!-- <div class="d-flex justify-content-center">
-                    <div class="boxVazio p-3 fw-bold rounded rounded-5">
-                        <p>Infelizmente não encontramos eventos próximos a este endereço cadastrados.</p>
-                    </div>
-                </div> -->
+                <div class="boxVazio p-3 fw-bold rounded rounded-5">
+                    <p>Infelizmente não encontramos eventos próximos a este endereço  cadastrados.</p>
+                </div>
+            </div> -->
+
+
+                <!-- Pode copiar essa div e só mudar o titulo pras outras funções de pesquisa -->
                 <div class="p-4">
-                    <h2 class="mb-3">Todos os Eventos (10)</h2>
+                    <h2 class="mb-3">Todos os Eventos (<?php echo count($eventos); ?>)</h2>
                     <div class="row g-3">
-                        <!-- <h2 class="mb-3">Mais Eventos</h2> -->
-                <!-- <h2 class="mb-3">Todos os Eventos Próximos</h2> -->
-                <div class="row g-3">
-                    <!--Card de evento-->
-                    <div class="col-sm-6 col-lg-3">
-                        <a href="../Evento/"> <!-- Adicione o link aqui -->
-                            <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                <img src="../../img/Usuario/carrossel-padrao.png" alt="Imagem do evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
-                                <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                <h3 class="fs-4 tituloEvento">Nome Evento</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
+                        <?php foreach ($eventos as $evento) : ?>
+                            <div class="col-sm-6 col-lg-3">
+                                <a href="../Evento/evento.php?id=<?php echo $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
+                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
+                                            <h3 class="fs-4 tituloEvento"><?php echo $evento['nomeEvento']; ?></h3>
+                                            <p class="tituloEvento"><?php echo $evento['descEvento']; ?></p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>

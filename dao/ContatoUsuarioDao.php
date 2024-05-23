@@ -7,15 +7,17 @@ class ContatoUsuarioDao{
         $titulo = $contato->getTitulo();
         $descricao = $contato->getDesc();
         $idUsuario = $contato->getIdUsuario();
+        $idCategoriaContatoUsuario = $contato->getIdCategoriaContatoUsuario();
     
         $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
-        $stmt = $conn->prepare("INSERT INTO tbcontatousuario (tituloContatoUsuario, descContatoUsuario, idUsuario) 
-                        VALUES (:titulo, :descricao, :idUsuario)");
+        $stmt = $conn->prepare("INSERT INTO tbcontatousuario (tituloContatoUsuario, descContatoUsuario, idUsuario, idCategoriaContatoUsuario) 
+                        VALUES (:titulo, :descricao, :idUsuario, :idCategoriaContatoUsuario)");
     
         $stmt->bindParam(':titulo', $titulo);        
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':idUsuario', $idUsuario);
+        $stmt->bindParam(':idCategoriaContatoUsuario', $idCategoriaContatoUsuario);
     
         $result = $stmt->execute();
     
@@ -29,6 +31,15 @@ class ContatoUsuarioDao{
     public static function selectAll(){
         $conexao = Conexao::conectar();
         $query = "SELECT * FROM tbcontatousuario";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public static function selectAllInner(){
+        $conexao = Conexao::conectar();
+        $query = "SELECT c.*, o.nomeUsuario, o.emailUsuario 
+                  FROM tbcontatousuario c
+                  INNER JOIN tbusuario o ON c.idUsuario = o.idUsuario";
         $stmt = $conexao->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -57,7 +68,8 @@ class ContatoUsuarioDao{
         $query = "UPDATE tbcontatousuario SET 
             tituloContatoUsuario = :titulo,
             descContatoUsuario = :descricao,
-            idUsuario = :idUsuario
+            idUsuario = :idUsuario,
+            idCategoriaContatoUsuario = :idCategoriaContatoUsuario
             WHERE idContatoUsuario = :id";
         
         $stmt = $conexao->prepare($query);
@@ -66,12 +78,13 @@ class ContatoUsuarioDao{
         $titulo = $contato->getTitulo();
         $descricao = $contato->getDesc();
         $idUsuario = $contato->getIdUsuario();
-           
-        $stmt->bindParam(':id', $id);        
+        $idCategoriaContatoUsuario = $contato->getIdCategoriaContatoUsuario();
+            
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':idUsuario', $idUsuario);
-    
+        $stmt->bindParam(':idCategoriaContatoUsuario', $idCategoriaContatoUsuario);
+        $stmt->bindParam(':id', $id); 
         return $stmt->execute();
     }
 }

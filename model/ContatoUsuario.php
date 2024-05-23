@@ -1,7 +1,7 @@
 <?php
 
 class ContatoUsuario {
-    public $id, $titulo, $desc, $idUsuario;
+    public $id, $titulo, $desc, $idUsuario, $idCategoriaContatoUsuario;
 
    // Getters e Setters
    public function getId() {
@@ -34,6 +34,13 @@ public function getIdUsuario() {
 
 public function setIdUsuario($idUsuario) {
     $this->idUsuario = $idUsuario;
+}
+public function getidCategoriaContatoUsuario() {
+    return $this->idCategoriaContatoUsuario;
+}
+
+public function setidCategoriaContatoUsuario($idCategoriaContatoUsuario) {
+    $this->idCategoriaContatoUsuario = $idCategoriaContatoUsuario;
 }
 }
 

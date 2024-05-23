@@ -12,6 +12,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $cidade = $evento->getCidade();
             $uf = $evento->getUf();
             $data = $evento->getData();
+            $dataFim = $evento->getDataFim();
             $faixaEtaria = $evento->getFaixaEtaria();
             $periodo = $evento->getPeriodoEvento();
             $valor = $evento->getValor();
@@ -24,7 +25,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
             $stmt = $conn->prepare("INSERT INTO tbevento (nomeEvento, cepEvento, enderecoEvento, numeroEvento, complementoEvento, bairroEvento, cidadeEvento, ufEvento,
-            dataEvento, faixaEtariaEvento, periodoEvento, valorEvento, espacoEvento, descEvento, idOrganizacaoEvento, imagemEvento, idSituacaoEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:faixa, :periodo, :valor,:espaco, :desc, :idOrgEvento, :imagem, :situacao)");
+            dataEvento, dataFimEvento, faixaEtariaEvento, periodoEvento, valorEvento, espacoEvento, descEvento, idOrganizacaoEvento, imagemEvento, idSituacaoEvento)  VALUES (:nome, :cep, :endereco, :numero, :complemento, :bairro, :cidade, :uf, :data,:dataFim, :faixa, :periodo, :valor,:espaco, :desc, :idOrgEvento, :imagem, :situacao)");
         
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':cep', $cep);
@@ -35,6 +36,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':cidade', $cidade);
             $stmt->bindParam(':uf', $uf);
             $stmt->bindParam(':data', $data);
+            $stmt->bindParam(':dataFim', $dataFim);
             $stmt->bindParam(':faixa', $faixaEtaria);
             $stmt->bindParam(':periodo', $periodo);
             $stmt->bindParam(':valor', $valor);
@@ -109,6 +111,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
                cidadeEvento = :cidade,
                ufEvento = :uf,
                dataEvento = :data,
+               dataFimEvento = :dataFim,
                faixaEtariaEvento = :faixa,
                periodoEvento = :periodo,
                valorEvento = :valor,
@@ -130,6 +133,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $cidade = $evento->getCidade();
             $uf = $evento->getUf();
             $data = $evento->getData();
+            $dataFim = $evento->getDataFim();
             $faixaEtaria = $evento->getFaixaEtaria();
             $periodo = $evento->getPeriodoEvento();
             $valor = $evento->getValor();
@@ -147,6 +151,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':cidade', $cidade);
             $stmt->bindParam(':uf', $uf);
             $stmt->bindParam(':data', $data);
+            $stmt->bindParam(':dataFim', $dataFim);
             $stmt->bindParam(':faixa', $faixaEtaria);
             $stmt->bindParam(':periodo', $periodo);
             $stmt->bindParam(':valor', $valor);
