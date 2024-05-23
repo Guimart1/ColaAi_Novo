@@ -20,10 +20,10 @@
 		document.getElementById($elemento).value = $id;
 		//window.location.href = "./registro.php";
 		}
-	function modalInfoEvento($id, $elemento){
+	function modalInfoEvento(id, elemento){
 		const myModal = new bootstrap.Modal('#modalInfoEvento');
 		myModal.show();
-		document.getElementById($elemento).value = $id;
+		document.getElementById(elemento).value = id;
 		//window.location.href = "./registro.php";
 		}
 
