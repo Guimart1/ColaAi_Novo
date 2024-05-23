@@ -84,7 +84,8 @@ $organizacao = new OrganizacaoDao();
     ?>
 
     <?php
-    require_once('../Componentes/headerLogado.php')
+    require_once('../Componentes/headerLogado.php');
+    require_once('../Componentes/modalEditarPerfil.php');
     ?>
 
     <!-- O banner está em background-image -->

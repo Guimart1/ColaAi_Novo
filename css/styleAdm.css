@@ -373,7 +373,7 @@ p {
    * Optional: Makes the sample page fill the window.
    */
 
-
+/* 
   input[type=text] {
     background-color: #fff;
     border: 0;
@@ -417,7 +417,7 @@ p {
   }
   input[type=button].button-secondary:hover {
     background-color: #d2e3fc;
-  }
+  } */
   
   #response-container {
     background-color: #fff;

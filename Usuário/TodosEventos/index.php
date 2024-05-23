@@ -44,9 +44,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
             margin-top:20px;
         }
 
-        #address-search {
-        display: none;
-    }
+
     </style>
     <script>
         let map, infoWindow, userMarker;
@@ -145,7 +143,8 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
 <body class="fundo-bolinha">
 
     <?php
-    require_once('../Componentes/headerLogado.php')
+    require_once('../Componentes/headerLogado.php');
+    require_once('../Componentes/modalEditarPerfil.php');
     ?>
 
 
@@ -209,27 +208,26 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                     <button class="btnFiltro rounded rounded-3" onclick="Fechar()">Aplicar filtros</button>
                 </div>
             </div>
-
-            <!-- <div class="listSearch pt-3 pb-3">
+            <div class="listSearch pt-3 pb-3">
                 <div class="searchBox d-flex justify-content-center">
-                    <div class="searchInput position-relative">
+                    <div class="searchInput position-relative" id="address-search">
                         <img src="../../img/Usuario/icon-search.png" alt="">
-                        <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5">
+                        <input type="text" placeholder="Pesquise locais" class="rounded rounded-5 ps-5" id="address-input">
                     </div>
                 </div>
-                <div class="distanciaBox">
-                    <label for="" class="mb-1 fs-5 mb-4">Distância</label>
-                    <div class="d-flex align-items-center">
-                        <div class="teste"></div><input type="range" name="" id=""><div class="teste"></div>
+                <div class="buttonProcurar d-flex justify-content-center mt-auto mb-1 me-auto" >
+                    <button class="border-0 rounded-3" onclick="searchAddress();">Buscar</button>
+                </div>
+                <div class="showFiltro mt-auto mb-1">
+                    <div class="buttonFiltros d-flex justify-content-center ">
+                        <button type="submit" class="border-0 rounded-3" onclick="Abrir()">Filtros</button>
                     </div>
                 </div>
-            </div> -->
-            <div class="col-md-10 listEventos">
+            </div>
 
-                <div id="address-search">
-                <input type="text" id="address-input">
-                <button onclick="searchAddress();">Pesquisar</button>
-            </div>  
+            <div class="col-md-10 listEventos">
+            <div style="height: 8vh;"></div>
+ 
                 <div class="w-100 d-flex justify-content-center mb-4">
                     <div id="map"></div>
                 </div>
@@ -251,7 +249,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                             <div class="col-sm-6 col-lg-3">
                                 <a href="../Evento/evento.php?id=<?php echo $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
                                     <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height: 100%;"> <!-- Defina a largura e altura desejadas -->
+                                        <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height: 100%; border-radius:15px;object-fit:cover"> <!-- Defina a largura e altura desejadas -->
                                         <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
                                             <h3 class="fs-4 tituloEvento"><?php echo $evento['nomeEvento']; ?></h3>
                                             <p class="tituloEvento"><?php echo $evento['descEvento']; ?></p>
@@ -266,10 +264,16 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
         </div>
     </div>
 </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+        let filtro = document.getElementById("filtro")
+        function Abrir() {
+            filtro.classList.add("filtroBox-on");
+            filtro.classList.remove("filtroBox-off");
+        }
+        function Fechar() {
+            filtro.classList.add("filtroBox-off");
+            filtro.classList.remove("filtroBox-on");
+        }
+    </script>
 </body>
 </html>

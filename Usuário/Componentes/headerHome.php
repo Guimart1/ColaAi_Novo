@@ -2,7 +2,7 @@
 <nav>
     <div class="navigation">
         <div class="imgHeader">
-            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2 logoHeader">
+            <img src="../../img/Login/Cola AI logo.png" alt="" class="img-fluid mb-2 logoHeader" style="max-width: 190px;">
         </div>
         <a href="#carrossel-teatros">Teatros</a>
         <a href="#carrossel-parques">Parques</a>
@@ -29,13 +29,11 @@
         <a href="#carrossel-parques">Parques</a>
         <a href="#carrossel-museus">Museus</a>
         <a href="#carrossel-centroCulturais">Centros Culturais</a>
-        <a href="#carrossel-centroCulturais">Seguindo</a>
-        <a href="#carrossel-centroCulturais">Registro de interesse</a>
     </div>
     <div class="iconBoxActive">
         <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
-        <img src="../../img/Usuario/icon-notificacao.png" alt="">
-        <a href="../Perfil/index.php"><img src="../../img/Usuario/icon-perfil.png" alt=""></a>
+        <img src="../../img/Usuario/icon-notificacao.png" alt="" onclick="toggleNotificacao()">
+        <img src="../../img/Usuario/icon-perfil.png" alt="" onclick="ToggleSelect()">
     </div>
 </div>
 
@@ -74,19 +72,25 @@
 
 <div class="position-relative">
     <div class="selectPerfil rounded rounded-5 selectPerfil-off" id="select">
-        <div class="d-flex p-2 ps-5 align-items-center optionPerfil">
-            <img src="../../img/Usuario/icon-meuPerfil.png" alt="" style="width: 35px; height:35px" class="me-1">
-            <a href="../Perfil/" class="fw-bold">Meu perfil</a>
-        </div>
-        <div class="d-flex p-2 ps-5 align-items-center optionPerfil">
-            <img src="../../img/Usuario/icon-editar.png" alt=""  style="width: 32px; height:32px" class="me-1">
-            <a class="fw-bold" >Editar Perfil</a> <!--Chamar o modal de editar dados do perfil-->
-        </div>
+        <a href="../Perfil/" class="fw-bold">
+            <div class="d-flex p-2 ps-5 align-items-center optionPerfil" style="border-radius: 30px 30px 0px 0px;">
+                <img src="../../img/Usuario/icon-meuPerfil.png" alt="" style="width: 35px; height:35px" class="me-1">
+                <span>Meu perfil</span>
+            </div>
+        </a>
+        <a class="fw-bold" style="cursor: pointer" onclick="modalDadosPessoais()">
+            <div class="d-flex p-2 ps-5 align-items-center optionPerfil">
+                <img src="../../img/Usuario/icon-editar.png" alt=""  style="width: 32px; height:32px" class="me-1">
+                <span>Editar Perfil</span> <!--Chamar o modal de editar dados do perfil-->
+            </div>
+        </a>
 
-        <div class="d-flex p-2 ps-5 align-items-center optionPerfil" style="border: none;">
-            <img src="../../img/Usuario/icon-sair.png" alt=""  style="width: 32px; height:32px" class="me-1">
-            <a class="fw-bold" href="../logoff.php">Sair</a>
-        </div>
+        <a class="fw-bold" href="../logoff.php">
+            <div class="d-flex p-2 ps-5 align-items-center optionPerfil" style="border: none;border-radius: 0px 0px 30px 30px;">
+                <img src="../../img/Usuario/icon-sair.png" alt=""  style="width: 32px; height:32px" class="me-1">
+                <span>Sair</span>
+            </div>
+        </a>
     </div>
 </div>
 

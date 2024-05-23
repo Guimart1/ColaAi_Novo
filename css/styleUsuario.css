@@ -694,7 +694,7 @@ input[type="checkbox"] {
     position: absolute;
     height: auto;
     width: 300px;
-    right: 5%;
+    right: 2%;
     z-index: 10;
     display: none;
 }
@@ -702,8 +702,13 @@ input[type="checkbox"] {
     color: #A6A6A6;
     text-decoration: none;
 }
+
 .optionPerfil{
     border-bottom: 2px solid #a6a6a6;
+}
+.optionPerfil:hover {
+    background-color: #d9ffba;
+    border-radius:auto;
 }
 .selectPerfil-on{
     display: block;

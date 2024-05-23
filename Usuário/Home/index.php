@@ -36,7 +36,8 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
     $authUser = $_SESSION['user'];
     ?>
     <?php
-    require_once('../Componentes/headerHome.php')
+    require_once('../Componentes/headerHome.php');
+    require_once('../Componentes/modalEditarPerfil.php');
     ?>
 
     <div class="container mt-4" style="width: 80%;">

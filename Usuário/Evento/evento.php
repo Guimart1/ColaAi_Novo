@@ -58,7 +58,8 @@ require_once '../../dao/InteresseEventoDao.php';
     }
     ?>
     <?php
-        require_once('../Componentes/headerLogado.php')
+        require_once('../Componentes/headerLogado.php');
+        require_once('../Componentes/modalEditarPerfil.php');
     ?>
     <!--inicio do conteudo-->
     <div class="container-fluid eventoBox d-flex align-items-center flex-column p-0">

@@ -62,7 +62,8 @@ $user = new UserDao();
     ?>
 
     <?php
-    require_once('../Componentes/headerLogado.php')
+    require_once('../Componentes/headerLogado.php');
+    require_once('../Componentes/modalEditarPerfil.php');
     ?>
 
     <!-- O banner está em background-image -->
@@ -221,25 +222,6 @@ $user = new UserDao();
                             <label for="banner" class="form-label m-1">Carregar Imagem</label>
                             <input type="file" id="banner" name="banner" accept="image/*" class="form-control mt-1 mb-4">
                         </div>
-                        <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
-                        <h1 class="modal-title fs-4 ps-1" id="exampleModalLabel">Dados Pessoais</h1>
-                    </div>
-                    <div class="p-1 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
-                        <p>O Cola Aí utiliza esses dados para manter sua segurança e elegibilidade de perfil único.</p>
-                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
-                            <h2 class="fs-5 mt-3">Nome</h2>
-                            <div class="inputContato">
-                                <input type="text" class="input-group mt-1" name="nomeUsuario" placeholder="Nome do usuário">
-                            </div>
-                            <h2 class="fs-5 mt-3">E-mail</h2>
-                            <div class="inputContato">
-                                <input type="text" class="input-group mt-1" name="emailUsuario" placeholder="E-mail do usuário">
-                            </div>
-                            <h2 class="fs-5 mt-3">Senha</h2>
-                            <div class="inputContato d-flex">
-                                <input type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4" style="font-weight: 600; color: #a6a6a6">
-                                <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
-                            </div>
                             <div class="btnModal w-100 mt-4 d-flex">
                                 <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
                             </div>
