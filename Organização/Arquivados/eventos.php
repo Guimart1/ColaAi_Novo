@@ -25,11 +25,12 @@ $evento = EventoDao::selectAllFiled();
         exit();
     }
 
-   // Obter o ID da organização logada
-   $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
-
-   // Buscar apenas os eventos associados a essa organização
-   $evento = EventoDao::selectByOrganizacaoIdFiled($idOrganizacaoLogada);
+    // Obter o ID da organização logada
+    $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
+    //o usuário está autenticado
+    $authUserOrg = $_SESSION['userOrg'];
+    // Buscar apenas os eventos associados a essa organização
+    $evento = EventoDao::selectByOrganizacaoIdFiled($idOrganizacaoLogada);
     include('../Componentes/header.php');
     ?>
     <div class="container-fluid vw-100">
@@ -48,9 +49,9 @@ $evento = EventoDao::selectAllFiled();
             include('../Componentes/menu.php')
             ?>
             <div class="info-box col-md-9 pt-4" style="color: #a6a6a6;" id="data-box">
-                <h1 class="text-center">Veja aqui todos as seus itens arquivados!</h1>
+                <h1 class="text-center">Veja aqui todos as seus Eventos arquivados!</h1>
                 <div class="w-100 d-flex flex-column mt-5 pe-5">
-                    <div class="dropdown ms-auto me-0">
+                    <!-- <div class="dropdown ms-auto me-0">
                         <h1 class="fs-5 ms-auto me-0">Item</h1>
                         <a class="btn btn-body-primary border-1 border dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Selecione
@@ -59,33 +60,33 @@ $evento = EventoDao::selectAllFiled();
                             <li><a class="dropdown-item" href="#">Eventos</a></li>
                             <li><a class="dropdown-item" href="#">Publicações </a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row ms-4 me-5 mt-2">
                     <table class="">
                         <thead>
                             <tr id="data-table">
                                 <th class="col-md-1 fs-5">ID</th>
-                                <th class="col-md-5 fs-5">Título do Evento/Publicação</th>
+                                <th class="col-md-5 fs-5">Título do Evento</th>
                                 <th class="col-md-1 text-center fs-5">Informações</th>
                                 <th class="col-md-1 text-center fs-5">Restaurar</th>
                             </tr>
-                            <?php foreach ($evento as $eventos) :?>
-                                    <tr class="mt-1">
-                                        <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
-                                        <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
-                                        <td class="pt-3 col-md-1 text-center">
-                                            <a class="dropdown-item" onclick="modalInfoPubli(1,1)"><!--  mudar de acordo com tipo (evento ou publi) -->
-                                                <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
-                                            </a>
-                                        </td>
-                                        <td class="pt-3 col-md-1 text-center">
-                                            <a class="dropdown-item" onclick="modalRestaurar(1,1)">
-                                                <img src="../../img/Organizacao/restaurar-icon.png" alt="" style="width: 35px;">
-                                            </a>
-                                        </td>
-                                    </tr>
-                            <?php endforeach;?>
+                            <?php foreach ($evento as $eventos) : ?>
+                                <tr class="mt-1">
+                                    <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
+                                    <td class="pt-3 col-md-1 text-center">
+                                        <a class="dropdown-item" onclick="modalInfoPubli(1,1)"><!--  mudar de acordo com tipo (evento ou publi) -->
+                                            <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
+                                        </a>
+                                    </td>
+                                    <td class="pt-3 col-md-1 text-center">
+                                        <a class="dropdown-item" onclick="modalRestaurar(1,1)">
+                                            <img src="../../img/Organizacao/restaurar-icon.png" alt="" style="width: 35px;">
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </thead>
                     </table>
                 </div>
