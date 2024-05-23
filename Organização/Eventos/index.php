@@ -99,6 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
     // Obter o ID da organização logada
     $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
 
+    //o usuário está autenticado
+    $authUserOrg = $_SESSION['userOrg'];
+
     // Buscar apenas os eventos associados a essa organização
     $evento = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
 
