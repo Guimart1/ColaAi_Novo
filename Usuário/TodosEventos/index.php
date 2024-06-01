@@ -171,11 +171,20 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
             <form class="col-md-2 filtroBox pt-3 filter" id="filtro">
                 <div class="filtroEtaria mb-2">
                     <label for="" class="fs-5">Faixa Etária</label>
-                    <div class="mt-1 mb-1">
-                        <input type="number" name = "minimo" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #6D9EAF;">min</span>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="" value="1" id=""><span class="ms-2">0-12 meses</span>
                     </div>
-                    <div class="mt-1 mb-1">
-                        <input type="number" name = "maximo" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #E6AEB2">max</span>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="" value="2" id=""><span class="ms-2">1-3 anos</span>
+                    </div>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="" value="3" id=""><span class="ms-2">3-5 anos</span>
+                    </div>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="" value="4" id=""><span class="ms-2">5-12 anos</span>
+                    </div>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="" value="5" id=""><span class="ms-2">Livre para todos</span>
                     </div>
                 </div>
                 <div class="distanciaBox">
@@ -184,6 +193,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                         <div class="teste"></div><input type="range" name="" id="">
                         <div class="teste"></div>
                     </div>
+                    
                 </div>
                 <span class="ms-auto">km</span>
                 <div class="turnoBox mt-2">
@@ -205,7 +215,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                         <input type="checkbox" name="valor" id="gratuito" value = "gratuito"><span class="ms-2">Gratuito</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="valor" value="pago" data-bs-toggle="collapse" href="#collapsePreco" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="ms-2">Pago</span>
+                        <input type="checkbox" name="valor" value="pago"><span class="ms-2">Pago</span>
                     </div>
                     <div class="collapse" id="collapsePreco">
                         <li class=" w-100" style="list-style: none;">
