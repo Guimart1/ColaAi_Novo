@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idFeedback'])) {
 
     // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
     $html_info = '';
-    $html_info .= "<input type='text' class='form-control' id='feedbackId' name='id' type='text'>";
+    $html_info .= "<input type='hidden' class='form-control' id='feedbackId' name='id' type='text'>";
     $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
     $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Usuário: </p>";
     $html_info .= "<p id='nomeUsuario' class='ms-2 fs-5'>" . $feedbackSolo['nomeUsuario'] . "</p>";

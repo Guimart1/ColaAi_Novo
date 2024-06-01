@@ -4,6 +4,34 @@ require_once '../../dao/EventoDao.php';
 $eventos = EventoDao::selectAll();
 $enderecosEventos = [];
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $turno = $_POST['turno'];
+    $eventosFiltrados = EventoDao::selectAllFiltros(1, 1, $turno, 1);
+    $quantidade = count($eventosFiltrados);
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $htmlCard = '';
+    $htmlCard = "<h2 class='mb-3'>Todos os Eventos (" . $quantidade . ")</h2>";
+    $htmlCard .= "<div class='row g-3'>";
+foreach ($eventosFiltrados as $eventos) {
+    $htmlCard .= "<div class='col-sm-6 col-lg-3'>";
+    $htmlCard .= "<a href='../Evento/evento.php?id=" . $eventos['idEvento'] . "'>"; // Fechamento correto da tag <a>
+    $htmlCard .= "<div class='imageBox position-relative' style='width: 100%; height: 200px;'> <!-- Defina a largura e altura desejadas -->";
+    $htmlCard .= "<img src='../../img/Organizacao/" . $eventos['imagemEvento'] . "' alt='Imagem do Evento' style='width: 100%; height: 100%; border-radius:15px;object-fit:cover'> <!-- Defina a largura e altura desejadas -->";
+    $htmlCard .= "<div class='descMini p-2 ps-4'> <!-- Defina a largura igual à da imagem -->";
+    $htmlCard .= "<h3 class='fs-4 tituloEvento'>" . $eventos['nomeEvento'] . "</h3>";
+    $htmlCard .= "<p class='tituloEvento'>" . $eventos['descEvento'] . "</p>";
+    $htmlCard .= "</div>";
+    $htmlCard .= "</div>";
+    $htmlCard .= "</a>"; // Fechamento correto da tag <a>
+    $htmlCard .= "</div>";
+};
+$htmlCard .= "</div>";
+
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $htmlCard;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
 // Populando $enderecosEventos
 foreach ($eventos as $evento) {
     $enderecoEvento = $evento['enderecoEvento'] . "," . $evento['numeroEvento'] . "," .  $evento['complementoEvento']. "," .  $evento['bairroEvento'] . "," . $evento['cepEvento'] . "," . $evento['cidadeEvento']. "," .  $evento['ufEvento'];
@@ -26,16 +54,6 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
     <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZxEPesp8pDRjhFBsLKBA7EMkA6jdfWzI&callback=initMap&v=weekly" defer></script>
-    <!-- Adicione a biblioteca ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!-- Adicione seu script personalizado -->
-    <script type="text/javascript" src="../../js/personalizar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    <script type="text/javascript" src="../../js/modal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <style>
         #map {
             width: 800px;
@@ -49,7 +67,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
     <script>
         let map, infoWindow, userMarker;
         const enderecosEventos = <?php echo $enderecosEventosJSON; ?>;
-
+        
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: -34.397, lng: 150.644 },
@@ -117,7 +135,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
         function searchAddress() {
             const addressInput = document.getElementById('address-input').value;
             const geocoder = new google.maps.Geocoder();
-
+            
             geocoder.geocode({ address: addressInput }, (results, status) => {
                 if (status === 'OK') {
                     map.setCenter(results[0].geometry.location);
@@ -150,14 +168,14 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2 filtroBox pt-3" id="filtro">
+            <form class="col-md-2 filtroBox pt-3 filter" id="filtro">
                 <div class="filtroEtaria mb-2">
                     <label for="" class="fs-5">Faixa Etária</label>
                     <div class="mt-1 mb-1">
-                        <input type="number" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #6D9EAF;">min</span>
+                        <input type="number" name = "minimo" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #6D9EAF;">min</span>
                     </div>
                     <div class="mt-1 mb-1">
-                        <input type="number" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #E6AEB2">max</span>
+                        <input type="number" name = "maximo" class="faixaEtariaInput me-2" min="1" max="15"><span style="color: #E6AEB2">max</span>
                     </div>
                 </div>
                 <div class="distanciaBox">
@@ -171,26 +189,23 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                 <div class="turnoBox mt-2">
                     <label for="" class="fs-5">Turno</label>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" id=""><span class="ms-2">Todos</span>
+                        <input type="checkbox" name="turno[]" value="1" id="vespertino"><span class="ms-2">Vespertino</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" id=""><span class="ms-2">Vespertino</span>
+                        <input type="checkbox" name="turno[]" value="2" id="matutino"><span class="ms-2">Matutino</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" id=""><span class="ms-2">Matutino</span>
-                    </div>
-                    <div class="inputFiltros">
-                        <input type="checkbox" name="" id=""><span class="ms-2">Noturno</span>
+                        <input type="checkbox" name="turno[]" value="3" id="noturno"><span class="ms-2">Noturno</span>
                     </div>
                 </div>
 
                 <div class="turnoBox mt-1">
                     <label for="" class="fs-5 ">Valor</label>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" id=""><span class="ms-2">Gratuito</span>
+                        <input type="checkbox" name="valor" id="gratuito" value = "gratuito"><span class="ms-2">Gratuito</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" data-bs-toggle="collapse" href="#collapsePreco" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="ms-2">Pago</span>
+                        <input type="checkbox" name="valor" value="pago" data-bs-toggle="collapse" href="#collapsePreco" role="button" aria-expanded="false" aria-controls="collapseExample"><span class="ms-2">Pago</span>
                     </div>
                     <div class="collapse" id="collapsePreco">
                         <li class=" w-100" style="list-style: none;">
@@ -205,9 +220,9 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                     </div>
                 </div>
                 <div class="w-100 d-flex justify-content-center mt-3">
-                    <button class="btnFiltro rounded rounded-3" onclick="Fechar()">Aplicar filtros</button>
+                    <button class="btnFiltro rounded rounded-3" type="submit" onclick="Fechar()">Aplicar filtros</button>
                 </div>
-            </div>
+    </form>
             <div class="listSearch pt-3 pb-3">
                 <div class="searchBox d-flex justify-content-center">
                     <div class="searchInput position-relative" id="address-search">
@@ -227,7 +242,7 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
 
             <div class="col-md-10 listEventos">
             <div style="height: 8vh;"></div>
- 
+            
                 <div class="w-100 d-flex justify-content-center mb-4">
                     <div id="map"></div>
                 </div>
@@ -235,14 +250,14 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                 <!-- Card se não encontrar evento -->
 
                 <!-- <div class="d-flex justify-content-center">
-                <div class="boxVazio p-3 fw-bold rounded rounded-5">
+                    <div class="boxVazio p-3 fw-bold rounded rounded-5">
                     <p>Infelizmente não encontramos eventos próximos a este endereço  cadastrados.</p>
                 </div>
             </div> -->
+            
 
-
-                <!-- Pode copiar essa div e só mudar o titulo pras outras funções de pesquisa -->
-                <div class="p-4">
+            <!-- Pode copiar essa div e só mudar o titulo pras outras funções de pesquisa -->
+            <div class="p-4" id = "informacoes">
                     <h2 class="mb-3">Todos os Eventos (<?php echo count($eventos); ?>)</h2>
                     <div class="row g-3">
                         <?php foreach ($eventos as $evento) : ?>
@@ -257,14 +272,25 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                                     </div>
                                 </a>
                             </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZxEPesp8pDRjhFBsLKBA7EMkA6jdfWzI&callback=initMap&v=weekly" defer></script>
+    <!-- Adicione a biblioteca ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Adicione seu script personalizado -->
+    <script type="text/javascript" src="../../js/personalizar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
+    <script>
         let filtro = document.getElementById("filtro")
         function Abrir() {
             filtro.classList.add("filtroBox-on");
@@ -274,6 +300,23 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
             filtro.classList.add("filtroBox-off");
             filtro.classList.remove("filtroBox-on");
         }
+    </script>
+    <script>
+        $(function() {
+            $('.filter').submit(function() {
+                // console.log($('.filter').serialize());
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: $('.filter').serialize(),
+                    success:function(data) {
+                        console.log(data);
+                        $('#informacoes').html(data);
+                    }
+                });
+                return false;
+            });
+        });
     </script>
 </body>
 </html>

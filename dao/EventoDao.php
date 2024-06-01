@@ -79,6 +79,34 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetchAll();
         }
 
+        public static function selectAllFiltros($min, $max, $turno, $valor){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbevento";
+            if(!empty($min) || !empty($max) || !empty($turno) || !empty($valor)){
+                $query .= " WHERE";
+                if(!empty($turno)){
+                    if(count($turno) == 2){
+                        $query .= " periodoEvento = :turno1 OR periodoEvento = :turno2";
+                    } elseif(count($turno) == 1){
+                        $query .= " periodoEvento = :turno";
+                    } else {
+                        $query .= " periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3";
+                    }
+                }
+            }
+            $stmt = $conexao->prepare($query);
+            if (!empty($turno)) {
+                if (count($turno) == 2) {
+                    $stmt->bindValue(':turno1', $turno[0]);
+                    $stmt->bindValue(':turno2', $turno[1]);
+                } elseif (count($turno) == 1) {
+                    $stmt->bindValue(':turno', $turno[0]);
+                }
+            }
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+
         public static function selectById($id){
             $conexao = Conexao::conectar();
             $query = "SELECT * FROM tbevento WHERE idEvento = :id";
