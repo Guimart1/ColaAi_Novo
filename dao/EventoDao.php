@@ -79,28 +79,76 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetchAll();
         }
 
-        public static function selectAllFiltros($min, $max, $turno, $valor){
+        public static function selectAllFiltros($faixaEtaria, $turno, $valor){
             $conexao = Conexao::conectar();
             $query = "SELECT * FROM tbevento";
-            if(!empty($min) || !empty($max) || !empty($turno) || !empty($valor)){
+            if(!empty($faixaEtaria) || !empty($turno) || !empty($valor)){
                 $query .= " WHERE";
+                if(!empty($faixaEtaria)){
+                    if(count($faixaEtaria) == 1){
+                        $query.= " faixaEtariaEvento = :faixaEtaria";
+                    } elseif(count($faixaEtaria) == 2){
+                        $query .= " (faixaEtariaEvento = :faixaEtaria OR faixaEtariaEvento = :faixaEtaria2)";
+                    } elseif(count($faixaEtaria) == 3){
+                        $query .= " (faixaEtariaEvento = :faixaEtaria OR faixaEtariaEvento = :faixaEtaria2 OR faixaEtariaEvento = :faixaEtaria3)";
+                    } elseif(count($faixaEtaria) == 4){
+                        $query .= " (faixaEtariaEvento = :faixaEtaria OR faixaEtariaEvento = :faixaEtaria2 OR faixaEtariaEvento = :faixaEtaria3 OR faixaEtariaEvento = :faixaEtaria4)";
+                    } else {
+                        $query .= " (faixaEtariaEvento = 1 OR faixaEtariaEvento = 2 OR faixaEtariaEvento = 3 OR faixaEtariaEvento = 4 OR faixaEtariaEvento = 5)";
+                    }
+                } else {
+                    $query .= " (faixaEtariaEvento = 1 OR faixaEtariaEvento = 2 OR faixaEtariaEvento = 3 OR faixaEtariaEvento = 4 OR faixaEtariaEvento = 5)";
+                }
                 if(!empty($turno)){
                     if(count($turno) == 2){
-                        $query .= " periodoEvento = :turno1 OR periodoEvento = :turno2";
+                        $query .= " AND (periodoEvento = :turno1 OR periodoEvento = :turno2)";
                     } elseif(count($turno) == 1){
-                        $query .= " periodoEvento = :turno";
+                        $query .= " AND periodoEvento = :turno1";
                     } else {
-                        $query .= " periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3";
+                        $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3)";
                     }
+                } else {
+                    $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3)";
+                }
+                if(!empty($valor)){
+                    if(count($valor) == 1){
+                        $query .= " AND valorEvento = :valor";
+                    } else {
+                        $query .= " AND (valorEvento = 1 OR valorEvento = 2)";
+                    }
+                } else {
+                    $query .= " AND (valorEvento = 1 OR valorEvento = 2)";
                 }
             }
             $stmt = $conexao->prepare($query);
+            if(!empty($faixaEtaria)){
+                if(count($faixaEtaria) == 1){
+                    $stmt->bindValue(':faixaEtaria', $faixaEtaria[0]);
+                } elseif(count($faixaEtaria) == 2){
+                    $stmt->bindValue(':faixaEtaria', $faixaEtaria[0]);
+                    $stmt->bindValue(':faixaEtaria2', $faixaEtaria[1]);
+                } elseif(count($faixaEtaria) == 3){
+                    $stmt->bindValue(':faixaEtaria', $faixaEtaria[0]);
+                    $stmt->bindValue(':faixaEtaria2', $faixaEtaria[1]);
+                    $stmt->bindValue(':faixaEtaria3', $faixaEtaria[2]);
+                } elseif(count($faixaEtaria) == 4){
+                    $stmt->bindValue(':faixaEtaria', $faixaEtaria[0]);
+                    $stmt->bindValue(':faixaEtaria2', $faixaEtaria[1]);
+                    $stmt->bindValue(':faixaEtaria3', $faixaEtaria[2]);
+                    $stmt->bindValue(':faixaEtaria4', $faixaEtaria[3]);
+                }
+            }
             if (!empty($turno)) {
                 if (count($turno) == 2) {
                     $stmt->bindValue(':turno1', $turno[0]);
                     $stmt->bindValue(':turno2', $turno[1]);
                 } elseif (count($turno) == 1) {
-                    $stmt->bindValue(':turno', $turno[0]);
+                    $stmt->bindValue(':turno1', $turno[0]);
+                }
+            }
+            if(!empty($valor)){
+                if(count($valor) == 1){
+                    $stmt->bindValue(':valor', $valor[0]);
                 }
             }
             $stmt->execute();

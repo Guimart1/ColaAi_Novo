@@ -5,8 +5,22 @@ $eventos = EventoDao::selectAll();
 $enderecosEventos = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $turno = $_POST['turno'];
-    $eventosFiltrados = EventoDao::selectAllFiltros(1, 1, $turno, 1);
+    if (!empty($_POST['faixaEtaria'])){
+        $faixaEtaria = $_POST['faixaEtaria'];
+    } else {
+        $faixaEtaria = '';
+    }
+    if (!empty($_POST['turno'])){
+        $turno = $_POST['turno'];
+    } else {
+        $turno = '';
+    }
+    if (!empty($_POST['valor'])){
+        $valor = $_POST['valor'];
+    } else {
+        $valor = '';
+    }
+    $eventosFiltrados = EventoDao::selectAllFiltros($faixaEtaria, $turno, $valor);
     $quantidade = count($eventosFiltrados);
     // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
     $htmlCard = '';
@@ -172,19 +186,19 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                 <div class="filtroEtaria mb-2">
                     <label for="" class="fs-5">Faixa Etária</label>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" value="1" id=""><span class="ms-2">0-12 meses</span>
+                        <input type="checkbox" name="faixaEtaria[]" value="1" id="0-12meses"><span class="ms-2">0-12 meses</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" value="2" id=""><span class="ms-2">1-3 anos</span>
+                        <input type="checkbox" name="faixaEtaria[]" value="2" id="1-3anos"><span class="ms-2">1-3 anos</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" value="3" id=""><span class="ms-2">3-5 anos</span>
+                        <input type="checkbox" name="faixaEtaria[]" value="3" id="3-5anos"><span class="ms-2">3-5 anos</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" value="4" id=""><span class="ms-2">5-12 anos</span>
+                        <input type="checkbox" name="faixaEtaria[]" value="4" id="5-12anos"><span class="ms-2">5-12 anos</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="" value="5" id=""><span class="ms-2">Livre para todos</span>
+                        <input type="checkbox" name="faixaEtaria[]" value="5" id="livreTodos"><span class="ms-2">Livre para todos</span>
                     </div>
                 </div>
                 <div class="distanciaBox">
@@ -212,10 +226,10 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                 <div class="turnoBox mt-1">
                     <label for="" class="fs-5 ">Valor</label>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="valor" id="gratuito" value = "gratuito"><span class="ms-2">Gratuito</span>
+                        <input type="checkbox" name="valor[]" id="gratuito" value = "1"><span class="ms-2">Gratuito</span>
                     </div>
                     <div class="inputFiltros">
-                        <input type="checkbox" name="valor" value="pago"><span class="ms-2">Pago</span>
+                        <input type="checkbox" name="valor[]" value="2" id = "pago"><span class="ms-2">Pago</span>
                     </div>
                     <div class="collapse" id="collapsePreco">
                         <li class=" w-100" style="list-style: none;">
