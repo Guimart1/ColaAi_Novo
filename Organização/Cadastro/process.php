@@ -104,6 +104,6 @@ switch ($_POST["acao"]) {
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         } 
         break;
-        
+   
 }
 ?>

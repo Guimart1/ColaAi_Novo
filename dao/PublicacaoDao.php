@@ -9,16 +9,17 @@ class PublicacaoDao
         $descricao = $publicacao->getDescricao();
         $link = $publicacao->getLink();
         $idOrganizacaoEvento = $publicacao->getIdOrganizacaoEvento();
+        $idSituacao = 1;
 
         $conn = Conexao::conectar();
 
-        $stmt = $conn->prepare("INSERT INTO tbpublicacao (tituloPublicacao, descPublicacao, linkOrganizacaoEvento, idOrganizacaoEvento)  
-                                VALUES (:titulo, :descricao, :link, :idOrganizacaoEvento)");
+        $stmt = $conn->prepare("INSERT INTO tbpublicacao (tituloPublicacao, descPublicacao, linkOrganizacaoEvento, idOrganizacaoEvento, idSituacaoPublicacao) VALUES (:titulo, :descricao, :link, :idOrganizacaoEvento, :idSituacao)");
 
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':link', $link);
         $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacaoEvento);
+        $stmt->bindParam(':idSituacao', $idSituacao);
 
         $result = $stmt->execute();
 
@@ -33,6 +34,14 @@ class PublicacaoDao
     {
         $conexao = Conexao::conectar();
         $query = "SELECT * FROM tbpublicacao";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public static function selectAllActive()
+    {
+        $conexao = Conexao::conectar();
+        $query = "SELECT * FROM tbpublicacao WHERE idSituacaoPublicacao = 1";
         $stmt = $conexao->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -84,13 +93,40 @@ class PublicacaoDao
 
         return $stmt->execute();
     }
-    public static function selectAllByOrganizacao($idOrganizacao)
+    public static function updateSituacao($id, $publicacao){
+        $conexao = Conexao::conectar();
+    
+        $query = "UPDATE tbpublicacao SET 
+            idSituacaoPublicacao = :situacao
+            WHERE idPublicacao = :id";
+        
+        $stmt = $conexao->prepare($query);
+    
+        // Atribuir os valores a variáveis antes de chamar bindParam
+        $situacao = $publicacao->getSituacaoPublicacao();
+
+        $stmt->bindParam(':situacao', $situacao);
+        $stmt->bindParam(':id', $id);
+    
+        return $stmt->execute();
+    }
+    public static function selectAllByOrganizacaoActive($idOrganizacao)
     {
         $conn = Conexao::conectar();
-        $query = "SELECT * FROM tbpublicacao WHERE idOrganizacaoEvento = :idOrganizacao";
+        $query = "SELECT * FROM tbpublicacao WHERE idOrganizacaoEvento = :idOrganizacao AND idSituacaoPublicacao = 1";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function selectAllByOrganizacaoFiled($idOrganizacao)
+    {
+        $conn = Conexao::conectar();
+        $query = "SELECT * FROM tbpublicacao WHERE idOrganizacaoEvento = :idOrganizacao AND idSituacaoPublicacao = 2";
         $stmt = $conn->prepare($query);
         $stmt->bindValue(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+?>

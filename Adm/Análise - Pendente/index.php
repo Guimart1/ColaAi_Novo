@@ -168,7 +168,7 @@
                             <div class="modal-content ">
                                 <div class="modal-body" style="color: #a6a6a6;">
                                     <form action="process.php" method="post">
-                                        <input type="text" class="form-control" id="idAceitar" name="id" type="text">
+                                        <input type="hidden" class="form-control" id="idAceitar" name="id" type="text">
                                         <h1 class="text-center fs-2 fw-bold">Aceitar o cadastro<br> da organização?</h1>
                                         <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#93CC4C">aceitar</span> 
                                         a organização receberá um e-mail de acesso para concluír o seu cadastro.</p>

@@ -105,7 +105,33 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt = $conexao->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll();
-
+        }
+        public static function selectAllInnerJoin(){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM `tborganizacaoevento` INNER JOIN tbsituacaoorganizacaoevento ON tborganizacaoevento.idSituacaoOrganizacaoEvento = tbsituacaoorganizacaoevento.idSituacaoOrganizacaoEvento
+            ";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        public static function selectAllInnerJoinFiltrado($filtro){
+            if($filtro != 0){
+                $query = "SELECT * FROM `tborganizacaoevento` INNER JOIN tbsituacaoorganizacaoevento ON tborganizacaoevento.idSituacaoOrganizacaoEvento = tbsituacaoorganizacaoevento.idSituacaoOrganizacaoEvento WHERE tborganizacaoevento.idSituacaoOrganizacaoEvento = $filtro";
+            } else{
+                $query = "SELECT * FROM `tborganizacaoevento` INNER JOIN tbsituacaoorganizacaoevento ON tborganizacaoevento.idSituacaoOrganizacaoEvento = tbsituacaoorganizacaoevento.idSituacaoOrganizacaoEvento";
+            }
+            $conexao = Conexao::conectar();
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        public static function selectFilter($categoria){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tborganizacaoevento WHERE idSituacaoOrganizacao = :categoria";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':categoria', $categoria);
+            $stmt->execute();
+            return $stmt->fetchAll();
         }
 
         public static function selectById($id){
@@ -117,6 +143,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
+
 
         public static function delete($id){
             $conexao = Conexao::conectar();
@@ -206,7 +233,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
         }
         public static function checkCredentials($email, $senha){
             $conexao = Conexao::conectar();
-            $query = "SELECT * FROM tborganizacaoevento WHERE emailOrganizacaoEvento = :email and senhaOrganizacaoEvento = :senha";
+            $query = "SELECT * FROM tborganizacaoevento WHERE emailOrganizacaoEvento = :email and senhaOrganizacaoEvento = :senha and idSituacaoOrganizacaoEvento = 2";
             $stmt = $conexao->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':senha', $senha);

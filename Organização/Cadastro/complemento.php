@@ -6,6 +6,32 @@
         header("Location:bairro.php");
         exit;
     }
+    
+// Função para buscar o endereço com base no CEP
+function buscarEnderecoPorCEP($cep) {
+    $url = "https://viacep.com.br/ws/{$cep}/json/";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+// Verifica se foi enviado um CEP
+if (isset($_SESSION['cepOrganizacaoEvento'])) {
+    $cep = $_SESSION['cepOrganizacaoEvento'];
+    $enderecoDetalhes = buscarEnderecoPorCEP($cep);
+
+    // Se o endereço foi encontrado, preenche o campo de endereço
+    if (!empty($enderecoDetalhes['complemento'])) {
+        $complemento = $enderecoDetalhes['complemento'];
+    } else {
+        $complemento = '';
+    }
+} else {
+    // Se não foi enviado um CEP, define o campo de endereço como vazio
+    $complemento = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +59,7 @@
                         <p class="fs-4 ps-4 pe-4">Recomendamos que envie dados atualizados.</p>
                     </div>
                     <div class="input-box mt-5 mb-5 ps-4 pe-4">
-                        <input type="text" class="input-group" name="complementoOrganizacaoEvento" placeholder="Digite o complemento">
+                        <input type="text" class="input-group" name="complementoOrganizacaoEvento" id="complementoOrganizacaoEvento" placeholder="Digite o complemento" value="<?php echo $complemento; ?>">
                     </div>
                     <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4"> 
                     <a href="endereco.php" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Voltar</a>

@@ -1,12 +1,39 @@
 <?php
-    session_start();
+session_start();
 
-     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enderecoOrganizacaoEvento']) && isset($_POST['numeroOrganizacaoEvento'])) {
-        $_SESSION['enderecoOrganizacaoEvento'] = trim($_POST['enderecoOrganizacaoEvento']);
-        $_SESSION['numeroOrganizacaoEvento'] = trim($_POST['numeroOrganizacaoEvento']);
-        header("Location:complemento.php");
-        exit;
+// Verifica se os detalhes do endereço foram enviados
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enderecoOrganizacaoEvento']) && isset($_POST['numeroOrganizacaoEvento'])) {
+    $_SESSION['enderecoOrganizacaoEvento'] = trim($_POST['enderecoOrganizacaoEvento']);
+    $_SESSION['numeroOrganizacaoEvento'] = trim($_POST['numeroOrganizacaoEvento']);
+    header("Location:complemento.php");
+    exit;
+}
+
+// Função para buscar o endereço com base no CEP
+function buscarEnderecoPorCEP($cep) {
+    $url = "https://viacep.com.br/ws/{$cep}/json/";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+// Verifica se foi enviado um CEP
+if (isset($_SESSION['cepOrganizacaoEvento'])) {
+    $cep = $_SESSION['cepOrganizacaoEvento'];
+    $enderecoDetalhes = buscarEnderecoPorCEP($cep);
+
+    // Se o endereço foi encontrado, preenche o campo de endereço
+    if (!empty($enderecoDetalhes['logradouro'])) {
+        $logradouro = $enderecoDetalhes['logradouro'];
+    } else {
+        $logradouro = '';
     }
+} else {
+    // Se não foi enviado um CEP, define o campo de endereço como vazio
+    $logradouro = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,10 +61,10 @@
                     </div>
                     <div class="row mb-5 ps-md-4 pe-md-4 g-5">
                         <div class="input-box col-sm-8">
-                            <input type="text" class="input-group" name="enderecoOrganizacaoEvento" placeholder="Digite o endereço" maxlength = "40">
+                            <input type="text" class="input-group" name="enderecoOrganizacaoEvento" id="enderecoOrganizacaoEvento" placeholder="Digite o endereço" maxlength="40" value="<?php echo $logradouro; ?>" required>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" class="input-group " placeholder="N°" maxlength="5" name = "numeroOrganizacaoEvento">
+                            <input type="text" class="input-group " placeholder="N°" maxlength="5" name="numeroOrganizacaoEvento" required>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-2 mb-4 ps-4 pe-4"> 

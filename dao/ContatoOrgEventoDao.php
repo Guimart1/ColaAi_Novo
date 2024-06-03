@@ -7,15 +7,17 @@ class ContatoOrgEventoDao {
         $titulo = $contato->getTitulo();
         $descricao = $contato->getDesc();
         $idOrganizacaoEvento = $contato->getIdOrganizacaoEvento();
+        $idCategoriaContatoOrganizacaoEvento = $contato->getIdCategoriaContatoOrganizacaoEvento();
     
         $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
         
-        $stmt = $conn->prepare("INSERT INTO tbcontatoorganizacaoevento (tituloContatoOrgEvento, descContatoOrgEvento, idOrganizacaoEvento) 
-                        VALUES (:titulo, :descricao, :idOrganizacaoEvento)");
+        $stmt = $conn->prepare("INSERT INTO tbcontatoorganizacaoevento (tituloContatoOrganizacaoEvento, descContatoOrganizacaoEvento, idOrganizacaoEvento, idCategoriaContatoOrganizacaoEvento) 
+                        VALUES (:titulo, :descricao, :idOrganizacaoEvento, :idCategoriaContatoOrganizacaoEvento)");
     
         $stmt->bindParam(':titulo', $titulo);        
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacaoEvento);
+        $stmt->bindParam(':idCategoriaContatoOrganizacaoEvento', $idCategoriaContatoOrganizacaoEvento);
     
         $result = $stmt->execute();
     
@@ -58,9 +60,10 @@ class ContatoOrgEventoDao {
         $conexao = Conexao::conectar();
     
         $query = "UPDATE tbcontatoorganizacaoevento SET 
-            tituloContatoOrgEvento = :titulo,
-            descContatoOrgEvento = :descricao,
-            idOrganizacaoEvento = :idOrganizacaoEvento
+            tituloContatoOrganizacaoEvento = :titulo,
+            descContatoOrganizacaoEvento = :descricao,
+            idOrganizacaoEvento = :idOrganizacaoEvento,
+            idCategoriaContatoOrganizacaoEvento = :idCategoriaContatoOrganizacaoEvento
             WHERE idContatoOrgEvento = :id";
         
         $stmt = $conexao->prepare($query);
@@ -69,12 +72,14 @@ class ContatoOrgEventoDao {
         $titulo = $contato->getTitulo();
         $descricao = $contato->getDesc();
         $idOrganizacaoEvento = $contato->getIdOrganizacaoEvento();
+        $idCategoriaContatoOrganizacaoEvento = $contato->getIdCategoriaContatoOrganizacaoEvento();
            
-        $stmt->bindParam(':id', $id);        
+               
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacaoEvento);
-    
+        $stmt->bindParam(':idCategoriaContatoOrganizacaoEvento', $idCategoriaContatoOrganizacaoEvento);
+        $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
 }

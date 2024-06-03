@@ -5,6 +5,7 @@ require_once '../../model/Mensagem.php';
 
 $user = new User();
 $msg = new Mensagem();
+$conexao = new mysqli("localhost", "root", "", "bdcolaai");
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
@@ -13,7 +14,7 @@ switch ($_POST["acao"]) {
       $userDao = UserDao::delete($_POST['id']);
       header("Location: index.php");
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
     break;
   case 'SALVAR':
@@ -22,25 +23,42 @@ switch ($_POST["acao"]) {
     $user->setEmail($_POST['emailUsuario']);
     $user->setSenha($_POST['senhaUsuario']);
     $user->setTel($_POST['telUsuario']);
-    $user->setImagemPerfil($user->salvarImagem($_POST['imagemPerfilUsuario']));
-    $user->setImagemBanner($user->salvarImagem($_POST['imagemBannerUsuario']));
 
-    try {
-      $userDao = UserDao::insert($user);
+    try { 
+        // Obtém o e-mail enviado pelo formulário
+        $email = $_POST['emailUsuario'];
+    
+        // Consulta SQL para verificar se o e-mail já existe no banco de dados
+        $sql = "SELECT * FROM tbusuario WHERE emailUsuario = '$email'";
+        $resultado = $conexao->query($sql);
+            // Verifica se houve algum erro na execução da consulta
+    if ($resultado === false) {
+      $msg->setMensagem("Erro ao executar a consulta.", "bg-danger");
+      header("Location: index.php");
+     } else {
+        // Verifica se houve algum resultado retornado pela consulta
+        if ($resultado->num_rows > 0) {
+            // E-mail já existe no banco de dados, exibe mensagem de erro
+            $msg->setMensagem("Erro, o e-mail informado já está em uso.", "bg-danger");
+            header("Location: index.php");
+        } else {
+            // E-mail não existe no banco de dados, pode prosseguir com o cadastro
+            $userDao = UserDao::insert($user);
+            $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
+            header("Location: personalizar.php");
+        }
+    } 
 
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
-      header("Location: personalizar.php");
     } catch (Exception $e) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
 
       // Adiciona uma mensagem para debug
-      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
+      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMensagem(), "bg-danger");
 
       header("Location: index.php");
     }
     break;
+
   case 'ATUALIZAR':
     //pode validar as informações
     $user->setNome($_POST['nomeUsuario']);
@@ -55,7 +73,7 @@ switch ($_POST["acao"]) {
       $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
       header("Location: index.php");
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
     break;
 
@@ -88,7 +106,7 @@ switch ($_POST["acao"]) {
       // Configura as opções do contexto da solicitação
       include('register.php');
     } catch (Exception $e) {
-      echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+      echo 'Exceção capturada: ',  $e->getMensagem(), "\n";
     }
 
 

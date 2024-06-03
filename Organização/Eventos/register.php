@@ -14,6 +14,7 @@ if (!empty($_POST)) {
     $cidade_Evento = $eventoDao['cidadeEvento'];
     $uf_Evento = $eventoDao['ufEvento'];
     $data_Evento = $eventoDao['dataEvento'];
+    $dataFim_Evento = $eventoDao['dataFimEvento'];
     $periodo_Evento = $eventoDao['faixaEtariaEvento'];
     $faixa_Evento = $eventoDao['periodoEvento'];
     $valor_Evento = $eventoDao['valorEvento'];
@@ -31,6 +32,7 @@ if (!empty($_POST)) {
     $cidade_Evento = '';
     $uf_Evento = '';
     $data_Evento = '';
+    $dataFim_Evento = '';
     $periodo_Evento = '';
     $faixa_Evento = '';
     $valor_Evento = '';
@@ -140,9 +142,14 @@ if (!empty($_POST)) {
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 needs-validation">
-                                <label for="date" class="col-form-label">Data do Evento*</label>
+                            <div class="col-md-6 needs-validation">
+                                <label for="date" class="col-form-label">Data Inicio do Evento*</label>
                                 <input type="date" class="form-control inputGeral" placeholder="" name="dataEvento" maxlength="100" id="" value="<?= $data_Evento ?>" required>
+                            </div>
+                            <div class="col-md-6 needs-validation">
+                                <label for="date" class="col-form-label">Data Fim do Evento*</label>
+                                <input type="date" class="form-control inputGeral" placeholder="" name="dataFimEvento" maxlength="100" id="" value="<?= $dataFim_Evento ?>" required>
+                            </div>
                                 <div class="row">
                                     <div class="col-md-6 needs-validation">
                                         <label for="faixaetaria" class="col-form-label">Faixa etária do Evento*</label>
@@ -162,6 +169,7 @@ if (!empty($_POST)) {
                                             <option value="1">Manhã</option>
                                             <option value="2">Tarde</option>
                                             <option value="3">Noite</option>
+                                            <option value="4">Dia Todo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -183,13 +191,14 @@ if (!empty($_POST)) {
                                             <option value="2">Museu</option>
                                             <option value="3">Teatro</option>
                                             <option value="4">Centro Cultural</option>
+                                            <option value="5">Outros</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 needs-validation ">
                                         <label for="descricao" class="col-form-label">Descrição do Evento*</label>
-                                        <textarea class="form-control inputGeral" name="descEvento" id="" cols="30" maxlength="500" rows="10" style="max-height: 400px;"><?= $desc_Evento ?></textarea>
+                                        <textarea class="form-control inputGeral" name="descEvento" id="" cols="30" maxlength="1000" rows="10" style="max-height: 400px;"><?= $desc_Evento ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-3">

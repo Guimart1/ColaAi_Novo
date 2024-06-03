@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,13 +45,16 @@
 
                     ?>
                     <form action="../valida_login.php" method="post">
-                        <input type="text" class="input-group mt-4" name="email" id="" placeholder="Digite o seu e-mail ou telefone">
+                        <input type="text" class="input-group mt-4" name="email" id="email" placeholder="Digite o seu e-mail">
                         <div class="orgSenha d-flex mt-5">
-                            <input required type="password" placeholder="Senha" name="senha" id="password" class="input-group mb-4">
+                            <input required type="password" placeholder="Senha" name="senha" id="senha" class="input-group mb-4">
                             <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
                         </div>
                         <div class="f-password w-100 text-end">
                             <a href="" style="color: #6D9EAF;">Esqueci a senha</a>
+                        </div>
+                        <div class="f-password w-100 text-end">
+                            <a href="./loginTel.php" style="color: #6D9EAF;">Entrar com telefone</a>
                         </div>
                         <div class="button w-100 d-flex pe-0 mt-5">
                             <button type="submit" class="border-0 rounded-3 ms-auto mb-4">Entrar</button>
@@ -64,6 +67,10 @@
             </div>
         </div>
     </div>
+    <!--Máscara-->
+    <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="../../js/personalizar.js"></script>
+    
     <script type="text/javascript" src="../../js/script.js"></script>
 </body>
 </html>

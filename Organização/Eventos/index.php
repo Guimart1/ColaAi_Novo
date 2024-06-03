@@ -1,6 +1,74 @@
 <?php
 require_once '../../dao/EventoDao.php';
-$eventos = EventoDao::selectAll();
+$evento = EventoDao::selectAllActive();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
+    // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+    $idEvento = $_POST['idEvento'];
+
+    // Obtém os dados filtrados da organização com base no valor do filtro
+    $eventoSolo = EventoDao::selectById($idEvento);
+
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $html_info = '';
+    $html_info .= "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Evento: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['nomeEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>CEP: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['cepEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+    $html_info .= "<div class='d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Endereço: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['enderecoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='me-auto ms-auto d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Nº: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['numeroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Complemento: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['complementoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['bairroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+    $html_info .= "<div class='d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Cidade: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['cidadeEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='me-auto ms-auto d-flex'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>UF: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['ufEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Faixa etária: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['faixaEtariaEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Turno: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['periodoEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['bairroEvento'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+    $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
+    $html_info .= "<p>" . $eventoSolo['descEvento'] . "</p>";
+    $html_info .= "</div>";
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $html_info;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,8 +99,11 @@ $eventos = EventoDao::selectAll();
     // Obter o ID da organização logada
     $idOrganizacaoLogada = $_SESSION['userOrg']['idOrganizacaoEvento'];
 
+    //o usuário está autenticado
+    $authUserOrg = $_SESSION['userOrg'];
+
     // Buscar apenas os eventos associados a essa organização
-    $eventos = EventoDao::selectByOrganizacaoId($idOrganizacaoLogada);
+    $evento = EventoDao::selectByOrganizacaoIdActive($idOrganizacaoLogada);
 
     include('../Componentes/header.php');
     ?>
@@ -70,30 +141,30 @@ $eventos = EventoDao::selectAll();
                                 <th class="text-center col-md-1 fs-4">Excluir</th>
 
                             </tr>
-                            <?php foreach ($eventos as $Eventos) : ?>
+                            <?php foreach ($evento as $eventos) : ?>
                                 <tr class="mt-1">
-                                    <td class="fs-5 pt-3"><?= $Eventos['idEvento']; ?></td>
-                                    <td class="fs-5 pt-3"><?= $Eventos['nomeEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $eventos['idEvento']; ?></td>
+                                    <td class="fs-5 pt-3"><?= $eventos['nomeEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalInfo(<?= $Eventos['idEvento'] ?>,'modalInfo')">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$eventos['idEvento']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
                                     <td class="text-center fs-5 pt-3">
-                                        <a class="dropdown-item" onclick="">
+                                        <a class="dropdown-item" onclick="modalArquivar(<?= $eventos['idEvento'] ?>,'idArquivar')">
                                             <img src="../../img/Organizacao/arquivar-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
                                     <td class="text-center pt-3">
                                         <form action="process.php" method="POST">
                                             <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
-                                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $Eventos['idEvento'] ?>">
+                                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $eventos['idEvento'] ?>">
                                             <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" style="width: 35px;">
                                             </button>
                                         </form>
                                     </td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalRemover(<?= $Eventos['idEvento'] ?>,'idDeletar')">
+                                        <a class="dropdown-item" onclick="modalRemover(<?= $eventos['idEvento'] ?>,'idDeletar')">
                                             <img src="../../img/Admin/excluir-icon.png" alt="" style="width: 30px;">
                                         </a>
                                     </td>
@@ -110,8 +181,8 @@ $eventos = EventoDao::selectAll();
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="color: #a6a6a6;">
-                                <form action="process.php" method="post">
-                                    <input type="hidden" class="form-control" id="" name="id" type="text">
+                                <form action="process.php" method="post" id = "informacoes">
+                                    <input type="text" class="form-control" id="idInfo" name="id" type="text">
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">Nome do Evento: </p>
                                         <p class="ms-2 fs-5">aa</p>
@@ -176,7 +247,7 @@ $eventos = EventoDao::selectAll();
                         <div class="modal-content ">
                             <div class="modal-body" style="color: #a6a6a6;">
                                 <form action="process.php" method="post">
-                                    <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                    <input type="text" class="form-control" id="idDeletar" name="id" type="text">
                                     <h1 class="text-center fs-2 fw-bold">Excluir evento<br> da organização?</h1>
                                     <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">excluir</span>
                                         a ação não poderá ser desfeita, na qual fará o evento deixar de existir.</p>
@@ -190,7 +261,27 @@ $eventos = EventoDao::selectAll();
                     </div>
                     <?= require '../Componentes/modal.php' ?>
                 </div>
+                <div class="modal fade" id="modalArquivar" role="dialog" data-bs-backdrop="false">
+                    <div class=" modal-dialog modal-dialog-centered">
+                        <div class="modal-content ">
+                            <div class="modal-body" style="color: #a6a6a6;">
+                                <form action="process.php" method="post">
+                                    <input type="hidden" class="form-control" id="idArquivar" name="id" type="text">
+                                    <h1 class="text-center fs-2 fw-bold">Arquivar evento<br> da organização?</h1>
+                                    <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">arquivar</span>
+                                        a ação não poderá ser desfeita, na qual fará o evento deixar de existir.</p>
+                                    <div class="d-flex justify-content-between mt-5">
+                                        <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
+                                        <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4 col-3" value="ARQUIVAR" name="acao">Arquivar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?= require '../Componentes/modal.php' ?>
+                </div>
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
             </script>
             <script>
@@ -207,6 +298,13 @@ $eventos = EventoDao::selectAll();
             </script>
             <script type="text/javascript" src="../../js/personalizar.js"></script>
             <script type="text/javascript" src="../../js/modal.js"></script>
+            <script type="text/javascript" src="../../js/ajax.js"></script>
+            <script>
+                function mostrarInfo(idEvento){
+                    enviarIdEvento(idEvento);
+                    modalInfo(idEvento, 'idInfo');
+                }
+            </script>
 </body>
 
 </html>

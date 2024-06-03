@@ -67,5 +67,16 @@ switch ($_POST["acao"]) {
       
         
           break;
+
+        case 'ARQUIVAR':
+          $publicacao->setSituacaoPublicacao(2);
+          try {
+            $publicacaoDao = publicacaoDao::updateSituacao($_POST["id"], $publicacao);
+            $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+            header("Location: index.php");
+          } catch (Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+          } 
+          break;
         }
 ?>

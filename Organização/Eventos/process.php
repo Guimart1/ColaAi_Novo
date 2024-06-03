@@ -26,6 +26,7 @@ switch ($_POST["acao"]) {
         $evento->setCidade($_POST['cidadeEvento']);
         $evento->setUf($_POST['ufEvento']);
         $evento->setData($_POST['dataEvento']);
+        $evento->setDataFim($_POST['dataFimEvento']);
         $evento->setFaixaEtaria($_POST['faixaEtariaEvento']);
         $evento->setPeriodoEvento($_POST['periodoEvento']);
         $evento->setValor($_POST['valorEvento']);
@@ -60,6 +61,7 @@ switch ($_POST["acao"]) {
           $evento->setCidade($_POST['cidadeEvento']);
           $evento->setUf($_POST['ufEvento']);
           $evento->setData($_POST['dataEvento']);
+          $evento->setDataFim($_POST['dataFimEvento']);
           $evento->setFaixaEtaria($_POST['faixaEtariaEvento']);
           $evento->setPeriodoEvento($_POST['periodoEvento']);
           $evento->setValor($_POST['valorEvento']);
@@ -78,7 +80,6 @@ switch ($_POST["acao"]) {
           break;
       
         case 'SELECTID':
-      
           try {
               $eventoDao = EventoDao::selectById($_POST['id']);
               // Configura as opções do contexto da solicitação
@@ -86,8 +87,17 @@ switch ($_POST["acao"]) {
           } catch (Exception $e) {
               echo 'Exceção capturada: ',  $e->getMessage(), "\n";
           } 
-      
-        
+        break;
+
+        case 'ARQUIVAR':
+          $evento->setSituacaoEvento(2);
+          try {
+            $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
+            // $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
+            header("Location: index.php");
+          } catch (Exception $e) {
+           echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+          } 
           break;
         }
 ?>

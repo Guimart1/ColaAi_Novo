@@ -1,6 +1,6 @@
 <?php
 class InteresseEvento {
-    public $id, $interesseEvento, $idEvento;
+    public $id, $idUsuario, $idEvento;
 
     // Getters e Setters
     public function getId() {
@@ -11,12 +11,12 @@ class InteresseEvento {
         $this->id = $id;
     }
 
-    public function getInteresseEvento() {
-        return $this->interesseEvento;
+    public function getIdUsuario() {
+        return $this->idUsuario;
     }
 
-    public function setInteresseEvento($interesseEvento) {
-        $this->interesseEvento = $interesseEvento;
+    public function setIdUsuario($idUsuario) {
+        $this->idUsuario = $idUsuario;
     }
     public function getIdEvento() {
         return $this->idEvento;

@@ -44,6 +44,15 @@ class FeedbackAppDao {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public static function selectByIdInnerJoin($id) {
+        $conexao = Conexao::conectar();
+        $query = "SELECT nomeUsuario, emailUsuario, tituloFeedBackApp, descFeedbackApp FROM tbfeedbackapp
+        INNER JOIN tbusuario ON tbfeedbackapp.idUsuario = tbusuario.idUsuario WHERE idFeedBackApp = :id";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public static function delete($id) {
         $conexao = Conexao::conectar();

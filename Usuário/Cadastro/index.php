@@ -24,7 +24,7 @@
             <div class="formulario rounded-5  p-3 rounded d-flex flex-column sombra">
                 <!--Titulo-->
                 <h1 class="text-center mb-5"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h1>
-                <form method="post" action="process.php">
+                <form method="post" action="process.php" id="formulario">
 
                     <!--Nome e sobrenome-->
                     <div class="col-12 d-flex flex-row mb-4">
@@ -64,7 +64,7 @@
                     </script>
                     <!--Confirmar-->
                     <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="botao btn fs-5" name="acao" value="SALVAR">Cadastre-se</button>
+                        <button id="botao" type="submit" class="botao btn fs-5" name="acao" value="SALVAR">Cadastre-se</button>
                     </div>
                 </form>
             </div>
@@ -99,6 +99,10 @@
             }
         }
     </script>
+
+    <!--Verificar senha-->
+    <script src="../../js/verificarSenha.js"></script>
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer>
     </script>

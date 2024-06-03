@@ -1,6 +1,38 @@
 <?php
 require_once '../../dao/FeedBackAppDao.php';
 $feedback = FeedBackAppDao::selectAll();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idFeedback'])) {
+    // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+    $idFeedback = $_POST['idFeedback'];
+    // Obtém os dados filtrados da organização com base no valor do filtro
+    $feedbackSolo = FeedbackAppDao::selectByIdInnerJoin($idFeedback);
+
+    // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+    $html_info = '';
+    $html_info .= "<input type='hidden' class='form-control' id='feedbackId' name='id' type='text'>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Usuário: </p>";
+    $html_info .= "<p id='nomeUsuario' class='ms-2 fs-5'>" . $feedbackSolo['nomeUsuario'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>E-mail: </p>";
+    $html_info .= "<p id='emailUsuario' class='ms-2 fs-5'>" . $feedbackSolo['emailUsuario'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Título: </p>";
+    $html_info .= "<p id='tituloFeedback' class='ms-2 fs-5'>" . $feedbackSolo['tituloFeedBackApp'] . "</p>";
+    $html_info .= "</div>";
+    $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+    $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-1 p-1'>";
+    $html_info .= "<p id='descricaoFeedback'>" . $feedbackSolo['descFeedbackApp'] . "</p>";
+    $html_info .= "</div>";
+
+
+    // Retorna o HTML do <tbody> com os dados filtrados
+    echo $html_info;
+    exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -70,7 +102,7 @@ $feedback = FeedBackAppDao::selectAll();
                                     <td class="fs-5 pt-3"><?= $Feedback['nomeUsuario']; ?></td>
                                     <td class="fs-5 pt-3"><?= $Feedback['emailUsuario']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalInfo(<?= $Feedback['idFeedBackApp'] ?>,'modalInfo')">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$Feedback['idFeedBackApp']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -87,8 +119,8 @@ $feedback = FeedBackAppDao::selectAll();
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body" style="color: #a6a6a6;">
-                                <form action="processFeeBack.php" method="post">
-                                    <input type="hidden" class="form-control" id="feedbackId" name="id" type="text">
+                                <form action="processFeeBack.php" id="informacoes" method="post">
+                                    <input type="text" class="form-control" id="feedbackId" name="id" type="text">
                                     <div class="d-flex m-0" style="height: 30px;">
                                         <p class="m-0 fw-bold fs-5">Nome do Usuário: </p>
                                         <p id="nomeUsuario" class="ms-2 fs-5"></p>
@@ -112,6 +144,9 @@ $feedback = FeedBackAppDao::selectAll();
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+        </script>
         <script>
             function toggleSidebar() {
                 var sidebar = document.getElementById('sidebar');
@@ -128,7 +163,12 @@ $feedback = FeedBackAppDao::selectAll();
         <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
         <script type="text/javascript" src="../../js/personalizar.js"></script>
         <script type="text/javascript" src="../../js/modal.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+        <script src = "../../js/ajax.js"></script>
+        <script>
+            function mostrarInfo(idFeedback){
+                    enviarIdFeedback(idFeedback);
+                    modalInfo(idFeedback, 'feedbackId');
+                }
         </script>
 </body>
 

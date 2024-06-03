@@ -22,3 +22,15 @@ function MostrarSenha2(){
         btnShowPass.classList.replace('bi-eye-slash', 'bi-eye')
     }
 }
+
+function valorSelect() {
+        var valorSelecionado = document.getElementById("filtroSelect").value;
+         $.ajax({
+        type: "POST",
+        url: "<?php echo $_SERVER['PHP_SELF']; ?>",
+        data: { valorSelecionado: valorSelecionado },
+        success: function(response) {
+            $("#data-table").html(response);
+        }
+    });
+}

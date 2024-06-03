@@ -1,7 +1,7 @@
 <?php
 
 class Publicacao {
-    public $id, $titulo, $descricao,$link, $imagem, $idOrganizacaoEvento;
+    public $id, $titulo, $descricao,$link, $imagem, $idOrganizacaoEvento, $situacaoPublicacao;
 
     // Getters e Setters
     public function getId() {
@@ -48,6 +48,12 @@ class Publicacao {
     }
     public function setImagem($imagem){
         $this-> imagem = $imagem;
+    }
+    public function getSituacaoPublicacao(){
+        return $this->situacaoPublicacao;
+    }
+    public function setSituacaoPublicacao($situacaoPublicacao){
+        $this-> situacaoPublicacao = $situacaoPublicacao;
     }
 
     public function salvarImagem($novo_nome){
