@@ -30,9 +30,16 @@
                     </div>
                     <input required type="email" placeholder="Email" id="email" name="emailUsuario" class="input-group mb-4">
                     <input required type="tel" placeholder="Telefone" id="telefone" name="telUsuario" class="input-group mb-4" data-mask="(00)00000-0000">
-                    <div class="orgSenha d-flex">
-                        <input required type="password" placeholder="Senha" id="senha" name="senhaUsuario" class="input-group mb-4">
+                    <p style="color: #a6a6a6; font-size: 12px;">Digite uma senha com no mínimo 8 caracteres, letras maiuscúlas e minúsculas, números e caracteres especiais (!@#$%¨&*)</p>
+                    <div class="orgSenha d-flex flex-column">
+                        <input required type="password" placeholder="Senha" id="senha" name="senhaUsuario" class="input-group mb-4" onkeyup="trigger()">
                         <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
+                        <div class="indicator text-center">
+                            <span class="fraco">1</span>
+                            <span class="medio">2</span>
+                            <span class="forte">3</span>
+                        </div>
+                        <div class="text">Fraca</div>
                     </div>
                     <div class="orgSenha d-flex">
                         <input required type="password" id="senha1" placeholder="Confirmar senha" name="confirmarSenha" class="input-group mb-4">
@@ -107,7 +114,61 @@
             }
         });
     </script>
+    <script>
+     const indicator = document.querySelector('.indicator');
+     const input = document.querySelector('input');
+     const fraco = document.querySelector('.fraco');
+     const medio = document.querySelector('.medio');
+     const forte = document.querySelector('.forte');
+     const text = document.querySelector('.text');
 
+     let regExpFraco = /[a-z]/;
+     let regExpMedio = /\d+/;
+     let regExpForte = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+
+     function trigger() {
+        if(input.value != ""){
+            indicator.style.display = "flex";
+            if(input.value.length <= 3 && (input.value.match(regExpFraco) || input.value.match(regExpMedio) || input.value.match(regExpForte))) no = 1;
+
+            if(input.value.lenght >= 6 && ((input.value.match(regExpFraco) && input.value.match(regExpMedio)) ||(input.value.match(regExpMedio) && input.value.match(regExpForte)) ||(input.value.match(regExpFraco) && input.value.match(regExpForte)))) no = 2;
+
+            if (input.value.length >= 6 && input.value.match(regExpFraco) && input.value.match(regExpMedio) && input.value.match(regExpForte)) no = 3;
+
+            if (no==1) {
+              fraco.classList.add('active');
+              text.textContent = "A sua senha é fraca";
+              text.classList.add('fraco');
+            }
+
+            if (no==2) {
+                medio.classList.add('active');
+                text.style.display = "block";
+                text.textContent = "A sua senha é mediana";
+                text.classList.add('medio');
+            } else {
+                medio.classList.remove('active');
+                text.classList.remove('medio');
+            }
+
+            if (no==3) {
+                forte.classList.add('active');
+                text.style.display = "block";
+                text.textContent = "A sua senha é forte";
+                text.classList.add('forte');
+            } else {
+                medio.classList.remove('active');
+                text.classList.remove('forte');
+            }
+
+            
+        } else {
+            indicator.style.display = "none";
+            text.style.display = "none";
+            showBtn.style.display = "none";
+        }
+     }
+    </script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer></script>
     <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>

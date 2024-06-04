@@ -62,3 +62,68 @@ li{
     margin: 8px 0px 8px 0px;
     color: #A6A6A6;
 }
+
+form .indicator {
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    display: none;
+}
+
+form .indicator span {
+    width: 100%;
+    height: 100%;
+    background: lightgray;
+    border-radius: 5px;
+    position: relative;
+}
+
+form .indicator span.medio {
+    margin: 0 3px;
+}
+
+form .indicator span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FABDC1;
+    border-radius: 5px;
+}
+
+form .indicator span.active.fraco::before {
+    background-color: red;
+
+}
+
+form .indicator span.active.medio::before {
+    background-color: yellow;
+}
+
+form .indicator span.active.forte::before {
+    background-color: green;
+}
+
+form .text {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: -10px;
+    display: none;
+}
+
+form .text.fraco {
+    color: red;
+}
+
+form .text.medio {
+    color: yellow;
+}
+
+form .text.forte {
+    color: green;
+}
+
