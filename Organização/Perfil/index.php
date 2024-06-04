@@ -55,33 +55,64 @@ $organizacaoDao = new OrganizacaoDao();
         ?>
         <!-- Hamburger -->
     </div>
-    <div class="first-div">
-        <img src="../../img/Organizacao/<?= $authUserOrg['imagemOrganizacaoEvento'] ? $authUserOrg['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>" style="width:100% ;heigh:100%">
-    </div>
-    <div class="second-div">
-        <div class="third-div">
-            <img src="../../img/Organizacao/<?= $authUserOrg['imagemOrganizacaoEvento'] ? $authUserOrg['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>" style="width:100% ;heigh:100%">
-
-        </div>
-        <div class="four-div">
-            <div class="five-div">
-                <?php if ($organizacao !== false) : ?>
-                    <h4 class="organization-name justify-content-center"><?php echo $organizacao['nomeOrganizacaoEvento']; ?></h4>
-                    <h2 class="organization-description"><?php echo $organizacao['descOrganizacaoEvento']; ?></h2>
-                <?php else : ?>
-                    <p>Não foi possível carregar os dados da organização.</p>
-                <?php endif; ?>
-            </div>
-        </div>
-        <div class="dropdown">
-            <form action="process.php" method="POST" >
-                <div class="d-flex h-auto p-2 mb-3">
-                    <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
-                    <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
-                    <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" class="ms-auto me-2" style="width: 45px;">
-                    </button>
+        <div class="container-fluid d-flex justify-content-start align-items-center flex-column" style="background-color: #E8E8E8; height:91vh; width:100vw"> 
+            <div class="headerPerfil mt-4 rounded rounded-4" style="width: 90%; height:90px; background-color:#fff" >
+                <div class="textBox h-100 d-flex align-items-center justify-content-evenly rounded rounded-4 " style="background-color: #FFF7D1; width:20%">
+                    <img src="../../img/Admin/icon-usuario.png" alt="" style="height: 50px; width:50px; object-fit:cover">
+                    <h2 class="fs-2 m-0" style="color: #a6a6a6">Meu Perfil</h2>
                 </div>
-            </form>
+            </div>
+            <div class="mt-4 rounded rounded-4" style="width: 90%; height:72vh;  background-color:#fff">
+                <div class="contentPerfil d-flex rounded rounded-4"  style="background-color: #FFF7D1; width:100%; height:350px">
+                <div class="dropdown">
+                    <a href="#" class="text-white d-block  text-decoration-none dropdown-toggle mt-4 ms-4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" class="ms-auto me-2" style="width: 45px;"></button>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="">Banner</a></li>
+                    <hr class="dropdown-divider">
+                    <li><a class="dropdown-item" href="">Foto do perfil</a></li>
+                    </ul>
+                </div>
+                    <div class="dropdown">
+                        <form action="process.php" method="POST" >
+                            <div class="d-flex h-auto p-2 mb-3">
+                                <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
+                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
+                            </div>
+                        </form>
+                    </div>
+                    <img src="../../img/Organizacao/<?= $authUserOrg['imagemOrganizacaoEvento'] ? $authUserOrg['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
+                    
+                    <div class="infoOrg d-flex justify-content-center flex-column ms-4">
+                        <?php if ($organizacao !== false) : ?>
+                            <h2 style="color: #a6a6a6"><?php echo $organizacao['nomeOrganizacaoEvento']; ?></h2>
+                            <p style="color: #a6a6a6; font-size:1.2em"><?php echo $organizacao['descOrganizacaoEvento']; ?></p>
+                        <?php else : ?>
+                            <p>Não foi possível carregar os dados da organização.</p>
+                        <?php endif; ?>
+                    </div>
+                    <div  class="alterarDados ms-auto mt-auto mb-4 me-5">
+                    <form action="process.php" method="POST" >
+                            <div class="d-flex h-auto p-2 mb-3">
+                                <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
+                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
+                                <button style="
+                                    border:none;
+                                    background-color: #FABDC1; 
+                                    width:100px;
+                                    height: 50px;
+                                    min-height: 50px;
+                                    min-width: 160px;
+                                    color: #6D9EAF;
+                                    font-size: 14pt;" class="rounded rounded-2">Alterar dados
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
