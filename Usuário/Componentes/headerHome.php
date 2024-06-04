@@ -1,4 +1,3 @@
-
 <nav>
     <div class="navigation">
         <div class="imgHeader">
@@ -7,28 +6,28 @@
         <a href="#carrossel-teatros">Teatros</a>
         <a href="#carrossel-parques">Parques</a>
         <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
+        <a href="#carrossel-centroculturais">Centros Culturais</a>
         <div class="iconBox">
             <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 35px; height:35px;"></a>
             <img src="../../img/Usuario/icon-notificacao.png" alt="" onclick="toggleNotificacao()">
             <img src="../../img/Usuario/icon-perfil.png" alt="" onclick="ToggleSelect()">
         </div>
         <div class="hamburger burgerUsuario" onclick="toggleNav(), toggleHamburger()">
-                <input class="checkbox" type="checkbox"/>
-                <svg fill="none" viewBox="0 0 50 50" height="50" width="50">
-                    <path class="lineTop line" stroke-linecap="round" stroke-width="4" stroke="black" d="M6 11L44 11"></path>
-                    <path stroke-linecap="round" stroke-width="4" stroke="black" d="M6 24H43" class="lineMid line"></path>
-                    <path stroke-linecap="round" stroke-width="4" stroke="black" d="M6 37H43" class="lineBottom line"></path>
-                </svg>
-            </div>
+            <input class="checkbox" type="checkbox"/>
+            <svg fill="none" viewBox="0 0 50 50" height="50" width="50">
+                <path class="lineTop line" stroke-linecap="round" stroke-width="4" stroke="black" d="M6 11L44 11"></path>
+                <path stroke-linecap="round" stroke-width="4" stroke="black" d="M6 24H43" class="lineMid line"></path>
+                <path stroke-linecap="round" stroke-width="4" stroke="black" d="M6 37H43" class="lineBottom line"></path>
+            </svg>
         </div>
+    </div>
 </nav>
 <div class="navbarActive" id="nav">
     <div class="linkActive p-3">
-    <a href="#carrossel-teatros">Teatros</a>
+        <a href="#carrossel-teatros">Teatros</a>
         <a href="#carrossel-parques">Parques</a>
         <a href="#carrossel-museus">Museus</a>
-        <a href="#carrossel-centroCulturais">Centros Culturais</a>
+        <a href="#carrossel-centroculturais">Centros Culturais</a>
     </div>
     <div class="iconBoxActive">
         <a href="../TodosEventos/index.php"><img src="../../img/Usuario/icon-mapa.png" alt="" style="width: 40px; height:40px;"></a>
@@ -36,7 +35,6 @@
         <img src="../../img/Usuario/icon-perfil.png" alt="" onclick="ToggleSelect()">
     </div>
 </div>
-
 
 <div class="position-relative">
     <div class="notificacaoBox rounded rounded-5 p-4 notb notiBox-off" id="NotificacaoBox">

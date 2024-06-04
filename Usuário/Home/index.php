@@ -169,7 +169,6 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
         </div> -->
         <div class="container">
             <?php
-            // Defina as categorias e seus IDs correspondentes
             $categorias = [
                 'Teatros' => '3',
                 'Parques' => '1',
@@ -179,63 +178,48 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             ];
 
             foreach ($categorias as $nomeCategoria => $espacoEvento) :
-                // Filtra os eventos pela categoria atual
                 $eventos_filtrados = array_filter($eventos, function ($evento) use ($espacoEvento) {
                     return $evento['espacoEvento'] === $espacoEvento;
                 });
 
-                // Verifica se há eventos disponíveis para essa categoria
                 if (!empty($eventos_filtrados)) :
             ?>
                     <h2 id="carrossel-<?= strtolower(str_replace(' ', '', $nomeCategoria)); ?>" class="fs-3"><?= $nomeCategoria; ?></h2>
                     <div class="glide mb-5 carrossel" data-glide='{
-        "loop": true,
-        "perView": 4,
-        "perMove": 4,
-        "perSwipe": 4,
-        "perTouch": 4,
-        "gap":20,
-        "type": "carousel",
-        "breakpoints": {
-            "600": {"perView": 1},
-            "800": {"perView": 2},
-            "1370": {"perView": 3}
-        }
+            "loop": true,
+            "perView": 4,
+            "perMove": 4,
+            "perSwipe": 4,
+            "perTouch": 4,
+            "gap":20,
+            "type": "carousel",
+            "breakpoints": {
+                "600": {"perView": 1},
+                "800": {"perView": 2},
+                "1370": {"perView": 3}
+            }
         }'>
                         <div class="glide__track" data-glide-el="track">
                             <ul class="glide__slides">
-                                <?php
-                                // Array para armazenar os IDs dos eventos já adicionados
-                                $eventos_adicionados = [];
-
-                                foreach ($eventos_filtrados as $evento) :
-                                    // Verifica se o ID do evento já foi adicionado ao carrossel
-                                    if (!in_array($evento['idEvento'], $eventos_adicionados)) :
-                                ?>
-                                        <li class="glide__slide">
-                                            <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>"> <!-- Adicione o link aqui -->
-                                                <div class="imageBox position-relative" style="width: 100%; height: 200px;"> <!-- Defina a largura e altura desejadas -->
-                                                    <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%; object-fit:cover;"> <!-- Defina a largura e altura desejadas -->
-                                                    <div class="descMini p-2 ps-4"> <!-- Defina a largura igual à da imagem -->
-                                                        <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
-                                                        <p><?= $evento['descEvento']; ?></p>
-                                                    </div>
+                                <?php foreach ($eventos_filtrados as $evento) : ?>
+                                    <li class="glide__slide">
+                                        <a href="../Evento/evento.php?id=<?= $evento['idEvento']; ?>">
+                                            <div class="imageBox position-relative" style="width: 100%; height: 200px;">
+                                                <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="Imagem do evento" style="width: 100%; height: 100%; object-fit:cover;">
+                                                <div class="descMini p-2 ps-4">
+                                                    <h3 class="fs-4 tituloEvento"><?= $evento['nomeEvento']; ?></h3>
+                                                    <p><?= $evento['descEvento']; ?></p>
                                                 </div>
-                                            </a>
-                                        </li>
-                                <?php
-                                        // Adiciona o ID do evento ao array de eventos adicionados
-                                        $eventos_adicionados[] = $evento['idEvento'];
-                                    endif;
-                                endforeach;
-                                ?>
+                                            </div>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                         <div class="glide__arrows" data-glide-el="controls">
                             <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><img src="../../img/Usuario/arrow-previus.png" alt=""></button>
                             <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><img src="../../img/Usuario/arrow-next.png" alt=""></button>
                         </div>
-
                         <div class="glide__bullets" data-glide-el="controls[nav]">
                             <button class="glide__bullet" data-glide-dir="=0"></button>
                             <button class="glide__bullet" data-glide-dir="=1"></button>
@@ -247,6 +231,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             endforeach;
             ?>
         </div>
+
     </div>
 
     <!--inicio footer-->
@@ -282,6 +267,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             glide.mount();
         }
     </script>
+
 
 </body>
 
