@@ -142,17 +142,17 @@ $user = new UserDao();
                             <?php foreach ($eventosInteresse as $interesse) : ?>
                                 <li class="glide__slide">
                                     <a href="../Evento/evento.php?id=<?= $interesse['idEvento']; ?>">
-                                    <div class="imageBox position-relative" style="width: 100%; height: 200px;">
-                                        <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
-                                            <!--<img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">-->
+                                        <div class="imageBox position-relative" style="width: 100%; height: 200px;">
+                                            <div class="d-flex align-items-start justify-content-start" style="width: 30px; height: 30px; position:absolute; margin:10px;">
+                                                <!--<img src="../../img/Usuario/icon-coracao.png" class="img-fluid" style="height: auto; width: auto; border-radius: 0px">-->
+                                            </div>
+                                            <!-- Aqui você pode exibir os detalhes do evento -->
+                                            <img src="../../img/Organizacao/<?= $interesse['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height:100%; object-fit:cover">
+                                            <div class="descMini p-2 ps-4">
+                                                <h3 class="fs-5 tituloEvento"><?= $interesse['nomeEvento']; ?></h3>
+                                                <p><?= $interesse['descEvento']; ?></p>
+                                            </div>
                                         </div>
-                                        <!-- Aqui você pode exibir os detalhes do evento -->
-                                        <img src="../../img/Organizacao/<?= $interesse['imagemEvento']; ?>" alt="Imagem do Evento" style="width: 100%; height:100%; object-fit:cover">
-                                        <div class="descMini p-2 ps-4">
-                                            <h3 class="fs-5 tituloEvento"><?= $interesse['nomeEvento']; ?></h3>
-                                            <p><?= $interesse['descEvento']; ?></p>
-                                        </div>
-                                    </div>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
@@ -178,7 +178,7 @@ $user = new UserDao();
     require_once('../Componentes/modalContato.php');
     require_once('../Componentes/modalSobre.php');
     ?>
-    
+
     <div class="modal fade" id="modalFotoPerfil" role="dialog"><!--modal foto perfil-->
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
@@ -225,16 +225,16 @@ $user = new UserDao();
                             <label for="banner" class="form-label m-1">Carregar Imagem</label>
                             <input type="file" id="banner" name="banner" accept="image/*" class="form-control mt-1 mb-4">
                         </div>
-                            <div class="btnModal w-100 mt-4 d-flex">
-                                <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
-                            </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
+                        </div>
                     </form>
-                    </div>
                 </div>
-
-                
             </div>
+
+
         </div>
+    </div>
     </div>
     <!--<div class="modal fade" id="modalDadosPessoais" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
@@ -269,7 +269,7 @@ $user = new UserDao();
         </div>
     </div>-->
     <div class="modal fade" id="modalSeguindo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class=" modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4 overflow-auto" style="background-color: #F4FFEB; height: 550px">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2 d-flex align-items-center">
                     <h1 class="modal-title fs-2 ps-3" id="exampleModalLabel" style="color: #E6AEB2; font-weight: bold">SE</h1>
@@ -278,48 +278,30 @@ $user = new UserDao();
                     <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pt-0 pb-1">
-                    <?php foreach ($seguindoOrganizacao as $seguindo) : ?>
-                        <div class="row d-flex mt-4 align-items-center">
-                            <div class="col-md-4">
-                                <img src="../../img/Organizacao/<?= $seguindo['imagemOrganizacaoEvento']; ?>" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: 125px; width: 125px;">
+                    <?php if (empty($seguindoOrganizacao)) : ?>
+                        <div class="alert alert-warning" role="alert">
+                            Você ainda não está seguindo nenhuma organização.
+                        </div>
+                    <?php else : ?>
+                        <?php foreach ($seguindoOrganizacao as $seguindo) : ?>
+                            <div class="row d-flex mt-4 align-items-center">
+                                <div class="col-md-4">
+                                    <img src="../../img/Organizacao/<?= $seguindo['imagemOrganizacaoEvento']; ?>" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: 125px; width: 125px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <a href="../PerfilOrganizacao/index.php?id=<?= $seguindo['idOrganizacaoEvento']; ?>" style="color: #a6a6a6; text-decoration:none">
+                                        <h2 class="fs-5 "><?= $seguindo['nomeOrganizacaoEvento']; ?></h2>
+                                    </a>
+                                    <p><?= $seguindo['descOrganizacaoEvento']; ?></p>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <a href="../PerfilOrganização/index.php?id=<?= $seguindo['idOrganizacaoEvento']; ?>" style="color: #a6a6a6; text-decoration:none"><h2 class="fs-5 "><?= $seguindo['nomeOrganizacaoEvento']; ?></h2></a>
-                                <p><?= $seguindo['descOrganizacaoEvento']; ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                    <!--<div class="row d-flex mt-4 align-items-center">
-                        <div class="col-md-4">
-                            <img src="../../img/Usuario/org-magma.png" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: auto; width: 125px;">
-                        </div>
-                        <div class="col-md-8">
-                            <h2 class="fs-5 ">Magma</h2>
-                            <p>A Magma é uma empresa voltada a tecnologia.</p>
-                        </div>
-                    </div>
-                    <div class="row d-flex mt-4 align-items-center">
-                        <div class="col-md-4">
-                            <img src="../../img/Usuario/org-ceu.png" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: auto; width: 125px;">
-                        </div>
-                        <div class="col-md-8">
-                            <h2 class="fs-5">CEU Jambeiro</h2>
-                            <p>O CEU Jambeiro é uma escola feita pela prefeitura de São Paulo onde se há diversos cursos e eventos para a família.</p>
-                        </div>
-                    </div>
-                    <div class="row d-flex mt-4 align-items-center">
-                        <div class="col-md-4">
-                            <img src="../../img/Usuario/org-centro.png" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: auto; width: 125px;">
-                        </div>
-                        <div class="col-md-8">
-                            <h2 class="fs-5 ">Centro Cultural Cidade Tiradentes</h2>
-                            <p>O Centro de Formação Cultural Cidade Tiradentes é o maior equipamento cultural da Prefeitura de São Paulo na Zona Leste da cidade.</p>
-                        </div>
-                    </div>-->
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
@@ -344,7 +326,7 @@ $user = new UserDao();
             glide.mount();
         }
     </script>
-    <script>  
+    <script>
         let nav = document.getElementById("nav")
         var i = 0
 

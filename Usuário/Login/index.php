@@ -16,39 +16,27 @@
     </div>
     <div class="container-fluid" style="min-height: 90vh; height:90vh">
         <div class="row h-100 d-flex justify-content-center">
-            <div class="col-lg-7 imageBox d-flex justify-content-center  align-items-center">
+            <div class="col-lg-7 imageBox d-flex justify-content-center align-items-center">
                 <img src="../../img/Usuario/login-img.png" alt="" style="width: 90%;">
             </div>
             <div class="col-lg-4 formBox d-flex row align-items-center justify-content-center">
                 <div class="inputBox h-auto rounded rounded-5 mb-5 mt-4 p-5">
                     <h1 class="text-center mt-2 mb-5 fs-2"><span style="color: #E6AEB2; font-size: 50px">Lo</span><span style="color: #6D9EAF; font-size: 50px">gin</span></h1>
-                    <?php
-                    if (isset($_GET['login']) && $_GET['login'] == "erro") {
-                    ?>
+                    <?php if (isset($_GET['login']) && $_GET['login'] == "erro") { ?>
                         <div class="text-danger" style="text-align: center;">
                             Usuário ou senha Inválido(s)
                         </div>
-
-                    <?php
-                    }
-
-                    ?>
-                    <?php
-                    if (isset($_GET['login']) && $_GET['login'] == "erro2") {
-                    ?>
+                    <?php } ?>
+                    <?php if (isset($_GET['login']) && $_GET['login'] == "erro2") { ?>
                         <div class="text-danger" style="text-align: center;">
                             Usuário não fez o login!
                         </div>
-
-                    <?php
-                    }
-
-                    ?>
+                    <?php } ?>
                     <form action="../valida_login.php" method="post">
                         <input type="text" class="input-group mt-4" name="email" id="email" placeholder="Digite o seu e-mail">
-                        <div class="orgSenha d-flex mt-5">
-                            <input required type="password" placeholder="Senha" name="senha" id="senha" class="input-group mb-4">
-                            <i class="bi bi-eye col1" id="btnSenha" onclick="MostrarSenha()"></i>
+                        <div class="orgSenha d-flex mt-5 position-relative">
+                            <input required type="password" placeholder="Senha" name="senha" id="senha" class="input-group mb-4 w-100">
+                            <i class="bi bi-eye position-absolute end-0 me-3" id="btnSenha" onclick="MostrarSenha()" style="cursor: pointer;"></i>
                         </div>
                         <div class="f-password w-100 text-end">
                             <a href="" style="color: #6D9EAF;">Esqueci a senha</a>
@@ -71,6 +59,20 @@
     <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     
-    <script type="text/javascript" src="../../js/script.js"></script>
+    <script>
+        function MostrarSenha() {
+            var senha = document.getElementById("senha");
+            var btnSenha = document.getElementById("btnSenha");
+            if (senha.type === "password") {
+                senha.type = "text";
+                btnSenha.classList.remove("bi-eye");
+                btnSenha.classList.add("bi-eye-slash");
+            } else {
+                senha.type = "password";
+                btnSenha.classList.remove("bi-eye-slash");
+                btnSenha.classList.add("bi-eye");
+            }
+        }
+    </script>
 </body>
 </html>
