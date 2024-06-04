@@ -14,37 +14,6 @@ $user = new UserDao();
     <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 <body class="fundo-bolinha">
-<?php
-    // Iniciar a sessão
-    session_start();
-
-    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
-    if (!isset($_SESSION['AutenticaoUser']) || $_SESSION['AutenticaoUser'] != 'SIM') {
-        // Redirecionar para o login com um erro2 se não estiver autenticado
-        header('Location: login.php?login=erro2');
-        exit();
-    }
-
-    //o usuário está autenticado
-    $authUser = $_SESSION['user'];
-
-    $idUsuario = $authUser['idUsuario']; // Supondo que o ID do usuário está armazenado na sessão
-
-    $user = UserDao::selectById($idUsuario);
-    
-    // Verifique se o usuário já tem uma foto de perfil
-    $imagemPerfil = ''; // Defina a variável como vazia inicialmente
-    $imagemBanner = ''; // Defina a variável como vazia inicialmente
-
-    if ($authUser && isset($authUser['imagemPerfilUsuario'])) {
-        // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
-        $imagemPerfil = $authUser['imagemPerfilUsuario'];
-    }
-    if ($authUser && isset($authUser['imagemBannerUsuario'])) {
-        // Se o usuário tiver uma imagem de banner, atribua à variável $imagemBanner
-        $imagemBanner = $authUser['imagemBannerUsuario'];
-    }
-    ?>
     <div class="container-fluid mt-2 ms-2">
         <img src="../../img/Login/Cola AI logo.png" alt="" style="height: 10vh;">
     </div>
@@ -59,14 +28,7 @@ $user = new UserDao();
                 <div class="d-flex">
                     <div class="fill" style="width: 150px"></div>
                     <h2 class="text-start">
-                    <?php
-                    // Exibir o nome do usuário se estiver autenticado
-                    if (isset($authUser['nomeUsuario'])) {
-                    echo $authUser['nomeUsuario'];
-                    } else {
-                         echo "Nome de Usuário";
-                    }
-                    ?></h2>
+                   </h2>
                 </div>
 
             </div>

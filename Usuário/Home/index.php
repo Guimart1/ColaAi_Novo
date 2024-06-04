@@ -74,7 +74,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
         </div>
 
 
-        <h2 class="fs-3">Próximos de você</h2>
+        <!-- <h2 class="fs-3">Próximos de você</h2>
         <div class="glide mb-5 carrossel" data-glide='{
         "loop": true,
         "perView": 4,
@@ -166,7 +166,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 <button class="glide__bullet" data-glide-dir="=1"></button>
                 <button class="glide__bullet" data-glide-dir="=2"></button>
             </div>
-        </div>
+        </div> -->
         <div class="container">
             <?php
             // Defina as categorias e seus IDs correspondentes
