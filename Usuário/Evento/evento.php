@@ -67,7 +67,7 @@ require_once '../../dao/InteresseEventoDao.php';
             <div class="eventImage col-md-4">
                 <h1 class="fw-bold fs-2 mt-4"><span style="color: #E6AEB2">E</span><span style="color: #6D9EAF">VEN</span><span style="color: #FFD417">TO</span></h1>
                 <div class="d-flex align-items-center">
-                    <img src="<?php echo !empty($organizacao['imagemOrganizacaoEvento']) ? "../../img/Organizacao/" . $organizacao['imagemOrganizacaoEvento'] : "../../img/Organizacao/userPadrao.png"; ?>" alt="foto perfil" style="width: 40px; border-radius: 50%;">
+                    <img src="<?php echo !empty($organizacao['imagemOrganizacaoEvento']) ? "../../img/Organizacao/" . $organizacao['imagemOrganizacaoEvento'] : "../../img/Organizacao/userPadrao.png"; ?>" alt="foto perfil" style="width: 40px; height:40px; border-radius: 50%;">
 
                     <a class="ms-2 mt-auto mb-auto" href="../PerfilOrganização/index.php?id=<?= $organizacao['idOrganizacaoEvento']; ?>" style="color: #6D9EAF; text-decoration:none"><?= $organizacao['nomeOrganizacaoEvento']; ?></a>
                 </div>

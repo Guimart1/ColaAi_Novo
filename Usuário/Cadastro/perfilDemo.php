@@ -37,9 +37,7 @@ $user = new UserDao();
                 <div class="col-md-4"></div>
                 <div class="col-md-4 col-12">
                     <div class="button">
-                        <a href="../Home/">
-                        <a href="../Login/index.php"><button class="border-0 rounded-3">Continuar</button></a>
-                        </a>
+                        <a href="./perfilCriado.php"><button class="border-0 rounded-3">Continuar</button></a>
                     </div>
                 </div>
             </div>

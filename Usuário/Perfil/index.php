@@ -231,8 +231,6 @@ $user = new UserDao();
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
     </div>
@@ -257,7 +255,7 @@ $user = new UserDao();
                                     <img src="../../img/Organizacao/<?= $seguindo['imagemOrganizacaoEvento']; ?>" class="img-fluid" alt="Alterar imagem" style="border-radius: 90px; height: 125px; width: 125px;">
                                 </div>
                                 <div class="col-md-8">
-                                    <a href="../PerfilOrganizacao/index.php?id=<?= $seguindo['idOrganizacaoEvento']; ?>" style="color: #a6a6a6; text-decoration:none">
+                                    <a href="../PerfilOrganização/index.php?id=<?= $seguindo['idOrganizacaoEvento']; ?>" style="color: #a6a6a6; text-decoration:none">
                                         <h2 class="fs-5 "><?= $seguindo['nomeOrganizacaoEvento']; ?></h2>
                                     </a>
                                     <p><?= $seguindo['descOrganizacaoEvento']; ?></p>
