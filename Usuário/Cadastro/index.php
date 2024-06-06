@@ -25,7 +25,7 @@
                 <!--Titulo-->
                 <h1 class="text-center mb-5"><b style="color: #E6AEB0;">Ca</b><b style="color: #6DA2B1;">das</b><b style="color: #93CC4C;">tre</b><b style="color: #FFD417;">-se</b></h1>
                 <form method="post" action="process.php" id="formulario" onsubmit="return validarSenha();">
-
+                <input type="hidden" id="idUsuario" name="idUsuario" value="">
                     <!--Nome e sobrenome-->
                     <div class="col-12 d-flex flex-row mb-4">
                         <input required type="text" placeholder="Nome" id="nome" name="nomeUsuario" class="input-group me-4">

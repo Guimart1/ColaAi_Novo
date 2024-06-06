@@ -36,22 +36,5 @@
             </div>
         </form>
     </div>
-
-    <script>
-        // Função para atualizar a pré-visualização da imagem
-        document.getElementById('imagemBannerUsuario').addEventListener('change', function(event) {
-            var file = event.target.files[0]; // Obtém o arquivo selecionado
-            var reader = new FileReader(); // Cria um objeto FileReader
-
-            // Função de callback que será executada quando a leitura do arquivo estiver completa
-            reader.onload = function(e) {
-                // Atualiza a imagem de pré-visualização com a imagem selecionada
-                document.getElementById('preview').src = e.target.result;
-            }
-
-            // Inicia a leitura do arquivo como URL de dados
-            reader.readAsDataURL(file);
-        });
-    </script>
 </body>
 </html>

@@ -22,8 +22,8 @@ $user = new UserDao();
             <p>É assim como ele ficará visível para os perfis de<br> organizações e administradores do Cola Aí.</p>
             <div class="img-fluid perfilBox me-auto ms-auto mt-4 rounded rounded-4" style="width: 70vh;">
                 <div class="position-relative">
-                    <img src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'icon-user.png'; ?>" class="position-absolute perfilIcon" alt="imagem Perfil" style="width: 12vh; height: 12vh; border-radius: 50%">
-                    <img src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'banner-padrao.png'; ?>" class="rounded rounded-4" alt="imagem Perfil" style="width: 100%;">
+                    <img src="../../img/Usuario/icon-user.png" class="position-absolute perfilIcon" alt="imagem Perfil" style="width: 12vh; height: 12vh; border-radius: 50%">
+                    <img src="../../img/Usuario/banner-padrao.png" class="rounded rounded-4" alt="imagem Perfil" style="width: 100%;">
                 </div>
                 <div class="d-flex">
                     <div class="fill" style="width: 150px"></div>

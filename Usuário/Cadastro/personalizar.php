@@ -37,51 +37,10 @@
             
         </div>
     </div>
-
-    <!--Script para mostrar ou não mostrar a senha-->
-    <script>
-        function MostrarSenha(){
-            var inputPass = document.getElementById('senha')
-            var btnShowPass = document.getElementById('btnSenha')
-
-            if(inputPass.type === 'password'){
-                inputPass.setAttribute('type', 'text')
-                btnShowPass.classList.replace('bi-eye', 'bi-eye-slash')
-            } else {
-                inputPass.setAttribute('type', 'password')
-                btnShowPass.classList.replace('bi-eye-slash', 'bi-eye')
-            }
-        }
-        function MostrarSenha2(){
-            var inputPass = document.getElementById('senha1')
-            var btnShowPass = document.getElementById('btnSenha1')
-
-            if(inputPass.type === 'password'){
-                inputPass.setAttribute('type', 'text')
-                btnShowPass.classList.replace('bi-eye', 'bi-eye-slash')
-            } else {
-                inputPass.setAttribute('type', 'password')
-                btnShowPass.classList.replace('bi-eye-slash', 'bi-eye')
-            }
-        }
-    </script>
-    <script>
-        function myFunction() {
-        var x = document.getElementById("senha");
-        var y = document.getElementById("senha1")
-        if (x.type === "password") {
-            x.type = "text";
-            y.type = "text";
-        } else {
-            x.type = "password";
-            y.type = "password";
-        }
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"  crossorigin="anonymous" defer>
     </script>
     <!--Máscara-->
     <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"> </script>
 </body>
-</html> 
+</html>

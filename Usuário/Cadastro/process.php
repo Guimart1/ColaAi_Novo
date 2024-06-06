@@ -28,7 +28,7 @@ switch ($_POST["acao"]) {
             // Adiciona uma mensagem para debug
             $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
 
-            header("Location: personalizar.php");
+            header("Location: perfilCriado.php");
         } catch (Exception $e) {
             // Se houver um erro na inserção, você pode lidar com isso aqui
 
