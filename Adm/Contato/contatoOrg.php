@@ -1,6 +1,42 @@
 <?php
-require_once '../../dao/ContatoOrgEventoDao.php';
-$contatoOrg = ContatoOrgEventoDao::selectAll();
+    require_once '../../dao/ContatoOrgEventoDao.php';
+    $contatoOrg = ContatoOrgEventoDao::selectAll();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoOrganizacaoEvento'])) {
+        // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+        $idContato = $_POST['idContatoOrganizacaoEvento'];
+    
+        // Obtém os dados filtrados da organização com base no valor do filtro
+        $contatoSolo = ContatoOrgEventoDao::selectByIdInner($idContato);
+    
+        // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+        $html_info = '';
+        $html_info = "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Usuário: </p> <p class='ms-2 fs-5' >" . $contatoSolo['nomeOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>E-mail: </p><p class='ms-2 fs-5'>" . $contatoSolo['emailOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Título: </p><p class='ms-2 fs-5'>" . $contatoSolo['tituloContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex  m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Motivo do Contato: </p><p class='ms-2 fs-5'>" . $contatoSolo['categoriaContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+        $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
+        $html_info .= "<p>" . $contatoSolo['descContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex justify-content-between'>"; 
+        $html_info .= "<a href='' class='fs-4 mt-auto mb-2' style='color: #6D9EAF'>Cancelar</a>";
+        $html_info .= "<button type='submit' class='btn-adm rounded rounded-3 border-0 fs-4' name='acao'>Validar denúncia</button>";
+        $html_info .= "</div>";
+    
+        // Retorna o HTML do <tbody> com os dados filtrados
+        echo $html_info;
+        exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -87,7 +123,7 @@ $contatoOrg = ContatoOrgEventoDao::selectAll();
                                     <td class="fs-5 pt-3"><?= $contatoOrgs['nomeOrganizacaoEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $contatoOrgs['emailOrganizacaoEvento']; ?></td>
                                     <td class="text-center">
-                                        <a class="dropdown-item" onclick="modalInfo(1,1)">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$contatoOrgs['idContatoOrganizacaoEvento']?>)">
                                                 <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -110,8 +146,8 @@ $contatoOrg = ContatoOrgEventoDao::selectAll();
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="color: #a6a6a6;">
-                                    <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                    <form action="process.php" id = "informacoes" method="post">
+                                        <input type="hidden" class="form-control" id="idInfo" name="id" type="text">
                                         <div class="d-flex m-0" style="height: 30px;">
                                             <p class="m-0 fw-bold fs-5">Nome do Usuário: </p> <p class="ms-2 fs-5" >aa</p>
                                         </div>
@@ -130,7 +166,7 @@ $contatoOrg = ContatoOrgEventoDao::selectAll();
                                         </div>
                                         <div class="d-flex justify-content-between"> 
                                             <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
-                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4" value="" name="acao">Validar denúncia</button>
+                                            <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4" name="acao">Validar denúncia</button>
                                         </div>
                                     </form>
                                 </div>
@@ -154,10 +190,18 @@ $contatoOrg = ContatoOrgEventoDao::selectAll();
             }
     </script>
     <!-- Para usar Mascara  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="../../js/ajax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script>
+        function mostrarInfo($idContatoOrganizacaoEvento) {
+            enviarIdContato($idContatoOrganizacaoEvento);
+            modalInfo($idContatoOrganizacaoEvento, 'idInfo');
+        }
     </script>
 </body>
 

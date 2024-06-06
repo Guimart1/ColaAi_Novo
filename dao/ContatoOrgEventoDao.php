@@ -47,6 +47,16 @@ class ContatoOrgEventoDao {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public static function selectByIdInner($id){
+        $conexao = Conexao::conectar();
+        $query = "SELECT nomeOrganizacaoEvento, emailOrganizacaoEvento, tituloContatoOrganizacaoEvento, categoriaContatoOrganizacaoEvento, descContatoOrganizacaoEvento FROM `tbcontatoorganizacaoevento`
+        INNER JOIN tborganizacaoevento ON tborganizacaoevento.idOrganizacaoEvento = tbcontatoorganizacaoevento.idOrganizacaoEvento
+        INNER JOIN tbcategoriacontatoorganizacaoevento ON tbcategoriacontatoorganizacaoevento.idCategoriaContatoOrganizacaoEvento = tbcontatoorganizacaoevento.idCategoriaContatoOrganizacaoEvento WHERE idContatoOrganizacaoEvento = :id";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
     public static function delete($id){
         $conexao = Conexao::conectar();
