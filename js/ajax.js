@@ -30,3 +30,19 @@ function enviarIdFeedback(idFeedback) {
         }
     });
 }
+function enviarIdOrganizacao(idOrganizacaoEvento) {
+    // Faz a requisição AJAX
+    $.ajax({
+        url: '', // URL do seu script PHP
+        method: 'POST',
+        data: { idOrganizacaoEvento: idOrganizacaoEvento }, // Envia o ID do evento para o PHP
+        success: function(data) {
+            // Manipule a resposta do servidor, se necessário
+            console.log(data);
+            $('#informacoes').html(data); // Insere o conteúdo na tbody da tabela
+        },
+        error: function(error) {
+            console.error('Erro:', error);
+        }
+    });
+}
