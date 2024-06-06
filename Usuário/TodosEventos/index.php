@@ -201,15 +201,14 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                         <input type="checkbox" name="faixaEtaria[]" value="5" id="livreTodos"><span class="ms-2">Livre para todos</span>
                     </div>
                 </div>
-                <div class="distanciaBox">
+                 <!-- <div class="distanciaBox">
                     <label for="" class="mb-1 fs-5 mb-4">Distância</label>
                     <div class="d-flex align-items-center">
                         <div class="teste"></div><input type="range" name="" id="">
                         <div class="teste"></div>
                     </div>
-                    
-                </div>
-                <span class="ms-auto">km</span>
+                </div> 
+                <span class="ms-auto">km</span> -->
                 <div class="turnoBox mt-2">
                     <label for="" class="fs-5">Turno</label>
                     <div class="inputFiltros">
@@ -220,6 +219,9 @@ $enderecosEventosJSON = json_encode($enderecosEventos);
                     </div>
                     <div class="inputFiltros">
                         <input type="checkbox" name="turno[]" value="3" id="noturno"><span class="ms-2">Noturno</span>
+                    </div>
+                    <div class="inputFiltros">
+                        <input type="checkbox" name="turno[]" value="4" id="diaTodo"><span class="ms-2">Dia Todo</span>
                     </div>
                 </div>
 

@@ -15,8 +15,8 @@ if (!empty($_POST)) {
     $uf_Evento = $eventoDao['ufEvento'];
     $data_Evento = $eventoDao['dataEvento'];
     $dataFim_Evento = $eventoDao['dataFimEvento'];
-    $periodo_Evento = $eventoDao['faixaEtariaEvento'];
-    $faixa_Evento = $eventoDao['periodoEvento'];
+    $periodo_Evento = $eventoDao['periodoEvento'];
+    $faixa_Evento = $eventoDao['faixaEtariaEvento'];
     $valor_Evento = $eventoDao['valorEvento'];
     $espaco_Evento = $eventoDao['espacoEvento'];
     $desc_Evento = $eventoDao['descEvento'];
@@ -153,45 +153,44 @@ if (!empty($_POST)) {
                                 <div class="row">
                                     <div class="col-md-6 needs-validation">
                                         <label for="faixaetaria" class="col-form-label">Faixa etária do Evento*</label>
-                                        <select class="form-select inputGeral" name="faixaEtariaEvento" value="<?= $faixa_Evento ?>" aria-label="Default select example">
-                                            <option selected>Selecione a faixa etária</option>
-                                            <option value="1">0-12 meses</option>
-                                            <option value="2">1-3 anos</option>
-                                            <option value="3">3-5 anos</option>
-                                            <option value="4">5-12 anos</option>
-                                            <option value="5">Livre para todos os públicos</option>
+                                        <select class="form-select inputGeral" name="faixaEtariaEvento" required>
+                                            <option value="" disabled <?=$faixa_Evento == '' ? 'selected' : ''?>>Selecione a faixa etária</option>
+                                            <option value="1" <?=$faixa_Evento == '1' ? 'selected' : ''?>>0-12 meses</option>
+                                            <option value="2" <?=$faixa_Evento == '2' ? 'selected' : ''?>>1-3 anos</option>
+                                            <option value="3" <?=$faixa_Evento == '3' ? 'selected' : ''?>>3-5 anos</option>
+                                            <option value="4" <?=$faixa_Evento == '4' ? 'selected' : ''?>>5-12 anos</option>
+                                            <option value="5" <?=$faixa_Evento == '5' ? 'selected' : ''?>>Livre para todos os públicos</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 needs-validation">
                                         <label for="turno" class="col-form-label">Turno do Evento*</label>
-                                        <select class="form-select inputGeral" name="periodoEvento" value="<?= $periodo_Evento ?>" aria-label="Default select example">
-                                            <option selected>Selecione o turno</option>
-                                            <option value="1">Manhã</option>
-                                            <option value="2">Tarde</option>
-                                            <option value="3">Noite</option>
-                                            <option value="4">Dia Todo</option>
+                                        <select class="form-select inputGeral" name="periodoEvento" aria-label="Default select example" required>
+                                            <option value="" disabled <?=$periodo_Evento == '' ? 'selected' : ''?>>Selecione o turno</option>
+                                            <option value="1" <?=$periodo_Evento == '1' ? 'selected' : ''?>>Manhã</option>
+                                            <option value="2" <?=$periodo_Evento == '2' ? 'selected' : ''?>>Tarde</option>
+                                            <option value="3" <?=$periodo_Evento == '3' ? 'selected' : ''?>>Noite</option>
+                                            <option value="4" <?=$periodo_Evento == '4' ? 'selected' : ''?>>Dia Todo</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 needs-validation mb-4">
                                         <label for="valor" class="col-form-label">Valor do Evento*</label>
-                                        <select class="form-select inputGeral" name="valorEvento" value="<?= $valor_Evento ?>" aria-label="Default select example">
-                                            <option selected>Selecione o valor</option>
-                                            <option value="1">Grátis</option>
-                                            <option value="2">Pago</option>
-                                            <option value="3">Outros</option>
+                                        <select class="form-select inputGeral" name="valorEvento" aria-label="Default select example" required>
+                                            <option value="" disabled <?=$valor_Evento == '' ? 'selected' : ''?>>Selecione o valor</option>
+                                            <option value="1" <?=$valor_Evento == '1' ? 'selected' : ''?>>Grátis</option>
+                                            <option value="2" <?=$valor_Evento == '2' ? 'selected' : ''?>>Pago</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 needs-validation mb-4">
                                         <label for="espaco" class="col-form-label">Espaço do Evento*</label>
-                                        <select class="form-select inputGeral" name="espacoEvento" value="<?= $espaco_Evento ?>" aria-label="Default select example">
-                                            <option selected>Selecione o valor</option>
-                                            <option value="1">Parque</option>
-                                            <option value="2">Museu</option>
-                                            <option value="3">Teatro</option>
-                                            <option value="4">Centro Cultural</option>
-                                            <option value="5">Outros</option>
+                                        <select class="form-select inputGeral" name="espacoEvento" aria-label="Default select example" required>
+                                            <option value="" disabled <?=$espaco_Evento == '' ? 'selected' : ''?>>Selecione o valor</option>
+                                            <option value="1" <?=$espaco_Evento == '1' ? 'selected' : ''?>>Parque</option>
+                                            <option value="2" <?=$espaco_Evento == '2' ? 'selected' : ''?>>Museu</option>
+                                            <option value="3" <?=$espaco_Evento == '3' ? 'selected' : ''?>>Teatro</option>
+                                            <option value="4" <?=$espaco_Evento == '4' ? 'selected' : ''?>>Centro Cultural</option>
+                                            <option value="5" <?=$espaco_Evento == '5' ? 'selected' : ''?>>Outros</option>
                                         </select>
                                     </div>
                                 </div>

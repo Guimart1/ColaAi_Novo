@@ -3,6 +3,21 @@ require_once '../../dao/EventoDao.php';
 $evento = EventoDao::selectAllActive();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
+    $faixa_etaria = array(
+        '1' => '0-12 meses',
+        '2' => '1-3 anos',
+        '3' => '3-5 anos',
+        '4' => '5-12 anos',
+        '5' => 'Livre para todos os públicos'
+    );
+
+    $turnos = array(
+        '1' => 'Manhã',
+        '2' => 'Tarde',
+        '3' => 'Noite',
+        '4' => 'Dia Todo'
+    );
+
     // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
     $idEvento = $_POST['idEvento'];
 
@@ -50,11 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
     $html_info .= "</div>";
     $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
     $html_info .= "<p class='m-0 fw-bold fs-5'>Faixa etária: </p>";
-    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['faixaEtariaEvento'] . "</p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $faixa_etaria[$eventoSolo['faixaEtariaEvento']] . "</p>";
     $html_info .= "</div>";
     $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
     $html_info .= "<p class='m-0 fw-bold fs-5'>Turno: </p>";
-    $html_info .= "<p class='ms-2 fs-5'>" . $eventoSolo['periodoEvento'] . "</p>";
+    $html_info .= "<p class='ms-2 fs-5'>" . $turnos[$eventoSolo['periodoEvento']] . "</p>";
     $html_info .= "</div>";
     $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
     $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p>";

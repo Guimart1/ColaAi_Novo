@@ -115,7 +115,6 @@ require_once '../../dao/InteresseEventoDao.php';
                                 $valores = array(
                                     '1' => 'Grátis',
                                     '2' => 'Pago',
-                                    '3' => 'Outros'
                                 );
 
                                 // Verifique se o valor do evento está definido e não é vazio

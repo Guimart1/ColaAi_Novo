@@ -100,15 +100,17 @@ require_once (__DIR__ . '../../model/Conexao.php');
                     $query .= " (faixaEtariaEvento = 1 OR faixaEtariaEvento = 2 OR faixaEtariaEvento = 3 OR faixaEtariaEvento = 4 OR faixaEtariaEvento = 5)";
                 }
                 if(!empty($turno)){
-                    if(count($turno) == 2){
-                        $query .= " AND (periodoEvento = :turno1 OR periodoEvento = :turno2)";
-                    } elseif(count($turno) == 1){
+                    if(count($turno) == 1){
                         $query .= " AND periodoEvento = :turno1";
-                    } else {
-                        $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3)";
+                    } elseif(count($turno) == 2){
+                        $query .= " AND (periodoEvento = :turno1 OR periodoEvento = :turno2)";
+                    } elseif(count($turno) == 3) {
+                        $query .= " AND (periodoEvento = :turno1 OR periodoEvento = :turno2 OR periodoEvento = :turno3)";
+                    } else{
+                        $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3 OR periodoEvento = 4)";
                     }
                 } else {
-                    $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3)";
+                    $query .= " AND (periodoEvento = 1 OR periodoEvento = 2 OR periodoEvento = 3 OR periodoEvento = 4)";
                 }
                 if(!empty($valor)){
                     if(count($valor) == 1){
@@ -139,11 +141,16 @@ require_once (__DIR__ . '../../model/Conexao.php');
                 }
             }
             if (!empty($turno)) {
-                if (count($turno) == 2) {
+                if (count($turno) == 1) {
+                    $stmt->bindValue(':turno1', $turno[0]);
+                } elseif (count($turno) == 2) {
                     $stmt->bindValue(':turno1', $turno[0]);
                     $stmt->bindValue(':turno2', $turno[1]);
-                } elseif (count($turno) == 1) {
+                }
+                 elseif(count($turno) == 3){
                     $stmt->bindValue(':turno1', $turno[0]);
+                    $stmt->bindValue(':turno2', $turno[1]);
+                    $stmt->bindValue(':turno3', $turno[2]);
                 }
             }
             if(!empty($valor)){
