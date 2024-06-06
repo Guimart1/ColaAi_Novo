@@ -1,6 +1,39 @@
 <?php
-require_once '../../dao/ContatoUsuarioDao.php';
-$contatoUser = ContatoUsuarioDao::selectAllInner();
+    require_once '../../dao/ContatoUsuarioDao.php';
+    $contatoUser = ContatoUsuarioDao::selectAllInner();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoOrganizacaoEvento'])) {
+        // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+        $idContato = $_POST['idContatoOrganizacaoEvento'];
+    
+        // Obtém os dados filtrados da organização com base no valor do filtro
+        $contatoSolo = ContatoUsuarioDao::selectByIdInner($idContato);
+    
+        // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+        $html_info = '';
+        $html_info = "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Usuário: </p> <p class='ms-2 fs-5' >" . $contatoSolo['nomeOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>E-mail: </p><p class='ms-2 fs-5'>" . $contatoSolo['emailOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Título: </p><p class='ms-2 fs-5'>" . $contatoSolo['tituloContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex  m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Motivo do Contato: </p><p class='ms-2 fs-5'>" . $contatoSolo['categoriaContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+        $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
+        $html_info .= "<p>" . $contatoSolo['descContatoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex justify-content-between'>"; 
+        $html_info .= "<a href='' class='fs-4 mt-auto mb-2' style='color: #6D9EAF'>Cancelar</a>";
+        $html_info .= "<button type='submit' class='btn-adm rounded rounded-3 border-0 fs-4' name='acao'>Validar denúncia</button>";
+        $html_info .= "</div>";
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

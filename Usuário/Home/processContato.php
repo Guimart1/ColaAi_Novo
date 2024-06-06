@@ -6,12 +6,12 @@ require_once '../../model/Mensagem.php';
 $contato = new ContatoUsuario();
 $msg = new Mensagem();
 
-//var_dump($_POST);
+var_dump($_POST);
 switch ($_POST["acao"]) {
   case 'DELETE':
     try {
       $contatoDao = ContatoUsuarioDao::delete($_POST['id']);
-      header("Location: index.php");
+      // header("Location: index.php");
     } catch (Exception $e) {
       echo 'Exceção capturada: ',  $e->getMessage(), "\n";
     }
@@ -20,7 +20,7 @@ switch ($_POST["acao"]) {
     $contato->setTitulo($_POST["tituloContatoUsuario"]);
     $contato->setDesc($_POST["descContatoUsuario"]);
     $contato->setIdUsuario($_POST["idUsuario"]);
-    $contato->setidCategoriaContatoUsuario($_POST["idCategoriaContatoUsuario "]);
+    $contato->setidCategoriaContatoUsuario($_POST["idCategoriaContatoUsuario"]);
 
     try {
     $contatoDao = ContatoUsuarioDao::insert($contato);
@@ -35,7 +35,7 @@ switch ($_POST["acao"]) {
       // Adiciona uma mensagem para debug
       echo "Erro ao inserir contato no banco de dados: " . $e->getMessage();
 
-      header("Location: index.php");
+      header("Location: processContato.php");
     }
     break;
   case 'ATUALIZAR':

@@ -53,6 +53,16 @@ class ContatoUsuarioDao{
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public static function selectByIdInner($id){
+        $conexao = Conexao::conectar();
+        $query = "SELECT nomeUsuario, emailUsuario, tituloContatoUsuario, categoriaContatoUsuario, descContatoUsuario FROM `tbcontatousuario`
+        INNER JOIN tbusuario ON tbusuario.idUsuario = tbcontatousuario.idUsuario
+        INNER JOIN tbcategoriacontatousuario ON tbcategoriacontatousuario.idCategoriaContatoUsuario = tbcontatousuario.idCategoriaContatoUsuario WHERE idContatoUsuario = :id";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
     public static function delete($id){
         $conexao = Conexao::conectar();

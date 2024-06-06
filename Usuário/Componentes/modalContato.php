@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
                 <p>Entre em contato com a nossa equipe de colaboradores e seja atendido por profissionais capacitados e interessados para oferecer a melhor vivência no Cola Aí.</p>
-                <form action="./processContato.php" method="POST" enctype="multipart/form-data">
+                <form action="../Home/processContato.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id da organização" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                     <h2 class="fs-5 mt-3">Título</h2>
                     <div class="inputContato">
@@ -41,7 +41,7 @@
                     </div>
                     <p style="color: #6D9EAF; font-size:0.9em" class="mt-3">As imagens serão reservadas e sem fins lucrativas, serão apenas para auxílio na resolução dos problemas</p> -->
                     <div class="btnModal w-100 mt-4 d-flex">
-                        <button type="submit" class="border border-0 ms-auto rounded rounded-5"  value="SALVAR" name="acao">Enviar</button>
+                        <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="SALVAR" name="acao">Enviar</button>
                     </div>
                 </form>
             </div>
