@@ -32,6 +32,14 @@ $organizacaoDao = new OrganizacaoDao();
     // Buscar dados da organização pelo ID (você precisa passar o ID da organização)
     $idOrganizacao = $_SESSION['userOrg']['idOrganizacaoEvento']; // Supondo que o ID da organização esteja na sessão
     $organizacao = $organizacaoDao->selectById($idOrganizacao);
+
+    $imagemPerfil = ''; // Defina a variável como vazia inicialmente
+    $imagemBanner = ''; // Defina a variável como vazia inicialmente
+
+    if ($organizacao && isset($organizacao['imagemOrganizacaoEvento'])) {
+        // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
+        $imagemPerfil = $organizacao['imagemOrganizacaoEvento'];
+    }
     ?>
 
     <?php
@@ -82,7 +90,7 @@ $organizacaoDao = new OrganizacaoDao();
                             </div>
                         </form>
                     </div>
-                    <img src="../../img/Organizacao/<?= $authUserOrg['imagemOrganizacaoEvento'] ? $authUserOrg['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
+                    <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
                     
                     <div class="infoOrg d-flex justify-content-center flex-column ms-4">
                         <?php if ($organizacao !== false) : ?>
@@ -125,10 +133,10 @@ $organizacaoDao = new OrganizacaoDao();
                 <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
                     <p>A sua foto de perfil ficará visível para os perfis deorganizações e administradores do Cola Aí.</p>
                     <form method="post" action="./processFotoPerfil.php" enctype="multipart/form-data">
-                        <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil ?>">
-                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id do usuario" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
-                        <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
+                        <input type="hidden" name="imagemOrganizacaoEvento" id="imagemOrganizacaoEvento" placeholder="nome foto" value="<?= $imagemPerfil ?>">
+                        <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id do Organizacao Evento" value="<?= isset($authUserOrg['idOrganizacaoEvento']) ? $authUserOrg['idOrganizacaoEvento'] : '' ?>" readonly>
+                        <label for="imagemOrganizacaoEvento" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
+                            <img id="preview" src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemOrganizacaoEvento" name="imagemOrganizacaoEvento" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
                         </label>
                         <div class="row inputFile text-center">
                             <label for="foto" class="form-label mt-1">Carregar Imagem</label>
