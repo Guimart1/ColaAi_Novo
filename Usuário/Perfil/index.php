@@ -192,7 +192,7 @@ $user = new UserDao();
                         <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil ?>">
                         <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id do usuario" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
+                            <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="height: 250px; width: 250px; border-radius: 100%;" class="mt-1">
                         </label>
                         <div class="row inputFile text-center">
                             <label for="foto" class="form-label mt-1">Carregar Imagem</label>
@@ -258,7 +258,7 @@ $user = new UserDao();
                                     <a href="../PerfilOrganização/index.php?id=<?= $seguindo['idOrganizacaoEvento']; ?>" style="color: #a6a6a6; text-decoration:none">
                                         <h2 class="fs-5 "><?= $seguindo['nomeOrganizacaoEvento']; ?></h2>
                                     </a>
-                                    <p><?= $seguindo['descOrganizacaoEvento']; ?></p>
+                                    <p class="descTitulo"><?= $seguindo['descOrganizacaoEvento']; ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
