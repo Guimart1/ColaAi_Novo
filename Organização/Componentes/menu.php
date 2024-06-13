@@ -16,12 +16,12 @@
         <span class="ms-2">Eventos</span>
       </li>
     </a>
-    <a class="menuItems w-100 p-1 ps-2" href="../Publicações/" style="text-decoration: none; color: #a6a6a6;">
+    <!-- <a class="menuItems w-100 p-1 ps-2" href="../Publicações/" style="text-decoration: none; color: #a6a6a6;">
       <li class="d-flex align-items-center">
         <img src="../../img/Admin/icon-publicacoes.png" alt="" id="menu-icon">
         <span class="ms-2">Publicações</span>
       </li>
-    </a>
+    </a> -->
     <a class="menuItems w-100 p-1 ps-2" data-bs-toggle="collapse" href="#collapseArquivados" role="button" aria-expanded="false" aria-controls="collapseArquivados" style="text-decoration: none; color: #a6a6a6;">
       <li class="d-flex align-items-center">
         <img src="../../img/Admin/itens-arquivados.png" alt="" id="menu-icon">
@@ -35,12 +35,12 @@
           <span>Eventos</span>
         </a>
       </li>
-      <li class="menuItems w-100 p-1 ps-4">
+      <!-- <li class="menuItems w-100 p-1 ps-4">
         <a href="../Arquivados/publicacoes.php" style="text-decoration: none; color: #a6a6a6;">
           <img src="../../img/Admin/icon-publicacoes.png" alt="" id="menu-icon">
           <span>Publicações</span>
         </a>
-      </li>
+      </li> -->
     </div>
     <a class="menuItems w-100 p-1 ps-2" href="../Contato/" style="text-decoration: none; color: #a6a6a6;">
       <li class="d-flex align-items-center">

@@ -45,7 +45,7 @@ switch ($_POST["acao"]) {
             // Se houver um erro na inserção, você pode lidar com isso aqui
 
             // Adiciona uma mensagem para debug
-            $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
+            // $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
 
             header("Location: register.php");
         } 
@@ -71,7 +71,7 @@ switch ($_POST["acao"]) {
           $evento->setImagemEvento($evento->salvarImagem(($_POST['imagemEvento'])));  
               try {
                 $eventoDao = EventoDao::update($_POST["idEvento"], $evento);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+                // $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";

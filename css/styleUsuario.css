@@ -300,6 +300,12 @@ p {
     font-size: 0.7em;
     font-weight: bold;
 }
+.descTitulo {
+    max-width: 40ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 footer{
     background-color: #F6EFCD;
 }
@@ -480,7 +486,6 @@ input[type="file"] {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
 
 .faixaEtariaInput{
     all: unset;

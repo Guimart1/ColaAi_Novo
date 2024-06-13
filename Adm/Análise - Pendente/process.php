@@ -12,7 +12,7 @@ switch ($_POST["acao"]) {
               $organizacao->setSituacao(2);
               try {
                 $organizacaoDao = OrganizacaoDao::updateSituacao($_POST["id"], $organizacao);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+                // $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
@@ -22,7 +22,7 @@ switch ($_POST["acao"]) {
               $organizacao->setSituacao(3);
               try {
                 $organizacaoDao = OrganizacaoDao::updateSituacao($_POST["id"], $organizacao);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+                // $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";

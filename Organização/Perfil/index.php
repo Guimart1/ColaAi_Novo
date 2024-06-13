@@ -32,6 +32,14 @@ $organizacaoDao = new OrganizacaoDao();
     // Buscar dados da organização pelo ID (você precisa passar o ID da organização)
     $idOrganizacao = $_SESSION['userOrg']['idOrganizacaoEvento']; // Supondo que o ID da organização esteja na sessão
     $organizacao = $organizacaoDao->selectById($idOrganizacao);
+
+    $imagemPerfil = ''; // Defina a variável como vazia inicialmente
+    $imagemBanner = ''; // Defina a variável como vazia inicialmente
+
+    if ($organizacao && isset($organizacao['imagemOrganizacaoEvento'])) {
+        // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
+        $imagemPerfil = $organizacao['imagemOrganizacaoEvento'];
+    }
     ?>
 
     <?php
@@ -69,9 +77,9 @@ $organizacaoDao = new OrganizacaoDao();
                         <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" class="ms-auto me-2" style="width: 45px;"></button>
                     </a>
                     <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="">Banner</a></li>
+                    <li><a class="dropdown-item" onclick="modalBannerPerfil(0,0)">Banner</a></li>
                     <hr class="dropdown-divider">
-                    <li><a class="dropdown-item" href="">Foto do perfil</a></li>
+                    <li><a class="dropdown-item" onclick="modalFotoPerfil(0,0)">Foto do perfil</a></li>
                     </ul>
                 </div>
                     <div class="dropdown">
@@ -82,7 +90,7 @@ $organizacaoDao = new OrganizacaoDao();
                             </div>
                         </form>
                     </div>
-                    <img src="../../img/Organizacao/<?= $authUserOrg['imagemOrganizacaoEvento'] ? $authUserOrg['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
+                    <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
                     
                     <div class="infoOrg d-flex justify-content-center flex-column ms-4">
                         <?php if ($organizacao !== false) : ?>
@@ -115,7 +123,61 @@ $organizacaoDao = new OrganizacaoDao();
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="modalFotoPerfil" role="dialog"><!--modal foto perfil-->
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4" style="background-color: #FFFBE7;">
+                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Adicione uma foto ao perfil</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                    <p>A sua foto de perfil ficará visível para os perfis deorganizações e administradores do Cola Aí.</p>
+                    <form method="post" action="./processFotoPerfil.php" enctype="multipart/form-data">
+                        <input type="hidden" name="imagemOrganizacaoEvento" id="imagemOrganizacaoEvento" placeholder="nome foto" value="<?= $imagemPerfil ?>">
+                        <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id do Organizacao Evento" value="<?= isset($authUserOrg['idOrganizacaoEvento']) ? $authUserOrg['idOrganizacaoEvento'] : '' ?>" readonly>
+                        <label for="imagemOrganizacaoEvento" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
+                            <img id="preview" src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemOrganizacaoEvento" name="imagemOrganizacaoEvento" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
+                        </label>
+                        <div class="row inputFile text-center">
+                            <label for="foto" class="form-label mt-1">Carregar Imagem</label>
+                            <input type="file" id="foto" name="foto" accept="image/*" class="form-control mt-1 mb-4">
+                        </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalBannerPerfil" role="dialog"><!--modal foto BANNER-->
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded rounded-5 pb-4 overflow-auto" style="background-color: #FFFBE7; height: 550px">
+                <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
+                    <h1 class="modal-title fs-4 ps-5" id="exampleModalLabel">Adicione um banner ao perfil</h1>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
+                    <p>O seu banner ficará visível para os perfis de organizações e administradores do Cola Aí.</p>
+                    <form method="post" action="./processBannerPerfil.php" enctype="multipart/form-data">
+                        <input type="hidden" name="imagemBannerUsuario" id="imagemBannerUsuario" placeholder="nome foto" value="<?= $imagemBanner ?>">
+                        <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
+                        <label for="imagemBannerUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
+                            <img id="previewBanner" src="../../img/Usuario/<?= $imagemBanner != "" ? $imagemBanner : 'add-banner.png'; ?>" id="imagemBannerUsuario" name="imagemBannerUsuario" alt="foto de Capa" style="width: 80%; min-width:250px; height:200px;" class="mt-5">
+                        </label>
+                        <div class="row inputFile text-center">
+                            <label for="banner" class="form-label m-1">Carregar Imagem</label>
+                            <input type="file" id="banner" name="banner" accept="image/*" class="form-control mt-1 mb-4">
+                        </div>
+                        <div class="btnModal w-100 mt-4 d-flex">
+                            <button type="submit" class="border border-0 ms-auto rounded rounded-5" value="ATUALIZAR" name="acao">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

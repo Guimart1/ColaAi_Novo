@@ -281,7 +281,53 @@ require_once (__DIR__ . '../../model/Conexao.php');
             }
         
         
+
+        public static function updatePerfilImage($id, $org){
+        $conexao = Conexao::conectar();
+    
+        // Verifica se há uma imagem a ser atualizada
+        if (!empty($_FILES['foto']['size'])) {
+            // Diretório onde as imagens são armazenadas
+            $diretorio = "../../img/Organiacao/";
+            $nomeCompleto = $diretorio . $org->getImagem();
+            // Verifica se a imagem já foi movida e renomeada
+            if (!$org->getImagem()) {
+                // Gera um nome aleatório para a imagem
+                $novo_nome = md5(time()) . ".jpg";
+                $nomeCompleto = $diretorio . $novo_nome;
+    
+                // Move a imagem para o diretório
+                move_uploaded_file($_FILES['foto']['tmp_name'], $nomeCompleto);
+    
+                // Atualiza o nome da imagem no objeto usuário
+                $org->setImagem($novo_nome);
+            } else {
+                // A imagem já foi movida e renomeada
+                $nomeCompleto = $diretorio . $org->getImagem();
+            }
+        } else {
+            // Se não houver uma nova imagem, use a imagem existente
+            
+        }
+    
+        // Query SQL para atualizar a imagem do perfil do usuário
+        $query = "UPDATE tborganizacaoevento SET 
+                imagemOrganizacaoEvento = :imagemPerfil
+                WHERE idOrganizacaoEvento = :id";
+    
+        // Prepara a declaração
+        $stmt = $conexao->prepare($query);
+    
+        // Obtém o nome da imagem do objeto usuário
+        $imagemP = $org->getImagem();
+    
+        // Vincula os parâmetros
+        $stmt->bindParam(':imagemPerfil', $imagemP);
+        $stmt->bindParam(':id', $id);
+    
+        // Executa a consulta SQL
+        return $stmt->execute();
     }
         
-
+    }
 ?>

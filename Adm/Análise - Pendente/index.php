@@ -2,6 +2,56 @@
     require_once('../../dao/OrganizacaoDao.php');
     require_once '../../model/Mensagem.php';
     $organizacao = OrganizacaoDao::selectAll(); 
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idOrganizacaoEvento'])) {
+        // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+        $idOrganizacao = $_POST['idOrganizacaoEvento'];
+    
+        // Obtém os dados filtrados da organização com base no valor do filtro
+        $organizacaoSolo = OrganizacaoDao::selectById($idOrganizacao);
+    
+        // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+        $html_info = '';
+        $html_info = "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Nome da Organização: </p> <p class='ms-2 fs-5' >" . $organizacaoSolo['nomeOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>CNPJ: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['cnpjOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>CEP: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['cepOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+        $html_info .= "<div class='d-flex'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Endereço: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['enderecoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='me-auto ms-auto d-flex'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Nº: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['numeroOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Complemento: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['complementoOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Bairro: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['bairroOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0 justify-content-between' style='height: 30px;'>";
+        $html_info .= "<div class='d-flex'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Cidade: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['cidadeOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='me-auto ms-auto d-flex'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>UF: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['ufOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>E-mail: </p><p class='ms-2 fs-5'>" . $organizacaoSolo['emailOrganizacaoEvento'] . "</p>";
+        $html_info .= "</div>";
+    
+        // Retorna o HTML do <tbody> com os dados filtrados
+        echo $html_info;
+        exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -92,7 +142,7 @@
                                     <td class="fs-5 pt-3"><?= $organizacao['emailOrganizacaoEvento']; ?></td>
                                     <td class="fs-5 pt-3"><?= $organizacao['cnpjOrganizacaoEvento']; ?></td>
                                     <td class="text-center pt-3">
-                                        <a class="dropdown-item" onclick="modalInfo(1,1)">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$organizacao['idOrganizacaoEvento']?>)">
                                             <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -122,7 +172,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="color: #a6a6a6;">
-                                    <form action="process.php" method="post">
+                                    <form id = "informacoes" method="post">
                                         <input type="hidden" class="form-control" id="idInfo" name="id" type="text">
                                         <div class="d-flex m-0" style="height: 30px;">
                                             <p class="m-0 fw-bold fs-5">Nome da Organização: </p> <p class="ms-2 fs-5" >aa</p>
@@ -201,6 +251,7 @@
             <?= require '../../Adm/Componentes/modal.php' ?>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
@@ -218,5 +269,12 @@
     </script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="../../js/ajax.js"></script>
+    <script>
+        function mostrarInfo(idOrganizacaoEvento){
+            enviarIdOrganizacao(idOrganizacaoEvento);
+            modalInfo(idOrganizacaoEvento, 'idInfo');
+        }
+    </script>
 </body>
 </html>

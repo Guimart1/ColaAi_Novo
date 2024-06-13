@@ -1,6 +1,41 @@
 <?php
-require_once '../../dao/ContatoUsuarioDao.php';
-$contatoUser = ContatoUsuarioDao::selectAllInner();
+    require_once '../../dao/ContatoUsuarioDao.php';
+    $contatoUser = ContatoUsuarioDao::selectAllInner();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoUsuario'])) {
+        // O ID do evento enviado via AJAX está disponível em $_POST['idEvento']
+        $idContato = $_POST['idContatoUsuario'];
+    
+        // Obtém os dados filtrados da organização com base no valor do filtro
+        $contatoSolo = ContatoUsuarioDao::selectByIdInner($idContato);
+    
+        // Constrói o HTML apenas para o <tbody> da tabela com os resultados filtrados
+        $html_info = '';
+        $html_info = "<input type='hidden' class='form-control' id='idInfo' name='id' type='text'>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Nome do Usuário: </p> <p class='ms-2 fs-5' >" . $contatoSolo['nomeUsuario'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>E-mail: </p><p class='ms-2 fs-5'>" . $contatoSolo['emailUsuario'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Título: </p><p class='ms-2 fs-5'>" . $contatoSolo['tituloContatoUsuario'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex  m-0' style='height: 30px;'>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Motivo do Contato: </p><p class='ms-2 fs-5'>" . $contatoSolo['categoriaContatoUsuario'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<p class='m-0 fw-bold fs-5'>Descrição: </p>";
+        $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
+        $html_info .= "<p>" . $contatoSolo['descContatoUsuario'] . "</p>";
+        $html_info .= "</div>";
+        $html_info .= "<div class='d-flex justify-content-between'>"; 
+        $html_info .= "<a href='' class='fs-4 mt-auto mb-2' style='color: #6D9EAF'>Cancelar</a>";
+        $html_info .= "<button type='submit' class='btn-adm rounded rounded-3 border-0 fs-4' name='acao'>Validar denúncia</button>";
+        $html_info .= "</div>";
+
+        echo $html_info;
+        exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -87,7 +122,7 @@ $contatoUser = ContatoUsuarioDao::selectAllInner();
                                     <td class="fs-5 pt-3"><?= $contatoUser['nomeUsuario']; ?></td>
                                     <td class="fs-5 pt-3"><?= $contatoUser['emailUsuario']; ?></td>
                                     <td class="text-center">
-                                        <a class="dropdown-item" onclick="modalInfo(1,1)">
+                                        <a class="dropdown-item" onclick="mostrarInfo(<?=$contatoUser['idContatoUsuario']?>)">
                                                 <img src="../../img/Admin/info-icon.png" alt="" style="width: 40px;">
                                         </a>
                                     </td>
@@ -110,8 +145,8 @@ $contatoUser = ContatoUsuarioDao::selectAllInner();
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" style="color: #a6a6a6;">
-                                    <form action="process.php" method="post">
-                                        <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
+                                    <form action="process.php" method="post" id = "informacoes">
+                                        <input type="hidden" class="form-control" id="idInfo" name="id" type="text">
                                         <div class="d-flex m-0" style="height: 30px;">
                                             <p class="m-0 fw-bold fs-5">Nome do Usuário: </p> <p class="ms-2 fs-5" >aa</p>
                                         </div>
@@ -154,10 +189,18 @@ $contatoUser = ContatoUsuarioDao::selectAllInner();
             }
     </script>
     <!-- Para usar Mascara  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="../../js/ajax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script>
+        function mostrarInfo(idContatoUsuario) {
+            enviarIdContatoUser(idContatoUsuario);
+            modalInfo(idContatoUsuario, 'idInfo');
+        }
     </script>
 </body>
 
