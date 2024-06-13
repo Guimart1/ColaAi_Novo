@@ -60,7 +60,7 @@ class ContatoOrgEventoDao {
     
     public static function delete($id){
         $conexao = Conexao::conectar();
-        $query = "DELETE FROM tbcontatoorganizacaoevento WHERE idContatoOrgEvento = :id";
+        $query = "DELETE FROM tbcontatoorganizacaoevento WHERE idContatoOrganizacaoEvento = :id";
         $stmt = $conexao->prepare($query);
         $stmt->bindParam(':id', $id);
         return  $stmt->execute();
@@ -92,6 +92,4 @@ class ContatoOrgEventoDao {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-}
-
-?>
+} ?>

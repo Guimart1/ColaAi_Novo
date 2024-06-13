@@ -95,7 +95,7 @@ $organizacao = OrganizacaoDao::selectAllInnerJoin();
                     <div class="dropdown ms-auto">
                     <h1 class="fs-5 ms-auto me-0 ">Categoria</h1>
                     <form id="filtroForm">
-                        <select name="filtro" id="filtro">
+                        <select name="filtro" class = "form-select" id="filtro">
                             <option value="0">Todos</option>
                             <option value="2">Ativo</option>
                             <option value="3">Desativado</option>
