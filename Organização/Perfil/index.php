@@ -90,7 +90,7 @@ $organizacaoDao = new OrganizacaoDao();
                             </div>
                         </form>
                     </div>
-                    <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%" class="mt-auto mb-auto" >
+                    <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%; max-width:280px;object-fit:cover; max-height:280px" class="mt-auto mb-auto">
                     
                     <div class="infoOrg d-flex justify-content-center flex-column ms-4">
                         <?php if ($organizacao !== false) : ?>
@@ -136,7 +136,7 @@ $organizacaoDao = new OrganizacaoDao();
                         <input type="hidden" name="imagemOrganizacaoEvento" id="imagemOrganizacaoEvento" placeholder="nome foto" value="<?= $imagemPerfil ?>">
                         <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id do Organizacao Evento" value="<?= isset($authUserOrg['idOrganizacaoEvento']) ? $authUserOrg['idOrganizacaoEvento'] : '' ?>" readonly>
                         <label for="imagemOrganizacaoEvento" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
-                            <img id="preview" src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemOrganizacaoEvento" name="imagemOrganizacaoEvento" alt="foto perfil" style="height: 250px; width: 250px;" class="mt-1">
+                            <img id="preview" src="../../img/Organizacao/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemOrganizacaoEvento" name="imagemOrganizacaoEvento" alt="foto perfil" style="height: 250px; width: 250px; object-fit:cover" class="mt-1">
                         </label>
                         <div class="row inputFile text-center">
                             <label for="foto" class="form-label mt-1">Carregar Imagem</label>
