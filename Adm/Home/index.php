@@ -45,7 +45,8 @@ $ultimosEventos = EventoDao::getLastFiveEvents();
     ?>
     <?php include('../Componentes/header.php'); ?>
     <?php include('../Componentes/menu.php'); ?>
-    <div class="container mt-4" id="data-box" style="color: #a6a6a6;">
+   
+    <div class="container-fluid vw-100" id="data-box" style="color: #a6a6a6;">
         <div class="hamburger-wrapper text-center">
             <div class="hamburger" onclick="toggleSidebar(), toggleHamburger()">
                 <input class="checkbox" type="checkbox" />

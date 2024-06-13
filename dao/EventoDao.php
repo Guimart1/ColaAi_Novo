@@ -331,6 +331,45 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+    public static function countEventsByOrganizacaoId($idOrganizacao)
+    {
+        $conexao = Conexao::conectar();
+        $query = "SELECT COUNT(*) AS totalEventos FROM tbevento WHERE idOrganizacaoEvento = :idOrganizacaoEvento";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':idOrganizacaoEvento', $idOrganizacao, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado['totalEventos'];
+    }
+
+    public static function getTopFiveEventsWithInterest($idOrganizacao)
+    {
+        $conexao = Conexao::conectar();
+        $query = "SELECT e.nomeEvento, COUNT(i.idInteresseEvento) AS total_interesses
+                  FROM tbevento e
+                  INNER JOIN tbinteresseEvento i ON e.idEvento = i.idEvento
+                  WHERE e.idOrganizacaoEvento = :idOrganizacao
+                  GROUP BY e.idEvento, e.nomeEvento
+                  ORDER BY total_interesses DESC
+                  LIMIT 5";
+        $stmt = $conexao->prepare($query);
+        $stmt->bindParam(':idOrganizacao', $idOrganizacao, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function countArchivedEvents()
+{
+    $conexao = Conexao::conectar();
+    $query = "SELECT COUNT(*) AS totalEventosArquivados FROM tbevento WHERE idSituacaoEvento = 2";
+    $stmt = $conexao->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $resultado['totalEventosArquivados'];
+}
+
+
     }
 
 
