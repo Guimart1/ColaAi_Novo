@@ -92,4 +92,12 @@ class ContatoOrgEventoDao {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+    public static function countAll(){
+        $conexao = Conexao::conectar();
+        $query = "SELECT COUNT(*) as totalContatos FROM tbcontatoorganizacaoevento";
+        $stmt = $conexao->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['totalContatos'];
+    }
 } ?>

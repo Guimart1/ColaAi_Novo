@@ -2,16 +2,21 @@
 require_once '../../dao/EventoDao.php';
 require_once '../../dao/OrganizacaoDao.php';
 require_once '../../dao/UserDao.php';
+require_once '../../dao/ContatoOrgEventoDao.php';
+require_once '../../dao/ContatoUsuarioDao.php';
 
 $totalEventos = EventoDao::countTotalEvents();
 $totalOrganizacoes = OrganizacaoDao::countAll();
 $totalUsuarios = UserDao::getTotalUsuarios();
 $totalOrganizacoesSituacao1 = OrganizacaoDao::countOrganizacoesComSituacao1();
 $ultimosEventos = EventoDao::getLastFiveEvents();
+$totalContatos = ContatoOrgEventoDao::countAll();
+$totalContatosUsuarios = ContatoUsuarioDao::countAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +25,7 @@ $ultimosEventos = EventoDao::getLastFiveEvents();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
 </head>
+
 <body>
     <?php
     session_start();
@@ -45,7 +51,7 @@ $ultimosEventos = EventoDao::getLastFiveEvents();
     ?>
     <?php include('../Componentes/header.php'); ?>
     <?php include('../Componentes/menu.php'); ?>
-   
+
     <div class="container-fluid vw-100" id="data-box" style="color: #a6a6a6;">
         <div class="hamburger-wrapper text-center">
             <div class="hamburger" onclick="toggleSidebar(), toggleHamburger()">
@@ -75,7 +81,14 @@ $ultimosEventos = EventoDao::getLastFiveEvents();
                 <h2 class="fs-5 pb-0">Quantidade de Organizações com Situação Pendente</h2>
                 <p class="fs-5">+ <?php echo $totalOrganizacoesSituacao1; ?> organizações</p>
             </div>
-           
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Contatos de Organizações para Retornar</h2>
+                <p class="fs-5">+ <?php echo $totalContatos; ?> contatos</p>
+            </div>
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Contatos de Usuários para Retornar</h2>
+                <p class="fs-5">+ <?php echo $totalContatosUsuarios; ?> contatos</p>
+            </div>
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-md-10 m-2">
@@ -113,4 +126,5 @@ $ultimosEventos = EventoDao::getLastFiveEvents();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
+
 </html>

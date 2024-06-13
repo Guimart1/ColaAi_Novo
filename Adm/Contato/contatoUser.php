@@ -28,10 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoUsuario'])) 
     $html_info .= "<div class='desc-box w-100 rounded rounded-3 mb-3 p-1'>";
     $html_info .= "<p>" . $contatoSolo['descContatoUsuario'] . "</p>";
     $html_info .= "</div>";
-    $html_info .= "<div class='d-flex justify-content-between'>";
-    $html_info .= "<a href='' class='fs-4 mt-auto mb-2' style='color: #6D9EAF'>Cancelar</a>";
-    $html_info .= "<button type='submit' class='btn-adm rounded rounded-3 border-0 fs-4' name='acao'>Validar denúncia</button>";
-    $html_info .= "</div>";
+   
 
     echo $html_info;
     exit(); // Finaliza a execução do script após retornar o HTML do <tbody>
@@ -147,10 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoUsuario'])) 
                                     <div class="desc-box w-100 rounded rounded-3 mb-3 p-1">
                                         <p>aaa</p>
                                     </div>
-                                    <div class="d-flex justify-content-between">
-                                        <a href="" class="fs-4 mt-auto mb-2" style="color: #6D9EAF">Cancelar</a>
-                                        <button type="submit" class="btn-adm rounded rounded-3 border-0 fs-4" value="" name="acao">Validar denúncia</button>
-                                    </div>
+                                
                                 </form>
                             </div>
                         </div>
