@@ -1,13 +1,17 @@
 <?php
-require_once __DIR__ . '../../../dao/EventoDao.php';
+require_once '../../dao/EventoDao.php';
 require_once '../../dao/OrganizacaoDao.php';
-// Chamar a função para contar eventos nos últimos 30 dias
-$totalEventos = EventoDao::countEventsLast30Days();
+require_once '../../dao/UserDao.php';
+
+$totalEventos = EventoDao::countTotalEvents();
 $totalOrganizacoes = OrganizacaoDao::countAll();
+$totalUsuarios = UserDao::getTotalUsuarios();
+$totalOrganizacoesSituacao1 = OrganizacaoDao::countOrganizacoesComSituacao1();
+$ultimosEventos = EventoDao::getLastFiveEvents();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +20,19 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
 </head>
-
 <body>
     <?php
-    // Iniciar a sessão
     session_start();
 
-    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
     if (!isset($_SESSION['AutenticaoAdm']) || $_SESSION['AutenticaoAdm'] != 'SIM') {
-        // Redirecionar para o login com um erro2 se não estiver autenticado
         header('Location: login.php?login=erro2');
         exit();
     }
 
-    //o usuário está autenticado
     $authUser = $_SESSION['userAdm'];
-
     $nomeAdm = $authUser['nomeAdmin'];
-    // Saudação com base no horário do dia
-    date_default_timezone_set('America/Sao_Paulo');
 
+    date_default_timezone_set('America/Sao_Paulo');
     $horaAtual = date('H');
     $saudacao = '';
     if ($horaAtual < 12) {
@@ -45,14 +42,12 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
     } else {
         $saudacao = 'Boa noite';
     }
-    //echo (date('H'));
     ?>
     <?php include('../Componentes/header.php'); ?>
     <?php include('../Componentes/menu.php'); ?>
-    <!-- Conteúdo Principal -->
-    <div class="text-center m-0" style="color: #a6a6a6;" id="data-box">
-        <div class="hamburger-wrapper">
-            <div class="hamburger" onclick="toggleSidebar() , toggleHamburger()">
+    <div class="container mt-4" id="data-box" style="color: #a6a6a6;">
+        <div class="hamburger-wrapper text-center">
+            <div class="hamburger" onclick="toggleSidebar(), toggleHamburger()">
                 <input class="checkbox" type="checkbox" />
                 <svg fill="none" viewBox="0 0 50 50" height="50" width="50">
                     <path class="lineTop line" stroke-linecap="round" stroke-width="4" stroke="black" d="M6 11L44 11"></path>
@@ -61,26 +56,45 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
                 </svg>
             </div>
         </div>
-        <h1 class="mt-2 fs-3"><?php echo $saudacao . ', ' . $nomeAdm . '! Bem-vindo ao Dashboard'; ?></h1>
-        <div class="row justify-content-evenly mt-4">
-            <div class="col-md-3 rounded-5" id="info-box">
-                <h2 class="fs-5 p-3 pb-0">Eventos Cadastrados</h2>
-                <p class="fs-5 p-0">+ <?php echo $totalEventos; ?> eventos</p>
+        <h1 class="text-center mt-2 fs-3"><?php echo $saudacao . ', ' . $nomeAdm . '! Bem-vindo ao Dashboard'; ?></h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Eventos Cadastrados</h2>
+                <p class="fs-5">+ <?php echo $totalEventos; ?> eventos</p>
             </div>
-            <!-- caixa de informações para organizações cadastradas -->
-            <div class="col-md-3 rounded-5" id="info-box">
-                <h2 class="fs-5 p-3 pb-0">Organizações Cadastradas</h2>
-                <p class="fs-5 p-0">+ <?php echo $totalOrganizacoes; ?> organizações</p>
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Organizações Cadastradas</h2>
+                <p class="fs-5">+ <?php echo $totalOrganizacoes; ?> organizações</p>
             </div>
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Usuários Cadastrados</h2>
+                <p class="fs-5">+ <?php echo $totalUsuarios; ?> usuários</p>
+            </div>
+            <div class="col-md-3 rounded-5 text-center p-3 m-2" id="info-box">
+                <h2 class="fs-5 pb-0">Quantidade de Organizações com Situação Pendente</h2>
+                <p class="fs-5">+ <?php echo $totalOrganizacoesSituacao1; ?> organizações</p>
+            </div>
+           
         </div>
-        <div class="row justify-content-evenly">
-            <div class="col-md-3">
-                <h2 class="fs-4 p-3 pb-0">Registro de Interesse nos Eventos</h2>
-                <canvas id="graficoBarras" width="400" height="400"></canvas> <!-- Gráfico de barras será renderizado aqui -->
-            </div>
-            <div class="col-md-3">
-                <h2 class="fs-4 p-3 pb-0">Usuários Cadastrados</h2>
-                <canvas id="graficoRosca" width="400" height="400"></canvas> <!-- Gráfico de rosca será renderizado aqui -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-10 m-2">
+                <h2 class="fs-4 p-3 pb-0">Lista dos últimos cinco eventos cadastrados</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome do Evento</th>
+                            <th scope="col">Organização Responsável</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($ultimosEventos as $evento) : ?>
+                            <tr>
+                                <td><?php echo $evento['nomeEvento']; ?></td>
+                                <td><?php echo $evento['nomeOrganizacaoEvento']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -92,62 +106,10 @@ $totalOrganizacoes = OrganizacaoDao::countAll();
     </script>
     <script>
         function toggleHamburger() {
-            var hamburger = document.querySelector('.hamburger'); // Selecionando o ícone do hambúrguer corretamente
+            var hamburger = document.querySelector('.hamburger');
             hamburger.classList.toggle('showHamburger');
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Dados para o gráfico de barras (Registro de Interesse nos Eventos)
-        var dadosBarras = {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-            datasets: [{
-                backgroundColor: [
-                    'rgb(230, 174, 178)',
-                    'rgb(111, 155, 171)'
-                ],
-                borderColor: 'rgba(255, 206, 86, 0.2)',
-                borderWidth: 1,
-                data: [1000, 2000, 3000, 4000, 5000, 6600], // Dados de interações com eventos
-                label: '(Últimos 30 dias)', // Alteração feita aqui
-            }]
-        };
-
-        // Dados para o gráfico de rosca (Usuários)
-        var dadosRosca = {
-            datasets: [{
-                data: [2000, 1800, 2200, 2200], // Dados de usuários
-                backgroundColor: [
-                    'rgb(147 204 76)',
-                    'rgb(109 158 175)',
-                    'rgb(255 212 23)',
-                    'rgb(230 174 178)',
-                ],
-                borderColor: [
-                    'rgb(147 204 76)',
-                    'rgb(109 158 175)',
-                    'rgb(255 212 23)',
-                    'rgb(230 174 178)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        // Criar o gráfico de barras (Interações com Eventos)
-        var ctxBarras = document.getElementById('graficoBarras').getContext('2d');
-        var graficoBarras = new Chart(ctxBarras, {
-            type: 'bar',
-            data: dadosBarras,
-        });
-
-        // Criar o gráfico de rosca (Usuários)
-        var ctxRosca = document.getElementById('graficoRosca').getContext('2d');
-        var graficoRosca = new Chart(ctxRosca, {
-            type: 'doughnut',
-            data: dadosRosca,
-        });
-    </script>
 </body>
-
 </html>

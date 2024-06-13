@@ -303,8 +303,27 @@ require_once (__DIR__ . '../../model/Conexao.php');
         
             return $stmt->execute();
         }
-        
-        
+        public static function countTotalEvents(){
+            $conexao = Conexao::conectar();
+            $query = "SELECT COUNT(*) AS totalEventos FROM tbevento";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $resultado['totalEventos'];
+        }
+        public static function getLastFiveEvents()
+        {
+            $conexao = Conexao::conectar();
+            $query = "SELECT e.nomeEvento, o.nomeOrganizacaoEvento 
+                      FROM tbevento e 
+                      JOIN tborganizacaoevento o ON e.idOrganizacaoEvento = o.idOrganizacaoEvento 
+                      ORDER BY e.idEvento DESC 
+                      LIMIT 5";
+            $stmt = $conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 
 

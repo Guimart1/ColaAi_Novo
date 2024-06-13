@@ -271,6 +271,16 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->execute();
             return $stmt->fetchColumn(); // Retorna o número de organizações cadastradas
         }
+        
+            public static function countOrganizacoesComSituacao1() {
+                $conexao = Conexao::conectar();
+                $query = "SELECT COUNT(*) FROM tborganizacaoevento WHERE idSituacaoOrganizacaoEvento = 1";
+                $stmt = $conexao->prepare($query);
+                $stmt->execute();
+                return $stmt->fetchColumn(); // Retorna o número de organizações com situação 1
+            }
+        
+        
     }
         
 

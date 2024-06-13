@@ -123,16 +123,17 @@ class UserDao
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    public static function getTotalClientes()
+    public static function getTotalUsuarios()
     {
         $conexao = Conexao::conectar();
-        $query = "SELECT COUNT(*) as totalUsuários FROM tbusuario";
+        $query = "SELECT COUNT(*) as totalUsuarios FROM tbusuario";
         $stmt = $conexao->prepare($query);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['totalUsuários'];
+    
+        return $result['totalUsuarios'];
     }
+    
     public static function updatePerfilImage($id, $user){
         $conexao = Conexao::conectar();
     
