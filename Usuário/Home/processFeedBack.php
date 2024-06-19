@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once '../../model/FeedbackApp.php';
 require_once '../../dao/FeedBackAppDao.php';
 require_once '../../model/Mensagem.php';
 
 $feedback = new FeedbackApp();
-$msg = new Mensagem();
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
@@ -23,16 +23,15 @@ switch ($_POST["acao"]) {
 
     try {
     $feedbackDao = FeedbackAppDao::insert($feedback);
-
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
+      $_SESSION['toastr'] = array(
+          'type' => 'success',
+          'message' => 'Feedback enviado com sucesso',
+          'title' => 'Ação concluida'
+      );
       header("Location: index.php");
+      exit();
     } catch (Exception $e) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
-
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
 
       header("Location: index.php");
     }
@@ -44,7 +43,6 @@ switch ($_POST["acao"]) {
     $feedback->setIdUsuario($_POST["idUsuario"]);
     try {
     $feedbackDao = FeedbackAppDao::update($_POST["idFeedBackApp"], $feedback);
-      $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
       header("Location: index.php");
     } catch (Exception $e) {
       echo 'Exceção capturada: ',  $e->getMessage(), "\n";

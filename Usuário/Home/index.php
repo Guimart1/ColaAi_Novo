@@ -18,6 +18,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
     <link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.core.min.css">
     <link rel="stylesheet" href="../../css/glide.theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="fundo-bolinha">
@@ -267,8 +268,19 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
             glide.mount();
         }
     </script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<?php 
+        if (isset($_SESSION['toastr'])) {
+            $toastr = $_SESSION['toastr'];
+            echo "<script>
+                $(document).ready(function() {
+                    toastr.{$toastr['type']}('{$toastr['message']}', '{$toastr['title']}');
+                });
+            </script>";
+            unset($_SESSION['toastr']); // Limpa a mensagem da sessão
+        }
+    ?>
 </body>
 
 </html>
