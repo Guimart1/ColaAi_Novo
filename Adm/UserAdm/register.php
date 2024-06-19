@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '../../../Adm/Componentes/modal.php');
-require_once(__DIR__ . '../../../dao/UserAdmDao.php');
+require_once '../../Adm/Componentes/modal.php';
+require_once  '../../dao/UserAdmDao.php';
 
 if (!empty($_POST)) {
   $id_Admin = $userAdmDao['idAdmin'];
@@ -40,6 +40,14 @@ if (!empty($_POST)) {
 
 <body style="justify-content: center; align-items: center; height: 100vh ">
   <?php
+  // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
+  if (!isset($_SESSION['AutenticaoAdm']) || $_SESSION['AutenticaoAdm'] != 'SIM') {
+      // Redirecionar para o login com um erro2 se não estiver autenticado
+      header('Location: login.php?login=erro2');
+      exit();
+  }
+
+  // Agora, o usuário está autenticado, então você pode acessar as informações do usuário na sessão
   $authUser = $_SESSION['userAdm'];
   ?>
   <?php
@@ -94,7 +102,7 @@ if (!empty($_POST)) {
           <form method="post" action="process.php" enctype="multipart/form-data" class="needs-validation w-100 h-100" novalidate>
             <input type="hidden" name="idAdmin" id="idAdmin" placeholder="id" value="<?= $id_Admin ?>">
             <input type="hidden" name="fotoPerfilAdmin" id="fotoPerfilAdmin" placeholder="nome foto" value="<?= $imagem_Admin ?>">
-            <input type="hidden" value="<?= $id_Admin ? 'ATUALIZAR' : 'SALVAR' ?>" name="acao">
+            <input type="hidden" value="<?= $id_Admin? 'ATUALIZAR' : 'SALVAR' ?>" name="acao">
             <div class="w-100 h-100 row d-flex p-2">
               <div class="col-md-4 text-center justify-content-center align-self-start d-flex flex-column">
                 <div class="row mt-4">
@@ -147,8 +155,8 @@ if (!empty($_POST)) {
                   </div>
                 </div>
                 <div class="row mt-3">
-                  <div class=" text-end p-3">
-                    <a class=" btn px-3" role="button" aria-disabled="true" href="index.php">Voltar</i></a>
+                  <div class="text-end p-3">
+                    <a class="btn px-3" role="button" aria-disabled="true" href="index.php">Voltar</i></a>
                     <input type="submit" class="btn" value="<?= $id_Admin ? 'Editar' : 'Cadastrar' ?>">
                   </div>
                 </div>

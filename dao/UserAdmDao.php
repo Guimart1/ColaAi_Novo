@@ -8,10 +8,10 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $cpf = $userAdm->getCpf();
             $nasc = $userAdm->getNasc();
             $email = $userAdm->getEmail();
-            $senha = $userAdm->getSenha(); // Corrigido o nome do método para getSenha()
+            $senha = $userAdm->getSenha(); 
             $imagem = $userAdm->getImagem();
             
-            $conn = Conexao::conectar(); // Estabeleça a conexão com o banco de dados
+            $conn = Conexao::conectar(); 
             
             $stmt = $conn->prepare("INSERT INTO tbadmin (nomeAdmin, sobrenomeAdmin, cpfAdmin, dataNascAdmin, emailAdmin, senhaAdmin, fotoPerfilAdmin) VALUES (:nome, :sobrenome, :cpf, :nasc, :email, :senha, :imagem)");
         

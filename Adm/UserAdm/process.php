@@ -10,7 +10,7 @@ $user = new UserAdm();
 switch ($_POST["acao"]) {
   case 'DELETE':
     try {
-      // $userAdmDao = UserAdmDao::delete($_POST['id']);
+      $userAdmDao = UserAdmDao::delete($_POST['id']);
       $_SESSION['toastr'] = array(
         'type' => 'success',
         'message' => 'Administrador deletado com sucesso',

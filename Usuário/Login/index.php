@@ -38,9 +38,9 @@
                             <input required type="password" placeholder="Senha" name="senha" id="senha" class="input-group mb-4 w-100">
                             <i class="bi bi-eye position-absolute end-0 me-3" id="btnSenha" onclick="MostrarSenha()" style="cursor: pointer;"></i>
                         </div>
-                        <div class="f-password w-100 text-end">
+                        <!-- <div class="f-password w-100 text-end">
                             <a href="" style="color: #6D9EAF;">Esqueci a senha</a>
-                        </div>
+                        </div> -->
                         <div class="f-password w-100 text-end">
                             <a href="./loginTel.php" style="color: #6D9EAF;">Entrar com telefone</a>
                         </div>
