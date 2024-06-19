@@ -109,10 +109,10 @@ $user = new UserDao();
             <div class="d-flex align-items-center justify-content-center" style="position:absolute; margin-right: 20px; margin-bottom: 40px">
                 <ul class="m-0 p-0 d-flex align-items-end flex-column" style="list-style: none; font-weight: bold;">
                     <li onclick="modalBannerPerfil(0,0)" style="cursor:pointer;"><img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem" style="height: 30px; width: 30px; margin-bottom: 2vh;"></li>
-                    <li class="d-flex" onclick="modalDadosPessoais(0,0)" style="cursor:pointer;">
+                    <!-- <li class="d-flex" onclick="modalDadosPessoais(0,0)" style="cursor:pointer;">
                         <p style="font-weight: bold; color: #A6A6A6; margin-Right: 10px">Dados pessoais</p>
                         <img src="../../img/Usuario/icon-editar.png" class="img-fluid" alt="Alterar imagem" style="height: 30px; width: 30px;">
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -318,7 +318,8 @@ $user = new UserDao();
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script type="text/javascript" src="../../js/script.js"></script>
-   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
     <script>
         const COMPONENT_NAME = "data-glide";
         const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;
