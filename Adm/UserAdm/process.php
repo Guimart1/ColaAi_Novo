@@ -30,19 +30,43 @@ switch ($_POST["acao"]) {
     $user->setEmail($_POST['emailAdmin']);
     $user->setSenha($_POST['senhaAdmin']);
     $user->setImagem($user->salvarImagem(($_POST['fotoPerfilAdmin'])));
-
-    try {
-      $userAdmDao = UserAdmDao::insert($user);
+    
+    $email = userAdmDao::checkEmail($_POST['emailAdmin']);
+    $cpf = userAdmDao::checkCpf($_POST['cpfAdmin']);
+    if($email != null && count($email)>0){
       $_SESSION['toastr'] = array(
-        'type' => 'success',
-        'message' => 'Administrador criado com sucesso',
-        'title' => 'Ação concluida'
+        'type' => 'error',
+        'message' => 'Email já cadastrado',
+        'title' => 'Falha ao cadastrar'
     );
-    header("Location: index.php");
+    header("Location: register.php");
     exit();
-    } catch (Exception $e) {
-      // Se houver um erro na inserção, você pode lidar com isso aqui
-      header("Location: register.php");
+    } else if($cpf != null && count($cpf)>0){
+      $_SESSION['toastr'] = array(
+        'type' => 'error',
+        'message' => 'CPF já cadastrado',
+        'title' => 'Falha ao cadastrar'
+    );
+    header("Location: register.php");
+    exit();
+    } else {
+      try {
+        $userAdmDao = UserAdmDao::insert($user);
+        $_SESSION['toastr'] = array(
+          'type' => 'success',
+          'message' => 'Administrador criado com sucesso',
+          'title' => 'Ação concluida'
+      );
+      header("Location: index.php");
+      exit();
+      } catch (Exception $e) {
+        $_SESSION['toastr'] = array(
+          'type' => 'error',
+          'message' => 'erro com sucesso',
+          'title' => 'Falha ao cadastrar'
+      );
+        header("Location: register.php");
+      }
     }
     break;
   case 'ATUALIZAR':

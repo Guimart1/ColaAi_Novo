@@ -48,7 +48,22 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->bindParam(':id', $id,  PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
-
+        }
+        public static function checkEmail($email){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbadmin WHERE emailAdmin = :email";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':email', $email,  PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        public static function checkCpf($cpf){
+            $conexao = Conexao::conectar();
+            $query = "SELECT * FROM tbadmin WHERE cpfAdmin = :cpf";
+            $stmt = $conexao->prepare($query);
+            $stmt->bindParam(':cpf', $cpf,  PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         public static function delete($id){
@@ -104,6 +119,7 @@ require_once (__DIR__ . '../../model/Conexao.php');
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
     }
 
 

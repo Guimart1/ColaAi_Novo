@@ -35,6 +35,7 @@ if (!empty($_POST)) {
   <!-- icon -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"> <!-- CSS Projeto -->
   <link rel="stylesheet" href="../../css/styleAdm.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
 
@@ -185,7 +186,19 @@ if (!empty($_POST)) {
     </script>
   <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
   <script type="text/javascript" src="../../js/personalizar.js"></script>
-
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <?php 
+        if (isset($_SESSION['toastr'])) {
+            $toastr = $_SESSION['toastr'];
+            echo "<script>
+                $(document).ready(function() {
+                    toastr.{$toastr['type']}('{$toastr['message']}', '{$toastr['title']}');
+                });
+            </script>";
+            unset($_SESSION['toastr']); // Limpa a mensagem da sessão
+        }
+    ?>
 </body>
 
 </html>
