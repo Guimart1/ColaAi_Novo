@@ -47,6 +47,7 @@ $eventosMaisInteresse = InteresseEventoDao::selectTopEventosMaisInteresse();
                 <ul class="glide__slides">
                     <?php foreach ($eventosMaisInteresse as $evento) : ?>
                         <li class="glide__slide">
+                        <h2 class="fs-3">Eventos com mais interesses</h2>
                             <a href="../Evento/evento.php?id=<?php echo $evento['idEvento']; ?>" style="text-decoration: none; color: inherit;">
                                 <div class="imageBox position-relative" style="height: 300px;">
                                     <img src="../../img/Organizacao/<?= $evento['imagemEvento']; ?>" alt="imagem do evento" style="width: 100%; height: 100%; object-fit: cover;">
