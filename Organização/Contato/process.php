@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once '../../model/ContatoOrgEvento.php';
 require_once '../../dao/ContatoOrgEventoDao.php';
 require_once '../../model/Mensagem.php';
 
 $contato = new ContatoOrgEvento();
-$msg = new Mensagem();
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
@@ -23,20 +23,17 @@ switch ($_POST["acao"]) {
     $contato->setIdCategoriaContatoOrganizacaoEvento($_POST["idCategoriaContatoOrganizacaoEvento"]);
 
     try {
-    $contatoDao = ContatoOrgEventoDao::insert($contato);
-
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
+      $contatoDao = ContatoOrgEventoDao::insert($contato);
+      $_SESSION['toastr'] = array(
+        'type' => 'success',
+        'message' => 'Mensagem enviada com sucesso',
+        'title' => 'Ação concluida'
+      );
       header("Location: index.php");
+      exit();
     } catch (Exception $e) {
       // Se houver um erro na inserção, você pode lidar com isso aqui
-
-      // Adiciona uma mensagem para debug
-      $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
-
-      // header("Location: index.php");
-      echo "falhou";
+      header("Location: index.php");
     }
     break;
   case 'ATUALIZAR':
@@ -46,8 +43,7 @@ switch ($_POST["acao"]) {
     $contato->setIdOrganizacaoEvento($_POST["idOrganizacaoEvento"]);
     $contato->setIdCategoriaContatoOrganizacaoEvento($_POST["idCategoriaContatoOrganizacaoEvento "]);
     try {
-    $contatoDao = ContatoOrgEventoDao::update($_POST["idContatoOrganizacaoEvento "], $contato);
-      $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
+      $contatoDao = ContatoOrgEventoDao::update($_POST["idContatoOrganizacaoEvento "], $contato);
       header("Location: index.php");
     } catch (Exception $e) {
       echo 'Exceção capturada: ',  $e->getMessage(), "\n";

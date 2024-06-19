@@ -96,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"> <!-- CSS Projeto -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -320,6 +321,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                     modalInfo(idEvento, 'idInfo');
                 }
             </script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <?php 
+        if (isset($_SESSION['toastr'])) {
+            $toastr = $_SESSION['toastr'];
+            echo "<script>
+                $(document).ready(function() {
+                    toastr.{$toastr['type']}('{$toastr['message']}', '{$toastr['title']}');
+                });
+            </script>";
+            unset($_SESSION['toastr']); // Limpa a mensagem da sessão
+        }
+    ?>
 </body>
 
 </html>

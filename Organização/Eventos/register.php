@@ -1,5 +1,7 @@
 <?php
-session_start(); // Inicia a sessão
+if(!isset($_SESSION)){
+    session_start();
+}
 // require_once(__DIR__ . '../../../Adm/Componentes/modal.php');
 require_once(__DIR__ . '../../../dao/EventoDao.php');
 
@@ -196,7 +198,7 @@ if (!empty($_POST)) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 needs-validation ">
-                                        <label for="descricao" class="col-form-label">Descrição do Evento*</label>
+                                        <label for="descricao" class="col-form-label">Descrição do Evento</label>
                                         <textarea class="form-control inputGeral" name="descEvento" id="" cols="30" maxlength="1000" rows="10" style="max-height: 400px;"><?= $desc_Evento ?></textarea>
                                     </div>
                                 </div>

@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once (__DIR__.'../../../model/Evento.php');
 require_once (__DIR__.'../../../dao/EventoDao.php');
 require_once (__DIR__.'../../../model/Mensagem.php');
 
 $evento = new Evento();
-$msg = new Mensagem();
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
@@ -36,16 +36,8 @@ switch ($_POST["acao"]) {
         $evento->setImagemEvento($evento->salvarImagem(($_POST['imagemEvento'])));  
         try {
             $eventoDao = EventoDao::insert($evento);
-
-            // Adiciona uma mensagem para debug
-            $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
             header("Location: index.php");
         } catch (Exception $e) {
-            // Se houver um erro na inserção, você pode lidar com isso aqui
-
-            // Adiciona uma mensagem para debug
-            $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
 
             header("Location: register.php");
         } 
@@ -71,7 +63,6 @@ switch ($_POST["acao"]) {
           $evento->setImagemEvento($evento->salvarImagem(($_POST['imagemEvento'])));  
               try {
                 $eventoDao = EventoDao::update($_POST["idEvento"], $evento);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
@@ -93,7 +84,6 @@ switch ($_POST["acao"]) {
           $evento->setSituacaoEvento(2);
           try {
             $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
-            $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
             header("Location: index.php");
           } catch (Exception $e) {
            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
@@ -104,8 +94,13 @@ switch ($_POST["acao"]) {
           $evento->setSituacaoEvento(1);
           try {
             $eventoDao = eventoDao::updateSituacao($_POST["id"], $evento);
-            // $msg->setMensagem("Usuário arquivado com sucesso.", "bg-success");
+            $_SESSION['toastr'] = array(
+              'type' => 'success',
+              'message' => 'Evento restaurado com sucesso',
+              'title' => 'Ação concluida'
+            );
             header("Location: eventos.php");
+            exit();
           } catch (Exception $e) {
            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
           } 
