@@ -64,7 +64,7 @@ switch ($_POST["acao"]) {
         try {
             $organizacaoDao = OrganizacaoDao::insertCadastro($org);
             $msg->setMensagem("Usuário Salvo com sucesso.", "bg-success");
-            header("Location: ../");
+            header("Location: analise.php");
         } catch (Exception $e) {
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
             $msg->setMensagem("Verifique os dados Digitados.", "bg-danger");
