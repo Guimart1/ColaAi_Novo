@@ -1,7 +1,7 @@
 <?php
 require_once '../../dao/EventoDao.php';
 require_once '../../dao/InteresseEventoDao.php';
-
+require_once '../../dao/OrganizacaoDao.php'
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,6 +41,9 @@ require_once '../../dao/InteresseEventoDao.php';
         // Busca os detalhes do evento com base no id do evento
         $evento = EventoDao::selectById($idEvento);
         $organizacao = EventoDao::selecionarEventoComOrganizacaoPorId($idEvento);
+
+        $selectOrganizacao = OrganizacaoDao::selectById($organizacao['idOrganizacaoEvento']);
+        $linkOrganizacao = $selectOrganizacao['linkSiteOrganizacaoEvento'];
 
         // Verifica se o evento foi encontrado
         if ($evento && $organizacao) {
@@ -141,14 +144,14 @@ require_once '../../dao/InteresseEventoDao.php';
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
                                 <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data começo:</span>
-                                <span class="text-center"><?= $evento['dataEvento']; ?></span>
+                                <span class="text-center"><?= (date("d/m/Y", strtotime($evento['dataEvento']))) ?></span>
                             </div>
                         </div>
                         <div class="col-md-auto col-6 d-flex centerInfo" >
                             <img src="../../img/Usuario/icon-data.png" alt="" style="width: 40px; height:40px" class="mt-auto mb-auto">
                             <div class="d-flex flex-column ms-1">
                                 <span class="fw-bold mb-auto" style="font-size: 1.1em;">Data Fim:</span>
-                                <span class="text-center"><?= $evento['dataFimEvento']; ?></span>
+                                <span class="text-center"><?= (date("d/m/Y", strtotime($evento['dataFimEvento']))) ?></span>
                             </div>
                         </div>
                             <div class="col-md-auto d-flex centerInfo">
@@ -221,43 +224,43 @@ require_once '../../dao/InteresseEventoDao.php';
                         </button>
                     </form>
                 </div>
-                <a href="" style="color: #6D9EAF;" class="mt-2 mb-5">Clique para obter Informações detalhadas</a>
+                <?php echo "<a href='$linkOrganizacao' target='_blank' title='Google' style='color: #6D9EAF;' class='mt-2 mb-5'>Clique para obter Informações detalhadas</a>";?>
             </div>
         </div>
     </div>
-            <script>
-                // Adicione um evento de clique ao botão
-                document.getElementById('interestButton').addEventListener('click', function(event) {
-                    event.preventDefault(); // Evitar o envio do formulário
+    <script>
+        // Adicione um evento de clique ao botão
+        document.getElementById('interestButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Evitar o envio do formulário
 
-                    // Verificar se o texto do botão é "Registrar Interesse"
-                    if (this.textContent.trim() === "Registrar Interesse") {
-                        this.textContent = "Retirar Interesse"; // Alterar o texto do botão
-                    } else {
-                        this.textContent = "Registrar Interesse"; // Alterar o texto do botão
-                    }
+            // Verificar se o texto do botão é "Registrar Interesse"
+            if (this.textContent.trim() === "Registrar Interesse") {
+                this.textContent = "Retirar Interesse"; // Alterar o texto do botão
+            } else {
+                this.textContent = "Registrar Interesse"; // Alterar o texto do botão
+            }
 
-                    // Submeter o formulário
-                    document.getElementById('interestForm').submit();
-                });
-            </script>
+            // Submeter o formulário
+            document.getElementById('interestForm').submit();
+        });
+    </script>
 
 
-            <?php
-            require_once('../Componentes/footerLogado.php');
-            require_once('../Componentes/modalFeedback.php');
-            require_once('../Componentes/modalContato.php');
-            require_once('../Componentes/modalSobre.php');
-            ?>
+    <?php
+    require_once('../Componentes/footerLogado.php');
+    require_once('../Componentes/modalFeedback.php');
+    require_once('../Componentes/modalContato.php');
+    require_once('../Componentes/modalSobre.php');
+    ?>
 
-            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-            </script>
-            <script type="text/javascript" src="../../js/modal.js"></script>
-            <script>  
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../../js/modal.js"></script>
+    <script>  
 
 let nav = document.getElementById("nav")
 var i = 0
