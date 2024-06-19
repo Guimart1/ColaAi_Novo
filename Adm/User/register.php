@@ -10,16 +10,16 @@ if (!empty($_POST)) {
   $email_Usuario = $userDao['emailUsuario'];
   $senha_Usuario = $userDao['senhaUsuario'];
   $tel_Usuario = $userDao['telUsuario'];
-  $ImagemPerfil_Usuario = $userDao['imagemPerfilUsuario'];
-  $ImagemBanner_Usuario = $userDao['imagemBannerUsuario'];
+//   $ImagemPerfil_Usuario = $userDao['imagemPerfilUsuario'];
+//   $ImagemBanner_Usuario = $userDao['imagemBannerUsuario'];
 } else {
   $nome_Usuario = '';
   $sobrenome_Usuario = '';
   $email_Usuario = '';
   $senha_Usuario = '';
   $tel_Usuario = '';
-  $ImagemPerfil_Usuario = '';
-  $ImagemBanner_Usuario = '';
+//   $ImagemPerfil_Usuario = '';
+//   $ImagemBanner_Usuario = '';
   $id_Usuario = '';
 }
 ?>

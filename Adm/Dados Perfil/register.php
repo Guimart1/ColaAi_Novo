@@ -132,7 +132,7 @@ if (!empty($_POST)) {
                         <div class="row">
                             <div class="col-md-12 needs-validation">
                                 <label for="complemento" class="col-form-label">Complemento da organização</label>
-                                <input type="text" class="form-control inputGeral" placeholder="" name="complementoOrganizacaoEvento" maxlength="100" id="complementoOrganizacaoEvento" value="<?= $complemento_Org ?>" required>
+                                <input type="text" class="form-control inputGeral" placeholder="" name="complementoOrganizacaoEvento" maxlength="100" id="complementoOrganizacaoEvento" value="<?= $complemento_Org ?>">
                             </div>
                         </div>
                         <div class="row">
@@ -166,7 +166,7 @@ if (!empty($_POST)) {
                         <div class="row">
                             <div class="col-md-12 needs-validation">
                                 <label for="link" class="col-form-label">Link do Site Organização*</label>
-                                <input type="text" class="form-control inputGeral" placeholder="" name="linkSiteOrganizacaoEvento" maxlength="2000" id="linkSiteOrganizacaoEvento" value="<?= $link_Org ?>" required>
+                                <input type="text" class="form-control inputGeral" placeholder="" name="linkSiteOrganizacaoEvento" maxlength="2000" id="linkSiteOrganizacaoEvento" value="<?= $link_Org ?>">
                             </div>
                         </div>
                         <div class="row">

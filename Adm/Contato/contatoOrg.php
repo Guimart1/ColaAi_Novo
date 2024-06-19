@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idContatoOrganizacaoE
                         <thead>
                             <tr id="data-table">
                                 <th class="col-md-1 fs-4">ID</th>
-                                <th class="col-md-2 fs-4">Nome</th>
+                                <th class="col-md-3 fs-4">Nome</th>
                                 <th class="col-md-3 fs-4">E-mail</th>
                                 <th class="col-md-3 fs-4 text-center">Informações</th>
                                 <th class="col-md-2 fs-4 text-center">Finalizar Contato</th>

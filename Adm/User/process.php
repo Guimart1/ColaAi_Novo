@@ -22,8 +22,8 @@ switch ($_POST["acao"]) {
         $user->setEmail($_POST['emailUsuario']);
         $user->setSenha($_POST['senhaUsuario']);
         $user->setTel($_POST['telUsuario']);
-        $user->setImagemPerfil($user->salvarImagem(($_POST['imagemPerfilUsuario'])));
-        $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
+        // $user->setImagemPerfil($user->salvarImagem(($_POST['imagemPerfilUsuario'])));
+        // $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
         
         try {
             $userDao = UserDao::insert($user);
@@ -48,8 +48,8 @@ switch ($_POST["acao"]) {
               $user->setEmail($_POST['emailUsuario']);
               $user->setSenha($_POST['senhaUsuario']);
               $user->setTel($_POST['telUsuario']);
-              $user->setImagemPerfil($user->salvarImagem(($_POST['imagemPerfilUsuario'])));
-              $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
+              // $user->setImagemPerfil($user->salvarImagem(($_POST['imagemPerfilUsuario'])));
+              // $user->setImagemBanner($user->salvarImagem(($_POST['imagemBannerUsuario'])));
               try {
                 $userDao = UserDao::update($_POST["idUsuario"], $user);
                 $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");

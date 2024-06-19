@@ -97,6 +97,7 @@ class UserDao
         $stmt->bindParam(':tel', $tel);
         $stmt->bindParam(':imagemPerfil', $imagemP);
         $stmt->bindParam(':imagemBanner', $imagemB);
+        $stmt->bindParam(':id', $id);
 
         return $stmt->execute();
     }
