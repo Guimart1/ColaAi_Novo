@@ -166,7 +166,7 @@ $organizacao = new OrganizacaoDao();
                                     </div>
                                 <//?php endif; ?>-->
                             </div>
-                            <a href="" style="font-weight: bold; color: #6F9BAB">Site organização</a>
+                            <!-- <a href="" style="font-weight: bold; color: #6F9BAB">Site organização</a> -->
                         </li>
                     <ul class="m-0 p-0" onclick="modalSeguindo(0,0)" style="list-style: none; font-weight: bold; cursor:pointer;">
                         <li>
