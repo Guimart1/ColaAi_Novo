@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                         <div class="modal-content ">
                             <div class="modal-body" style="color: #a6a6a6;">
                                 <form action="process.php" method="post">
-                                    <input type="text" class="form-control" id="idDeletar" name="id" type="text">
+                                    <input type="hidden" class="form-control" id="idDeletar" name="id" type="text">
                                     <h1 class="text-center fs-2 fw-bold">Excluir evento<br> da organização?</h1>
                                     <p class="fs-5 m-0">Quando clicar em <span style="text-decoration: underline; color:#FF3131">excluir</span>
                                         a ação não poderá ser desfeita, na qual fará o evento deixar de existir.</p>
@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                             </div>
                         </div>
                     </div>
-                    <?= require '../Componentes/modal.php' ?>
+                  
                 </div>
                 <div class="modal fade" id="modalArquivar" role="dialog" data-bs-backdrop="false">
                     <div class=" modal-dialog modal-dialog-centered">
@@ -293,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                             </div>
                         </div>
                     </div>
-                    <?= require '../Componentes/modal.php' ?>
+                   
                 </div>
             </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

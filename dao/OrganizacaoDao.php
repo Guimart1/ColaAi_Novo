@@ -213,6 +213,62 @@ require_once (__DIR__ . '../../model/Conexao.php');
         
             return $stmt->execute();
         }
+        public static function updateDados($id, $org){
+            $conexao = Conexao::conectar();
+        
+            $query = "UPDATE tborganizacaoevento SET 
+               nomeOrganizacaoEvento = :nome, 
+               cnpjOrganizacaoEvento = :cnpj,
+               cepOrganizacaoEvento = :cep, 
+               enderecoOrganizacaoEvento = :log,
+               numeroOrganizacaoEvento = :num,
+               complementoOrganizacaoEvento = :complemento,
+               bairroOrganizacaoEvento = :bairro,
+               cidadeOrganizacaoEvento = :cidade,
+               ufOrganizacaoEvento = :uf,
+               telOrganizacaoEvento = :tel,
+               emailOrganizacaoEvento = :email, 
+               senhaOrganizacaoEvento = :senha, 
+               linkSiteOrganizacaoEvento = :link,
+               descOrganizacaoEvento = :desc
+                WHERE idOrganizacaoEvento = :id";
+            
+            $stmt = $conexao->prepare($query);
+        
+            // Atribuir os valores a variáveis antes de chamar bindParam
+            $nome = $org->getNome();
+            $cnpj = $org->getCnpj();
+            $cep = $org->getCep();
+            $log = $org->getLog();
+            $num = $org->getNum();
+            $complemento = $org->getComplemento();
+            $bairro = $org->getBairro();
+            $cidade = $org->getCidade();
+            $uf = $org->getUf();
+            $tel = $org->getTel();
+            $email = $org->getEmail();
+            $senha = $org->getSenha(); 
+            $link = $org->getLink();
+            $desc = $org->getDesc();
+
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':cnpj', $cnpj);
+            $stmt->bindParam(':cep', $cep);
+            $stmt->bindParam(':log', $log);
+            $stmt->bindParam(':num', $num);
+            $stmt->bindParam(':complemento', $complemento);
+            $stmt->bindParam(':bairro', $bairro);
+            $stmt->bindParam(':cidade', $cidade);
+            $stmt->bindParam(':uf', $uf);
+            $stmt->bindParam(':tel', $tel);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->bindParam(':link', $link);
+            $stmt->bindParam(':desc', $desc);
+            $stmt->bindParam(':id', $id);
+        
+            return $stmt->execute();
+        }
 
         public static function updateSituacao($id, $org){
             $conexao = Conexao::conectar();

@@ -310,7 +310,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idEvento'])) {
                             </div>
                         </div>
                     </div>
-                    <?= require '../../Adm/Componentes/modal.php' ?>
                 </div>
 
             </div>

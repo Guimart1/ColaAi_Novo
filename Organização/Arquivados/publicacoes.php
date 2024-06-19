@@ -224,7 +224,6 @@ require_once '../../dao/PublicacaoDao.php';
                             </div>
                         </div>
                     </div>
-                    <?= require '../../Adm/Componentes/modal.php' ?>
                 </div>
 
             </div>

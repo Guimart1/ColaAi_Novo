@@ -189,7 +189,7 @@ $user = new UserDao();
                 <div class="modal-body p-5 pt-0 pb-1" style="color: #a6a6a6; text-align:justify">
                     <p>A sua foto de perfil ficará visível para os perfis deorganizações e administradores do Cola Aí.</p>
                     <form method="post" action="./processFotoPerfil.php" enctype="multipart/form-data">
-                        <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil ?>">
+                        <input type="hidden" name="imagemPerfilUsuario" id="imagemPerfilUsuario" placeholder="nome foto" value="<?= $imagemPerfil?>">
                         <input type="hidden" name="idUsuario" id="idUsuario" placeholder="id do usuario" value="<?= isset($authUser['idUsuario']) ? $authUser['idUsuario'] : '' ?>" readonly>
                         <label for="imagemPerfilUsuario" class="d-flex justify-content-center" style="cursor: pointer; color: #6D9EAF;">
                             <img id="preview" src="../../img/Usuario/<?= $imagemPerfil != "" ? $imagemPerfil : 'add-foto.png'; ?>" id="imagemPerfilUsuario" name="imagemPerfilUsuario" alt="foto perfil" style="height: 250px; width: 250px; border-radius: 100%;" class="mt-1">
@@ -274,8 +274,7 @@ $user = new UserDao();
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
     <script type="text/javascript" src="../../js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+   
     <script>
         const COMPONENT_NAME = "data-glide";
         const COMPONENT_SELECTOR = `[${COMPONENT_NAME}]`;

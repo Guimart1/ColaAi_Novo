@@ -12,7 +12,7 @@ $organizacaoDao = new OrganizacaoDao();
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
-
+    <link rel="stylesheet" href="../../css/styleUsuario.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@ $organizacaoDao = new OrganizacaoDao();
     // Iniciar a sessão
     session_start();
 
-    // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
+    // Verificar se o índice 'AutenticacaoOrg' existe ou é igual a 'SIM'
     if (!isset($_SESSION['AutenticaoOrg']) || $_SESSION['AutenticaoOrg'] != 'SIM') {
         // Redirecionar para o login com um erro2 se não estiver autenticado
         header('Location: loginEmail.php?login=erro2');
@@ -34,13 +34,17 @@ $organizacaoDao = new OrganizacaoDao();
     $organizacao = $organizacaoDao->selectById($idOrganizacao);
 
     $imagemPerfil = ''; // Defina a variável como vazia inicialmente
-    $imagemBanner = ''; // Defina a variável como vazia inicialmente
 
     if ($organizacao && isset($organizacao['imagemOrganizacaoEvento'])) {
         // Se o usuário tiver uma imagem de perfil, atribua à variável $imagemPerfil
         $imagemPerfil = $organizacao['imagemOrganizacaoEvento'];
+        // Atualiza a imagem na variável de sessão
+        $_SESSION['userOrg']['imagemOrganizacaoEvento'] = $imagemPerfil;
     }
+
+    // Agora $authUserOrg deve conter a imagem da organização, se existir
     ?>
+
 
     <?php
     include('../Componentes/header.php');
@@ -63,49 +67,49 @@ $organizacaoDao = new OrganizacaoDao();
         ?>
         <!-- Hamburger -->
     </div>
-        <div class="container-fluid d-flex justify-content-start align-items-center flex-column" style="background-color: #E8E8E8; height:91vh; width:100vw"> 
-            <div class="headerPerfil mt-4 rounded rounded-4" style="width: 90%; height:90px; background-color:#fff" >
-                <div class="textBox h-100 d-flex align-items-center justify-content-evenly rounded rounded-4 " style="background-color: #FFF7D1; width:20%">
-                    <img src="../../img/Admin/icon-usuario.png" alt="" style="height: 50px; width:50px; object-fit:cover">
-                    <h2 class="fs-2 m-0" style="color: #a6a6a6">Meu Perfil</h2>
-                </div>
+    <div class="container-fluid d-flex justify-content-start align-items-center flex-column" style="background-color: #E8E8E8; height:91vh; width:100vw">
+        <div class="headerPerfil mt-4 rounded rounded-4" style="width: 90%; height:90px; background-color:#fff">
+            <div class="textBox h-100 d-flex align-items-center justify-content-evenly rounded rounded-4 " style="background-color: #FFF7D1; width:20%">
+                <img src="../../img/Admin/icon-usuario.png" alt="" style="height: 50px; width:50px; object-fit:cover">
+                <h2 class="fs-2 m-0" style="color: #a6a6a6">Meu Perfil</h2>
             </div>
-            <div class="mt-4 rounded rounded-4" style="width: 90%; height:72vh;  background-color:#fff">
-                <div class="contentPerfil d-flex rounded rounded-4"  style="background-color: #FFF7D1; width:100%; height:350px">
+        </div>
+        <div class="mt-4 rounded rounded-4" style="width: 90%; height:72vh;  background-color:#fff">
+            <div class="contentPerfil d-flex rounded rounded-4" style="background-color: #FFF7D1; width:100%; height:350px">
                 <div class="dropdown">
                     <a href="#" class="text-white d-block  text-decoration-none dropdown-toggle mt-4 ms-4" data-bs-toggle="dropdown" aria-expanded="false">
                         <button type="submit" class="dropdown-item"><img src="../../img/Admin/editar-icon.png" alt="" class="ms-auto me-2" style="width: 45px;"></button>
                     </a>
                     <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" onclick="modalBannerPerfil(0,0)">Banner</a></li>
-                    <hr class="dropdown-divider">
-                    <li><a class="dropdown-item" onclick="modalFotoPerfil(0,0)">Foto do perfil</a></li>
+                        <!-- <li><a class="dropdown-item" onclick="modalBannerPerfil(0,0)">Banner</a></li> -->
+                        <!-- <hr class="dropdown-divider"> -->
+                        <li><a class="dropdown-item" onclick="modalFotoPerfil(0,0)">Foto do perfil</a></li>
                     </ul>
                 </div>
-                    <div class="dropdown">
-                        <form action="process.php" method="POST" >
-                            <div class="d-flex h-auto p-2 mb-3">
-                                <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
-                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
-                            </div>
-                        </form>
-                    </div>
-                    <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>"alt="" style="border-radius: 50%; height:80%; height:80%; max-width:280px;object-fit:cover; max-height:280px" class="mt-auto mb-auto">
-                    
-                    <div class="infoOrg d-flex justify-content-center flex-column ms-4">
-                        <?php if ($organizacao !== false) : ?>
-                            <h2 style="color: #a6a6a6"><?php echo $organizacao['nomeOrganizacaoEvento']; ?></h2>
-                            <p style="color: #a6a6a6; font-size:1.2em"><?php echo $organizacao['descOrganizacaoEvento']; ?></p>
-                        <?php else : ?>
-                            <p>Não foi possível carregar os dados da organização.</p>
-                        <?php endif; ?>
-                    </div>
-                    <div  class="alterarDados ms-auto mt-auto mb-4 me-5">
-                    <form action="process.php" method="POST" >
-                            <div class="d-flex h-auto p-2 mb-3">
-                                <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
-                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
-                                <button style="
+                <div class="dropdown">
+                    <form action="process.php" method="POST">
+                        <div class="d-flex h-auto p-2 mb-3">
+                            <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
+                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
+                        </div>
+                    </form>
+                </div>
+                <img src="../../img/Organizacao/<?= $organizacao['imagemOrganizacaoEvento'] ? $organizacao['imagemOrganizacaoEvento'] : 'userPadrao.png'; ?>" alt="" style="border-radius: 50%; height:80%; height:80%; max-width:280px;object-fit:cover; max-height:280px" class="mt-auto mb-auto">
+
+                <div class="infoOrg d-flex justify-content-center flex-column ms-4">
+                    <?php if ($organizacao !== false) : ?>
+                        <h2 style="color: #a6a6a6"><?php echo $organizacao['nomeOrganizacaoEvento']; ?></h2>
+                        <p style="color: #a6a6a6; font-size:1.2em"><?php echo $organizacao['descOrganizacaoEvento']; ?></p>
+                    <?php else : ?>
+                        <p>Não foi possível carregar os dados da organização.</p>
+                    <?php endif; ?>
+                </div>
+                <div class="alterarDados ms-auto mt-auto mb-4 me-5">
+                    <form action="process.php" method="POST">
+                        <div class="d-flex h-auto p-2 mb-3">
+                            <input type="hidden" class="form-control" id="acao" name="acao" value="SELECTID">
+                            <input type="hidden" class="form-control" id="id" name="id" value="<?= $organizacao['idOrganizacaoEvento'] ?>">
+                            <button style="
                                     border:none;
                                     background-color: #FABDC1; 
                                     width:100px;
@@ -114,14 +118,14 @@ $organizacaoDao = new OrganizacaoDao();
                                     min-width: 160px;
                                     color: #6D9EAF;
                                     font-size: 14pt;" class="rounded rounded-2">Alterar dados
-                                </button>
-                            </div>
-                        </form>
+                            </button>
+                        </div>
+                    </form>
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="modal fade" id="modalFotoPerfil" role="dialog"><!--modal foto perfil-->
         <div class=" modal-dialog modal-dialog-centered">
@@ -150,7 +154,7 @@ $organizacaoDao = new OrganizacaoDao();
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalBannerPerfil" role="dialog"><!--modal foto BANNER-->
+    <!-- <div class="modal fade" id="modalBannerPerfil" role="dialog">
         <div class=" modal-dialog modal-dialog-centered">
             <div class="modal-content rounded rounded-5 pb-4 overflow-auto" style="background-color: #FFFBE7; height: 550px">
                 <div class="modal-header border-0 pt-4 m-0 p-0 pb-2">
@@ -176,8 +180,10 @@ $organizacaoDao = new OrganizacaoDao();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="../../js/personalizar.js"></script>
+    <script type="text/javascript" src="../../js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

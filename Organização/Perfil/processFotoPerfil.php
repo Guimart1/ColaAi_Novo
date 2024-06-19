@@ -26,18 +26,18 @@ switch ($_POST["acao"]) {
         header("Location: index.php");
     } 
     break;
-  case 'ATUALIZAR':
-    //pode validar as informações
-    $org->setImagem($org->salvarImagem(($_POST['imagemOrganizacaoEvento'])));
-    try {
-      $orgDao = OrganizacaoDao::updatePerfilImage($_POST["idOrganizacaoEvento"], $org);
-      $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
-      header("Location: index.php");
-    } catch (Exception $e) {
-     echo 'Exceção capturada: ',  $e->getMessage(), "\n";
-
-    } 
-break;
-
-        }
+    case 'ATUALIZAR':
+      $org->setId($_POST["idOrganizacaoEvento"]);
+      $org->setImagem($org->salvarImagem($_FILES['foto']));
+      try {
+          OrganizacaoDao::updatePerfilImage($_POST["idOrganizacaoEvento"], $org);
+          $msg->setMensagem("Foto atualizada com sucesso.", "bg-success");
+          $_SESSION['userOrg']['imagemOrganizacaoEvento'] = $org->getImagem(); // Atualiza a sessão com a nova imagem
+          header("Location: index.php");
+      } catch (Exception $e) {
+          $msg->setMensagem("Erro ao atualizar foto: " . $e->getMessage(), "bg-danger");
+          header("Location: index.php");
+      }
+      break;
+}
 ?>

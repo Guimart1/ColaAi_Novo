@@ -175,7 +175,6 @@ require_once '../../dao/PublicacaoDao.php';
                         </div>
                     </div>
                 </div>
-                <?= require '../../Adm/Componentes/modal.php' ?>
             </div>
             <div class="modal fade" id="modalArquivar" role="dialog" data-bs-backdrop="false">
                     <div class=" modal-dialog modal-dialog-centered">
@@ -194,7 +193,6 @@ require_once '../../dao/PublicacaoDao.php';
                             </div>
                         </div>
                     </div>
-                <?= require '../Componentes/modal.php' ?>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">

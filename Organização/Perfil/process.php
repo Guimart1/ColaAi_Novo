@@ -30,7 +30,7 @@ switch ($_POST["acao"]) {
         $organizacao->setEmail($_POST['emailOrganizacaoEvento']);
         $organizacao->setSenha($_POST['senhaOrganizacaoEvento']);
         $organizacao->setLink($_POST['linkSiteOrganizacaoEvento']);
-        $organizacao->setImagem($organizacao->salvarImagem(($_POST['imagemOrganizacaoEvento'])));
+        // $organizacao->setImagem($organizacao->salvarImagem(($_POST['imagemOrganizacaoEvento'])));
         $organizacao->setDesc($_POST['descOrganizacaoEvento']);
         
         try {
@@ -64,10 +64,10 @@ switch ($_POST["acao"]) {
               $organizacao->setEmail($_POST['emailOrganizacaoEvento']);
               $organizacao->setSenha($_POST['senhaOrganizacaoEvento']);
               $organizacao->setLink($_POST['linkSiteOrganizacaoEvento']);
-              $organizacao->setImagem($organizacao->salvarImagem(($_POST['imagemOrganizacaoEvento'])));
+              // $organizacao->setImagem($organizacao->salvarImagem(($_POST['imagemOrganizacaoEvento'])));
               $organizacao->setDesc($_POST['descOrganizacaoEvento']);
               try {
-                $organizacaoDao = OrganizacaoDao::update($_POST["idOrganizacaoEvento"], $organizacao);
+                $organizacaoDao = OrganizacaoDao::updateDados($_POST["idOrganizacaoEvento"], $organizacao);
                 $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {

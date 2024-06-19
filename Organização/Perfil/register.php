@@ -18,7 +18,7 @@ if (!empty($_POST)) {
     $email_Org = $organizacaoDao['emailOrganizacaoEvento'];
     $senha_Org = $organizacaoDao['senhaOrganizacaoEvento'];
     $link_Org = $organizacaoDao['linkSiteOrganizacaoEvento'];
-    $fotoPerfil_Org = $organizacaoDao['imagemOrganizacaoEvento'];
+    // $fotoPerfil_Org = $organizacaoDao['imagemOrganizacaoEvento'];
     $desc_Org = $organizacaoDao['descOrganizacaoEvento'];
 } else {
     $nome_Org = '';
@@ -34,7 +34,7 @@ if (!empty($_POST)) {
     $email_Org = '';
     $senha_Org = '';
     $link_Org = '';
-    $fotoPerfil_Org = '';
+    // $fotoPerfil_Org = '';
     $desc_Org = '';
     $id_Org = '';
 }
@@ -96,7 +96,7 @@ if (!empty($_POST)) {
                     <h1 class="text-center mt-5 fs-2" style="color: #a6a6a6;">Organização - Dados do perfil</h1>
                     <form method="post" action="process.php" enctype="multipart/form-data" class="needs-validation w-100 h-100 p-4" novalidate>
                         <input type="hidden" name="idOrganizacaoEvento" id="idOrganizacaoEvento" placeholder="id" value="<?= $id_Org ?>">
-
+                        <input type="hidden" value="<?= $id_Org ? 'ATUALIZAR' : 'SALVAR' ?>" name="acao">
                         <div class="row">
                             <div class="col-md-6 mb-3 needs-validation">
                                 <label for="nomeOrganizacao" class="col-form-label">Nome da Organização*</label>
