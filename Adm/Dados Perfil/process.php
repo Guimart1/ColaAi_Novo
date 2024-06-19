@@ -1,17 +1,23 @@
 <?php
+session_start();
 require_once (__DIR__.'../../../model/OrganizacaoEvento.php');
 require_once (__DIR__.'../../../dao/OrganizacaoDao.php');
 require_once (__DIR__.'../../../model/Mensagem.php');
 
 $organizacao = new OrganizacaoEvento();
-$msg = new Mensagem();
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
     case 'DELETE':
      try {
-          $organizacaoDao = OrganizacaoDao::delete($_POST['id']);
-          header("Location: index.php");
+        $organizacaoDao = OrganizacaoDao::delete($_POST['id']);
+        $_SESSION['toastr'] = array(
+          'type' => 'success',
+          'message' => 'Organização deletada com sucesso',
+          'title' => 'Ação concluida'
+      );
+      header("Location: index.php");
+      exit();
       } catch (Exception $e) {
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
       }
@@ -36,15 +42,9 @@ switch ($_POST["acao"]) {
         try {
             $organizacaoDao = OrganizacaoDao::insert($organizacao);
 
-            // Adiciona uma mensagem para debug
-            $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
-
             header("Location: index.php");
         } catch (Exception $e) {
             // Se houver um erro na inserção, você pode lidar com isso aqui
-
-            // Adiciona uma mensagem para debug
-            $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
 
             header("Location: register.php");
         } 
@@ -68,8 +68,13 @@ switch ($_POST["acao"]) {
               $organizacao->setDesc($_POST['descOrganizacaoEvento']);
               try {
                 $organizacaoDao = OrganizacaoDao::update($_POST["idOrganizacaoEvento"], $organizacao);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
-                header("Location: index.php");
+                $_SESSION['toastr'] = array(
+                  'type' => 'success',
+                  'message' => 'Organização atualizada com sucesso',
+                  'title' => 'Ação concluida'
+              );
+              header("Location: index.php");
+              exit();
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";
       

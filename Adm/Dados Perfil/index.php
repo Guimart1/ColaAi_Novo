@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="../../css/styleAdm.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"> <!-- CSS Projeto -->
 </head>
 <body>
     <?php
     session_start();
-
     // Verificar se o índice 'Autenticado' existe ou é igual a 'SIM'
     if (!isset($_SESSION['AutenticaoAdm']) || $_SESSION['AutenticaoAdm'] != 'SIM') {
       // Redirecionar para o login com um erro2 se não estiver autenticado
@@ -131,17 +131,30 @@
             var sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('show');
         }
-    </script>
+        </script>
     <script>
         function toggleHamburger() {
-                var hamburger = document.querySelector('.hamburger'); // Selecionando o ícone do hambúrguer corretamente
-                hamburger.classList.toggle('showHamburger');
-            }
-    </script>
+            var hamburger = document.querySelector('.hamburger'); // Selecionando o ícone do hambúrguer corretamente
+            hamburger.classList.toggle('showHamburger');
+        }
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/personalizar.js"></script>
     <script type="text/javascript" src="../../js/modal.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <?php 
+        if (isset($_SESSION['toastr'])) {
+            $toastr = $_SESSION['toastr'];
+            echo "<script>
+                $(document).ready(function() {
+                    toastr.{$toastr['type']}('{$toastr['message']}', '{$toastr['title']}');
+                });
+            </script>";
+            unset($_SESSION['toastr']); // Limpa a mensagem da sessão
+        }
+    ?>
 </body>
 </html>

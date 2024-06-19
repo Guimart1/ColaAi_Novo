@@ -1,5 +1,4 @@
 <?php
-session_start(); // Inicia a sessão
 require_once(__DIR__ . '../../../Adm/Componentes/modal.php');
 require_once(__DIR__ . '../../../dao/UserAdmDao.php');
 
@@ -150,7 +149,7 @@ if (!empty($_POST)) {
                 <div class="row mt-3">
                   <div class=" text-end p-3">
                     <a class=" btn px-3" role="button" aria-disabled="true" href="index.php">Voltar</i></a>
-                    <input type="submit" class="btn" value="Cadastrar">
+                    <input type="submit" class="btn" value="<?= $id_Admin ? 'Editar' : 'Cadastrar' ?>">
                   </div>
                 </div>
               </div>

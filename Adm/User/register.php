@@ -1,5 +1,4 @@
 <?php
-session_start(); // Inicia a sessão
 require_once(__DIR__ . '../../../Adm/Componentes/modal.php');
 require_once(__DIR__ . '../../../dao/UserDao.php');
 

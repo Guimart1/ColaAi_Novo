@@ -1,17 +1,23 @@
 <?php
 require_once (__DIR__.'../../../model/Evento.php');
 require_once (__DIR__.'../../../dao/EventoDao.php');
-require_once (__DIR__.'../../../model/Mensagem.php');
 
+
+session_start();
 $evento = new Evento();
-$msg = new Mensagem();
 
 //var_dump($_POST);
 switch ($_POST["acao"]) {
     case 'DELETE':
      try {
-          $eventoDao = EventoDao::delete($_POST['id']);
-          header("Location: index.php");
+        $eventoDao = EventoDao::delete($_POST['id']);
+        $_SESSION['toastr'] = array(
+          'type' => 'success',
+          'message' => 'Evento deletado com sucesso',
+          'title' => 'Ação concluida'
+      );
+      header("Location: index.php");
+      exit();
       } catch (Exception $e) {
         echo 'Exceção capturada: ',  $e->getMessage(), "\n";
       }
@@ -38,14 +44,13 @@ switch ($_POST["acao"]) {
             $eventoDao = EventoDao::insert($evento);
 
             // Adiciona uma mensagem para debug
-            $msg->setMensagem("Usuário inserido com sucesso no banco de dados.", "bg-success");
+            echo "toastr.success('Are you the six fingered man?', 'Inigo Montoya')";
 
             header("Location: index.php");
         } catch (Exception $e) {
             // Se houver um erro na inserção, você pode lidar com isso aqui
 
-            // Adiciona uma mensagem para debug
-            $msg->setMensagem("Erro ao inserir usuário no banco de dados: " . $e->getMessage(), "bg-danger");
+
 
             header("Location: register.php");
         } 
@@ -71,7 +76,6 @@ switch ($_POST["acao"]) {
           $evento->setImagemEvento($evento->salvarImagem(($_POST['imagemEvento'])));  
               try {
                 $eventoDao = EventoDao::update($_POST["idEvento"], $evento);
-                $msg->setMensagem("Usuário atualizado com sucesso.", "bg-success");
                 header("Location: index.php");
               } catch (Exception $e) {
                echo 'Exceção capturada: ',  $e->getMessage(), "\n";

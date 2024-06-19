@@ -1,5 +1,5 @@
 <?php
-session_start(); // Inicia a sessão
+// session_start(); // Inicia a sessão
 require_once(__DIR__ . '../../../Adm/Componentes/modal.php');
 require_once(__DIR__ . '../../../dao/OrganizacaoDao.php');
 
@@ -165,13 +165,13 @@ if (!empty($_POST)) {
                         </div>
                         <div class="row">
                             <div class="col-md-12 needs-validation">
-                                <label for="link" class="col-form-label">Link do Site Organização*</label>
+                                <label for="link" class="col-form-label">Link do Site Organização</label>
                                 <input type="text" class="form-control inputGeral" placeholder="" name="linkSiteOrganizacaoEvento" maxlength="2000" id="linkSiteOrganizacaoEvento" value="<?= $link_Org ?>">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 needs-validation ">
-                                <label for="descricao" class="col-form-label">Descrição da Organização*</label>
+                                <label for="descricao" class="col-form-label">Descrição da Organização</label>
                                 <textarea class="form-control inputGeral" name="descOrganizacaoEvento" id="descOrganizacaoEvento" cols="30" rows="10" style="max-height: 400px;"><?= $desc_Org ?></textarea>
                             </div>
                         </div>
